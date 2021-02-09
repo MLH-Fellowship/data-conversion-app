@@ -1,0 +1,163 @@
+-----------------------------------------------------------------------------------------------
+-- All CEESIM file formats and templates, whether ASCII or binary, and whether
+-- electronic or print, are proprietary to Northrop Grumman. Protected from
+-- further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+-- exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+-- section 552(b)(4). No license, express or implied, is granted under any
+-- patents, copyrights, trade secrets, or any other intellectual property
+-- right of Northrop Grumman.
+-----------------------------------------------------------------------------------------------
+ 
+ $FILE_NAMES
+  EMITTER_FILE_NAME                    = 'NSIN_Test_Scenario_ASCIIName_Export.emt'
+  PLATFORM_FILE_NAME                   = 'NSIN_Test_Scenario_ASCIIName_Export.plt'
+  SCRIPT_FILE_NAME                     = 'NSIN_Test_Scenario_ASCIIName_Export.scr'
+ $END
+ 
+ 
+ $HEADER_DATA
+  SIMULATOR_FILE_NAME                  = '/ceesim/site/eglin-ega/temp/4f2b6b80-0886-4650-9224-aab831cd85b3.scn'
+  SCENARIO_CREATION_DATE               = '01/25/2021 17:47:48'
+  SCENARIO_MODIFY_DATE                 = '01/25/2021 17:55:44'
+  COMMENT                              = ''
+  SUT_PLATFORM_NUMBER( 1)              = 4*1
+  EXTERNAL_SUT_FLAG                    = FALSE
+  DISTANCE_UNITS                       = 'NAUTICAL_MILES'
+  ENVIRONMENT_KIND                     = 'ROUND'
+  SCENARIO_REVISION                    = 32
+  SOFTWARE_RELEASE_OF_LAST_HEADER_EDIT = 436
+  HORIZON_MASKING_ENABLE               = FALSE
+  EARTH_RADIUS_FACTOR                  = 1.33000000000000
+  SCENARIO_ELEMENT_LIBRARY_ENABLE      = FALSE
+ $END
+ 
+ 
+ $SITUATION_DISPLAY
+  NUMBER_OF_DISPLAY_SETTINGS           = 1
+ $END
+ 
+ 
+ $SITUATION_DISPLAY_SETTINGS
+  DISPLAY_SERVER                       = 1
+  DISPLAY_ID                           = 1
+  DISPLAY_VISIBILITY                   = FALSE
+  DISPLAY_CENTER                       = 'ON_SUT'
+  DISPLAY_MODE                         = 'RECTANGULAR'
+  DISPLAY_SCALE                        = 1.00000000000000
+  DISPLAY_INTENSITY                    = 1.00000000000000
+  VELOCITY_VECTOR_DURATION             = 1.00000000000000
+  DISPLAY_TERRAIN                      = TRUE
+  DISPLAY_ROUGHNESS                    = TRUE
+  DISPLAY_GEOPOLITICAL                 = TRUE
+  NUMBER_OF_GEOPOLITICAL_OPTIONS       = 2
+  GEOPOLITICAL_OPTION( 1)              = 'COASTLINE'
+  GEOPOLITICAL_OPTION( 2)              = 'POLITICAL_LINES'
+  NUMBER_OF_PLATFORMS                  = 0
+ $END
+ 
+ 
+ $GUI_DISPLAY_SETTINGS
+  DISPLAY_MODE                         = 'PLAN_VIEW'
+  THE_DISPLAY_GRID_KIND                = 'DECIMAL'
+  DISPLAY_CENTER                       = 'ON_SUT'
+  CENTER_PLATFORM_NUMBER               = 1
+  SCALE                                = 1.00000000000000
+  INTENSITY                            = 1.00000000000000
+  VELOCITY_VECTOR_DURATION             = 1.00000000000000
+  DISPLAY_HUD                          = TRUE
+  DISPLAY_PLATFORM_DETAILS             = FALSE
+  DISPLAY_TERRAIN_LEGEND               = FALSE
+  DISPLAY_GRIDS                        = TRUE
+  DISPLAY_PROJECTED_PATH               = TRUE
+  DISPLAY_PATH_HISTORY                 = TRUE
+  DISPLAY_INACTIVE_PLATFORMS           = FALSE
+  DISPLAY_SYMBOL_LEGEND                = FALSE
+  DISPLAY_ROUGHNESS_LEGEND             = FALSE
+  DISPLAY_VMAP_LEGEND                  = FALSE
+  TERRAIN_ENABLED                      = FALSE
+  ROUGHNESS_ENABLED                    = FALSE
+  VMAP_ENABLED                         = FALSE
+  GEOPOLITICAL_CENTER_LATITUDE         = 0.00000000000000
+  GEOPOLITICAL_CENTER_LONGITUDE        = 0.00000000000000
+  DISPLAY_VMAP_BARRIERS                = FALSE
+  DISPLAY_VMAP_COASTLINE               = FALSE
+  DISPLAY_VMAP_DEPTH_LINES             = FALSE
+  DISPLAY_VMAP_POLITICAL_LINES         = FALSE
+  DISPLAY_VMAP_CANALS                  = FALSE
+  DISPLAY_VMAP_WATERWAYS               = FALSE
+  DISPLAY_VMAP_LANDFORMS               = FALSE
+  DISPLAY_VMAP_RAILROADS               = FALSE
+  DISPLAY_VMAP_ROADS                   = FALSE
+  DISPLAY_VMAP_TRAILS                  = FALSE
+  DISPLAY_VMAP_STRUCTURES              = FALSE
+  DISPLAY_VMAP_PIPELINES               = FALSE
+  DISPLAY_VMAP_UTILITIES               = FALSE
+  GEO_TIFF_ENABLED                     = FALSE
+  GEO_TIFF_PATH                        = '$GT/'
+  NUMBER_OF_PLATFORMS                  = 2
+  PLATFORM_NUMBER( 1)                  = 1
+  PLATFORM_NUMBER( 2)                  = 2
+  DISPLAY_PLATFORM_SYMBOL( 1)          = 2*TRUE
+  DISPLAY_PLATFORM_PATH_HISTORY( 1)    = 2*TRUE
+  DISPLAY_PLATFORM_PROJECTED_PATH( 1)  = 2*TRUE
+ $END
+ 
+ 
+ $DATA_RECORDING
+  DATA_RECORDING_ENABLE                = FALSE
+ $END
+ 
+ 
+ $EMITTER_LIBRARY
+  EMITTER_LIBRARY_ENABLE               = FALSE
+ $END
+ 
+ 
+ $TERRAIN
+  TERRAIN_ENABLE                       = FALSE
+ $END
+ 
+ 
+ $SURFACE_EFFECTS
+  MULTIPATH_ENABLE                     = FALSE
+  WAVE_SPLASH_ENABLE                   = FALSE
+  SUT_EMITTER_EARTH_REFLECTION_ENABLE  = FALSE
+ $END
+ 
+ 
+ $PROPAGATION_EFFECTS
+  ATMOSPHERIC_ABSORPTION_ATTENUATION   = FALSE
+  RAINFALL_RATE_KIND                   = 'NO_RAIN'
+  DUCTING_ENABLE                       = FALSE
+  RANGE_ATTENUATION_ENABLE             = TRUE
+  FREQUENCY_ATTENUATION_ENABLE         = TRUE
+ $END
+ 
+ 
+ $SPACIAL_AND_DOPPLER_EFFECTS
+  FREQUENCY_DOPPLER_SHIFT_ENABLE       = FALSE
+  RANGE_AND_PRI_DOPPLER_SHIFT_ENABLE   = FALSE
+ $END
+ 
+ 
+ $HARDWARE_RESOURCE_OPTIMIZATIONS
+  PULSE_TRUNCATION_ENABLE              = FALSE
+  CW_INTERRUPT_ENABLE                  = FALSE
+  SENSITIVITY_THRESHOLD_ENABLE         = FALSE
+ $END
+ 
+ 
+ $DPM_FILTER_DATA
+  DPM_BOARD_COLLECTION_ENABLED         = FALSE
+ $END
+ 
+ 
+ $DPM_FILTER_DATA
+  DPM_BOARD_COLLECTION_ENABLED         = FALSE
+ $END
+ 
+ 
+ $NAVIGATION_INTERFACE_SETTINGS
+  ENABLED                              = FALSE
+ $END
+ 
