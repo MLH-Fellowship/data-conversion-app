@@ -1,0 +1,17 @@
+//*************** INTRAPULSE DEFINITION FILE ****************
+//
+// Model:   Test4_Intra_FSK_2
+//
+// Created: Wed Jan 20, 2021  10:18 AM
+
+
+//******************* INTRAPULSE MODEL ********************
+
+INTRAPULSE NOTES:   ""
+
+INTRAPULSE MODEL:   FSK
+
+DEVIATION:          2.0000000 MHZ
+PATTERN:            +---+-+-+++---+-+-+-++++++---++--+-+-+-+-+-+-+-+
+CHIP WIDTH:         1.000 USEC
+AMPLITUDE TRIM:     0.0000 DB
