@@ -19,7 +19,7 @@ We are working with a very technically advanced US Air Force division that deals
 
 CEESIM files are different. I will send them to you in an XML format, and ASCII format and the CEESIM format.
 
-You will not be able to read the CEESIM format as you do not have a CEESIM system. __*(I did not include these in the data dump - there are no CEESIM format files, these are sc1-3 files we talk about...)*__
+You will not be able to read the CEESIM format as you do not have a CEESIM system. __*(I did not include these in the data dump - there are no CEESIM format files, these are the sc1-3 files we talked about...)*__
 
 I think you will want to work with the XML format as you should be able to tell more from that and the XML format can be directly uploaded to CEESIM so that will probably be the one to go with.
 
