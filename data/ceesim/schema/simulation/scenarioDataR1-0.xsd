@@ -1,0 +1,383 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema 
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+
+  <!--
+    Note:
+    
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+    
+    Change History:
+    
+    Date        Who  Revision  Description
+    2013-03-11  XXX  1.0       Original.
+    2013-07-08  JSP  1.0       Change NatoName to EmitterName for DPM filters.
+  -->
+
+  <xsd:include schemaLocation="commonComplexTypesR1-0.xsd"/>
+
+  <xsd:complexType name="ctScenarioData">
+    <xsd:all minOccurs="1">
+      <xsd:element name="ScenarioHeader" type="ce:ctScenarioHeader" minOccurs="0"/>
+    </xsd:all>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctScenarioHeader">
+    <xsd:all minOccurs="1">
+      <xsd:element name="CreationDate"                    type="ce:stDateCreationDate" minOccurs="0"/>
+      <xsd:element name="ModificationDate"                type="ce:stDateModificationDate" minOccurs="0"/>
+      <xsd:element name="ScenarioRevision"                type="ce:stIntScenarioRevision" minOccurs="0"/>
+      <xsd:element name="SoftwareReleaseOfLastHeaderEdit" type="ce:stIntSoftwareReleaseOfLastHeaderEdit" minOccurs="0"/>
+      <xsd:element name="DistanceUnits"                   type="ce:stEnumDistanceUnits" minOccurs="0"/>
+      <xsd:element name="EnvironmentKind"                 type="ce:stEnumEnvironmentKind" minOccurs="0"/>
+      <xsd:element name="Comment"                         type="ce:stStringCommentScenarioHeader" minOccurs="0"/>
+      <xsd:element name="SutPlatformNumbers"              type="ce:ctSutPlatformNumberList" minOccurs="0"/>
+      <xsd:element name="ExternalSutFlag"                 type="ce:stBoolExternalSutFlag" minOccurs="0"/>
+      <xsd:element name="HorizonMaskingEnable"            type="ce:stBoolHorizonMaskingEnable" minOccurs="0"/>
+      <xsd:element name="EarthRadiusFactor"               type="ce:stDoubleEarthRadiusFactor" minOccurs="0"/>
+      <xsd:element name="DataRecording"                   type="ce:ctDataRecording" minOccurs="0"/>
+      <xsd:element name="EmitterLibraryEnable"            type="ce:stBoolEmitterLibraryEnable" minOccurs="0"/>
+      <xsd:element name="EmitterLibraryName"              type="ce:stStringEmitterLibraryName" minOccurs="0"/>
+      <xsd:element name="ScenarioElementLibraryEnable"    type="ce:stBoolScenarioElementLibraryEnable" minOccurs="0"/>
+      <xsd:element name="ScenarioElementLibraryName"      type="ce:stTextScenarioElementLibraryName" minOccurs="0"/>
+      <xsd:element name="Terrain"                         type="ce:ctTerrain" minOccurs="0"/>
+      <xsd:element name="SurfaceEffects"                  type="ce:ctSurfaceEffects" minOccurs="0"/>
+      <xsd:element name="PropagationEffects"              type="ce:ctPropagationEffects" minOccurs="0"/>
+      <xsd:element name="SpacialAndDopplerEffects"        type="ce:ctSpacialAndDopplerEffects" minOccurs="0"/>
+      <xsd:element name="HardwareResourceOptimizations"   type="ce:ctHardwareResourceOptimizations" minOccurs="0"/>
+      <xsd:element name="Dpms"                            type="ce:ctDpmDataList" minOccurs="0"/>
+      <xsd:element name="NavigationInterfaceSettings"     type="ce:ctNavigationInterfaceSettings" minOccurs="0"/>
+      <xsd:element name="SituationDisplayData"            type="ce:ctSituationDisplayDataList" minOccurs="0"/>
+      <xsd:element name="GuiDisplaySettings"              type="ce:ctGuiDisplaySettings" minOccurs="0"/>
+    </xsd:all>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSutPlatformNumberList">
+    <xsd:sequence minOccurs="0" maxOccurs="4">
+      <xsd:element name="SutPlatformNumber" type="ce:stIntSutPlatformNumber"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDataRecording">
+    <xsd:all minOccurs="1">
+      <xsd:element name="DataRecordingEnable" type="ce:stBoolDataRecordingEnable" minOccurs="0"/>
+      <xsd:element name="DxFileName" type="ce:stStringDxFileName" minOccurs="0"/>
+      <xsd:element name="RecordPlatformEventsEnable" type="ce:stBoolRecordPlatformEventsEnable" minOccurs="0"/>
+      <xsd:element name="RecordEmitterEventsEnable" type="ce:stBoolRecordEmitterEventsEnable" minOccurs="0"/>
+      <xsd:element name="RecordPulseCountsEnable" type="ce:stBoolRecordPulseCountsEnable" minOccurs="0"/>
+      <xsd:element name="RecordPlatformStatusEnable" type="ce:stBoolRecordPlatformStatusEnable" minOccurs="0"/>
+      <xsd:element name="RecordEmitterStatusEnable" type="ce:stBoolRecordEmitterStatusEnable" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctTerrain">
+    <xsd:all minOccurs="1">
+      <xsd:element name="TerrainEnable" type="ce:stBoolTerrainEnable" minOccurs="0"/>
+      <xsd:element name="TerrainMaskingAttenuationEnable" type="ce:stBoolTerrainMaskingAttenuationEnable" minOccurs="0"/>
+      <xsd:element name="TerrainDtedKind" type="ce:stEnumTerrainDtedKind" minOccurs="0"/>
+      <xsd:element name="NorthLatitude" type="ce:stDoubleNorthLatitude" minOccurs="0"/>
+      <xsd:element name="NorthDirection" type="ce:stEnumNorthSouthDirectionKind" minOccurs="0"/>
+      <xsd:element name="WestLongitude" type="ce:stDoubleWestLongitude" minOccurs="0"/>
+      <xsd:element name="WestDirection" type="ce:stEnumEastWestDirectionKind" minOccurs="0"/>
+      <xsd:element name="SouthLatitude" type="ce:stDoubleSouthLatitude" minOccurs="0"/>
+      <xsd:element name="SouthDirection" type="ce:stEnumNorthSouthDirectionKind" minOccurs="0"/>
+      <xsd:element name="EastLongitude" type="ce:stDoubleEastLongitude" minOccurs="0"/>
+      <xsd:element name="EastDirection" type="ce:stEnumEastWestDirectionKind" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSurfaceEffects">
+    <xsd:all minOccurs="1">
+      <xsd:element name="MultipathEnable" type="ce:stBoolMultipathEnable" minOccurs="0"/>
+      <xsd:element name="WaveSplashEnable" type="ce:stBoolWaveSplashEnable" minOccurs="0"/>
+      <xsd:element name="SutEmitterEarthReflectionEnable" type="ce:stBoolSutEmitterEarthReflectionEnable" minOccurs="0"/>
+      <xsd:element name="SurfaceKind" type="ce:stEnumSurfaceKind" minOccurs="0"/>
+      <xsd:element name="NorthLatitude" type="ce:stDoubleNorthLatitude" minOccurs="0"/>
+      <xsd:element name="NorthDirection" type="ce:stEnumNorthSouthDirectionKind" minOccurs="0"/>
+      <xsd:element name="WestLongitude" type="ce:stDoubleWestLongitude" minOccurs="0"/>
+      <xsd:element name="WestDirection" type="ce:stEnumEastWestDirectionKind" minOccurs="0"/>
+      <xsd:element name="SouthLatitude" type="ce:stDoubleSouthLatitude" minOccurs="0"/>
+      <xsd:element name="SouthDirection" type="ce:stEnumNorthSouthDirectionKind" minOccurs="0"/>
+      <xsd:element name="EastLongitude" type="ce:stDoubleEastLongitude" minOccurs="0"/>
+      <xsd:element name="EastDirection" type="ce:stEnumEastWestDirectionKind" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPropagationEffects">
+    <xsd:all minOccurs="1">
+      <xsd:element name="AtmosphericAbsorptionAttenuationEnable" type="ce:stBoolAtmosphericAbsorptionAttenuationEnable" minOccurs="0"/>
+      <xsd:element name="RainfallRateKind" type="ce:stEnumRainfallRateKind" minOccurs="0"/>
+      <xsd:element name="DuctingEnable" type="ce:stBoolDuctingEnable" minOccurs="0"/>
+      <xsd:element name="DuctingBoundaryKind" type="ce:stEnumDuctingBoundaryKind" minOccurs="0"/>
+      <xsd:element name="DuctingHeight" type="ce:stDoubleDuctingHeight" minOccurs="0"/>
+      <xsd:element name="DuctingRefractivity" type="ce:stDoubleDuctingRefractivity" minOccurs="0"/>
+      <xsd:element name="DuctingFileName" type="ce:stStringDuctingFileName" minOccurs="0"/>
+      <xsd:element name="RangeAttenuationEnable" type="ce:stBoolRangeAttenuationEnable" minOccurs="0"/>
+      <xsd:element name="FrequencyAttenuationEnable" type="ce:stBoolFrequencyAttenuationEnable" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSpacialAndDopplerEffects">
+    <xsd:all minOccurs="1">
+      <xsd:element name="FrequencyDopplerShiftEnable" type="ce:stBoolFrequencyDopplerShiftEnable" minOccurs="0"/>
+      <xsd:element name="RangeAndPriDopplerShiftEnable" type="ce:stBoolRangeAndPriDopplerShiftEnable" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctHardwareResourceOptimizations">
+    <xsd:all minOccurs="1">
+      <xsd:element name="PulseTruncationEnable" type="ce:stBoolPulseTruncationEnable" minOccurs="0"/>
+      <xsd:element name="CwInterruptEnable" type="ce:stBoolCwInterruptEnable" minOccurs="0"/>
+      <xsd:element name="SensitivityThresholdEnable" type="ce:stBoolSensitivityThresholdEnable" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmDataList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="Dpm" type="ce:ctDpmData"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctDpmData">
+    <xsd:all minOccurs="1">
+      <xsd:element name="DpmBoardCollectionEnable" type="ce:stBoolDpmBoardCollectionEnable" minOccurs="0"/>
+      <xsd:element name="PulseContendedState" type="ce:stEnumPulseContendedStateKind" minOccurs="0"/>
+      <xsd:element name="PulseInhibitState" type="ce:stEnumPulseInhibitStateKind" minOccurs="0"/>
+      <xsd:element name="CircularBufferCollection" type="ce:stBoolCircularBufferCollection" minOccurs="0"/>
+      <xsd:element name="ExternalGatingState" type="ce:stEnumExternalGatingStateKind" minOccurs="0"/>
+      <xsd:element name="DgsVideoState" type="ce:stEnumDgsVideoStateKind" minOccurs="0"/>
+      <xsd:element name="PdwKind" type="ce:stEnumPdwKind" minOccurs="0"/>
+      <xsd:element name="InvalidPdwsFlag" type="ce:stBoolInvalidPdwsFlag" minOccurs="0"/>
+      <xsd:element name="DpmFilters" type="ce:ctDpmFilter" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilter">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="AzAoa" type="ce:ctDpmFilterAzAoa" minOccurs="0"/>
+      <xsd:element name="ElAoa" type="ce:ctDpmFilterElAoa" minOccurs="0"/>
+      <xsd:element name="EmitterNumber" type="ce:ctDpmFilterEmitterNumber" minOccurs="0"/>
+      <xsd:element name="Frequency" type="ce:ctDpmFilterFrequency" minOccurs="0"/>
+      <xsd:element name="Generator" type="ce:ctDpmFilterGenerator" minOccurs="0"/>
+      <xsd:element name="EmitterName" type="ce:stStringEmitterName" minOccurs="0"/>
+      <xsd:element name="PulseWidth" type="ce:ctDpmFilterPulseWidth" minOccurs="0"/>
+      <xsd:element name="Power" type="ce:ctDpmFilterPower" minOccurs="0"/>
+      <xsd:element name="ScenarioTime" type="ce:ctDpmFilterScenarioTime" minOccurs="0"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterAzAoa">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerAzimuth" type="ce:stDoubleLowerAz" minOccurs="0"/>
+      <xsd:element name="UpperAzimuth" type="ce:stDoubleUpperAz" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterElAoa">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerElevation" type="ce:stDoubleLowerElevation" minOccurs="0"/>
+      <xsd:element name="UpperElevation" type="ce:stDoubleUpperElevation" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterEmitterNumber">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerEmitter" type="ce:stIntLowerEmitterNumber" minOccurs="0"/>
+      <xsd:element name="UpperEmitter" type="ce:stIntUpperEmitterNumber" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterFrequency">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerFrequency" type="ce:stDoubleLowerFrequency" minOccurs="0"/>
+      <xsd:element name="UpperFrequency" type="ce:stDoubleUpperFrequency" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterGenerator">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerGenerator" type="ce:stIntLowerGeneratorNumber" minOccurs="0"/>
+      <xsd:element name="UpperGenerator" type="ce:stIntUpperGeneratorNumber" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterPulseWidth">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerPulseWidth" type="ce:stDoubleLowerPulseWidth" minOccurs="0"/>
+      <xsd:element name="UpperPulseWidth" type="ce:stDoubleUpperPulseWidth" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterPower">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerPower" type="ce:stDoubleLowerPower" minOccurs="0"/>
+      <xsd:element name="UpperPower" type="ce:stDoubleUpperPower" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterScenarioTime">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerTime" type="ce:stDoubleLowerTime" minOccurs="0"/>
+      <xsd:element name="UpperTime" type="ce:stDoubleUpperTime" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctNavigationInterfaceSettings">
+    <xsd:all minOccurs="1">
+      <xsd:element name="NavIfEnable"          type="ce:stBoolNavIfEnable" minOccurs="0"/>
+      <xsd:element name="NavIfPhysicalIfKind"  type="ce:stEnumNavIfPhysicalIfKind" minOccurs="0"/>
+      <xsd:element name="NavIf1553BusKind"     type="ce:stEnumNavIf1553BusKind" minOccurs="0"/>
+      <xsd:element name="NavIfUpdateInterval"  type="ce:stEnumNavIfUpdateInterval" minOccurs="0"/>
+      <xsd:element name="NavIfPlatforms"       type="ce:ctNavIfPlatformsList" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctNavIfPlatformsList">
+    <xsd:sequence minOccurs="0" maxOccurs="6">
+      <xsd:element name="NavIfPlatform" type="ce:ctNavIfPlatform"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctNavIfPlatform">
+    <xsd:all minOccurs="1">
+      <xsd:element name="NavIfUserPlatformNumber"  type="ce:stIntUserPlatformNumber"  minOccurs="0"/>
+      <xsd:element name="NavIfRtAddress"           type="ce:stIntNavIfRtAddress"  minOccurs="0"/>
+      <xsd:element name="NavIfRtSubAddress"        type="ce:stIntNavIfRtSubAddress"  minOccurs="0"/>
+      <xsd:element name="NavIfTransferDirection"  type="ce:stEnumNavIfTransferDirection" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSituationDisplayDataList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="SituationDisplaySettings" type="ce:ctSituationDisplaySettings"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSituationDisplaySettings">
+    <xsd:all minOccurs="1">
+      <xsd:element name="DisplayServer"               type="ce:stIntDisplayServer" minOccurs="0"/>
+      <xsd:element name="DisplayId"                   type="ce:stIntDisplayId" minOccurs="0"/>
+      <xsd:element name="DisplayVisibility"           type="ce:stBoolDisplayVisibility" minOccurs="0"/>
+      <xsd:element name="SituationDisplayCenter"      type="ce:stEnumSituationDisplayCenterKind" minOccurs="0"/>
+      <xsd:element name="Center"                      type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="SituationDisplayMode"        type="ce:stEnumSituationDisplayModeKind" minOccurs="0"/>
+      <xsd:element name="DisplayScale"                type="ce:stDoubleDisplayScale" minOccurs="0"/>
+      <xsd:element name="DisplayIntensity"            type="ce:stDoubleDisplayIntensity" minOccurs="0"/>
+      <xsd:element name="VelocityVectorDuration"      type="ce:stDoubleVelocityVectorDuration" minOccurs="0"/>
+      <xsd:element name="DisplayTerrain"              type="ce:stBoolDisplayTerrain" minOccurs="0"/>
+      <xsd:element name="DisplayRoughness"            type="ce:stBoolDisplayRoughness" minOccurs="0"/>
+      <xsd:element name="DisplayGeopolitical"         type="ce:stBoolDisplayGeopolitical" minOccurs="0"/>
+      <xsd:element name="GeopoliticalCenterLatitude"  type="ce:stDoubleGeopoliticalCenterLatitude"    minOccurs="0"/>
+      <xsd:element name="GeopoliticalCenterLongitude" type="ce:stDoubleGeopoliticalCenterLongitude"   minOccurs="0"/>
+      <xsd:element name="DisplayBarriers"             type="ce:stBoolDisplayBarriers" minOccurs="0"/>
+      <xsd:element name="DisplayCoastline"            type="ce:stBoolDisplayCoastline" minOccurs="0"/>
+      <xsd:element name="DisplayDepthLines"           type="ce:stBoolDisplayDepthLines" minOccurs="0"/>
+      <xsd:element name="DisplayPoliticalLines"       type="ce:stBoolDisplayPoliticalLines" minOccurs="0"/>
+      <xsd:element name="DisplayCanals"               type="ce:stBoolDisplayCanals" minOccurs="0"/>
+      <xsd:element name="DisplayWaterways"            type="ce:stBoolDisplayWaterways" minOccurs="0"/>
+      <xsd:element name="DisplayLandforms"            type="ce:stBoolDisplayLandforms" minOccurs="0"/>
+      <xsd:element name="DisplayRailroads"            type="ce:stBoolDisplayRailroads" minOccurs="0"/>
+      <xsd:element name="DisplayRoads"                type="ce:stBoolDisplayRoads" minOccurs="0"/>
+      <xsd:element name="DisplayTrails"               type="ce:stBoolDisplayTrails" minOccurs="0"/>
+      <xsd:element name="DisplayStructures"           type="ce:stBoolDisplayStructures" minOccurs="0"/>
+      <xsd:element name="DisplayPipelines"            type="ce:stBoolDisplayPipelines" minOccurs="0"/>
+      <xsd:element name="DisplayUtilities"            type="ce:stBoolDisplayUtilities" minOccurs="0"/>
+      <xsd:element name="PlatformDisplayOptionsList"  type="ce:ctSituationDisplayPlatformOptionsList" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctGuiDisplaySettings">
+    <xsd:all minOccurs="1">
+      <xsd:element name="GuiDisplayMode"              type="ce:stEnumGuiDisplayModeKind"        minOccurs="0"/>
+      <xsd:element name="DisplayGridKind"             type="ce:stEnumDisplayGridKind"           minOccurs="0"/>
+      <xsd:element name="GuiDisplayCenter"            type="ce:stEnumDisplayCenterKind"         minOccurs="0"/>
+      <xsd:element name="Center"                      type="ce:ctPoint"                         minOccurs="0"/>
+      <xsd:element name="CenterPlatformNumber"        type="ce:stIntUserPlatformNumber"         minOccurs="0"/>
+      <xsd:element name="Scale"                       type="ce:stDoubleScale"                   minOccurs="0"/>
+      <xsd:element name="Intensity"                   type="ce:stDoubleIntensity"               minOccurs="0"/>
+      <xsd:element name="VelocityVectorDuration"      type="ce:stDoubleVelocityVectorDuration"  minOccurs="0"/>
+      <xsd:element name="DisplayHud"                  type="ce:stBoolDisplayHud"                minOccurs="0"/>
+      <xsd:element name="DisplayPlatformDetails"      type="ce:stBoolDisplayPlatformDetails"    minOccurs="0"/>
+      <xsd:element name="DisplayTerrainLegend"        type="ce:stBoolDisplayTerrainLegend"      minOccurs="0"/>
+      <xsd:element name="DisplayGrids"                type="ce:stBoolDisplayGrids"              minOccurs="0"/>
+      <xsd:element name="DisplayProjectedPath"        type="ce:stBoolDisplayProjectedPath"      minOccurs="0"/>
+      <xsd:element name="DisplayPathHistory"          type="ce:stBoolDisplayPathHistory"        minOccurs="0"/>
+      <xsd:element name="DisplayInactivePlatforms"    type="ce:stBoolDisplayInactivePlatforms"  minOccurs="0"/>
+      <xsd:element name="DisplaySymbolLegend"         type="ce:stBoolDisplaySymbolLegend"       minOccurs="0"/>
+      <xsd:element name="DisplayRoughnessLegend"      type="ce:stBoolDisplayRoughnessLegend"    minOccurs="0"/>
+      <xsd:element name="DisplayVmapLegend"           type="ce:stBoolDisplayVmapLegend"         minOccurs="0"/>
+      <xsd:element name="TerrainEnable"               type="ce:stBoolTerrainEnable"             minOccurs="0"/>
+      <xsd:element name="RoughnessEnable"             type="ce:stBoolRoughnessEnable"           minOccurs="0"/>
+      <xsd:element name="VmapEnable"                  type="ce:stBoolVmapEnable"                 minOccurs="0"/>
+      <xsd:element name="GeopoliticalCenterLatitude"  type="ce:stDoubleGeopoliticalCenterLatitude"    minOccurs="0"/>
+      <xsd:element name="GeopoliticalCenterLongitude" type="ce:stDoubleGeopoliticalCenterLongitude"   minOccurs="0"/>
+      <xsd:element name="DisplayBarriers"             type="ce:stBoolDisplayBarriers"           minOccurs="0"/>
+      <xsd:element name="DisplayCoastline"            type="ce:stBoolDisplayCoastline"          minOccurs="0"/>
+      <xsd:element name="DisplayDepthLines"           type="ce:stBoolDisplayDepthLines"         minOccurs="0"/>
+      <xsd:element name="DisplayPoliticalLines"       type="ce:stBoolDisplayPoliticalLines"     minOccurs="0"/>
+      <xsd:element name="DisplayCanals"               type="ce:stBoolDisplayCanals"             minOccurs="0"/>
+      <xsd:element name="DisplayWaterways"            type="ce:stBoolDisplayWaterways"          minOccurs="0"/>
+      <xsd:element name="DisplayLandforms"            type="ce:stBoolDisplayLandforms"          minOccurs="0"/>
+      <xsd:element name="DisplayRailroads"            type="ce:stBoolDisplayRailroads"          minOccurs="0"/>
+      <xsd:element name="DisplayRoads"                type="ce:stBoolDisplayRoads"              minOccurs="0"/>
+      <xsd:element name="DisplayTrails"               type="ce:stBoolDisplayTrails"             minOccurs="0"/>
+      <xsd:element name="DisplayStructures"           type="ce:stBoolDisplayStructures"         minOccurs="0"/>
+      <xsd:element name="DisplayPipelines"            type="ce:stBoolDisplayPipelines"          minOccurs="0"/>
+      <xsd:element name="DisplayUtilities"            type="ce:stBoolDisplayUtilities"          minOccurs="0"/>
+      <xsd:element name="GeotiffEnable"               type="ce:stBoolGeotiffEnable"             minOccurs="0"/>
+      <xsd:element name="GeotiffPath"                 type="ce:stTextGeotiffPath"               minOccurs="0"/>
+      <xsd:element name="PlatformDisplayOptionsList"  type="ce:ctGuiPlatformOptionsList"        minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSituationDisplayPlatformOptionsList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="PlatformDisplayOptions" type="ce:ctSituationDisplayPlatformOptions"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSituationDisplayPlatformOptions">
+    <xsd:all minOccurs="1">
+      <xsd:element name="PlatformNumber"  type="ce:stIntUserPlatformNumber"  minOccurs="0"/>
+      <xsd:element name="DisplayPlatform" type="ce:stBoolDisplayPlatform" minOccurs="0"/>
+      <xsd:element name="DisplayPath"     type="ce:stBoolDisplayPath"     minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctGuiPlatformOptionsList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="PlatformDisplayOptions" type="ce:ctGuiPlatformOptions"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctGuiPlatformOptions">
+    <xsd:all minOccurs="1">
+      <xsd:element name="PlatformNumber"        type="ce:stIntUserPlatformNumber"     minOccurs="0"/>
+      <xsd:element name="DisplaySymbol"         type="ce:stBoolDisplaySymbol"         minOccurs="0"/>
+      <xsd:element name="DisplayPathHistory"    type="ce:stBoolDisplayPathHistory"    minOccurs="0"/>
+      <xsd:element name="DisplayProjectedPath"  type="ce:stBoolDisplayProjectedPath"  minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+</xsd:schema>

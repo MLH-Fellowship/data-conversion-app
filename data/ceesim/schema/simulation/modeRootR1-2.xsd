@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+
+  <!--
+    Note:
+    
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+    
+    Change History:
+    
+    Date        Who  Revision  Description
+    2013-03-11  XXX  1.0       Original.
+    2013-04-11  JSP  1.1       Rename include for revision 1.1.
+    2017-07-11  KMB  1.2       Rename include for revision 1.2
+  -->
+
+  <xsd:include schemaLocation="modeDataR1-2.xsd"/>
+
+  <xsd:element name="EmitterMode" type="ce:ctEmitterMode"/>
+
+
+</xsd:schema>
+

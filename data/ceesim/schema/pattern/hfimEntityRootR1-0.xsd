@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+
+  <!--
+    Note:
+    
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+
+    Sample Period are in seconds (international system of units - SI)
+
+    Change History:
+    
+    Date        Who  Revision  Description
+    2017-01-19  XXX  1.0       Original.
+  -->
+
+  <!-- The major revision needs to be a single value, i.e., minInclusive == maxInclusive -->
+  <xsd:simpleType name="stHfimEntityMajorRevision">
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <!-- The minor revision ranges from 0 to the current minor revision -->
+  <xsd:simpleType name="stHfimEntityMinorRevision">
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:element name="HfimEntity" type="ce:ctHfimEntity"/>
+
+  <xsd:complexType name="ctHfimEntity">
+    <xsd:all minOccurs="1">
+      <xsd:element name="Hfim" type ="ce:ctHfimPattern" minOccurs="1"/>
+    </xsd:all>
+    <xsd:attribute name="Major" type="ce:stHfimEntityMajorRevision" use="required"/>
+    <xsd:attribute name="Minor" type="ce:stHfimEntityMinorRevision" use="required"/>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctHfimPattern">
+    <xsd:all minOccurs="1">
+      <xsd:element name="Header" type="ce:ctHfimHeader" minOccurs="1"/>
+    </xsd:all>
+  </xsd:complexType>
+  
+  <xsd:complexType  name="ctHfimHeader">
+    <xsd:all minOccurs="1">
+      <xsd:element name="Function" type="ce:stStringHfimFunction" minOccurs="1"/>
+      <xsd:element name="Comment" type="ce:stStringHfimComment" minOccurs="0"/>
+      <xsd:element name="DownloadDataLength" type="ce:stIntDownloadDataLength" minOccurs="1"/>
+      <xsd:element name="EditorDataLength" type="ce:stIntEditorDataLength" minOccurs="1"/>
+      <xsd:element name="AmplitudeAxisScale" type="ce:stEnumAmplitudeAxisScaleKind" minOccurs="1"/>
+      <xsd:element name="SamplePeriod" type="ce:stDoubleSamplePeriod" minOccurs="1"/>
+      <xsd:element name="ViewMode" type="ce:stEnumViewModeKind" minOccurs="1"/>
+      <xsd:element name="ICrc" type="ce:stUnsignedLongCrc" minOccurs="0"/>
+      <xsd:element name="QCrc" type="ce:stUnsignedLongCrc" minOccurs="0"/>
+      <xsd:element name="Version" type="ce:stIntVersion" minOccurs="0"/>
+      <xsd:element name="Revision" type="ce:stIntRevision" minOccurs="1"/>
+      <xsd:element name="FilterPath" type="ce:stEnumFilterPathKind" minOccurs="0"/>
+      <xsd:element name="UpsamplingState" type="ce:stEnumUpsamplingStateKind" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:simpleType name="stStringHfimFunction">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringHfimComment">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntDownloadDataLength">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntEditorDataLength">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumAmplitudeAxisScaleKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Linear</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Linear"/>
+      <xsd:enumeration value="Logarithmic"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSamplePeriod">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.00000003125000</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:enumeration value="0.00000001562500"/>
+      <xsd:enumeration value="0.00000006250000"/>
+      <xsd:enumeration value="0.00000025000000"/>
+      <xsd:enumeration value="0.00000100000000"/>
+      <xsd:enumeration value="0.00000000781250"/>
+      <xsd:enumeration value="0.00000003125000"/>
+      <xsd:enumeration value="0.00000012500000"/>
+      <xsd:enumeration value="0.00000050000000"/>
+      <xsd:enumeration value="0.00000200000000"/>
+      <xsd:enumeration value="0.00000000390625"/>
+      <xsd:enumeration value="0.00000000078125"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumViewModeKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Frequency_Amplitude</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Frequency_Amplitude"/>
+      <xsd:enumeration value="Phase_Amplitude"/>
+      <xsd:enumeration value="Iphase_Qphase"/>
+      <xsd:enumeration value="Amop"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stUnsignedLongCrc">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:unsignedLong">
+      <xsd:minInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntVersion">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntRevision">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumFilterPathKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Non_Filtered_Path</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Non_Filtered_Path"/>
+      <xsd:enumeration value="Filtered_Path"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumUpsamplingStateKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Enabled</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Disabled"/>
+      <xsd:enumeration value="Enabled"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>

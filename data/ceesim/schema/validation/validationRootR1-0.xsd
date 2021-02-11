@@ -1,0 +1,658 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+  <!--
+    Note:
+    
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+    
+    Change History:
+    
+    Date        Who  Revision  Description
+    2013-06-17  XXX  1.0       Original.
+  -->
+  
+  <!-- The major revision needs to be a single value, i.e., minInclusive == maxInclusive -->
+  <xsd:simpleType name="stValidationMajorRevision">
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <!-- The minor revision ranges from 0 to the current minor revision -->
+  <xsd:simpleType name="stValidationMinorRevision">
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:element name ="CeesimValidationData" type="ce:ctValidationSection"/>
+
+  <xsd:complexType name ="ctValidationSection">
+    <xsd:sequence>
+      <xsd:element name ="ValidationSection" type="ce:ctValidationRecord" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="Major" type="ce:stValidationMajorRevision" use="required"/>
+    <xsd:attribute name="Minor" type="ce:stValidationMinorRevision" use="required"/>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctValidationRecord" >
+    <xsd:choice minOccurs="1" maxOccurs="unbounded">
+      <xsd:element name ="Int"                  type="ce:ctValidationInteger"                minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Dou"                  type="ce:ctValidationDouble"                 minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Enum"                 type="ce:ctValidationEnum"                   minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Bool"                 type="ce:ctValidationBoolean"                minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ChPwrFreqDataList"    type="ce:ctChannelPowerFrequencyDataList"    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ChValidationList"     type="ce:ctChannelValidationDataList"        minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="GpValidationList"     type="ce:ctGpValidationDataList"             minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="HfimPatternList"      type="ce:ctHfimModulationPatternList"        minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ModPatternList"       type="ce:ctModulationPatternRecordList"      minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PoolValidationList"   type="ce:ctPoolValidationDataList"           minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SystemType"           type="ce:stEnumSystemType"                   minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="TxPatternList"        type="ce:ctTransmitPatternRecordList"        minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="UniPolarizationList"  type="ce:ctUniformPolarizationRecordList"    minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:choice>
+    <xsd:attribute name="N" type="xsd:string"/>
+  </xsd:complexType>
+
+<!-- /////////////////////////////////////////////////////////////////////////////////
+     //
+     // Complex Type Validation Type Definitions
+     //
+     ///////////////////////////////////////////////////////////////////////////// -->
+
+  <xsd:complexType name ="ctValidationBoolean" >
+    <xsd:all>
+      <xsd:element name ="Def" type="xsd:boolean" minOccurs="0" maxOccurs="1"></xsd:element>
+    </xsd:all>
+    <xsd:attribute name="N" type="xsd:string" />
+    <xsd:attribute name="Const" type="xsd:boolean" use="optional" default="false"/>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctValidationDouble" >
+    <xsd:all>
+      <xsd:element name ="Def" type="xsd:double" minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Min" type="xsd:double" minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Max" type="xsd:double" minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Res" type="xsd:double" minOccurs="0" maxOccurs="1"></xsd:element>
+    </xsd:all>
+    <xsd:attribute name="N" type="xsd:string" />
+    <xsd:attribute name="Const" type="xsd:boolean" use="optional" default="false"/>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctValidationEnum" >
+    <xsd:sequence>
+      <xsd:element name ="Def" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Opt" type="ce:ctValidationIndexedString" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="N"     type="xsd:string"  use="optional" />
+    <xsd:attribute name="Const" type="xsd:boolean" use="optional" default="false"/>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctValidationInteger" >
+    <xsd:all>
+      <xsd:element name ="Def" type="xsd:int" minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Min" type="xsd:int" minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Max" type="xsd:int" minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Res" type="xsd:int" minOccurs="0" maxOccurs="1"></xsd:element>
+    </xsd:all>
+    <xsd:attribute name="N"     type="xsd:string" />
+    <xsd:attribute name="Const" type="xsd:boolean" use="optional" default="false"/>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctValidationIndexedString" >
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="Ind" type="xsd:int" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+
+<!-- /////////////////////////////////////////////////////////////////////////////////
+     //
+     // Complex Type Ada Record Definitions
+     //
+     ///////////////////////////////////////////////////////////////////////////// -->
+
+  <xsd:complexType name ="ctChannelIdAndSourceStateList" >
+    <xsd:sequence>
+      <xsd:element name ="ChannelIdAndSourceState" type="ce:ctChannelIdAndSourceState"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctChannelIdAndSourceState" >
+    <xsd:sequence>
+      <xsd:element name ="Id"          type="xsd:int"              minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SourceState" type="ce:stEnumSourceState" minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctChannelPowerFrequencyDataList" >
+    <xsd:sequence>
+      <xsd:element name ="ChannelPowerFrequencyData" type="ce:ctChannelPowerFrequencyData"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctChannelPowerFrequencyData" >
+    <xsd:sequence>
+      <xsd:element name ="Channel"       type="xsd:int"                 minOccurs="1"   maxOccurs="1"></xsd:element>
+      <xsd:element name ="PowerFreqList" type="ce:ctPowerFrequencyData" minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctChannelValidationDataList" >
+    <xsd:sequence>
+      <xsd:element name ="ChannelValidationData" type="ce:ctChannelValidationData"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctChannelValidationData" >
+    <xsd:sequence>
+      <xsd:element name ="Active"                 type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ActiveFreqs"            type="ce:ctFrequencyRangeList"        minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="AmopSupported"          type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="AmopMaxAtten"           type="xsd:double"                     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="AmopResolution"         type="xsd:double"                     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="BurstSupported"         type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ChannelSourceType"      type="ce:stEnumChannelSourceType"     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="FmopMaxDev"             type="xsd:double"                     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="CurrentSourceState"     type="ce:stEnumSourceState"           minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Description"            type="xsd:string"                     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="DualRiseTime"           type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ExternalRadar"          type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="HfimFreqList"           type="ce:ctFrequencyRangeList"        minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="HfimList"               type="ce:ctHfimPatternLookupData"     minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="HighFreq"               type="xsd:double"                     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="InactiveFreqList"       type="ce:ctFrequencyRangeList"        minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="LowFreq"                type="xsd:double"                     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="MdfAvailable"           type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="MdfMaster"              type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="MdfMode"                type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="MinChirpRate"           type="xsd:double"                     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="MinFreqRes"             type="xsd:double"                     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Number"                 type="xsd:int"                        minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PhaseShiftMode"         type="ce:stEnumBiQuadPhaseMode"       minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PmopList"               type="ce:ctPmopBandDataList"          minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Pooled"                 type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimAgilitySupported"   type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimChannelSource"      type="ce:stEnumRfguSourceType"        minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimFmopList"           type="ce:ctChirpFmopSourceDataList"   minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimFmopTable"          type="ce:ctChirpFmopTable"            minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimFmopMaxDev"         type="xsd:double"                     minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimFmopSupported"      type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimDigitalFreqRes"     type="xsd:double"                     minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimFineFreqSupported"  type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimFreqRes"            type="xsd:double"                     minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimHfimSupported"      type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimHsAmopPresent"      type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimPeriodModSupported" type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimPmopSupported"      type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimSubbandFreqList"    type="ce:ctSubbandFrequencyDataList"  minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PrimTuningState"        type="ce:stEnumTuningState"           minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecAgilitySupported"    type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecChannelSource"       type="ce:stEnumRfguSourceType"        minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecFmopList"            type="ce:ctChirpFmopSourceDataList"   minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecFmopTable"           type="ce:ctChirpFmopTable"            minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecFmopMaxDev"          type="xsd:double"                     minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecFmopSupported"       type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecDigitalFreqRes"      type="xsd:double"                     minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecFineFreqSupported"   type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecFreqRes"             type="xsd:double"                     minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecHfimSupported"       type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecHsAmopPresent"       type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecPeriodModSupported"  type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecPmopSupported"       type="xsd:boolean"                    minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecSubbandFreqList"     type="ce:ctSubbandFrequencyDataList"  minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SecTuningState"         type="ce:stEnumTuningState"           minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ProgramSimFreqDisplay"  type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="RfAttenType"            type="ce:stEnumRfAttenuatorType"      minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="RfguType"               type="ce:stEnumRfguType"              minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="RiseTime"               type="ce:stEnumRiseTimeState"         minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="RsiChannel"             type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SfaPresent"             type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SfaStartFreqList"       type="ce:ctValidationEnum"            minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SfaStopFreqList"        type="ce:ctValidationEnum"            minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ShadowTime"             type="xsd:double"                     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SourceState"            type="ce:stEnumSourceState"           minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SourceType"             type="ce:stEnumChannelSourceType"     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="UseFreqBandDesignators" type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="VideoAoaModeEnabled"    type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctChirpBandDataList" >
+    <xsd:sequence>
+      <xsd:element name ="ChirpBandData" type="ce:ctChirpBandData"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctChirpBandData" >
+    <xsd:sequence>
+      <xsd:element name ="MaxVolts"          type="xsd:double"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Scale"             type="xsd:int"                       minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ChirpVoltDataList" type="ce:ctChirpVoltageBandDataList" minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctChirpFmopSourceDataList" >
+    <xsd:sequence>
+      <xsd:element name ="ChirpFmopSourceData" type="ce:ctChirpFmopSourceData"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctChirpFmopSourceData" >
+    <xsd:sequence>
+      <xsd:element name ="Direction" type="ce:stEnumChirpModulationDirection" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="MaxDev"    type="xsd:double"                        minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Modsense"  type="xsd:double"                        minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Start"     type="xsd:double"                        minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Stop"      type="xsd:double"                        minOccurs="1" maxOccurs="1"></xsd:element>   
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctChirpFmopTable" >
+    <xsd:sequence>
+      <xsd:element name ="MaxVolt"           type="xsd:double"             minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="MaxVoltForRate"    type="xsd:double"             minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="MaxVoltPercent"    type="xsd:double"             minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ChirpBandDataList" type="ce:ctChirpBandDataList" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="FmopBandDataList"  type="ce:ctFmopBandDataList"  minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctChirpVoltageBandDataList" >
+    <xsd:sequence>
+      <xsd:element name ="ChirpVoltageBandData" type="ce:ctChirpVoltageBandData"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctChirpVoltageBandData" >
+    <xsd:sequence>
+      <xsd:element name ="MinRate" type="xsd:double" minOccurs="1"  maxOccurs="1"></xsd:element>
+      <xsd:element name ="MaxRate" type="xsd:double" minOccurs="1"  maxOccurs="1"></xsd:element>
+      <xsd:element name ="Msb"     type="xsd:int"    minOccurs="1"  maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctFmopBandDataList" >
+    <xsd:sequence>
+      <xsd:element name ="FmopBandData" type="ce:ctFmopBandData"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctFmopBandData" >
+    <xsd:sequence>
+      <xsd:element name ="AbsMaxVolt" type="xsd:double" minOccurs="1"  maxOccurs="1"></xsd:element>
+      <xsd:element name ="Scale"      type="xsd:int"    minOccurs="1"  maxOccurs="1"></xsd:element>
+      <xsd:element name ="VoltLsb"    type="xsd:double" minOccurs="1"  maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctFrequencyRangeList" >
+    <xsd:sequence>
+      <xsd:element name ="FrequencyRange" type="ce:ctFrequencyRange"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctFrequencyRange" >
+    <xsd:sequence>
+      <xsd:element name ="Start" type="xsd:double" minOccurs="1"  maxOccurs="1"></xsd:element>
+      <xsd:element name ="Stop"  type="xsd:double" minOccurs="1"  maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctGpValidationDataList" >
+    <xsd:sequence>
+      <xsd:element name ="GpValidationData" type="ce:ctGpValidationData"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctGpValidationData" >
+    <xsd:sequence>
+      <xsd:element name ="Pool" type="xsd:int" minOccurs="1"  maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctHfimModulationPatternList" >
+    <xsd:sequence>
+      <xsd:element name ="HfimModulationPattern" type="ce:ctHfimModulationPattern"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctHfimModulationPattern" >
+    <xsd:sequence>
+      <xsd:element name ="Comment"      type="xsd:string"                     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Duration"     type="xsd:double"                     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Name"         type="xsd:string"                     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Period"       type="ce:stEnumHfimSamplePeriodKind"  minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="OriginalAwg"  type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Valid"        type="xsd:boolean"                    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ViewMode"     type="ce:stEnumHfimViewMode"          minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctHfimPatternLookupDataList" >
+    <xsd:sequence>
+      <xsd:element name ="hfimPatternLookupData" type="ce:ctHfimPatternLookupData"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctHfimPatternLookupData" >
+    <xsd:sequence>
+      <xsd:element name ="ChannelSourceStateList" type="ce:ctChannelIdAndSourceStateList" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="DownloadPatternList"    type="ce:ctValidationEnum"              minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Duration"               type="xsd:double"                       minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="FilterPath"             type="ce:stEnumHfimFilterPathSelection" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ICrc"                   type="xsd:int"                          minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="IqCombine"              type="xsd:boolean"                      minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="MemAllocatedList"       type="ce:ctChannelIdAndSourceStateList" minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="InUse"                  type="xsd:boolean"                      minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="StartAddressList"       type="ce:ctValidationEnum"              minOccurs="0" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Name"                   type="xsd:string"                       minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PreUpsample"            type="xsd:int"                          minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="QCrc"                   type="xsd:int"                          minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Pairs"                  type="xsd:int"                          minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Rate"                   type="ce:stEnumHfimSamplePeriodKind"    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ValidFirstInList"       type="xsd:boolean"                      minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ValidInList"            type="xsd:boolean"                      minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctModulationPatternRecordList" >
+    <xsd:sequence>
+      <xsd:element name ="ModulationPatternRecord" type="ce:ctModulationPatternRecord"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctModulationPatternRecord" >
+    <xsd:sequence>
+      <xsd:element name ="Avg"  type="xsd:double" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Min"  type="xsd:double" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Max"  type="xsd:double" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Name" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctPmopBandDataList" >
+    <xsd:sequence>
+      <xsd:element name ="PmopBandData" type="ce:ctPmopBandData"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctPmopBandData" >
+    <xsd:sequence>
+      <xsd:element name ="Start"  type="xsd:double"               minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Stop"   type="xsd:double"               minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Mode"   type="ce:stEnumBiQuadPhaseMode" minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctPoolValidationDataList" >
+    <xsd:sequence>
+      <xsd:element name ="PoolValidationData" type="ce:ctPoolValidationData"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctPoolValidationData" >
+    <xsd:sequence>
+      <xsd:element name ="Active"                 type="xsd:boolean"              minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="AmopMaxAtten"           type="xsd:double"               minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="AmopSupported"          type="xsd:boolean"              minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ChannelList"            type="ce:ctValidationEnum"      minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Description"            type="xsd:string"               minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="DualRiseTimeSupported"  type="xsd:boolean"              minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="FineFreqSupported"      type="xsd:boolean"              minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="FmopMaxDev"             type="xsd:double"               minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="FmopSupported"          type="xsd:boolean"              minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="FreqRes"                type="xsd:double"               minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="HfimSupported"          type="xsd:boolean"              minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="HighFreq"               type="xsd:double"               minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="HsAmopSupported"        type="xsd:boolean"              minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="LowFreq"                type="xsd:double"               minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PhaseShiftMode"         type="ce:stEnumBiQuadPhaseMode" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PmopSupported"          type="xsd:boolean"              minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="PoolNumber"             type="xsd:int"                  minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="ShadowTime"             type="xsd:double"               minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="SourceState"            type="ce:stEnumSourceState"     minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="UseFreqBandDesignators" type="xsd:boolean"              minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctPowerFrequencyDataList" >
+    <xsd:sequence>
+      <xsd:element name ="PowerFrequencyData" type="ce:ctPowerFrequencyData"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctPowerFrequencyData" >
+    <xsd:sequence>
+      <xsd:element name ="Pow"  type="xsd:double" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Freq" type="xsd:double" minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctSubbandFrequencyDataList" >
+    <xsd:sequence>
+      <xsd:element name ="SubbandFrequencyData" type="ce:ctSubbandFrequencyData"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctSubbandFrequencyData" >
+    <xsd:sequence>
+      <xsd:element name ="Start"      type="xsd:double" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Stop"       type="xsd:double" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="StartGuard" type="xsd:double" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="StopGuard"  type="xsd:double" minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctTransmitPatternRecordList" >
+    <xsd:sequence>
+      <xsd:element name ="TransmitPatternRecord" type="ce:ctTransmitPatternRecord"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctTransmitPatternRecord" >
+    <xsd:sequence>
+      <xsd:element name ="BeamWidth"     type="xsd:double" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="FirstSideLobe" type="xsd:double" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Name"          type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctUniformPolarizationRecordList" >
+    <xsd:sequence>
+      <xsd:element name ="UniformPolarizationRecord" type="ce:ctUniformPolarizationRecord"  minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name ="ctUniformPolarizationRecord" >
+    <xsd:sequence>
+      <xsd:element name ="Kind"                  type="ce:stEnumPolarizationKind" minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="MinorToMajorAxisRatio" type="xsd:double"                minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Rotation"              type="ce:stEnumRotationSense"    minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="StateId"               type="xsd:string"                minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="Tilt"                  type="xsd:double"                minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="VhPhaseDelta"          type="xsd:double"                minOccurs="1" maxOccurs="1"></xsd:element>
+      <xsd:element name ="VhPolRatioArcTan"      type="xsd:double"                minOccurs="1" maxOccurs="1"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+ 
+
+<!-- /////////////////////////////////////////////////////////////////////////////////
+     //
+     // ENUM Definitions
+     //
+     ///////////////////////////////////////////////////////////////////////////// -->
+
+  <xsd:simpleType name="stEnumBiQuadPhaseMode">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="None" />
+      <xsd:enumeration value="Bi_Phase" />
+      <xsd:enumeration value="Quad_Phase" />
+      <xsd:enumeration value="Bi_And_Quad_Phase" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumChannelSourceType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Rfgu" />
+      <xsd:enumeration value="Mcdrc" />
+      <xsd:enumeration value="Undefined" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumChirpModulationDirection">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Up" />
+      <xsd:enumeration value="Down" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumHfimSamplePeriodKind">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Period_15_625_Nanosec" />
+      <xsd:enumeration value="Period_62_5_Nanosec" />
+      <xsd:enumeration value="Period_250_Nanosec" />
+      <xsd:enumeration value="Period_1_Usec" />
+      <xsd:enumeration value="Period_7_813_Nanosec" />
+      <xsd:enumeration value="Period_31_25_Nanosec" />
+      <xsd:enumeration value="Period_125_Nanosec" />
+      <xsd:enumeration value="Period_500_Nanosec" />
+      <xsd:enumeration value="Period_2_Usec" />
+      <xsd:enumeration value="Period_3_90625_Nanosec" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumHfimFilterPathSelection">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Non_Filtered_Path" />
+      <xsd:enumeration value="Filtered_Path" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumHfimViewMode">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Frequency_Amplitude" />
+      <xsd:enumeration value="Phase_Amplitude" />
+      <xsd:enumeration value="Iphase_Qphase" />
+      <xsd:enumeration value="Amop" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPolarizationKind">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Horizontal" />
+      <xsd:enumeration value="Vertical" />
+      <xsd:enumeration value="Right_Slant" />
+      <xsd:enumeration value="Left_Slant" />
+      <xsd:enumeration value="Rh_Circular" />
+      <xsd:enumeration value="Lh_Circular" />
+      <xsd:enumeration value="Elliptical" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumRfAttenuatorType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="None" />
+      <xsd:enumeration value="Rf_Attenuator" />
+      <xsd:enumeration value="Hp_Attenuator" />
+      <xsd:enumeration value="Fixed_Attenuator" />
+      <xsd:enumeration value="Hp_And_Fixed_Attenuator" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumRiseTimeState">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Slow" />
+      <xsd:enumeration value="Fast" />
+      <xsd:enumeration value="Unknown" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumRfguSourceType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Dto" />
+      <xsd:enumeration value="Synthesizer" />
+      <xsd:enumeration value="Jammer" />
+      <xsd:enumeration value="Dto_And_Synthesizer" />
+      <xsd:enumeration value="Synthesizer_And_Synthesizer" />
+      <xsd:enumeration value="Synthesizer_And_Jammer" />
+      <xsd:enumeration value="Dto_And_Jammer" />
+      <xsd:enumeration value="Digital" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumRfguType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Original" />
+      <xsd:enumeration value="Enhanced" />
+      <xsd:enumeration value="Ctb" />
+      <xsd:enumeration value="Portable" />
+      <xsd:enumeration value="Mcdrc" />
+      <xsd:enumeration value="Mcdrc_Dig_Ctrl_Only" />
+      <xsd:enumeration value="Fgrf" />
+      <xsd:enumeration value="Dual" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumRotationSense">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="None" />
+      <xsd:enumeration value="Right_Hand" />
+      <xsd:enumeration value="Left_Hand" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumSourceState">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Primary" />
+      <xsd:enumeration value="Secondary" />
+      <xsd:enumeration value="Both" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumSystemType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Standard_Mkn" />
+      <xsd:enumeration value="Portable_Mkn" />
+      <xsd:enumeration value="Rem_Mkn" />
+      <xsd:enumeration value="Pulseman_Mkn" />
+      <xsd:enumeration value="Fgrf_Ceesim" />
+      <xsd:enumeration value="Fgrf_Ames" />
+      <xsd:enumeration value="Prb_For_Mkn_Cal" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumTuningState">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Slow" />
+      <xsd:enumeration value="Fast" />
+      <xsd:enumeration value="Both" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>

@@ -1,0 +1,1725 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema 
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+
+  <!--
+    Note:
+    
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+    
+    Change History:
+    
+    Date        Who  Revision  Description
+    2013-03-11  XXX  1.0       Original.
+    2013-04-11  JSP  1.1       Moved types specific to this file from the former commonSimpleTypes
+                               file to this file.
+    2013-07-08  JSP  1.1       Changed NatoName to EmitterName and ThreeD_View to Threed_View.
+    2015-02-03  JSP  1.1       Fix ranges for stDoubleDisplayIntensity and stDoubleDisplayScale.
+  -->
+
+  <xsd:include schemaLocation="commonTypesR1-1.xsd"/>
+
+  <xsd:complexType name="ctScenarioData">
+    <xsd:all minOccurs="1">
+      <xsd:element name="ScenarioHeader" type="ce:ctScenarioHeader" minOccurs="0"/>
+    </xsd:all>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctScenarioHeader">
+    <xsd:all minOccurs="1">
+      <xsd:element name="CreationDate"                    type="ce:stDateCreationDate" minOccurs="0"/>
+      <xsd:element name="ModificationDate"                type="ce:stDateModificationDate" minOccurs="0"/>
+      <xsd:element name="ScenarioRevision"                type="ce:stIntScenarioRevision" minOccurs="0"/>
+      <xsd:element name="SoftwareReleaseOfLastHeaderEdit" type="ce:stIntSoftwareReleaseOfLastHeaderEdit" minOccurs="0"/>
+      <xsd:element name="DistanceUnits"                   type="ce:stEnumDistanceUnits" minOccurs="0"/>
+      <xsd:element name="EnvironmentKind"                 type="ce:stEnumEnvironmentKind" minOccurs="0"/>
+      <xsd:element name="Comment"                         type="ce:stStringCommentScenarioHeader" minOccurs="0"/>
+      <xsd:element name="SutPlatformNumbers"              type="ce:ctSutPlatformNumberList" minOccurs="0"/>
+      <xsd:element name="ExternalSutFlag"                 type="ce:stBoolExternalSutFlag" minOccurs="0"/>
+      <xsd:element name="HorizonMaskingEnable"            type="ce:stBoolHorizonMaskingEnable" minOccurs="0"/>
+      <xsd:element name="EarthRadiusFactor"               type="ce:stDoubleEarthRadiusFactor" minOccurs="0"/>
+      <xsd:element name="DataRecording"                   type="ce:ctDataRecording" minOccurs="0"/>
+      <xsd:element name="EmitterLibraryEnable"            type="ce:stBoolEmitterLibraryEnable" minOccurs="0"/>
+      <xsd:element name="EmitterLibraryName"              type="ce:stStringEmitterLibraryName" minOccurs="0"/>
+      <xsd:element name="ScenarioElementLibraryEnable"    type="ce:stBoolScenarioElementLibraryEnable" minOccurs="0"/>
+      <xsd:element name="ScenarioElementLibraryName"      type="ce:stTextScenarioElementLibraryName" minOccurs="0"/>
+      <xsd:element name="Terrain"                         type="ce:ctTerrain" minOccurs="0"/>
+      <xsd:element name="SurfaceEffects"                  type="ce:ctSurfaceEffects" minOccurs="0"/>
+      <xsd:element name="PropagationEffects"              type="ce:ctPropagationEffects" minOccurs="0"/>
+      <xsd:element name="SpacialAndDopplerEffects"        type="ce:ctSpacialAndDopplerEffects" minOccurs="0"/>
+      <xsd:element name="HardwareResourceOptimizations"   type="ce:ctHardwareResourceOptimizations" minOccurs="0"/>
+      <xsd:element name="Dpms"                            type="ce:ctDpmDataList" minOccurs="0"/>
+      <xsd:element name="NavigationInterfaceSettings"     type="ce:ctNavigationInterfaceSettings" minOccurs="0"/>
+      <xsd:element name="SituationDisplayData"            type="ce:ctSituationDisplayDataList" minOccurs="0"/>
+      <xsd:element name="GuiDisplaySettings"              type="ce:ctGuiDisplaySettings" minOccurs="0"/>
+    </xsd:all>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSutPlatformNumberList">
+    <xsd:sequence minOccurs="0" maxOccurs="4">
+      <xsd:element name="SutPlatformNumber" type="ce:stIntSutPlatformNumber"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDataRecording">
+    <xsd:all minOccurs="1">
+      <xsd:element name="DataRecordingEnable" type="ce:stBoolDataRecordingEnable" minOccurs="0"/>
+      <xsd:element name="DxFileName" type="ce:stStringDxFileName" minOccurs="0"/>
+      <xsd:element name="RecordPlatformEventsEnable" type="ce:stBoolRecordPlatformEventsEnable" minOccurs="0"/>
+      <xsd:element name="RecordEmitterEventsEnable" type="ce:stBoolRecordEmitterEventsEnable" minOccurs="0"/>
+      <xsd:element name="RecordPulseCountsEnable" type="ce:stBoolRecordPulseCountsEnable" minOccurs="0"/>
+      <xsd:element name="RecordPlatformStatusEnable" type="ce:stBoolRecordPlatformStatusEnable" minOccurs="0"/>
+      <xsd:element name="RecordEmitterStatusEnable" type="ce:stBoolRecordEmitterStatusEnable" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctTerrain">
+    <xsd:all minOccurs="1">
+      <xsd:element name="TerrainEnable" type="ce:stBoolTerrainEnable" minOccurs="0"/>
+      <xsd:element name="TerrainMaskingAttenuationEnable" type="ce:stBoolTerrainMaskingAttenuationEnable" minOccurs="0"/>
+      <xsd:element name="TerrainDtedKind" type="ce:stEnumTerrainDtedKind" minOccurs="0"/>
+      <xsd:element name="NorthLatitude" type="ce:stDoubleNorthLatitude" minOccurs="0"/>
+      <xsd:element name="NorthDirection" type="ce:stEnumNorthSouthDirectionKind" minOccurs="0"/>
+      <xsd:element name="WestLongitude" type="ce:stDoubleWestLongitude" minOccurs="0"/>
+      <xsd:element name="WestDirection" type="ce:stEnumEastWestDirectionKind" minOccurs="0"/>
+      <xsd:element name="SouthLatitude" type="ce:stDoubleSouthLatitude" minOccurs="0"/>
+      <xsd:element name="SouthDirection" type="ce:stEnumNorthSouthDirectionKind" minOccurs="0"/>
+      <xsd:element name="EastLongitude" type="ce:stDoubleEastLongitude" minOccurs="0"/>
+      <xsd:element name="EastDirection" type="ce:stEnumEastWestDirectionKind" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSurfaceEffects">
+    <xsd:all minOccurs="1">
+      <xsd:element name="MultipathEnable" type="ce:stBoolMultipathEnable" minOccurs="0"/>
+      <xsd:element name="WaveSplashEnable" type="ce:stBoolWaveSplashEnable" minOccurs="0"/>
+      <xsd:element name="SutEmitterEarthReflectionEnable" type="ce:stBoolSutEmitterEarthReflectionEnable" minOccurs="0"/>
+      <xsd:element name="SurfaceKind" type="ce:stEnumSurfaceKind" minOccurs="0"/>
+      <xsd:element name="NorthLatitude" type="ce:stDoubleNorthLatitude" minOccurs="0"/>
+      <xsd:element name="NorthDirection" type="ce:stEnumNorthSouthDirectionKind" minOccurs="0"/>
+      <xsd:element name="WestLongitude" type="ce:stDoubleWestLongitude" minOccurs="0"/>
+      <xsd:element name="WestDirection" type="ce:stEnumEastWestDirectionKind" minOccurs="0"/>
+      <xsd:element name="SouthLatitude" type="ce:stDoubleSouthLatitude" minOccurs="0"/>
+      <xsd:element name="SouthDirection" type="ce:stEnumNorthSouthDirectionKind" minOccurs="0"/>
+      <xsd:element name="EastLongitude" type="ce:stDoubleEastLongitude" minOccurs="0"/>
+      <xsd:element name="EastDirection" type="ce:stEnumEastWestDirectionKind" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPropagationEffects">
+    <xsd:all minOccurs="1">
+      <xsd:element name="AtmosphericAbsorptionAttenuationEnable" type="ce:stBoolAtmosphericAbsorptionAttenuationEnable" minOccurs="0"/>
+      <xsd:element name="RainfallRateKind" type="ce:stEnumRainfallRateKind" minOccurs="0"/>
+      <xsd:element name="DuctingEnable" type="ce:stBoolDuctingEnable" minOccurs="0"/>
+      <xsd:element name="DuctingBoundaryKind" type="ce:stEnumDuctingBoundaryKind" minOccurs="0"/>
+      <xsd:element name="DuctingHeight" type="ce:stDoubleDuctingHeight" minOccurs="0"/>
+      <xsd:element name="DuctingRefractivity" type="ce:stDoubleDuctingRefractivity" minOccurs="0"/>
+      <xsd:element name="DuctingFileName" type="ce:stStringDuctingFileName" minOccurs="0"/>
+      <xsd:element name="RangeAttenuationEnable" type="ce:stBoolRangeAttenuationEnable" minOccurs="0"/>
+      <xsd:element name="FrequencyAttenuationEnable" type="ce:stBoolFrequencyAttenuationEnable" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSpacialAndDopplerEffects">
+    <xsd:all minOccurs="1">
+      <xsd:element name="FrequencyDopplerShiftEnable" type="ce:stBoolFrequencyDopplerShiftEnable" minOccurs="0"/>
+      <xsd:element name="RangeAndPriDopplerShiftEnable" type="ce:stBoolRangeAndPriDopplerShiftEnable" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctHardwareResourceOptimizations">
+    <xsd:all minOccurs="1">
+      <xsd:element name="PulseTruncationEnable" type="ce:stBoolPulseTruncationEnable" minOccurs="0"/>
+      <xsd:element name="CwInterruptEnable" type="ce:stBoolCwInterruptEnable" minOccurs="0"/>
+      <xsd:element name="SensitivityThresholdEnable" type="ce:stBoolSensitivityThresholdEnable" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmDataList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="Dpm" type="ce:ctDpmData"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctDpmData">
+    <xsd:all minOccurs="1">
+      <xsd:element name="DpmBoardCollectionEnable" type="ce:stBoolDpmBoardCollectionEnable" minOccurs="0"/>
+      <xsd:element name="PulseContendedState" type="ce:stEnumPulseContendedStateKind" minOccurs="0"/>
+      <xsd:element name="PulseInhibitState" type="ce:stEnumPulseInhibitStateKind" minOccurs="0"/>
+      <xsd:element name="CircularBufferCollection" type="ce:stBoolCircularBufferCollection" minOccurs="0"/>
+      <xsd:element name="ExternalGatingState" type="ce:stEnumExternalGatingStateKind" minOccurs="0"/>
+      <xsd:element name="DgsVideoState" type="ce:stEnumDgsVideoStateKind" minOccurs="0"/>
+      <xsd:element name="PdwKind" type="ce:stEnumPdwKind" minOccurs="0"/>
+      <xsd:element name="InvalidPdwsFlag" type="ce:stBoolInvalidPdwsFlag" minOccurs="0"/>
+      <xsd:element name="DpmFilters" type="ce:ctDpmFilter" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilter">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="AzAoa" type="ce:ctDpmFilterAzAoa" minOccurs="0"/>
+      <xsd:element name="ElAoa" type="ce:ctDpmFilterElAoa" minOccurs="0"/>
+      <xsd:element name="EmitterNumber" type="ce:ctDpmFilterEmitterNumber" minOccurs="0"/>
+      <xsd:element name="Frequency" type="ce:ctDpmFilterFrequency" minOccurs="0"/>
+      <xsd:element name="Generator" type="ce:ctDpmFilterGenerator" minOccurs="0"/>
+      <xsd:element name="EmitterName" type="ce:stStringEmitterName" minOccurs="0"/>
+      <xsd:element name="PulseWidth" type="ce:ctDpmFilterPulseWidth" minOccurs="0"/>
+      <xsd:element name="Power" type="ce:ctDpmFilterPower" minOccurs="0"/>
+      <xsd:element name="ScenarioTime" type="ce:ctDpmFilterScenarioTime" minOccurs="0"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterAzAoa">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerAzimuth" type="ce:stDoubleLowerAz" minOccurs="0"/>
+      <xsd:element name="UpperAzimuth" type="ce:stDoubleUpperAz" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterElAoa">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerElevation" type="ce:stDoubleLowerElevation" minOccurs="0"/>
+      <xsd:element name="UpperElevation" type="ce:stDoubleUpperElevation" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterEmitterNumber">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerEmitter" type="ce:stIntLowerEmitterNumber" minOccurs="0"/>
+      <xsd:element name="UpperEmitter" type="ce:stIntUpperEmitterNumber" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterFrequency">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerFrequency" type="ce:stDoubleLowerFrequency" minOccurs="0"/>
+      <xsd:element name="UpperFrequency" type="ce:stDoubleUpperFrequency" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterGenerator">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerGenerator" type="ce:stIntLowerGeneratorNumber" minOccurs="0"/>
+      <xsd:element name="UpperGenerator" type="ce:stIntUpperGeneratorNumber" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterPulseWidth">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerPulseWidth" type="ce:stDoubleLowerPulseWidth" minOccurs="0"/>
+      <xsd:element name="UpperPulseWidth" type="ce:stDoubleUpperPulseWidth" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterPower">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerPower" type="ce:stDoubleLowerPower" minOccurs="0"/>
+      <xsd:element name="UpperPower" type="ce:stDoubleUpperPower" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDpmFilterScenarioTime">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LowerTime" type="ce:stDoubleLowerTime" minOccurs="0"/>
+      <xsd:element name="UpperTime" type="ce:stDoubleUpperTime" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctNavigationInterfaceSettings">
+    <xsd:all minOccurs="1">
+      <xsd:element name="NavIfEnable"          type="ce:stBoolNavIfEnable" minOccurs="0"/>
+      <xsd:element name="NavIfPhysicalIfKind"  type="ce:stEnumNavIfPhysicalIfKind" minOccurs="0"/>
+      <xsd:element name="NavIf1553BusKind"     type="ce:stEnumNavIf1553BusKind" minOccurs="0"/>
+      <xsd:element name="NavIfUpdateInterval"  type="ce:stEnumNavIfUpdateInterval" minOccurs="0"/>
+      <xsd:element name="NavIfPlatforms"       type="ce:ctNavIfPlatformsList" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctNavIfPlatformsList">
+    <xsd:sequence minOccurs="0" maxOccurs="6">
+      <xsd:element name="NavIfPlatform" type="ce:ctNavIfPlatform"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctNavIfPlatform">
+    <xsd:all minOccurs="1">
+      <xsd:element name="NavIfUserPlatformNumber"  type="ce:stIntUserPlatformNumber"  minOccurs="0"/>
+      <xsd:element name="NavIfRtAddress"           type="ce:stIntNavIfRtAddress"  minOccurs="0"/>
+      <xsd:element name="NavIfRtSubAddress"        type="ce:stIntNavIfRtSubAddress"  minOccurs="0"/>
+      <xsd:element name="NavIfTransferDirection"  type="ce:stEnumNavIfTransferDirection" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSituationDisplayDataList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="SituationDisplaySettings" type="ce:ctSituationDisplaySettings"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSituationDisplaySettings">
+    <xsd:all minOccurs="1">
+      <xsd:element name="DisplayServer"               type="ce:stIntDisplayServer" minOccurs="0"/>
+      <xsd:element name="DisplayId"                   type="ce:stIntDisplayId" minOccurs="0"/>
+      <xsd:element name="DisplayVisibility"           type="ce:stBoolDisplayVisibility" minOccurs="0"/>
+      <xsd:element name="SituationDisplayCenter"      type="ce:stEnumSituationDisplayCenterKind" minOccurs="0"/>
+      <xsd:element name="Center"                      type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="SituationDisplayMode"        type="ce:stEnumSituationDisplayModeKind" minOccurs="0"/>
+      <xsd:element name="DisplayScale"                type="ce:stDoubleDisplayScale" minOccurs="0"/>
+      <xsd:element name="DisplayIntensity"            type="ce:stDoubleDisplayIntensity" minOccurs="0"/>
+      <xsd:element name="VelocityVectorDuration"      type="ce:stDoubleVelocityVectorDuration" minOccurs="0"/>
+      <xsd:element name="DisplayTerrain"              type="ce:stBoolDisplayTerrain" minOccurs="0"/>
+      <xsd:element name="DisplayRoughness"            type="ce:stBoolDisplayRoughness" minOccurs="0"/>
+      <xsd:element name="DisplayGeopolitical"         type="ce:stBoolDisplayGeopolitical" minOccurs="0"/>
+      <xsd:element name="GeopoliticalCenterLatitude"  type="ce:stDoubleGeopoliticalCenterLatitude"    minOccurs="0"/>
+      <xsd:element name="GeopoliticalCenterLongitude" type="ce:stDoubleGeopoliticalCenterLongitude"   minOccurs="0"/>
+      <xsd:element name="DisplayBarriers"             type="ce:stBoolDisplayBarriers" minOccurs="0"/>
+      <xsd:element name="DisplayCoastline"            type="ce:stBoolDisplayCoastline" minOccurs="0"/>
+      <xsd:element name="DisplayDepthLines"           type="ce:stBoolDisplayDepthLines" minOccurs="0"/>
+      <xsd:element name="DisplayPoliticalLines"       type="ce:stBoolDisplayPoliticalLines" minOccurs="0"/>
+      <xsd:element name="DisplayCanals"               type="ce:stBoolDisplayCanals" minOccurs="0"/>
+      <xsd:element name="DisplayWaterways"            type="ce:stBoolDisplayWaterways" minOccurs="0"/>
+      <xsd:element name="DisplayLandforms"            type="ce:stBoolDisplayLandforms" minOccurs="0"/>
+      <xsd:element name="DisplayRailroads"            type="ce:stBoolDisplayRailroads" minOccurs="0"/>
+      <xsd:element name="DisplayRoads"                type="ce:stBoolDisplayRoads" minOccurs="0"/>
+      <xsd:element name="DisplayTrails"               type="ce:stBoolDisplayTrails" minOccurs="0"/>
+      <xsd:element name="DisplayStructures"           type="ce:stBoolDisplayStructures" minOccurs="0"/>
+      <xsd:element name="DisplayPipelines"            type="ce:stBoolDisplayPipelines" minOccurs="0"/>
+      <xsd:element name="DisplayUtilities"            type="ce:stBoolDisplayUtilities" minOccurs="0"/>
+      <xsd:element name="PlatformDisplayOptionsList"  type="ce:ctSituationDisplayPlatformOptionsList" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctGuiDisplaySettings">
+    <xsd:all minOccurs="1">
+      <xsd:element name="GuiDisplayMode"              type="ce:stEnumGuiDisplayModeKind"        minOccurs="0"/>
+      <xsd:element name="DisplayGridKind"             type="ce:stEnumDisplayGridKind"           minOccurs="0"/>
+      <xsd:element name="GuiDisplayCenter"            type="ce:stEnumDisplayCenterKind"         minOccurs="0"/>
+      <xsd:element name="Center"                      type="ce:ctPoint"                         minOccurs="0"/>
+      <xsd:element name="CenterPlatformNumber"        type="ce:stIntUserPlatformNumber"         minOccurs="0"/>
+      <xsd:element name="Scale"                       type="ce:stDoubleScale"                   minOccurs="0"/>
+      <xsd:element name="Intensity"                   type="ce:stDoubleIntensity"               minOccurs="0"/>
+      <xsd:element name="VelocityVectorDuration"      type="ce:stDoubleVelocityVectorDuration"  minOccurs="0"/>
+      <xsd:element name="DisplayHud"                  type="ce:stBoolDisplayHud"                minOccurs="0"/>
+      <xsd:element name="DisplayPlatformDetails"      type="ce:stBoolDisplayPlatformDetails"    minOccurs="0"/>
+      <xsd:element name="DisplayTerrainLegend"        type="ce:stBoolDisplayTerrainLegend"      minOccurs="0"/>
+      <xsd:element name="DisplayGrids"                type="ce:stBoolDisplayGrids"              minOccurs="0"/>
+      <xsd:element name="DisplayProjectedPath"        type="ce:stBoolDisplayProjectedPath"      minOccurs="0"/>
+      <xsd:element name="DisplayPathHistory"          type="ce:stBoolDisplayPathHistory"        minOccurs="0"/>
+      <xsd:element name="DisplayInactivePlatforms"    type="ce:stBoolDisplayInactivePlatforms"  minOccurs="0"/>
+      <xsd:element name="DisplaySymbolLegend"         type="ce:stBoolDisplaySymbolLegend"       minOccurs="0"/>
+      <xsd:element name="DisplayRoughnessLegend"      type="ce:stBoolDisplayRoughnessLegend"    minOccurs="0"/>
+      <xsd:element name="DisplayVmapLegend"           type="ce:stBoolDisplayVmapLegend"         minOccurs="0"/>
+      <xsd:element name="TerrainEnable"               type="ce:stBoolTerrainEnable"             minOccurs="0"/>
+      <xsd:element name="RoughnessEnable"             type="ce:stBoolRoughnessEnable"           minOccurs="0"/>
+      <xsd:element name="VmapEnable"                  type="ce:stBoolVmapEnable"                 minOccurs="0"/>
+      <xsd:element name="GeopoliticalCenterLatitude"  type="ce:stDoubleGeopoliticalCenterLatitude"    minOccurs="0"/>
+      <xsd:element name="GeopoliticalCenterLongitude" type="ce:stDoubleGeopoliticalCenterLongitude"   minOccurs="0"/>
+      <xsd:element name="DisplayBarriers"             type="ce:stBoolDisplayBarriers"           minOccurs="0"/>
+      <xsd:element name="DisplayCoastline"            type="ce:stBoolDisplayCoastline"          minOccurs="0"/>
+      <xsd:element name="DisplayDepthLines"           type="ce:stBoolDisplayDepthLines"         minOccurs="0"/>
+      <xsd:element name="DisplayPoliticalLines"       type="ce:stBoolDisplayPoliticalLines"     minOccurs="0"/>
+      <xsd:element name="DisplayCanals"               type="ce:stBoolDisplayCanals"             minOccurs="0"/>
+      <xsd:element name="DisplayWaterways"            type="ce:stBoolDisplayWaterways"          minOccurs="0"/>
+      <xsd:element name="DisplayLandforms"            type="ce:stBoolDisplayLandforms"          minOccurs="0"/>
+      <xsd:element name="DisplayRailroads"            type="ce:stBoolDisplayRailroads"          minOccurs="0"/>
+      <xsd:element name="DisplayRoads"                type="ce:stBoolDisplayRoads"              minOccurs="0"/>
+      <xsd:element name="DisplayTrails"               type="ce:stBoolDisplayTrails"             minOccurs="0"/>
+      <xsd:element name="DisplayStructures"           type="ce:stBoolDisplayStructures"         minOccurs="0"/>
+      <xsd:element name="DisplayPipelines"            type="ce:stBoolDisplayPipelines"          minOccurs="0"/>
+      <xsd:element name="DisplayUtilities"            type="ce:stBoolDisplayUtilities"          minOccurs="0"/>
+      <xsd:element name="GeotiffEnable"               type="ce:stBoolGeotiffEnable"             minOccurs="0"/>
+      <xsd:element name="GeotiffPath"                 type="ce:stTextGeotiffPath"               minOccurs="0"/>
+      <xsd:element name="PlatformDisplayOptionsList"  type="ce:ctGuiPlatformOptionsList"        minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSituationDisplayPlatformOptionsList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="PlatformDisplayOptions" type="ce:ctSituationDisplayPlatformOptions"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSituationDisplayPlatformOptions">
+    <xsd:all minOccurs="1">
+      <xsd:element name="PlatformNumber"  type="ce:stIntUserPlatformNumber"  minOccurs="0"/>
+      <xsd:element name="DisplayPlatform" type="ce:stBoolDisplayPlatform" minOccurs="0"/>
+      <xsd:element name="DisplayPath"     type="ce:stBoolDisplayPath"     minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctGuiPlatformOptionsList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="PlatformDisplayOptions" type="ce:ctGuiPlatformOptions"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctGuiPlatformOptions">
+    <xsd:all minOccurs="1">
+      <xsd:element name="PlatformNumber"        type="ce:stIntUserPlatformNumber"     minOccurs="0"/>
+      <xsd:element name="DisplaySymbol"         type="ce:stBoolDisplaySymbol"         minOccurs="0"/>
+      <xsd:element name="DisplayPathHistory"    type="ce:stBoolDisplayPathHistory"    minOccurs="0"/>
+      <xsd:element name="DisplayProjectedPath"  type="ce:stBoolDisplayProjectedPath"  minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:simpleType name="stBoolAtmosphericAbsorptionAttenuationEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolCircularBufferCollection">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolCwInterruptEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDataRecordingEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayBarriers">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayCanals">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayCoastline">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayDepthLines">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayGeopolitical">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayGrids">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayHud">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayInactivePlatforms">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayLandforms">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayPipelines">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayPoliticalLines">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayPath">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayPathHistory">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayPlatform">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayPlatformDetails">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayProjectedPath">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayRailroads">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayRoads">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayRoughness">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayRoughnessLegend">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayStructures">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplaySymbol">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplaySymbolLegend">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayTerrain">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayTerrainLegend">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayTrails">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayUtilities">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayVisibility">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayVmapLegend">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplayWaterways">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDpmBoardCollectionEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDuctingEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolEmitterLibraryEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolExternalSutFlag">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolFrequencyAttenuationEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolFrequencyDopplerShiftEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolGeotiffEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolHorizonMaskingEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolInvalidPdwsFlag">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolMultipathEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolNavIfEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolPulseTruncationEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolRangeAndPriDopplerShiftEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolRangeAttenuationEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolRecordEmitterEventsEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolRecordEmitterStatusEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolRecordPlatformEventsEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolRecordPlatformStatusEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolRecordPulseCountsEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolRoughnessEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolScenarioElementLibraryEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolSensitivityThresholdEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolSutEmitterEarthReflectionEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolTerrainEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolTerrainMaskingAttenuationEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolVmapEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolWaveSplashEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDisplayIntensity">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.01"/>
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDisplayScale">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1.0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.01"/>
+      <xsd:maxInclusive value="8"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDuctingHeight">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="1000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDuctingRefractivity">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEarthRadiusFactor">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1.33</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.1"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEastLongitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleGeopoliticalCenterLatitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleGeopoliticalCenterLongitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleIntensity">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLowerAz">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="360"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLowerElevation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLowerFrequency">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="131071000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLowerPower">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-256"/>
+      <xsd:maxInclusive value="255.75"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLowerPulseWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.131071"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLowerTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="137438"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleNorthLatitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleScale">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSouthLatitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleUpperAz">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="360"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleUpperElevation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleUpperFrequency">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="131071000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleUpperPower">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-256"/>
+      <xsd:maxInclusive value="255.75"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleUpperPulseWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.131071"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleUpperTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="137438"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleVelocityVectorDuration">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="600"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleWestLongitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDgsVideoStateKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Ignore</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Ignore"/>
+      <xsd:enumeration value="Store_Only_Video_Enabled_Pulses"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDisplayCenterKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>On_Sut</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="On_Sut"/>
+      <xsd:enumeration value="On_Platform"/>
+      <xsd:enumeration value="At_Fixed_Point"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDisplayGridKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Decimal</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Decimal"/>
+      <xsd:enumeration value="Deg_Min_Sec"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDistanceUnits">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Kilometers</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Kilometers"/>
+      <xsd:enumeration value="Nautical_Miles"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDuctingBoundaryKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Independent_Of_Surface_Type</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Independent_Of_Surface_Type"/>
+      <xsd:enumeration value="Land_Sea_Boundaries"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumEastWestDirectionKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>East</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="East"/>
+      <xsd:enumeration value="West"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumEnvironmentKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Round</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Round"/>
+      <xsd:enumeration value="Flat"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumExternalGatingStateKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Ignore</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Ignore"/>
+      <xsd:enumeration value="Store_Only_Gated_Pulses"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumGuiDisplayModeKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Plan_View</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Plan_View"/>
+      <xsd:enumeration value="Threed_View"/>
+      <xsd:enumeration value="Polar_View"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumNavIf1553BusKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Bus_A</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Bus_A"/>
+      <xsd:enumeration value="Bus_B"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumNavIfPhysicalIfKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Nav_Ethernet</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Nav_1553b"/>
+      <xsd:enumeration value="Nav_Ethernet"/>
+      <xsd:enumeration value="Nav_Rm"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumNavIfTransferDirection">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Receive</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Receive"/>
+      <xsd:enumeration value="Transmit"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumNavIfUpdateInterval">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Nav_Interval_1_Ms</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Nav_Interval_1_Ms"/>
+      <xsd:enumeration value="Nav_Interval_2_Ms"/>
+      <xsd:enumeration value="Nav_Interval_5_Ms"/>
+      <xsd:enumeration value="Nav_Interval_10_Ms"/>
+      <xsd:enumeration value="Nav_Interval_20_Ms"/>
+      <xsd:enumeration value="Nav_Interval_30_Ms"/>
+      <xsd:enumeration value="Nav_Interval_40_Ms"/>
+      <xsd:enumeration value="Nav_Interval_50_Ms"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumNorthSouthDirectionKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>North</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="North"/>
+      <xsd:enumeration value="South"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPdwKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Gp</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Gp"/>
+      <xsd:enumeration value="Ntp"/>
+      <xsd:enumeration value="Ntp_With_Rp"/>
+      <xsd:enumeration value="Ntp_With_Spinner"/>
+      <xsd:enumeration value="Ntp_With_Esa"/>
+      <xsd:enumeration value="Prb"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPulseContendedStateKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Ignore</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Ignore"/>
+      <xsd:enumeration value="Store_Only_Pulses_Contended"/>
+      <xsd:enumeration value="Store_Only_Pulses_Not_Contended"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPulseInhibitStateKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Ignore</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Ignore"/>
+      <xsd:enumeration value="Store_Only_Pulses_Inhibited"/>
+      <xsd:enumeration value="Store_Only_Pulses_Not_Inhibited"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumRainfallRateKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>No_Rain</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="No_Rain"/>
+      <xsd:enumeration value="Drizzle"/>
+      <xsd:enumeration value="Light_Rain"/>
+      <xsd:enumeration value="Medium_Rain"/>
+      <xsd:enumeration value="Heavy_Rain"/>
+      <xsd:enumeration value="Tropical_Downpour"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumSituationDisplayCenterKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>On_Sut</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="On_Sut"/>
+      <xsd:enumeration value="At_Point"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumSituationDisplayModeKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Rectangular</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Rectangular"/>
+      <xsd:enumeration value="Polar"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumSurfaceKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Smooth_Land</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Calm_Sea"/>
+      <xsd:enumeration value="Smooth_Sea"/>
+      <xsd:enumeration value="Slight_Sea"/>
+      <xsd:enumeration value="Moderate_Sea"/>
+      <xsd:enumeration value="Rough_Sea"/>
+      <xsd:enumeration value="Very_Rough_Sea"/>
+      <xsd:enumeration value="High_Sea"/>
+      <xsd:enumeration value="Very_High_Sea"/>
+      <xsd:enumeration value="Smooth_Land"/>
+      <xsd:enumeration value="Rough_Land"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumTerrainDtedKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Ceesim_Elv</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Level_0"/>
+      <xsd:enumeration value="Level_1"/>
+      <xsd:enumeration value="Ceesim_Elv"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntDisplayId">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntDisplayServer">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntLowerEmitterNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntLowerGeneratorNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2047"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntNavIfRtAddress">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="31"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntNavIfRtSubAddress">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="31"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntScenarioRevision">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntSoftwareReleaseOfLastHeaderEdit">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntSutPlatformNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntUpperEmitterNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntUpperGeneratorNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2047"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringCommentScenarioHeader">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringDuctingFileName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="255"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringDxFileName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="255"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringEmitterLibraryName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="255"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextGeotiffPath">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>$GT</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextScenarioElementLibraryName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+</xsd:schema>

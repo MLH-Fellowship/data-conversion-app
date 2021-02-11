@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema targetNamespace="http://www.amherst.com/CEESIM/XML" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:ce="http://www.amherst.com/CEESIM/XML" attributeFormDefault="unqualified" elementFormDefault="qualified" >
+  <!--
+
+    Note:
+   
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+
+    Change History:
+
+    Date        Who  Revision  Description
+    2013-07-30  XXX  1.0       Original.
+    2013-11-13  KMB  1.0       Renamed number of generators to total generators
+
+  -->  
+  <xsd:complexType name="ctEmitterModeSummary">
+    <xsd:all minOccurs="1">
+      <xsd:element name="ModeComment"               type="ce:stStringModeComment"         minOccurs="0"/>
+      <xsd:element name="ModeSummaryValid"          type="ce:stBoolModeSummaryValid"      minOccurs="0"/>
+      <xsd:element name="TotalGenerators"           type="ce:stIntTotalGenerators"        minOccurs="0"/>
+      <xsd:element name="FrequencyKind"             type="ce:stEnumFrequencyKind"         minOccurs="0"/>
+      <xsd:element name="PriKind"                   type="ce:stEnumPriKind"               minOccurs="0"/>
+      <xsd:element name="PulseKind"                 type="ce:stEnumPulseKind"             minOccurs="0"/>
+      <xsd:element name="ScanKind"                  type="ce:stEnumScanKind"              minOccurs="0"/>
+      <xsd:element name="MinimumErp"                type="ce:stDoubleMinimumErp"          minOccurs="0"/>
+      <xsd:element name="MaximumErp"                type="ce:stDoubleMaximumErp"          minOccurs="0"/>
+      <xsd:element name="MinimumFrequency"          type="ce:stDoubleMinimumFrequency"    minOccurs="0"/>
+      <xsd:element name="MaximumFrequency"          type="ce:stDoubleMaximumFrequency"    minOccurs="0"/>
+      <xsd:element name="MinimumPri"                type="ce:stDoubleMinimumPri"          minOccurs="0"/>
+      <xsd:element name="MaximumPri"                type="ce:stDoubleMaximumPri"          minOccurs="0"/>
+      <xsd:element name="MinimumPulseWidth"         type="ce:stDoubleMinimumPulseWidth"   minOccurs="0"/>
+      <xsd:element name="MaximumPulseWidth"         type="ce:stDoubleMaximumPulseWidth"   minOccurs="0"/>
+    </xsd:all>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:simpleType name="stBoolModeSummaryValid">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean" />
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleMaximumErp">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-255.75" />
+      <xsd:maxInclusive value="255.75" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleMinimumErp">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-255.75" />
+      <xsd:maxInclusive value="255.75" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleMaximumFrequency">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0" />
+      <xsd:maxInclusive value="65535000000" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleMinimumFrequency">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0" />
+      <xsd:maxInclusive value="65535000000" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleMaximumPri">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0" />
+      <xsd:maxInclusive value="0.999999" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleMinimumPri">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0" />
+      <xsd:maxInclusive value="0.999999" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleMaximumPulseWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>100</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0" />
+      <xsd:maxInclusive value="0.13107199609375" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleMinimumPulseWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>100</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0" />
+      <xsd:maxInclusive value="0.13107199609375" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumFrequencyKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Single</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Single" />
+      <xsd:enumeration value="Series" />
+      <xsd:enumeration value="Dwell" />
+      <xsd:enumeration value="Periodic" />
+      <xsd:enumeration value="Discrete_Agility" />
+      <xsd:enumeration value="Associated" />
+      <xsd:enumeration value="Complex" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPriKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Single</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Single" />
+      <xsd:enumeration value="Staggered" />
+      <xsd:enumeration value="Dwell" />
+      <xsd:enumeration value="Periodic" />
+      <xsd:enumeration value="Discrete_Jitter" />
+      <xsd:enumeration value="Continuous_Wave" />
+      <xsd:enumeration value="Complex" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPulseKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Single</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Single" />
+      <xsd:enumeration value="Series" />
+      <xsd:enumeration value="Continuous_Wave" />
+      <xsd:enumeration value="Complex" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumScanKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Omni</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Omni" />
+      <xsd:enumeration value="Circular" />
+      <xsd:enumeration value="Sector" />
+      <xsd:enumeration value="Steady" />
+      <xsd:enumeration value="Sync" />
+      <xsd:enumeration value="Non_Interleaved_Raster" />
+      <xsd:enumeration value="Interleaved_Raster" />
+      <xsd:enumeration value="Electronic" />
+      <xsd:enumeration value="Conical" />
+      <xsd:enumeration value="Spiral" />
+      <xsd:enumeration value="Helical" />
+      <xsd:enumeration value="Complex" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntTotalGenerators">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1" />
+      <xsd:maxInclusive value="32" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stStringModeComment">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue />
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0" />
+      <xsd:maxLength value="250" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>  

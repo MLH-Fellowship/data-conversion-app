@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+
+  <!--
+    Note:
+    
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+    
+    Change History:
+    
+    Date        Who  Revision  Description
+    2013-03-11  XXX  1.0       Original.
+    2013-03-22  JSP  1.0       Revise/add key constraints.
+    2013-04-11  JSP  1.1       Update for revision 1.1.
+  -->
+  
+  <xsd:include schemaLocation="modeDataR1-1.xsd"/>
+  <xsd:include schemaLocation="emitterDataR1-1.xsd"/>
+  <xsd:include schemaLocation="platformScriptDataR1-1.xsd"/>
+  <xsd:include schemaLocation="platformDataR1-1.xsd"/>
+  <xsd:include schemaLocation="scenarioDataR1-1.xsd"/>
+
+  <!-- The major revision needs to be a single value, i.e., minInclusive == maxInclusive -->
+  <xsd:simpleType name="stSimEntityMajorRevision">
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <!-- The minor revision ranges from 0 to the current minor revision -->
+  <xsd:simpleType name="stSimEntityMinorRevision">
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:element name="SimEntity" type="ce:ctSimEntityData"/>
+
+  <xsd:complexType name="ctSimEntityData">
+    <xsd:choice minOccurs="1" maxOccurs="1">
+
+      <xsd:element name="EmitterMode" type="ce:ctEmitterMode" minOccurs="1" maxOccurs="unbounded"/>
+
+      <xsd:element name="Emitter" type="ce:ctEmitterFullData" minOccurs="1" maxOccurs="unbounded"/>
+      
+      <xsd:element name="Platform" type="ce:ctPlatformFullData" minOccurs="1" maxOccurs="unbounded"/>
+      
+      <xsd:element name="Scenario" type="ce:ctScenarioFullData" minOccurs="1" maxOccurs="unbounded">
+        <xsd:key name="keyScenarioPlatform">
+          <xsd:selector xpath="ce:Platforms/ce:Platform/ce:PlatformHeader"/>
+          <xsd:field xpath="ce:UserPlatformNumber"/>
+        </xsd:key>
+        <xsd:key name="keyScenarioEmitter">
+          <xsd:selector xpath="ce:Platforms/ce:Platform/ce:Emitters/ce:Emitter/ce:EmitterHeader"/>
+          <xsd:field xpath="ce:UserEmitterNumber"/>
+        </xsd:key>
+      </xsd:element>
+      
+      <xsd:element name="Sel" type="ce:ctSel" minOccurs="1">
+        <xsd:key name="keySelPlatform">
+          <xsd:selector xpath="ce:Platforms/ce:Platform/ce:PlatformHeader"/>
+          <xsd:field xpath="ce:PlatformId"/>
+        </xsd:key>
+      </xsd:element>
+      
+      <xsd:element name="Eml" type="ce:ctEml" minOccurs="1">
+        <xsd:key name="keyEmlEmitter">
+          <xsd:selector xpath="ce:Emitters/ce:Emitter/ce:EmitterHeader"/>
+          <xsd:field xpath="ce:EmitterId"/>
+          <xsd:field xpath="ce:EmitterName"/>
+        </xsd:key>
+      </xsd:element>
+      
+    </xsd:choice>
+    <xsd:attribute name="Major" type="ce:stSimEntityMajorRevision" use="required"/>
+    <xsd:attribute name="Minor" type="ce:stSimEntityMinorRevision" use="required"/>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctEmitterModeList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="EmitterMode" type="ce:ctEmitterMode"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctEmitterFullData">
+    <xsd:all minOccurs="1">
+      <xsd:element name="EmitterHeader" type="ce:ctEmitterHeader" minOccurs="1"/>
+      <xsd:element name="EmitterScript" type="ce:ctEmitterScriptEventList" minOccurs="0">
+        <xsd:unique name="uniqueEmitterFullScriptEventNumber">
+          <xsd:selector xpath="ce:EmitterScriptEvent"/>
+          <xsd:field xpath="ce:EventNumber"/>
+        </xsd:unique>
+      </xsd:element>
+      <xsd:element name="EmitterModes" type="ce:ctEmitterModeList" minOccurs="0">
+        <xsd:key name="keyEmitterMode">
+          <xsd:selector xpath="ce:EmitterMode/ce:EmitterModeHeader"/>
+          <xsd:field xpath="ce:ModeName"/>
+        </xsd:key>
+      </xsd:element>
+    </xsd:all>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctEmitterFullDataList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="Emitter" type="ce:ctEmitterFullData"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPlatformFullData">
+    <xsd:all minOccurs="1">
+      <xsd:element name="PlatformHeader" type="ce:ctPlatformHeader" minOccurs="1"/>
+      <xsd:element name="PlatformScript" type="ce:ctPlatformScriptEventList" minOccurs="0"/>
+      <xsd:element name="Emitters" type="ce:ctEmitterFullDataList" minOccurs="0"/>
+    </xsd:all>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctScenarioPlatformFullDataList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="Platform" type="ce:ctPlatformFullData"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSelPlatformFullDataList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="Platform" type="ce:ctPlatformFullData">
+        <xsd:key name="keySelEmitter">
+          <xsd:selector xpath="ce:Emitters/ce:Emitter/ce:EmitterHeader"/>
+          <xsd:field xpath="ce:EmitterId"/>
+          <xsd:field xpath="ce:EmitterName"/>
+        </xsd:key>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctScenarioFullData">
+    <xsd:all minOccurs="1">
+      <xsd:element name="ScenarioHeader" type="ce:ctScenarioHeader" minOccurs="0"/>
+      <xsd:element name="Platforms" type="ce:ctScenarioPlatformFullDataList" minOccurs="0"/>
+    </xsd:all>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+   <xsd:complexType name="ctSel">
+     <xsd:all minOccurs="1">
+      <xsd:element name="SelHeader" type="ce:ctModificationHeader" minOccurs="0"/>
+      <xsd:element name="Platforms" type="ce:ctSelPlatformFullDataList" minOccurs="0"/>
+    </xsd:all>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctEmlEmitter">
+    <xsd:all minOccurs="1">
+      <xsd:element name="EmitterHeader" type="ce:ctEmitterHeader" minOccurs="1"/>
+      <xsd:element name="EmitterModes" type="ce:ctEmitterModeList" minOccurs="0">
+        <xsd:key name="keyEmlEmitterMode">
+          <xsd:selector xpath="ce:EmitterMode/ce:EmitterModeHeader"/>
+          <xsd:field xpath="ce:ModeName"/>
+        </xsd:key>
+      </xsd:element>
+    </xsd:all>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctEmlEmitterList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="Emitter" type="ce:ctEmlEmitter"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctEml">
+    <xsd:all minOccurs="1">
+      <xsd:element name="EmlHeader" type="ce:ctModificationHeader" minOccurs="0"/>
+      <xsd:element name="Emitters" type="ce:ctEmlEmitterList" minOccurs="0"/>
+    </xsd:all>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+</xsd:schema>

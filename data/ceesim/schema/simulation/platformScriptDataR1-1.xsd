@@ -1,0 +1,575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+
+  <!--
+    Note:
+    
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+    
+    Change History:
+    
+    Date        Who  Revision  Description
+    2013-03-11  XXX  1.0       Original.
+    2013-04-11  JSP  1.1       Moved types specific to this file from the former commonSimpleTypes
+                               file to this file.
+    2013-07-02  GAN  1.1       Added support for platform intercept events.
+    2013-07-03  GAN  1.1       Fix enumeration defaults.
+
+  -->
+
+  <xsd:include schemaLocation="commonTypesR1-1.xsd"/>
+
+  <xsd:complexType name="ctPlatformScriptEventList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="PlatformScriptEvent" type="ce:ctPlatformScriptEvent"/>
+    </xsd:sequence>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPlatformScriptEvent">
+    <xsd:all minOccurs="1">
+      <xsd:element name="StartTime" type="ce:stDoubleStartTime" minOccurs="0"/>
+      <xsd:element name="Deactivate" type="ce:stBoolDeactivate" minOccurs="0"/>
+      <xsd:element name="Segment" type="ce:ctPathSegment" minOccurs="0"/>
+      <xsd:element name="Intercept" type="ce:ctInterceptSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPathSegment">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="Point" type="ce:ctPointSegment" minOccurs="0"/>
+      <xsd:element name="Line" type="ce:ctLineSegment" minOccurs="0"/>
+      <xsd:element name="Arc" type="ce:ctArcSegment" minOccurs="0"/>
+      <xsd:element name="Compound" type="ce:ctCompoundSegment" minOccurs="0"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPointSegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="AltitudeKind" type="ce:stEnumAltitudeKind" minOccurs="0"/>
+      <xsd:element name="FirstSegmentOnPath" type="ce:stBoolFirstSegmentOnPath" minOccurs="0"/>
+      <xsd:element name="StartPoint" type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="CoupledMotionEnable" type="ce:stBoolCoupledMotionEnable" minOccurs="0"/>
+      <xsd:element name="StartRoll" type="ce:stDoubleStartRoll" minOccurs="0"/>
+      <xsd:element name="StartPitch" type="ce:stDoubleStartPitch" minOccurs="0"/>
+      <xsd:element name="StartYaw" type="ce:stDoubleStartYaw" minOccurs="0"/>
+      <xsd:element name="RollRate" type="ce:stDoubleRollRate" minOccurs="0"/>
+      <xsd:element name="PitchRate" type="ce:stDoublePitchRate" minOccurs="0"/>
+      <xsd:element name="YawRate" type="ce:stDoubleYawRate" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctLineSegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="AltitudeKind" type="ce:stEnumAltitudeKind" minOccurs="0"/>
+      <xsd:element name="FirstSegmentOnPath" type="ce:stBoolFirstSegmentOnPath" minOccurs="0"/>
+      
+      <xsd:element name="StartPoint" type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="EndPoint" type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="CoupledMotionEnable" type="ce:stBoolCoupledMotionEnable" minOccurs="0"/>
+      
+      <xsd:element name="StartRoll" type="ce:stDoubleStartRoll" minOccurs="0"/>
+      <xsd:element name="StartPitch" type="ce:stDoubleStartPitch" minOccurs="0"/>
+      <xsd:element name="StartYaw" type="ce:stDoubleStartYaw" minOccurs="0"/>
+      
+      <xsd:element name="EndRoll" type="ce:stDoubleEndRoll" minOccurs="0"/>
+      <xsd:element name="EndPitch" type="ce:stDoubleEndPitch" minOccurs="0"/>
+      <xsd:element name="EndYaw" type="ce:stDoubleEndYaw" minOccurs="0"/>
+
+      <xsd:element name="RollRate" type="ce:stDoubleRollRate" minOccurs="0"/>
+      <xsd:element name="PitchRate" type="ce:stDoublePitchRate" minOccurs="0"/>
+      <xsd:element name="YawRate" type="ce:stDoubleYawRate" minOccurs="0"/>
+
+      <xsd:element name="EndRollRate" type="ce:stDoubleEndRollRate" minOccurs="0"/>
+      <xsd:element name="EndPitchRate" type="ce:stDoubleEndPitchRate" minOccurs="0"/>
+      <xsd:element name="EndYawRate" type="ce:stDoubleEndYawRate" minOccurs="0"/>
+
+      <xsd:element name="StartSpeed" type="ce:stDoubleStartSpeed" minOccurs="0"/>
+      <xsd:element name="EndSpeed" type="ce:stDoubleEndSpeed" minOccurs="0"/>
+      <xsd:element name="PitchKind" type="ce:stEnumPitchKind" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctArcSegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="AltitudeKind" type="ce:stEnumAltitudeKind" minOccurs="0"/>
+      <xsd:element name="FirstSegmentOnPath" type="ce:stBoolFirstSegmentOnPath" minOccurs="0"/>
+      
+      <xsd:element name="StartPoint" type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="CenterPoint" type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="EndPoint" type="ce:ctPoint" minOccurs="0"/>
+      
+      <xsd:element name="StartRoll" type="ce:stDoubleStartRoll" minOccurs="0"/>
+      <xsd:element name="StartPitch" type="ce:stDoubleStartPitch" minOccurs="0"/>
+      <xsd:element name="StartYaw" type="ce:stDoubleStartYaw" minOccurs="0"/>
+      
+      <xsd:element name="EndRoll" type="ce:stDoubleEndRoll" minOccurs="0"/>
+      <xsd:element name="EndPitch" type="ce:stDoubleEndPitch" minOccurs="0"/>
+      <xsd:element name="EndYaw" type="ce:stDoubleEndYaw" minOccurs="0"/>
+      
+      <xsd:element name="StartSpeed" type="ce:stDoubleStartSpeed" minOccurs="0"/>
+      <xsd:element name="EndSpeed" type="ce:stDoubleEndSpeed" minOccurs="0"/>
+      
+      <xsd:element name="PitchKind" type="ce:stEnumPitchKind" minOccurs="0"/>
+      <xsd:element name="TurnKind" type="ce:stEnumTurnKind" minOccurs="0"/>
+      
+      <xsd:element name="LoadFactor" type="ce:stDoubleLoadFactor" minOccurs="0"/>
+      
+      <xsd:element name="RollRate" type="ce:stDoubleRollRate" minOccurs="0"/>
+      
+      <xsd:element name="BankAngle" type="ce:stDoubleBankAngle" minOccurs="0"/>
+      <xsd:element name="Heading" type="ce:stDoubleHeading" minOccurs="0"/>
+      <xsd:element name="ClimbAngle" type="ce:stDoubleClimbAngle" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctCompoundSegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="AltitudeKind" type="ce:stEnumAltitudeKind" minOccurs="0"/>
+      <xsd:element name="FirstSegmentOnPath" type="ce:stBoolFirstSegmentOnPath" minOccurs="0"/>
+      
+      <xsd:element name="StartPoint" type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="EndPoint" type="ce:ctPoint" minOccurs="0"/>
+      
+      <xsd:element name="StartRoll" type="ce:stDoubleStartRoll" minOccurs="0"/>
+      <xsd:element name="StartPitch" type="ce:stDoubleStartPitch" minOccurs="0"/>
+      <xsd:element name="StartYaw" type="ce:stDoubleStartYaw" minOccurs="0"/>
+      
+      <xsd:element name="EndRoll" type="ce:stDoubleEndRoll" minOccurs="0"/>
+      <xsd:element name="EndPitch" type="ce:stDoubleEndPitch" minOccurs="0"/>
+      <xsd:element name="EndYaw" type="ce:stDoubleEndYaw" minOccurs="0"/>
+      
+      <xsd:element name="StartSpeed" type="ce:stDoubleStartSpeed" minOccurs="0"/>
+      <xsd:element name="EndSpeed" type="ce:stDoubleEndSpeed" minOccurs="0"/>
+      
+      <xsd:element name="PitchKind" type="ce:stEnumPitchKind" minOccurs="0"/>
+      <xsd:element name="TurnKind" type="ce:stEnumTurnKind" minOccurs="0"/>
+      
+      <xsd:element name="LoadFactor" type="ce:stDoubleLoadFactor" minOccurs="0"/>
+      
+      <xsd:element name="RollRate" type="ce:stDoubleRollRate" minOccurs="0"/>
+      
+      <xsd:element name="BankAngle" type="ce:stDoubleBankAngle" minOccurs="0"/>
+      <xsd:element name="Heading" type="ce:stDoubleHeading" minOccurs="0"/>
+      <xsd:element name="ClimbAngle" type="ce:stDoubleClimbAngle" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctInterceptSegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="InterceptKind" type="ce:stEnumInterceptKind" minOccurs="1"/>
+      <xsd:element name="TargetSutFlag" type="ce:stBoolTargetSutFlag" minOccurs="0"/>
+      <xsd:element name="TargetPlatformNumber" type="ce:stIntTargetPlatformNumber" minOccurs="0"/>
+      <xsd:element name="InterceptEndAction" type="ce:stEnumEndActionKind" minOccurs="1"/>
+      <xsd:element name="InterceptRange" type="ce:stDoubleRange" minOccurs="1"/>
+      <xsd:element name="ConstantSpeed" type="ce:stDoubleSpeed" minOccurs="0"/>
+      <xsd:element name="MaximumSpeed" type="ce:stDoubleSpeed" minOccurs="0"/>
+      <xsd:element name="InterceptDuration" type="ce:stDoubleDuration" minOccurs="0"/>
+      <xsd:element name="LimitDurationFlag" type="ce:stBoolLimitDurationFlag" minOccurs="0"/>
+      <xsd:element name="DurationLimit" type="ce:stDoubleDuration" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:simpleType name="stBoolCoupledMotionEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDeactivate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolFirstSegmentOnPath">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolLimitDurationFlag">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolTargetSutFlag">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBankAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleClimbAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDuration">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>300.0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="2.0"/>
+      <xsd:maxInclusive value="3600.0"/>  
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndPitch">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndPitchRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndRoll">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndRollRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndSpeed">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2777.77777777778"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndYaw">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndYawRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleHeading">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLoadFactor">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="100"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoublePitchRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleRange">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>100.0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="10.0"/>
+      <xsd:maxInclusive value="20000.0"/>  
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleRollRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSpeed">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>27.777777</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.277777"/>
+      <xsd:maxInclusive value="2777.777777"/>  
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStartPitch">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStartRoll">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStartSpeed">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2777.77777777778"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStartTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="86400"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStartYaw">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleYawRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumAltitudeKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Km_Above_Sea_Level</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Km_Above_Sea_Level"/>
+      <xsd:enumeration value="Km_Above_Terrain"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumEndActionKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Continue_In_Final_Direction</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Continue_In_Final_Direction"/>
+      <xsd:enumeration value="Stop"/>
+      <xsd:enumeration value="Deactivate"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumInterceptKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Constant_Speed</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Constant_Speed"/>
+      <xsd:enumeration value="Time_Based"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPitchKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Absolute</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Absolute"/>
+      <xsd:enumeration value="Relative"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumTurnKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Load_Factor</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Load_Factor"/>
+      <xsd:enumeration value="Radius"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntTargetPlatformNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>

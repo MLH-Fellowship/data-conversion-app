@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+
+  <!--
+    Note:
+    
+    If a change will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+
+    PRI Values are in seconds (international system of units - SI)
+    
+    Change History:
+    
+    Date        Who  Revision  Description
+    2016-11-14  XXX  1.0       Original.
+  -->
+
+  <!-- The major revision needs to be a single value, i.e., minInclusive == maxInclusive -->
+
+  <xsd:simpleType name="stComplexPriPatternEntityMajorRevision">
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <!-- The minor revision ranges from 0 to the current minor revision -->
+  <xsd:simpleType name="stComplexPriPatternEntityMinorRevision">
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:element name="ComplexPriPatternEntity" type="ce:ctComplexPriPatternEntity"/>
+
+  <xsd:complexType name="ctComplexPriPatternEntity">
+    <xsd:all minOccurs="1" maxOccurs="1">
+      <xsd:element name="ComplexPriPattern" type ="ce:ctComplexPriPattern" minOccurs="1" maxOccurs="1"/>
+    </xsd:all>
+    <xsd:attribute name="Major" type="ce:stComplexPriPatternEntityMajorRevision" use="required"/>
+    <xsd:attribute name="Minor" type="ce:stComplexPriPatternEntityMinorRevision" use="required"/>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctComplexPriPattern">
+    <xsd:all minOccurs="1" maxOccurs="1">
+      <xsd:element name="Header" type="ce:ctComplexPriPatternHeader" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="Pts" type="ce:ctPts" minOccurs="1" maxOccurs="1">
+        <xsd:unique name="uniqueIndexNumber">
+          <xsd:selector xpath="ce:Pt"/>
+          <xsd:field xpath="ce:Index"/>
+        </xsd:unique>
+      </xsd:element>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType  name="ctComplexPriPatternHeader">
+    <xsd:all minOccurs="1" maxOccurs="1">
+      <xsd:element name="Function" type="ce:stStringFunction" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="Multiplier" type="ce:stDoubleMultiplierValue" minOccurs="1" maxOccurs="1"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPts">
+    <xsd:sequence  minOccurs="1" maxOccurs="unbounded">
+      <xsd:element name="Pt" type="ce:ctPt"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPt">
+    <xsd:sequence  minOccurs="1" maxOccurs="1">
+      <xsd:element name="Index" type="ce:stIntIndexNumber"/>
+      <xsd:element name="Value" type="ce:stDoubleValue"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:simpleType name="stDoubleMultiplierValue">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1.0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:enumeration value="0.5"/>
+      <xsd:enumeration value="1.0"/>
+      <xsd:enumeration value="2.0"/>
+      <xsd:enumeration value="4.0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleValue">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.000001</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000001"/>
+      <xsd:maxInclusive value="0.999999"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntIndexNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringFunction">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1"/>
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>

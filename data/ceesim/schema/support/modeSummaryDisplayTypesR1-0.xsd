@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema 
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+
+  <!--
+    Note:
+    
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+    
+    Change History:
+    
+    Date        Who  Revision  Description
+    2013-08-28  KMB  1.0       Original.
+    2013-11-13  KMB  1.0       Added platform number and renamed number of generators 
+                               to total generators
+
+  -->
+  
+  <xsd:include schemaLocation="modeSummaryDataR1-0.xsd"/>
+
+ <!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+      //
+      // Newly created types.
+      //
+      /////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+  <xsd:simpleType name="xtIntEmitterNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="xtIntPlatformNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="xtStringEmitterId">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="5"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="xtStringEmitterName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="22"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="xtStringModeName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>mode</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1"/>
+      <xsd:maxLength value="22"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     //
+     // Emitter Mode Summary  Extensions
+     //
+     //    Additions: Emitter Number, Name, Id, Mode Name
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+  <xsd:complexType name="xtEmitterModeSummary">
+      <xsd:complexContent>
+         <xsd:extension base="ce:ctEmitterModeSummary">
+            <xsd:all>
+               <xsd:element name="EmitterNumber"  type="ce:xtIntEmitterNumber"  default="1" />
+               <xsd:element name="EmitterName"    type="ce:xtStringEmitterName" default="1" />
+               <xsd:element name="EmitterId"      type="ce:xtStringEmitterId"   default="1" />
+               <xsd:element name="PlatformNumber" type="ce:xtIntPlatformNumber" default="1" />
+               <xsd:element name="ModeName"       type="ce:xtStringModeName"    default="1" />
+            </xsd:all>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+
+
+ <!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+      //
+      // Display fields
+      //
+      /////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+  <xsd:simpleType name="dtDoubleMaximumErp">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DisplayUnit>dBm</DisplayUnit>
+        <DisplayDigits>2</DisplayDigits>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="MaximumErp">
+            <Column>18</Column>
+            <Width>75</Width>
+            <Editable>false</Editable>
+            <DisplayName>ERP&#xA;Max</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stDoubleMaximumErp">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtDoubleMinimumErp">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DisplayUnit>dBm</DisplayUnit>
+        <DisplayDigits>2</DisplayDigits>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="MinimumErp">
+            <Column>17</Column>
+            <Width>75</Width>
+            <Editable>false</Editable>
+            <DisplayName>ERP&#xA;Min</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stDoubleMinimumErp">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtDoubleMaximumFrequency">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DisplayUnit>Megahertz</DisplayUnit>
+        <DisplayDigits>0</DisplayDigits>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="MaximumFrequency">
+            <Column>10</Column>
+            <Width>85</Width>
+            <Editable>false</Editable>
+            <DisplayName>Frequency&#xA;Max</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stDoubleMaximumFrequency">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtDoubleMinimumFrequency">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DisplayUnit>Megahertz</DisplayUnit>
+        <DisplayDigits>0</DisplayDigits>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="MinimumFrequency">
+            <Column>9</Column>
+            <Width>85</Width>
+            <Editable>false</Editable>
+            <DisplayName>Frequency&#xA;Min</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stDoubleMinimumFrequency">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtDoubleMaximumPri">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DisplayUnit>Microseconds</DisplayUnit>
+        <DisplayDigits>14</DisplayDigits>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="MaximumPri">
+            <Column>13</Column>
+            <Width>75</Width>
+            <Editable>false</Editable>
+            <DisplayName>PRI&#xA;Max</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stDoubleMaximumPri">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtDoubleMinimumPri">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DisplayUnit>Microseconds</DisplayUnit>
+        <DisplayDigits>14</DisplayDigits>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="MinimumPri">
+            <Column>12</Column>
+            <Width>75</Width>
+            <Editable>false</Editable>
+            <DisplayName>PRI&#xA;Min</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stDoubleMinimumPri">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtDoubleMaximumPulseWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DisplayUnit>Microseconds</DisplayUnit>
+        <DisplayDigits>17</DisplayDigits>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="MaximumPulseWidth">
+            <Column>16</Column>
+            <Width>75</Width>
+            <Editable>false</Editable>
+            <DisplayName>PW&#xA;Max</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stDoubleMaximumPulseWidth">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtDoubleMinimumPulseWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DisplayUnit>Microseconds</DisplayUnit>
+        <DisplayDigits>17</DisplayDigits>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="MinimumPulseWidth">
+            <Column>15</Column>
+            <Width>75</Width>
+            <Editable>false</Editable>
+            <DisplayName>PW&#xA;Min</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation></xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stDoubleMinimumPulseWidth">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtEnumFrequencyKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+         <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="FrequencyKind">
+            <Column>8</Column>
+            <Width>95</Width>
+            <Editable>false</Editable>
+            <DisplayName>Frequency&#xA;Type</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Single">
+            <DisplayName>Single</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Series">
+            <DisplayName>Series</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Dwell">
+            <DisplayName>Dwell</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Periodic">
+            <DisplayName>Periodic</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Discrete_Agility">
+            <DisplayName>Discrete Agility</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Associated">
+            <DisplayName>Associated</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Complex">
+            <DisplayName>Complex</DisplayName>
+          </TranslationEntry>
+        </TranslationEntryList>   
+      </xsd:appinfo>
+      <xsd:documentation>Frequency type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stEnumFrequencyKind">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtEnumPriKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+         <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="PriKind">
+            <Column>11</Column>
+            <Width>95</Width>
+            <Editable>false</Editable>
+            <DisplayName>PRI&#xA;Type</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Single">
+            <DisplayName>Single</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Staggered">
+            <DisplayName>Staggered</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Dwell">
+            <DisplayName>Dwell</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Periodic">
+            <DisplayName>Periodic</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Discrete_Jitter">
+            <DisplayName>Discrete Jitter</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Continuous_Wave">
+            <DisplayName>CW</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Complex">
+            <DisplayName>Complex</DisplayName>
+          </TranslationEntry>
+        </TranslationEntryList>   
+      </xsd:appinfo>
+      <xsd:documentation>PRI type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stEnumPriKind">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtEnumPulseKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+         <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="PulseKind">
+            <Column>14</Column>
+            <Width>95</Width>
+            <Editable>false</Editable>
+            <DisplayName>Pulse&#xA;Type</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Single">
+            <DisplayName>Single</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Series">
+            <DisplayName>Series</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Continuous_Wave">
+            <DisplayName>CW</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Complex">
+            <DisplayName>Complex</DisplayName>
+          </TranslationEntry>
+        </TranslationEntryList>   
+      </xsd:appinfo>
+      <xsd:documentation>Pulse type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stEnumPulseKind">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtEnumScanKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+         <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="ScanKind">
+            <Column>19</Column>
+            <Width>95</Width>
+            <Editable>false</Editable>
+            <DisplayName>Scan&#xA;Type</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Omni">
+            <DisplayName>Omni</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Circular">
+            <DisplayName>Circular</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Sector">
+            <DisplayName>Sector</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Steady">
+            <DisplayName>Steady</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Sync">
+            <DisplayName>Synchronized</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Non_Interleaved_Raster">
+            <DisplayName>Non-Interleaved Raster</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Interleaved_Raster">
+            <DisplayName>Interleaved Raster</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Electronic">
+            <DisplayName>Electronic</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Conical">
+            <DisplayName>Conical</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Spiral">
+            <DisplayName>Spiral</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Helical">
+            <DisplayName>Helical</DisplayName>
+          </TranslationEntry>
+          <TranslationEntry EntryType="Enum" EntryName="Complex">
+            <DisplayName>Complex</DisplayName>
+          </TranslationEntry>
+        </TranslationEntryList>   
+      </xsd:appinfo>
+      <xsd:documentation>Scan type</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stEnumScanKind">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtIntEmitterNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="EmitterNumber">
+            <Column>1</Column>
+            <Width>90</Width>
+            <Editable>false</Editable>
+            <DisplayName>Emitter&#xA;Number</DisplayName>
+            <Group>Emitter</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation>Emitter number</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:xtIntEmitterNumber">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtIntTotalGenerators">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="TotalGenerators">
+            <Column>7</Column>
+            <Width>100</Width>
+            <Editable>false</Editable>
+            <DisplayName>Total&#xA;Generators</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation>Number of generators on mode</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stIntTotalGenerators">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtIntPlatformNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="PlatformNumber">
+            <Column>4</Column>
+            <Width>90</Width>
+            <Editable>false</Editable>
+            <DisplayName>Platform&#xA;Number</DisplayName>
+            <Group>Emitter</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation>Platform number</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:xtIntPlatformNumber">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtStringEmitterId">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="EmitterId">
+            <Column>2</Column>
+            <Width>75</Width>
+            <Editable>false</Editable>
+            <DisplayName>Emitter&#xA;ID</DisplayName>
+            <Group>Emitter</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation>Emitter ID</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:xtStringEmitterId">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtStringEmitterName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="EmitterName">
+            <Column>3</Column>
+            <Width>90</Width>
+            <Editable>false</Editable>
+            <DisplayName>Emitter&#xA;Name</DisplayName>
+            <Group>Emitter</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation>Emitter Name</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:xtStringEmitterName">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtStringModeComment">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="ModeComment">
+            <Column>6</Column>
+            <Width>120</Width>
+            <Editable>false</Editable>
+            <DisplayName>Comment</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation>Mode Comment</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:stStringModeComment">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="dtStringModeName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <TranslationEntryList>
+          <TranslationEntry EntryType="EmitterModeSummary" EntryName="ModeName">
+            <Column>5</Column>
+            <Width>120</Width>
+            <Editable>false</Editable>
+            <DisplayName>Mode&#xA;Name</DisplayName>
+            <Group>Mode</Group>
+          </TranslationEntry>
+        </TranslationEntryList>
+      </xsd:appinfo>
+      <xsd:documentation>Mode Name</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="ce:xtStringModeName">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>

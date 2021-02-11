@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<xsd:schema
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+  <!--
+    Note:
+    
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+    
+    Change History:
+    
+    Date        Who  Revision  Description
+    2014-12-10  XXX  1.0       Original.
+    2018-01-16  KMB  1.1       Added subpools
+  -->
+
+  <!-- The major revision needs to be a single value, i.e., minInclusive == maxInclusive -->
+  <xsd:simpleType name="stCeesimHealthInformationMajorRevision">
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <!-- The minor revision ranges from 0 to the current minor revision -->
+  <xsd:simpleType name="stCeesimHealthInformationMinorRevision">
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:element name="CeesimHealthInformation" type="ce:ctCeesimHealthInformation"/>
+
+   <xsd:complexType name ="ctCalibrationKinds" >
+     <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+       <xsd:element name ="CalibrationKind" type="ce:stEnumCalibrationKind" minOccurs="0"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+<xsd:complexType name ="ctCalibrationPath" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="CalibrationPathId" type="ce:stIntCalibrationPathId" minOccurs="1"></xsd:element>
+   <xsd:element name ="CalibrationKind" type="ce:stEnumCalibrationKind" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfPathId" type="ce:stIntRfPathId" minOccurs="1"></xsd:element>
+   <xsd:element name ="FrequencyRanges" type="ce:ctFrequencyRanges" minOccurs="1"></xsd:element>
+   <xsd:element name ="ChannelId" type="ce:stIntChannelId" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfPeripheralIndex" type="ce:stIntRfPeripheralIndex" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfComponentIndex" type="ce:stIntRfComponentIndex" minOccurs="1"></xsd:element>
+   <xsd:element name ="UnknownStatusFileName" type="ce:stBoolUnknownStatusFileName" minOccurs="0"></xsd:element>
+   <xsd:element name ="StatusFileName" type="ce:stStringStatusFileName" minOccurs="0"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctCalibrationPaths" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="CalibrationPath" type="ce:ctCalibrationPath" minOccurs="1"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctCalibrationStatusRecord" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="CalibrationKind" type="ce:stEnumCalibrationKind" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfcuId" type="ce:stIntRfcuId" minOccurs="1"></xsd:element>
+   <xsd:element name ="PortId" type="ce:stIntPortId" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfPathKind" type="ce:stEnumRfPathKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="RfguSelectionKind" type="ce:stEnumRfguSelectionKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="SourceKind" type="ce:stEnumSourceKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="HighPowerKind" type="ce:stEnumHighPowerKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="FrequencyRange" type="ce:ctFrequencyRange" minOccurs="1"></xsd:element>
+   <xsd:element name ="DateTime" type="ce:stDateTime" minOccurs="1"></xsd:element>
+   <xsd:element name ="LastSuccessfulDateTime" type="ce:stDateTimeLastSuccessful" minOccurs="1"></xsd:element>
+   <xsd:element name ="StatusCode" type="ce:stIntStatusCode" minOccurs="1"></xsd:element>
+   <xsd:element name ="DetailedResultsFileName" type="ce:stStringDetailedResultsFileName" minOccurs="0"></xsd:element>
+   <xsd:element name ="LogFileName" type="ce:stStringLogFileName" minOccurs="0"></xsd:element>
+   <xsd:element name ="PlotFileName" type="ce:stStringPlotFileName" minOccurs="0"></xsd:element>
+   <xsd:element name ="Description" type="ce:stStringDescription" minOccurs="0"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctCalibrationStatusRecords" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="CalibrationStatusRecord" type="ce:ctCalibrationStatusRecord" minOccurs="1"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctCeesimHealthInformation" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="DataGenerationModeKind" type="ce:stEnumDataGenerationModeKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="HardwareInformationMissing" type="ce:stBoolHardwareInformationMissing" minOccurs="0"></xsd:element>
+   <xsd:element name ="Channels" type="ce:ctChannels" minOccurs="0"></xsd:element>
+   <xsd:element name ="Rfcus" type="ce:ctRfcus" minOccurs="0"></xsd:element>
+   <xsd:element name ="RfComponents" type="ce:ctRfComponents" minOccurs="0"></xsd:element>
+   <xsd:element name ="RfPeripherals" type="ce:ctRfPeripherals" minOccurs="0"></xsd:element>
+   <xsd:element name ="RfPaths" type="ce:ctRfPaths" minOccurs="0"></xsd:element>
+   <xsd:element name ="ChannelPools" type="ce:ctChannelPools" minOccurs="0"></xsd:element>
+   <xsd:element name ="CalibrationPaths" type="ce:ctCalibrationPaths" minOccurs="0"></xsd:element>
+   <xsd:element name ="FaultTestPaths" type="ce:ctFaultTestPaths" minOccurs="0"></xsd:element>
+   <xsd:element name ="CalibrationStatusRecords" type="ce:ctCalibrationStatusRecords" minOccurs="0"></xsd:element>
+   <xsd:element name ="FaultTestStatusRecords" type="ce:ctFaultTestStatusRecords" minOccurs="0"></xsd:element>
+   <xsd:element name ="HardwareInformationRecords" type="ce:ctHardwareInformationRecords" minOccurs="0"></xsd:element>
+</xsd:all>
+    <xsd:attribute name="Major" type="ce:stCeesimHealthInformationMajorRevision" use="required"/>
+    <xsd:attribute name="Minor" type="ce:stCeesimHealthInformationMinorRevision" use="required"/>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+</xsd:complexType>
+
+<xsd:complexType name ="ctChannel" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="ChannelId" type="ce:stIntChannelId" minOccurs="1"></xsd:element>
+   <xsd:element name ="ChannelDescription" type="ce:stStringChannelDescription" minOccurs="1"></xsd:element>
+   <xsd:element name ="Offline" type="ce:stBoolOffline" minOccurs="0"></xsd:element>
+   <xsd:element name ="FrequencyRange" type="ce:ctFrequencyRange" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfPeripheralLinks" type="ce:ctRfPeripheralLinks" minOccurs="1"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctChannels" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="Channel" type="ce:ctChannel" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctChannelIds" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="ChannelId" type="ce:stIntChannelId" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctSubpool" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="SubpoolId" type="ce:stIntSubpoolId" minOccurs="1"></xsd:element>
+   <xsd:element name ="ChannelIds" type="ce:ctChannelIds" minOccurs="1"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctSubpools" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="Subpool" type="ce:ctSubpool" minOccurs="1"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctChannelPool" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="ChannelPoolId" type="ce:stIntChannelPoolId" minOccurs="1"></xsd:element>
+   <xsd:element name ="ChannelPoolDescription" type="ce:stStringChannelPoolDescription" minOccurs="1"></xsd:element>
+   <xsd:element name ="ChannelIds" type="ce:ctChannelIds" minOccurs="1"></xsd:element>
+   <xsd:element name ="Subpools" type="ce:ctSubpools" minOccurs="0"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctChannelPools" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="ChannelPool" type="ce:ctChannelPool" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctEffectKinds" >
+<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+   <xsd:element name ="EffectKind" type="ce:stEnumEffectKind" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctFaultTestKinds" >
+<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+   <xsd:element name ="FaultTestKind" type="ce:stEnumFaultTestKind" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctFaultTestPath" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="FaultTestPathId" type="ce:stIntFaultTestPathId" minOccurs="1"></xsd:element>
+   <xsd:element name ="FaultTestKind" type="ce:stEnumFaultTestKind" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfPathId" type="ce:stIntRfPathId" minOccurs="1"></xsd:element>
+   <xsd:element name ="FrequencyRanges" type="ce:ctFrequencyRanges" minOccurs="1"></xsd:element>
+   <xsd:element name ="ChannelId" type="ce:stIntChannelId" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfPeripheralIndex" type="ce:stIntRfPeripheralIndex" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfComponentIndex" type="ce:stIntRfComponentIndex" minOccurs="1"></xsd:element>
+   <xsd:element name ="UnknownStatusFileName" type="ce:stBoolUnknownStatusFileName" minOccurs="0"></xsd:element>
+   <xsd:element name ="StatusFileName" type="ce:stStringStatusFileName" minOccurs="0"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctFaultTestPaths" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="FaultTestPath" type="ce:ctFaultTestPath" minOccurs="1"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctFaultTestStatusRecord" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="FaultTestKind" type="ce:stEnumFaultTestKind" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfcuId" type="ce:stIntRfcuId" minOccurs="1"></xsd:element>
+   <xsd:element name ="PortId" type="ce:stIntPortId" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfPathKind" type="ce:stEnumRfPathKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="RfguSelectionKind" type="ce:stEnumRfguSelectionKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="SourceKind" type="ce:stEnumSourceKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="HighPowerKind" type="ce:stEnumHighPowerKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="FrequencyRange" type="ce:ctFrequencyRange" minOccurs="1"></xsd:element>
+   <xsd:element name ="DateTime" type="ce:stDateTime" minOccurs="1"></xsd:element>
+   <xsd:element name ="LastSuccessfulDateTime" type="ce:stDateTimeLastSuccessful" minOccurs="1"></xsd:element>
+   <xsd:element name ="StatusCode" type="ce:stIntStatusCode" minOccurs="1"></xsd:element>
+   <xsd:element name ="DetailedResultsFileName" type="ce:stStringDetailedResultsFileName" minOccurs="0"></xsd:element>
+   <xsd:element name ="LogFileName" type="ce:stStringLogFileName" minOccurs="0"></xsd:element>
+   <xsd:element name ="PlotFileName" type="ce:stStringPlotFileName" minOccurs="0"></xsd:element>
+   <xsd:element name ="Description" type="ce:stStringDescription" minOccurs="0"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctFaultTestStatusRecords" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="FaultTestStatusRecord" type="ce:ctFaultTestStatusRecord" minOccurs="1"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctFrequencyRange" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="Start" type="ce:stDoubleStartFrequency" minOccurs="1"></xsd:element>
+   <xsd:element name ="Stop" type="ce:stDoubleStopFrequency" minOccurs="1"></xsd:element>
+   <xsd:element name ="StartExclusive" type="ce:stBoolStartExclusive" minOccurs="0"></xsd:element>
+   <xsd:element name ="StopExclusive" type="ce:stBoolStopExclusive" minOccurs="0"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctFrequencyRanges" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="FrequencyRange" type="ce:ctFrequencyRange" minOccurs="1"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctHardwareInfomationRecord" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="BoardAddress" type="ce:ctBoardAddress" minOccurs="1"></xsd:element>
+   <xsd:element name ="SerialId" type="ce:stStringSerialId" minOccurs="1"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctHardwareInformationRecords" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="HardwareInfomationRecord" type="ce:ctHardwareInfomationRecord" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctOscillator" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="OscillatorId" type="ce:stIntOscillatorId" minOccurs="1"></xsd:element>
+   <xsd:element name ="FrequencyRanges" type="ce:ctFrequencyRanges" minOccurs="1"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctOscillators" >
+<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+   <xsd:element name ="Oscillator" type="ce:ctOscillator" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctPort" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="PortId" type="ce:stIntPortId" minOccurs="1"></xsd:element>
+   <xsd:element name ="PortName" type="ce:stStringPortName" minOccurs="1"></xsd:element>
+   <xsd:element name ="FrequencyRanges" type="ce:ctFrequencyRanges" minOccurs="1"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctPorts" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="Port" type="ce:ctPort" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfComponent" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="RfComponentId" type="ce:stIntRfComponentId" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfComponentKind" type="ce:stEnumRfComponentKind" minOccurs="1"></xsd:element>
+   <xsd:element name ="Oscillators" type="ce:ctOscillators" minOccurs="0"></xsd:element>
+   <xsd:element name ="EffectKinds" type="ce:ctEffectKinds" minOccurs="0"></xsd:element>
+   <xsd:element name ="CalibrationKinds" type="ce:ctCalibrationKinds" minOccurs="0"></xsd:element>
+   <xsd:element name ="FaultTestKinds" type="ce:ctFaultTestKinds" minOccurs="0"></xsd:element>
+   <xsd:element name ="FrequencyRanges" type="ce:ctFrequencyRanges" minOccurs="1"></xsd:element>
+   <xsd:element name ="Offline" type="ce:stBoolOffline" minOccurs="0"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfComponents" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="RfComponent" type="ce:ctRfComponent" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfComponentLink" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="RfComponentId" type="ce:stIntRfComponentId" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfComponentIndex" type="ce:stIntRfComponentIndex" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfConnection" type="ce:ctRfConnection" minOccurs="0"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfComponentLinks" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="RfComponentLink" type="ce:ctRfComponentLink" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfcu" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="RfcuId" type="ce:stIntRfcuId" minOccurs="1"></xsd:element>
+   <xsd:element name ="CombinerName" type="ce:stStringRfcuCombinerName" minOccurs="1"></xsd:element>
+   <xsd:element name ="BoardAddresses" type="ce:ctBoardAddresses" minOccurs="0"></xsd:element>
+   <xsd:element name ="IsVirtual" type="ce:stBoolIsVirtual" minOccurs="0"></xsd:element>
+   <xsd:element name ="Ports" type="ce:ctPorts" minOccurs="0"></xsd:element>
+   <xsd:element name ="Offline" type="ce:stBoolOffline" minOccurs="0"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfcus" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="Rfcu" type="ce:ctRfcu" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfPath" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="RfPathId" type="ce:stIntRfPathId" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfcuId" type="ce:stIntRfcuId" minOccurs="1"></xsd:element>
+   <xsd:element name ="PortId" type="ce:stIntPortId" minOccurs="1"></xsd:element>
+   <xsd:element name ="FrequencyRanges" type="ce:ctFrequencyRanges" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfPathComponents" type="ce:ctRfPathComponents" minOccurs="1"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfPaths" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="RfPath" type="ce:ctRfPath" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfPathComponent" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="RfPathComponentIndex" type="ce:stIntRfPathComponentIndex" minOccurs="1"></xsd:element>
+   <xsd:element name ="ChannelId" type="ce:stIntChannelId" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfPeripheralIndex" type="ce:stIntRfPeripheralIndex" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfComponentIndex" type="ce:stIntRfComponentIndex" minOccurs="1"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfPathComponents" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="RfPathComponent" type="ce:ctRfPathComponent" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfPeripheral" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="RfPeripheralId" type="ce:stIntRfPeripheralId" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfPeripheralKind" type="ce:stEnumRfPeripheralKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="BoardAddress" type="ce:ctBoardAddress" minOccurs="0"></xsd:element>
+   <xsd:element name ="Offline" type="ce:stBoolOffline" minOccurs="0"></xsd:element>
+   <xsd:element name ="RfComponentLinks" type="ce:ctRfComponentLinks" minOccurs="1"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfPeripherals" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="RfPeripheral" type="ce:ctRfPeripheral" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfPeripheralLink" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="RfPeripheralId" type="ce:stIntRfPeripheralId" minOccurs="1"></xsd:element>
+   <xsd:element name ="RfPeripheralIndex" type="ce:stIntRfPeripheralIndex" minOccurs="1"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfPeripheralLinks" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="RfPeripheralLink" type="ce:ctRfPeripheralLink" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctBoardAddress" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="DrawerId" type="ce:stIntDrawerId" minOccurs="1"></xsd:element>
+   <xsd:element name ="SlotId" type="ce:stIntSlotId" minOccurs="1"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+<xsd:complexType name ="ctBoardAddresses" >
+<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+   <xsd:element name ="BoardAddress" type="ce:ctBoardAddress" minOccurs="0"></xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name ="ctRfConnection" >
+<xsd:all minOccurs="1">
+   <xsd:element name ="SourceKind" type="ce:stEnumSourceKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="RfPathKind" type="ce:stEnumRfPathKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="RfguSelectionKind" type="ce:stEnumRfguSelectionKind" minOccurs="0"></xsd:element>
+   <xsd:element name ="ControlLine" type="ce:stIntControlLine" minOccurs="0"></xsd:element>
+</xsd:all>
+</xsd:complexType>
+
+  <xsd:simpleType name="stBoolIsVirtual">    <xsd:restriction base="xsd:boolean">    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stBoolCalibrateFlag">    <xsd:restriction base="xsd:boolean">    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stBoolFaultTestFlag">    <xsd:restriction base="xsd:boolean">    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stBoolOffline">    <xsd:restriction base="xsd:boolean">    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stBoolStartExclusive">    <xsd:restriction base="xsd:boolean">    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stBoolStopExclusive">    <xsd:restriction base="xsd:boolean">    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stBoolHardwareInformationMissing">    <xsd:restriction base="xsd:boolean">    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stBoolUnknownStatusFileName">    <xsd:restriction base="xsd:boolean">    </xsd:restriction>  </xsd:simpleType>     
+
+  <xsd:simpleType name="stEnumCalibrationKind">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="AmplitudeShiftCharacterization" />
+      <xsd:enumeration value="Frequency" />
+      <xsd:enumeration value="HfimDcOffset" />
+      <xsd:enumeration value="HfimLinearization" />
+      <xsd:enumeration value="HsAmop" />
+      <xsd:enumeration value="PhaseAlignment" />
+      <xsd:enumeration value="PhaseLinearization" />
+      <xsd:enumeration value="PhaseShiftCharacterization" />
+      <xsd:enumeration value="ReceiveAlignment" />
+      <xsd:enumeration value="ReceiveLinearization" />
+      <xsd:enumeration value="TdoaAlignment" />
+      <xsd:enumeration value="TdoaLinearization" />
+      <xsd:enumeration value="TransmitAlignment" />
+      <xsd:enumeration value="TransmitLinearization" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDataGenerationModeKind">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="HardwareOnline" />
+      <xsd:enumeration value="HardwareOffline" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumEffectKind">
+    <xsd:restriction base="xsd:string">
+        <xsd:enumeration value="Amop" />
+        <xsd:enumeration value="Attenuation" />
+        <xsd:enumeration value="Audio" />
+        <xsd:enumeration value="Burst" />
+        <xsd:enumeration value="Fmop" />
+        <xsd:enumeration value="Frequency" />
+        <xsd:enumeration value="Intrapulse" />
+        <xsd:enumeration value="Phase" />
+        <xsd:enumeration value="Pmop" />
+        <xsd:enumeration value="Pri" />
+        <xsd:enumeration value="Pw" />
+        <xsd:enumeration value="Receive" />
+        <xsd:enumeration value="SkinPower" />
+        <xsd:enumeration value="Tdoa" />
+        <xsd:enumeration value="Transmit" />
+        <xsd:enumeration value="Video" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumFaultTestKind">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Frequency" />
+      <xsd:enumeration value="HsAmopAccuracy" />
+      <xsd:enumeration value="PhaseAccuracy" />
+      <xsd:enumeration value="ReceiveAccuracy" />
+      <xsd:enumeration value="SuppressionAccuracy" />
+      <xsd:enumeration value="TdoaAccuracy" />
+      <xsd:enumeration value="TransmitAccuracy" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumHighPowerKind">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Ssa" />
+      <xsd:enumeration value="Twt" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumRfComponentKind">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Apc" />
+      <xsd:enumeration value="Flo" />
+      <xsd:enumeration value="HighFidelityIntrapulseModulator" />
+      <xsd:enumeration value="HsAmopAttenuator" />
+      <xsd:enumeration value="Pmod" />
+      <xsd:enumeration value="ReceiveAttenuator" />
+      <xsd:enumeration value="Ssa" />
+      <xsd:enumeration value="Synthesizer" />
+      <xsd:enumeration value="TransmitAttenuator" />
+      <xsd:enumeration value="Twt" />
+      <xsd:enumeration value="VectorModulator" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumRfguSelectionKind">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="A" />
+      <xsd:enumeration value="B" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumRfPathKind">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="A" />
+      <xsd:enumeration value="B" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumRfPeripheralKind">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Aoa" />
+      <xsd:enumeration value="Rfgu" />
+      <xsd:enumeration value="GenAoa" />
+      <xsd:enumeration value="BitDec" />
+      <xsd:enumeration value="Router" />
+      <xsd:enumeration value="McdrcRfgu" />
+      <xsd:enumeration value="McdrcAoa" />
+      <xsd:enumeration value="Asu" />
+      <xsd:enumeration value="RemIu" />
+      <xsd:enumeration value="Tsc" />
+      <xsd:enumeration value="VideoAoa" />
+      <xsd:enumeration value="Apg" />
+      <xsd:enumeration value="Lo" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumSourceKind">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Primary" />
+      <xsd:enumeration value="Secondary" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDateTime">
+    <xsd:restriction base="xsd:dateTime">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDateTimeLastSuccessful">
+    <xsd:restriction base="xsd:dateTime">
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStartFrequency">    <xsd:restriction base="xsd:double">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="131071000000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stDoubleStopFrequency">    <xsd:restriction base="xsd:double">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="131071000000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntCalibrationPathComponentIndex">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntCalibrationPathId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntChannelId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntChannelPoolId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntControlLine">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntDrawerId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntFaultTestPathId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntOscillatorId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntPortId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntRfComponentId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntRfComponentIndex">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntRfcuId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntRfPathComponentIndex">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntRfPathId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntRfPeripheralId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntRfPeripheralIndex">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stIntSlotId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>
+  <xsd:simpleType name="stIntStatusCode">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="1000000000"/>    </xsd:restriction>  </xsd:simpleType>
+  <xsd:simpleType name="stIntSubpoolId">    <xsd:restriction base="xsd:int">      <xsd:minInclusive value="0"/>      <xsd:maxInclusive value="100000"/>    </xsd:restriction>  </xsd:simpleType>     
+
+  <xsd:simpleType name="stStringChannelDescription">    <xsd:restriction base="xsd:string">      </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stStringChannelPoolDescription">    <xsd:restriction base="xsd:string">      </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stStringDescription">    <xsd:restriction base="xsd:string">      </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stStringDetailedResultsFileName">    <xsd:restriction base="xsd:string">      </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stStringLogFileName">    <xsd:restriction base="xsd:string">      </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stStringPlotFileName">    <xsd:restriction base="xsd:string">      </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stStringPortName">    <xsd:restriction base="xsd:string">      </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stStringRfcuCombinerName">    <xsd:restriction base="xsd:string">      </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stStringSerialId">    <xsd:restriction base="xsd:string">      </xsd:restriction>  </xsd:simpleType>     
+  <xsd:simpleType name="stStringStatusFileName">    <xsd:restriction base="xsd:string">      </xsd:restriction>  </xsd:simpleType>     
+
+</xsd:schema>
+

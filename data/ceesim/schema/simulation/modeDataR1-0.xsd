@@ -1,0 +1,1332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+
+  <!--
+    Note:
+    
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+    
+    Change History:
+    
+    Date        Who  Revision  Description
+    2013-03-11  XXX  1.0       Original.
+    2013-03-22  JSP  1.0       Remove ModeTransitionPeriod and InterruptDurationOverride fields.
+                               These fields will be moved to the rev 1.1 schema.
+			       Add key and unique constraints.
+                               
+  -->
+  
+  <xsd:include schemaLocation="commonSimpleTypesR1-0.xsd"/>
+
+  <xsd:complexType name="ctEmitterMode">
+    <xsd:all minOccurs="1">
+      <xsd:element name="EmitterModeHeader" type="ce:ctEmitterModeHeader" minOccurs="1"/>
+      <xsd:element name="Generators" type="ce:ctGeneratorList" minOccurs="0">
+        <xsd:unique name="uniqueGeneratorNumber">
+          <xsd:selector xpath="ce:Generator"/>
+          <xsd:field xpath="ce:GeneratorNumber"/>
+        </xsd:unique>
+      </xsd:element>
+      <xsd:element name="EmitterSubmodes" type="ce:ctEmitterSubmodeList" minOccurs="0">
+        <xsd:key name="keyEmitterSubmodeId">
+          <xsd:selector xpath="ce:EmitterSubmode/ce:EmitterSubmodeHeader"/>
+          <xsd:field xpath="ce:SubmodeId"/>
+        </xsd:key>
+        <xsd:key name="keyEmitterSubmodeName">
+          <xsd:selector xpath="ce:EmitterSubmode/ce:EmitterSubmodeHeader"/>
+          <xsd:field xpath="ce:SubmodeName"/>
+        </xsd:key>
+      </xsd:element>
+    </xsd:all>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctEmitterModeHeader">
+    <xsd:all minOccurs="1">
+      <xsd:element name="ModeName"                  type="ce:stStringModeName"            minOccurs="1"/>
+      <xsd:element name="LastUpdateDate"            type="ce:stDateModificationDate"      minOccurs="0"/>
+      <xsd:element name="ModeComment"               type="ce:stStringModeComment"         minOccurs="0"/>
+      <xsd:element name="ModeProtectionSwitch"      type="ce:stBoolModeProtectionSwitch"  minOccurs="0"/>
+      <xsd:element name="SensitivityOverride"       type="ce:stBoolSensitivityOverride"   minOccurs="0"/>
+      <xsd:element name="PriorityKind"              type="ce:stEnumPriority"              minOccurs="0"/>
+      <xsd:element name="GpAssigned"                type="ce:stBoolGpAssigned"            minOccurs="0"/>
+      <xsd:element name="GpPooled"                  type="ce:stBoolGpPooled"              minOccurs="0"/>
+      <xsd:element name="GpOrPoolNumber"            type="ce:stIntGpOrPoolNumber"         minOccurs="0"/>
+      <xsd:element name="JammerStatus"              type="ce:stBoolJammerStatus"          minOccurs="0"/>
+      <xsd:element name="AzimuthTestPoint"          type="ce:stBoolAzimuthTestPoint"      minOccurs="0"/>
+      <xsd:element name="ElevationTestPoint"        type="ce:stBoolElevationTestPoint"    minOccurs="0"/>
+      <xsd:element name="PriTestPoint"              type="ce:stBoolPriTestPoint"          minOccurs="0"/>
+      <xsd:element name="PriTestPoint2"             type="ce:stBoolPriTestPoint2"         minOccurs="0"/>
+      <xsd:element name="PriTestPoint3"             type="ce:stBoolPriTestPoint3"         minOccurs="0"/>
+      <xsd:element name="PriTestPoint4"             type="ce:stBoolPriTestPoint4"         minOccurs="0"/>
+      <xsd:element name="DigitalVideoTestPoint"     type="ce:stBoolDigitalVideoTestPoint" minOccurs="0"/>
+      <xsd:element name="ChannelVideoTestPoint"     type="ce:stBoolChannelVideoTestPoint" minOccurs="0"/>
+      <xsd:element name="ChannelAudioTestPoint"     type="ce:stBoolChannelAudioTestPoint" minOccurs="0"/>
+      <xsd:element name="RfBlankingVideoTestPoint"  type="ce:stBoolRfBlankingVideoTestPoint" minOccurs="0"/>
+      <xsd:element name="SiteId"                    type="ce:stIntSiteId"                     minOccurs="0"/>
+      <xsd:element name="VirtualNumber"             type="ce:stIntVirtualNumber"              minOccurs="0"/>
+      <xsd:element name="ExternalModeId"            type="ce:stIntExternalModeId"             minOccurs="0"/>
+      <xsd:element name="PgpDefaultMode"            type="ce:stBoolPgpDefaultMode"            minOccurs="0"/>
+      <xsd:element name="PgpDropTrackMode"          type="ce:stBoolPgpDropTrackMode"          minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctGeneratorList">
+    <xsd:sequence minOccurs="0" maxOccurs="32">
+      <xsd:element name="Generator" type="ce:ctGenerator">
+        <xsd:unique name="uniquePriSegmentNumber">
+          <xsd:selector xpath="ce:PriSequence/*"/>
+          <xsd:field xpath="ce:SegmentNumber"/>
+        </xsd:unique>
+        <xsd:unique name="uniqueFrequencySegmentNumber">
+          <xsd:selector xpath="ce:FrequencySequence/*"/>
+          <xsd:field xpath="ce:SegmentNumber"/>
+        </xsd:unique>
+        <xsd:unique name="uniqueScanSegmentNumber">
+          <xsd:selector xpath="ce:ScanSequence/*"/>
+          <xsd:field xpath="ce:SegmentNumber"/>
+        </xsd:unique>
+        <xsd:unique name="uniquePulseSegmentNumber">
+          <xsd:selector xpath="ce:PulseSequence/*"/>
+          <xsd:field xpath="ce:SegmentNumber"/>
+        </xsd:unique>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctEmitterSubmodeList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="EmitterSubmode" type="ce:ctEmitterSubmode"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctGenerator">
+    <xsd:all minOccurs="1">
+      <xsd:element name="GeneratorNumber" type="ce:stIntGeneratorNumber" minOccurs="0"/>
+      <xsd:element name="GeneratorName" type="ce:stStringGeneratorName" minOccurs="0"/>
+      <xsd:element name="GeneratorKind" type="ce:stEnumGeneratorKind" minOccurs="0"/>
+      <xsd:element name="GeneratorComment" type="ce:stStringGeneratorComment" minOccurs="0"/>
+      <xsd:element name="PriorityKind" type="ce:stEnumPriority" minOccurs="0"/>
+      <xsd:element name="PriCrystalValue" type="ce:stDoublePriCrystalValue" minOccurs="0"/>
+      <xsd:element name="FreqChannelization" type="ce:stDoubleFreqChannelization" minOccurs="0"/>
+      <xsd:element name="DelayTime" type="ce:stDoubleDelayTime" minOccurs="0"/>
+      <xsd:element name="DelayTimeJitterStatus" type="ce:stBoolDelayTimeJitterStatus" minOccurs="0"/>
+      <xsd:element name="DelayTimeJitterLimit" type="ce:stDoubleDelayTimeJitterLimit" minOccurs="0"/>
+      <xsd:element name="DelayTimeJitterDstrbKind" type="ce:stStringDelayTimeJitterDstrbKind" minOccurs="0"/>
+      <xsd:element name="DelayTimeJitterResSwitch" type="ce:stBoolDelayTimeJitterResSwitch" minOccurs="0"/>
+      <xsd:element name="DelayTimeModStatus" type="ce:stBoolDelayTimeModStatus" minOccurs="0"/>
+      <xsd:element name="DelayTimeModPatternKind" type="ce:stTextDelayTimeModPatternKind" minOccurs="0"/>
+      <xsd:element name="DelayTimeModAmp" type="ce:stDoubleDelayTimeModAmp" minOccurs="0"/>
+      <xsd:element name="DelayTimeModPeriodKind" type="ce:stEnumDelayTimeModPeriodKind" minOccurs="0"/>
+      <xsd:element name="DelayTimeModPeriodPulses" type="ce:stIntDelayTimeModPeriodPulses" minOccurs="0"/>
+      <xsd:element name="DelayTimeModPeriod" type="ce:stDoubleDelayTimeModPeriod" minOccurs="0"/>
+      <xsd:element name="DelayTimeModPeriodSync" type="ce:stBoolDelayTimeModPeriodSync" minOccurs="0"/>
+      <xsd:element name="SecDtJitterStatus" type="ce:stBoolSecDtJitterStatus" minOccurs="0"/>
+      <xsd:element name="SecDtJitterLimit" type="ce:stDoubleSecDtJitterLimit" minOccurs="0"/>
+      <xsd:element name="SecDtJitterDstrbKind" type="ce:stStringSecDtJitterDstrbKind" minOccurs="0"/>
+      <xsd:element name="SecDtModStatus" type="ce:stBoolSecDtModStatus" minOccurs="0"/>
+      <xsd:element name="SecDtModPatternKind" type="ce:stTextSecDtModPatternKind" minOccurs="0"/>
+      <xsd:element name="SecDtModAmp" type="ce:stDoubleSecDtModAmp" minOccurs="0"/>
+      <xsd:element name="SecDtModPeriod" type="ce:stDoubleSecDtModPeriod" minOccurs="0"/>
+      <xsd:element name="RfBlanking" type="ce:stBoolRfBlanking" minOccurs="0"/>
+      <xsd:element name="TestPointChannelNumber" type="ce:stIntTestPointChannelNumber" minOccurs="0"/>
+      <xsd:element name="AzimuthTestPoint" type="ce:stBoolAzimuthTestPoint" minOccurs="0"/>
+      <xsd:element name="ElevationTestPoint" type="ce:stBoolElevationTestPoint" minOccurs="0"/>
+      <xsd:element name="PriTestPoint" type="ce:stBoolPriTestPoint" minOccurs="0"/>
+      <xsd:element name="PriTestPoint2" type="ce:stBoolPriTestPoint2" minOccurs="0"/>
+      <xsd:element name="PriTestPoint3" type="ce:stBoolPriTestPoint3" minOccurs="0"/>
+      <xsd:element name="PriTestPoint4" type="ce:stBoolPriTestPoint4" minOccurs="0"/>
+      <xsd:element name="DigitalVideoTestPoint" type="ce:stBoolDigitalVideoTestPoint" minOccurs="0"/>
+      <xsd:element name="ChannelVideoTestPoint" type="ce:stBoolChannelVideoTestPoint" minOccurs="0"/>
+      <xsd:element name="ChannelAudioTestPoint" type="ce:stBoolChannelAudioTestPoint" minOccurs="0"/>
+      
+      <xsd:element name="PriSequence" type="ce:ctPriSequence" minOccurs="0"/>
+      <xsd:element name="FrequencySequence" type="ce:ctFrequencySequence" minOccurs="0"/>
+      <xsd:element name="ScanSequence" type="ce:ctScanSequence" minOccurs="0"/>
+      <xsd:element name="PulseSequence" type="ce:ctPulseSequence" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPriSequence">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      
+      <xsd:element name="PriSegmentSingle" type="ce:ctPriSegmentSingle" minOccurs="0"/>
+      <xsd:element name="PriSegmentDwell" type="ce:ctPriSegmentDwell" minOccurs="0"/>
+      <xsd:element name="PriSegmentPeriodic" type="ce:ctPriSegmentPeriodic" minOccurs="0"/>
+      <xsd:element name="PriSegmentStaggered" type="ce:ctPriSegmentStaggered" minOccurs="0"/>
+      <xsd:element name="PriSegmentDiscreteJitter" type="ce:ctPriSegmentDiscreteJitter" minOccurs="0"/>      
+      <xsd:element name="PriSegmentCw" type="ce:ctPriSegmentCw" minOccurs="0"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPriSegmentSingle">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="ComplexPriState" type="ce:stBoolComplexPriState" minOccurs="0"/>
+      <xsd:element name="ComplexPriEntryId" type="ce:stStringComplexPriEntryId" minOccurs="0"/>
+      <xsd:element name="Pri" type="ce:stDoublePri" minOccurs="0"/>
+      <xsd:element name="JitterStatus" type="ce:stBoolJitterStatus" minOccurs="0"/>
+      <xsd:element name="JitterLimit" type="ce:stDoubleJitterLimitPri" minOccurs="0"/>
+      <xsd:element name="JitterDstrbKind" type="ce:stStringJitterDstrbKind" minOccurs="0"/>
+      <xsd:element name="JitterResSwitch" type="ce:stBoolJitterResSwitch" minOccurs="0"/>
+      <xsd:element name="ClockedPriJitterState" type="ce:stBoolClockedPriJitterState" minOccurs="0"/>
+      <xsd:element name="ClockedPriJitterExcursion" type="ce:stDoubleClockedPriJitterExcursion" minOccurs="0"/>
+      <xsd:element name="ClockedPriJitterVariance" type="ce:stDoubleClockedPriJitterVariance" minOccurs="0"/>
+      <xsd:element name="PulseInvisibleState" type="ce:stBoolPulseInvisibleState" minOccurs="0"/>
+      <xsd:element name="MissingPulseFactor" type="ce:stDoubleMissingPulseFactor" minOccurs="0"/>
+      <xsd:element name="PriTestPoint" type="ce:stBoolPriTestPoint" minOccurs="0"/>
+      <xsd:element name="PriTestPoint2" type="ce:stBoolPriTestPoint2" minOccurs="0"/>
+      <xsd:element name="PriTestPoint3" type="ce:stBoolPriTestPoint3" minOccurs="0"/>
+      <xsd:element name="PriTestPoint4" type="ce:stBoolPriTestPoint4" minOccurs="0"/>
+      <xsd:element name="FrequencyTrigger" type="ce:stBoolFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+      <xsd:element name="EarSequenceTriggerState" type="ce:stBoolEarSequenceTriggerState" minOccurs="0"/>
+      <xsd:element name="GeneratorTriggerState" type="ce:stBoolGeneratorTriggerState" minOccurs="0"/>
+      <xsd:element name="SynchronizedGenerator" type="ce:stIntSynchronizedGeneratorNumber" minOccurs="0"/>
+      <xsd:element name="TerminalSegment" type="ce:stBoolTerminalSegment" minOccurs="0"/>
+      <xsd:element name="SecJitterStatus" type="ce:stBoolSecJitterStatus" minOccurs="0"/>
+      <xsd:element name="SecJitterLimit" type="ce:stDoubleSecJitterLimit" minOccurs="0"/>
+      <xsd:element name="SecJitterDstrbKind" type="ce:stStringSecJitterDstrbKind" minOccurs="0"/>
+      <xsd:element name="SecModStatus" type="ce:stBoolSecModStatus" minOccurs="0"/>
+      <xsd:element name="SecModPatternKind" type="ce:stTextSecModPatternKind" minOccurs="0"/>
+      <xsd:element name="SecModAmp" type="ce:stDoubleSecModAmp" minOccurs="0"/>
+      <xsd:element name="SecModPeriod" type="ce:stDoubleSecModPeriod" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPriSegmentDwell">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="Pri" type="ce:stDoublePri" minOccurs="0"/>
+      <xsd:element name="DwellStatus" type="ce:stBoolDwellStatus" minOccurs="0"/>
+      <xsd:element name="DwellKind" type="ce:stEnumDwellKind" minOccurs="0"/>
+      <xsd:element name="DwellTime" type="ce:stDoubleDwellTime" minOccurs="0"/>
+      <xsd:element name="DwellVariation" type="ce:stDoubleDwellVariation" minOccurs="0"/>
+      <xsd:element name="DwellTimePulses" type="ce:stIntDwellTimePulses" minOccurs="0"/>
+      <xsd:element name="DwellVariationPulses" type="ce:stIntDwellVariationPulses" minOccurs="0"/>
+      <xsd:element name="JitterStatus" type="ce:stBoolJitterStatus" minOccurs="0"/>
+      <xsd:element name="JitterLimit" type="ce:stDoubleJitterLimitPri" minOccurs="0"/>
+      <xsd:element name="JitterDstrbKind" type="ce:stStringJitterDstrbKind" minOccurs="0"/>
+      <xsd:element name="JitterResSwitch" type="ce:stBoolJitterResSwitch" minOccurs="0"/>
+      <xsd:element name="PulseInvisibleState" type="ce:stBoolPulseInvisibleState" minOccurs="0"/>
+      <xsd:element name="MissingPulseFactor" type="ce:stDoubleMissingPulseFactor" minOccurs="0"/>
+      <xsd:element name="PriTestPoint" type="ce:stBoolPriTestPoint" minOccurs="0"/>
+      <xsd:element name="PriTestPoint2" type="ce:stBoolPriTestPoint2" minOccurs="0"/>
+      <xsd:element name="PriTestPoint3" type="ce:stBoolPriTestPoint3" minOccurs="0"/>
+      <xsd:element name="PriTestPoint4" type="ce:stBoolPriTestPoint4" minOccurs="0"/>
+      <xsd:element name="FrequencyTrigger" type="ce:stBoolFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+      <xsd:element name="EarSequenceTriggerState" type="ce:stBoolEarSequenceTriggerState" minOccurs="0"/>
+      <xsd:element name="GeneratorTriggerState" type="ce:stBoolGeneratorTriggerState" minOccurs="0"/>
+      <xsd:element name="SynchronizedGenerator" type="ce:stIntSynchronizedGeneratorNumber" minOccurs="0"/>
+      <xsd:element name="TerminalSegment" type="ce:stBoolTerminalSegment" minOccurs="0"/>
+      <xsd:element name="SecJitterStatus" type="ce:stBoolSecJitterStatus" minOccurs="0"/>
+      <xsd:element name="SecJitterLimit" type="ce:stDoubleSecJitterLimit" minOccurs="0"/>
+      <xsd:element name="SecJitterDstrbKind" type="ce:stStringSecJitterDstrbKind" minOccurs="0"/>
+      <xsd:element name="SecModStatus" type="ce:stBoolSecModStatus" minOccurs="0"/>
+      <xsd:element name="SecModPatternKind" type="ce:stTextSecModPatternKind" minOccurs="0"/>
+      <xsd:element name="SecModAmp" type="ce:stDoubleSecModAmp" minOccurs="0"/>
+      <xsd:element name="SecModPeriod" type="ce:stDoubleSecModPeriod" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPriSegmentPeriodic">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="Pri" type="ce:stDoublePri" minOccurs="0"/>
+      <xsd:element name="ModStatus" type="ce:stBoolModStatus" minOccurs="0"/>
+      <xsd:element name="ModPatternKind" type="ce:stTextModPatternKind" minOccurs="0"/>
+      <xsd:element name="ModAmp" type="ce:stDoubleModAmpPri" minOccurs="0"/>
+      <xsd:element name="ModPeriodKind" type="ce:stEnumModPeriodKind" minOccurs="0"/>
+      <xsd:element name="ModPeriodPulses" type="ce:stIntModPeriodPulses" minOccurs="0"/>
+      <xsd:element name="ModPeriod" type="ce:stDoubleModPeriod" minOccurs="0"/>
+      <xsd:element name="ModPeriodSync" type="ce:stBoolModPeriodSync" minOccurs="0"/>
+      <xsd:element name="JitterStatus" type="ce:stBoolJitterStatus" minOccurs="0"/>
+      <xsd:element name="JitterLimit" type="ce:stDoubleJitterLimitPri" minOccurs="0"/>
+      <xsd:element name="JitterDstrbKind" type="ce:stStringJitterDstrbKind" minOccurs="0"/>
+      <xsd:element name="JitterResSwitch" type="ce:stBoolJitterResSwitch" minOccurs="0"/>
+      <xsd:element name="ClockedPriJitterState" type="ce:stBoolClockedPriJitterState" minOccurs="0"/>
+      <xsd:element name="ClockedPriJitterExcursion" type="ce:stDoubleClockedPriJitterExcursion" minOccurs="0"/>
+      <xsd:element name="ClockedPriJitterVariance" type="ce:stDoubleClockedPriJitterVariance" minOccurs="0"/>
+      <xsd:element name="PulseInvisibleState" type="ce:stBoolPulseInvisibleState" minOccurs="0"/>
+      <xsd:element name="MissingPulseFactor" type="ce:stDoubleMissingPulseFactor" minOccurs="0"/>
+      <xsd:element name="PriTestPoint" type="ce:stBoolPriTestPoint" minOccurs="0"/>
+      <xsd:element name="PriTestPoint2" type="ce:stBoolPriTestPoint2" minOccurs="0"/>
+      <xsd:element name="PriTestPoint3" type="ce:stBoolPriTestPoint3" minOccurs="0"/>
+      <xsd:element name="PriTestPoint4" type="ce:stBoolPriTestPoint4" minOccurs="0"/>
+      <xsd:element name="FrequencyTrigger" type="ce:stBoolFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+      <xsd:element name="EarSequenceTriggerState" type="ce:stBoolEarSequenceTriggerState" minOccurs="0"/>
+      <xsd:element name="GeneratorTriggerState" type="ce:stBoolGeneratorTriggerState" minOccurs="0"/>
+      <xsd:element name="SynchronizedGenerator" type="ce:stIntSynchronizedGeneratorNumber" minOccurs="0"/>
+      <xsd:element name="TerminalSegment" type="ce:stBoolTerminalSegment" minOccurs="0"/>
+      <xsd:element name="SecJitterStatus" type="ce:stBoolSecJitterStatus" minOccurs="0"/>
+      <xsd:element name="SecJitterLimit" type="ce:stDoubleSecJitterLimit" minOccurs="0"/>
+      <xsd:element name="SecJitterDstrbKind" type="ce:stStringSecJitterDstrbKind" minOccurs="0"/>
+      <xsd:element name="SecModStatus" type="ce:stBoolSecModStatus" minOccurs="0"/>
+      <xsd:element name="SecModPatternKind" type="ce:stTextSecModPatternKind" minOccurs="0"/>
+      <xsd:element name="SecModAmp" type="ce:stDoubleSecModAmp" minOccurs="0"/>
+      <xsd:element name="SecModPeriod" type="ce:stDoubleSecModPeriod" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPriSegmentStaggered">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="TerminalSegment" type="ce:stBoolTerminalSegment" minOccurs="0"/>
+      <xsd:element name="AssociatedFrequencySegment" type="ce:stIntAssociatedFrequencySegment" minOccurs="0"/>
+      <xsd:element name="AssociatedPulseSegment" type="ce:stIntAssociatedPulseSegment" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+      <xsd:element name="Subsegments" type="ce:ctStaggeredSeriesPriSegmentList" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctStaggeredSeriesPriSegmentList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="StaggeredSeriesPriSegment" type="ce:ctStaggeredSeriesPriSegment"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctStaggeredSeriesPriSegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="Pri" type="ce:stDoublePri" minOccurs="0"/>
+      <xsd:element name="JitterStatus" type="ce:stBoolJitterStatus" minOccurs="0"/>
+      <xsd:element name="JitterLimit" type="ce:stDoubleJitterLimitPri" minOccurs="0"/>
+      <xsd:element name="JitterDstrbKind" type="ce:stStringJitterDstrbKind" minOccurs="0"/>
+      <xsd:element name="JitterResSwitch" type="ce:stBoolJitterResSwitch" minOccurs="0"/>
+      <xsd:element name="DwellKind" type="ce:stEnumDwellKind" minOccurs="0"/>
+      <xsd:element name="DwellTime" type="ce:stDoubleDwellTime" minOccurs="0"/>
+      <xsd:element name="DwellTimePulses" type="ce:stIntDwellTimePulses" minOccurs="0"/>
+      <xsd:element name="PulseInvisibleState" type="ce:stBoolPulseInvisibleState" minOccurs="0"/>
+      <xsd:element name="MissingPulseFactor" type="ce:stDoubleMissingPulseFactor" minOccurs="0"/>
+      <xsd:element name="PriTestPoint" type="ce:stBoolPriTestPoint" minOccurs="0"/>
+      <xsd:element name="PriTestPoint2" type="ce:stBoolPriTestPoint2" minOccurs="0"/>
+      <xsd:element name="PriTestPoint3" type="ce:stBoolPriTestPoint3" minOccurs="0"/>
+      <xsd:element name="PriTestPoint4" type="ce:stBoolPriTestPoint4" minOccurs="0"/>
+      <xsd:element name="FrequencyTrigger" type="ce:stBoolFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+      <xsd:element name="EarSequenceTriggerState" type="ce:stBoolEarSequenceTriggerState" minOccurs="0"/>
+      <xsd:element name="GeneratorTriggerState" type="ce:stBoolGeneratorTriggerState" minOccurs="0"/>
+      <xsd:element name="SynchronizedGenerator" type="ce:stIntSynchronizedGeneratorNumber" minOccurs="0"/>
+      <xsd:element name="SecJitterStatus" type="ce:stBoolSecJitterStatus" minOccurs="0"/>
+      <xsd:element name="SecJitterLimit" type="ce:stDoubleSecJitterLimit" minOccurs="0"/>
+      <xsd:element name="SecJitterDstrbKind" type="ce:stStringSecJitterDstrbKind" minOccurs="0"/>
+      <xsd:element name="SecModStatus" type="ce:stBoolSecModStatus" minOccurs="0"/>
+      <xsd:element name="SecModPatternKind" type="ce:stTextSecModPatternKind" minOccurs="0"/>
+      <xsd:element name="SecModAmp" type="ce:stDoubleSecModAmp" minOccurs="0"/>
+      <xsd:element name="SecModPeriod" type="ce:stDoubleSecModPeriod" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPriSegmentDiscreteJitter">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="AssociatedFrequencySegment" type="ce:stIntAssociatedFrequencySegment" minOccurs="0"/>
+      <xsd:element name="AssociatedPulseSegment" type="ce:stIntAssociatedPulseSegment" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+      <xsd:element name="Subsegments" type="ce:ctDiscreteJitterSeriesPriSegmentList" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDiscreteJitterSeriesPriSegmentList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="DiscreteJitterSeriesPriSegment" type="ce:ctDiscreteJitterSeriesPriSegment"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctDiscreteJitterSeriesPriSegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="Pri" type="ce:stDoublePri" minOccurs="0"/>
+      <xsd:element name="DwellKind" type="ce:stEnumDwellKind" minOccurs="0"/>
+      <xsd:element name="DwellTime" type="ce:stDoubleDwellTime" minOccurs="0"/>
+      <xsd:element name="DwellTimePulses" type="ce:stIntDwellTimePulses" minOccurs="0"/>
+      <xsd:element name="PulseInvisibleState" type="ce:stBoolPulseInvisibleState" minOccurs="0"/>
+      <xsd:element name="MissingPulseFactor" type="ce:stDoubleMissingPulseFactor" minOccurs="0"/>
+      <xsd:element name="PriTestPoint" type="ce:stBoolPriTestPoint" minOccurs="0"/>
+      <xsd:element name="PriTestPoint2" type="ce:stBoolPriTestPoint2" minOccurs="0"/>
+      <xsd:element name="PriTestPoint3" type="ce:stBoolPriTestPoint3" minOccurs="0"/>
+      <xsd:element name="PriTestPoint4" type="ce:stBoolPriTestPoint4" minOccurs="0"/>
+      <xsd:element name="FrequencyTrigger" type="ce:stBoolFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+      <xsd:element name="EarSequenceTriggerState" type="ce:stBoolEarSequenceTriggerState" minOccurs="0"/>
+      <xsd:element name="GeneratorTriggerState" type="ce:stBoolGeneratorTriggerState" minOccurs="0"/>
+      <xsd:element name="SynchronizedGenerator" type="ce:stIntSynchronizedGeneratorNumber" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPriSegmentCw">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctFrequencySequence">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="FrequencySegmentAssociated" type="ce:ctFrequencySegmentAssociated" minOccurs="0"/>      
+      <xsd:element name="FrequencySegmentSingle" type="ce:ctFrequencySegmentSingle" minOccurs="0"/>
+      <xsd:element name="FrequencySegmentDwell" type="ce:ctFrequencySegmentDwell" minOccurs="0"/>      
+      <xsd:element name="FrequencySegmentPeriodic" type="ce:ctFrequencySegmentPeriodic" minOccurs="0"/>
+      <xsd:element name="FrequencySegmentSeries" type="ce:ctFrequencySegmentSeries" minOccurs="0"/>      
+      <xsd:element name="FrequencySegmentDiscreteAgility" type="ce:ctFrequencySegmentDiscreteAgility" minOccurs="0"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctFrequencySegmentAssociated">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="MasterGenerator" type="ce:stIntMasterGeneratorNumber" minOccurs="0"/>
+      <xsd:element name="FrequencyOffset" type="ce:stDoubleFrequencyOffset" minOccurs="0"/>
+      <xsd:element name="FrequencySource" type="ce:stEnumFrequencySource" minOccurs="0"/>
+      <xsd:element name="PowerLevelKind" type="ce:stEnumPowerLevelKind" minOccurs="0"/>
+      <xsd:element name="PooledStatus" type="ce:stBoolPooledStatus" minOccurs="0"/>
+      <xsd:element name="PoolNumber" type="ce:stIntPoolNumber" minOccurs="0"/>
+      <xsd:element name="ChannelNumber" type="ce:stIntChannelNumber" minOccurs="0"/>
+      <xsd:element name="DedicatedChannelStatus" type="ce:stBoolDedicatedChannelStatus" minOccurs="0"/>
+      <xsd:element name="VirtualNumber" type="ce:stIntVirtualNumber" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctFrequencySegmentSingle">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="Frequency" type="ce:stDoubleFrequency" minOccurs="0"/>
+      <xsd:element name="FrequencySource" type="ce:stEnumFrequencySource" minOccurs="0"/>
+      <xsd:element name="PowerLevelKind" type="ce:stEnumPowerLevelKind" minOccurs="0"/>
+      <xsd:element name="PooledStatus" type="ce:stBoolPooledStatus" minOccurs="0"/>
+      <xsd:element name="PoolNumber" type="ce:stIntPoolNumber" minOccurs="0"/>
+      <xsd:element name="ChannelNumber" type="ce:stIntChannelNumber" minOccurs="0"/>
+      <xsd:element name="DedicatedChannelStatus" type="ce:stBoolDedicatedChannelStatus" minOccurs="0"/>
+      <xsd:element name="VirtualNumber" type="ce:stIntVirtualNumber" minOccurs="0"/>
+      <xsd:element name="AgilityStatus" type="ce:stBoolAgilityStatus" minOccurs="0"/>
+      <xsd:element name="AgilityLimit" type="ce:stDoubleAgilityLimit" minOccurs="0"/>
+      <xsd:element name="AgilityPatternName" type="ce:stStringAgilityPatternName" minOccurs="0"/>
+      <xsd:element name="AgilityResolutionSwitch" type="ce:stBoolAgilityResolutionSwitch" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctFrequencySegmentDwell">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="Frequency" type="ce:stDoubleFrequency" minOccurs="0"/>
+      <xsd:element name="FrequencySource" type="ce:stEnumFrequencySource" minOccurs="0"/>
+      <xsd:element name="PowerLevelKind" type="ce:stEnumPowerLevelKind" minOccurs="0"/>
+      <xsd:element name="PooledStatus" type="ce:stBoolPooledStatus" minOccurs="0"/>
+      <xsd:element name="PoolNumber" type="ce:stIntPoolNumber" minOccurs="0"/>
+      <xsd:element name="ChannelNumber" type="ce:stIntChannelNumber" minOccurs="0"/>
+      <xsd:element name="DedicatedChannelStatus" type="ce:stBoolDedicatedChannelStatus" minOccurs="0"/>
+      <xsd:element name="VirtualNumber" type="ce:stIntVirtualNumber" minOccurs="0"/>
+      <xsd:element name="DwellStatus" type="ce:stBoolDwellStatus" minOccurs="0"/>
+      <xsd:element name="DwellKind" type="ce:stEnumDwellKind" minOccurs="0"/>
+      <xsd:element name="DwellTime" type="ce:stDoubleDwellTime" minOccurs="0"/>
+      <xsd:element name="DwellVariation" type="ce:stDoubleDwellVariation" minOccurs="0"/>
+      <xsd:element name="DwellTimePulses" type="ce:stIntDwellTimePulses" minOccurs="0"/>
+      <xsd:element name="DwellVariationPulses" type="ce:stIntDwellVariationPulses" minOccurs="0"/>
+      <xsd:element name="AgilityStatus" type="ce:stBoolAgilityStatus" minOccurs="0"/>
+      <xsd:element name="AgilityLimit" type="ce:stDoubleAgilityLimit" minOccurs="0"/>
+      <xsd:element name="AgilityPatternName" type="ce:stStringAgilityPatternName" minOccurs="0"/>
+      <xsd:element name="AgilityResolutionSwitch" type="ce:stBoolAgilityResolutionSwitch" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctFrequencySegmentPeriodic">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="Frequency" type="ce:stDoubleFrequency" minOccurs="0"/>
+      <xsd:element name="FrequencySource" type="ce:stEnumFrequencySource" minOccurs="0"/>
+      <xsd:element name="PowerLevelKind" type="ce:stEnumPowerLevelKind" minOccurs="0"/>
+      <xsd:element name="PooledStatus" type="ce:stBoolPooledStatus" minOccurs="0"/>
+      <xsd:element name="PoolNumber" type="ce:stIntPoolNumber" minOccurs="0"/>
+      <xsd:element name="ChannelNumber" type="ce:stIntChannelNumber" minOccurs="0"/>
+      <xsd:element name="DedicatedChannelStatus" type="ce:stBoolDedicatedChannelStatus" minOccurs="0"/>
+      <xsd:element name="VirtualNumber" type="ce:stIntVirtualNumber" minOccurs="0"/>
+      <xsd:element name="AgilityStatus" type="ce:stBoolAgilityStatus" minOccurs="0"/>
+      <xsd:element name="AgilityLimit" type="ce:stDoubleAgilityLimit" minOccurs="0"/>
+      <xsd:element name="AgilityPatternName" type="ce:stStringAgilityPatternName" minOccurs="0"/>
+      <xsd:element name="AgilityResolutionSwitch" type="ce:stBoolAgilityResolutionSwitch" minOccurs="0"/>
+      <xsd:element name="ModStatus" type="ce:stBoolModStatus" minOccurs="0"/>
+      <xsd:element name="ModAmp" type="ce:stDoubleModAmpFrequency" minOccurs="0"/>
+      <xsd:element name="ModPatternName" type="ce:stTextModPatternKind" minOccurs="0"/>
+      <xsd:element name="ModPeriodKind" type="ce:stEnumModPeriodKind" minOccurs="0"/>
+      <xsd:element name="ModPeriodPulses" type="ce:stIntModPeriodPulses" minOccurs="0"/>
+      <xsd:element name="ModPeriod" type="ce:stDoubleModPeriod" minOccurs="0"/>
+      <xsd:element name="ModPeriodSync" type="ce:stBoolModPeriodSync" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctFrequencySegmentSeries">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+      <xsd:element name="Subsegments" type ="ce:ctSeriesFrequencySegmentList" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSeriesFrequencySegmentList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="SeriesFrequencySegment" type="ce:ctSeriesFrequencySegment"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctSeriesFrequencySegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="Frequency" type="ce:stDoubleFrequency" minOccurs="0"/>
+      <xsd:element name="DwellKind" type="ce:stEnumDwellKind" minOccurs="0"/>
+      <xsd:element name="DwellTime" type="ce:stDoubleDwellTime" minOccurs="0"/>
+      <xsd:element name="DwellTimePulses" type="ce:stIntDwellTimePulses" minOccurs="0"/>
+      <xsd:element name="FrequencySource" type="ce:stEnumFrequencySource" minOccurs="0"/>
+      <xsd:element name="PowerLevelKind" type="ce:stEnumPowerLevelKind" minOccurs="0"/>
+      <xsd:element name="PooledStatus" type="ce:stBoolPooledStatus" minOccurs="0"/>
+      <xsd:element name="PoolNumber" type="ce:stIntPoolNumber" minOccurs="0"/>
+      <xsd:element name="ChannelNumber" type="ce:stIntChannelNumber" minOccurs="0"/>
+      <xsd:element name="DedicatedChannelStatus" type="ce:stBoolDedicatedChannelStatus" minOccurs="0"/>
+      <xsd:element name="VirtualNumber" type="ce:stIntVirtualNumber" minOccurs="0"/>
+      <xsd:element name="AgilityStatus" type="ce:stBoolAgilityStatus" minOccurs="0"/>
+      <xsd:element name="AgilityLimit" type="ce:stDoubleAgilityLimit" minOccurs="0"/>
+      <xsd:element name="AgilityPatternName" type="ce:stStringAgilityPatternName" minOccurs="0"/>
+      <xsd:element name="AgilityResolutionSwitch" type="ce:stBoolAgilityResolutionSwitch" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctFrequencySegmentDiscreteAgility">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+      <xsd:element name="Subsegments" type="ce:ctDiscreteAgilityFrequencySegmentList" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDiscreteAgilityFrequencySegmentList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="DiscreteAgilityFrequencySegment" type="ce:ctDiscreteAgilityFrequencySegment"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctDiscreteAgilityFrequencySegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="DwellKind" type="ce:stEnumDwellKind" minOccurs="0"/>
+      <xsd:element name="DwellTime" type="ce:stDoubleDwellTime" minOccurs="0"/>
+      <xsd:element name="DwellTimePulses" type="ce:stIntDwellTimePulses" minOccurs="0"/>
+      <xsd:element name="Frequency" type="ce:stDoubleFrequency" minOccurs="0"/>
+      <xsd:element name="FrequencySource" type="ce:stEnumFrequencySource" minOccurs="0"/>
+      <xsd:element name="PowerLevelKind" type="ce:stEnumPowerLevelKind" minOccurs="0"/>
+      <xsd:element name="PooledStatus" type="ce:stBoolPooledStatus" minOccurs="0"/>
+      <xsd:element name="PoolNumber" type="ce:stIntPoolNumber" minOccurs="0"/>
+      <xsd:element name="ChannelNumber" type="ce:stIntChannelNumber" minOccurs="0"/>
+      <xsd:element name="DedicatedChannelStatus" type="ce:stBoolDedicatedChannelStatus" minOccurs="0"/>
+      <xsd:element name="VirtualNumber" type="ce:stIntVirtualNumber" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctScanSequence">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      
+      <xsd:element name="ScanSegmentAzEl" type="ce:ctScanSegmentAzEl" minOccurs="0"/>
+      <xsd:element name="ScanSegmentConical" type="ce:ctScanSegmentConical" minOccurs="0"/>
+      <xsd:element name="ScanSegmentElectronic" type="ce:ctScanSegmentElectronic" minOccurs="0"/>
+      <xsd:element name="ScanSegmentHelical" type="ce:ctScanSegmentHelical" minOccurs="0"/>
+      <xsd:element name="ScanSegmentSpiral" type="ce:ctScanSegmentSpiral" minOccurs="0"/>
+      <xsd:element name="ScanSegmentInterleavedRaster" type="ce:ctScanSegmentInterleavedRaster" minOccurs="0"/>
+      <xsd:element name="ScanSegmentNonInterleavedRaster" type="ce:ctScanSegmentNonInterleavedRaster" minOccurs="0"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctScanSegmentAzEl">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="AzScanKind" type="ce:stEnumAzScanKind" minOccurs="0"/>
+      <xsd:element name="AzSutTrackingSwitch" type="ce:stBoolAzSutTrackingSwitch" minOccurs="0"/>
+      <xsd:element name="AzTrackingSwitch" type="ce:stBoolAzTrackingSwitch" minOccurs="0"/>
+      <xsd:element name="AzTrackOffset" type="ce:stDoubleAzTrackOffset" minOccurs="0"/>
+      <xsd:element name="AzTrackPlatform" type="ce:stIntAzTrackPlatformNumber" minOccurs="0"/>
+      <xsd:element name="AzPointAngle" type="ce:stDoubleAzPointAngle" minOccurs="0"/>
+      <xsd:element name="AzSectorWidth" type="ce:stDoubleAzSectorWidth" minOccurs="0"/>
+      <xsd:element name="AzInitialBeamOffset" type="ce:stDoubleAzInitialBeamOffset" minOccurs="0"/>
+      <xsd:element name="AzScanPeriod" type="ce:stDoubleAzScanPeriod" minOccurs="0"/>
+      <xsd:element name="AzPeriodSynchronization" type="ce:stBoolAzPeriodSynchronization" minOccurs="0"/>
+      <xsd:element name="AzDirection" type="ce:stEnumAzScanDirection" minOccurs="0"/>
+      <xsd:element name="AzScanMotion" type="ce:stEnumAzScanMotion" minOccurs="0"/>
+      <xsd:element name="AzFlybackTime" type="ce:stDoubleAzFlybackTime" minOccurs="0"/>
+      <xsd:element name="AzScanReset" type="ce:stBoolAzScanReset" minOccurs="0"/>
+      <xsd:element name="AzMasterGenerator" type="ce:stIntAzMasterGeneratorNumber" minOccurs="0"/>
+      <xsd:element name="AzMasterOffset" type="ce:stDoubleAzMasterOffset" minOccurs="0"/>
+      <xsd:element name="AzExitCondition" type="ce:stBoolAzExitCondition" minOccurs="0"/>
+      <xsd:element name="ElScanKind" type="ce:stEnumElScanKind" minOccurs="0"/>
+      <xsd:element name="ElSutTrackingSwitch" type="ce:stBoolElSutTrackingSwitch" minOccurs="0"/>
+      <xsd:element name="ElTrackingSwitch" type="ce:stBoolElTrackingSwitch" minOccurs="0"/>
+      <xsd:element name="ElTrackOffset" type="ce:stDoubleElTrackOffset" minOccurs="0"/>
+      <xsd:element name="ElTrackPlatform" type="ce:stIntElTrackPlatformNumber" minOccurs="0"/>
+      <xsd:element name="ElPointAngle" type="ce:stDoubleElPointAngle" minOccurs="0"/>
+      <xsd:element name="ElSectorWidth" type="ce:stDoubleElSectorWidth" minOccurs="0"/>
+      <xsd:element name="ElInitialBeamOffset" type="ce:stDoubleElInitialBeamOffset" minOccurs="0"/>
+      <xsd:element name="ElScanPeriod" type="ce:stDoubleElScanPeriod" minOccurs="0"/>
+      <xsd:element name="ElPeriodSynchronization" type="ce:stBoolElPeriodSynchronization" minOccurs="0"/>
+      <xsd:element name="ElDirection" type="ce:stEnumElScanDirection" minOccurs="0"/>
+      <xsd:element name="ElScanMotion" type="ce:stEnumElScanMotion" minOccurs="0"/>
+      <xsd:element name="ElFlybackTime" type="ce:stDoubleElFlybackTime" minOccurs="0"/>
+      <xsd:element name="ElScanReset" type="ce:stBoolElScanReset" minOccurs="0"/>
+      <xsd:element name="ElMasterGenerator" type="ce:stIntElMasterGeneratorNumber" minOccurs="0"/>
+      <xsd:element name="ElMasterOffset" type="ce:stDoubleElMasterOffset" minOccurs="0"/>
+      <xsd:element name="ElExitCondition" type="ce:stBoolElExitCondition" minOccurs="0"/>
+      <xsd:element name="CoupledAxisMotionModel" type="ce:stBoolCoupledAxisMotionModel" minOccurs="0"/>
+      <xsd:element name="ScanBlanking" type="ce:stBoolScanBlanking" minOccurs="0"/>
+      <xsd:element name="PalmerStatus" type="ce:stBoolPalmerStatus" minOccurs="0"/>
+      <xsd:element name="PalmerInitialOffset" type="ce:stDoublePalmerInitialOffset" minOccurs="0"/>
+      <xsd:element name="PalmerSquintAngle" type="ce:stDoublePalmerSquintAngle" minOccurs="0"/>
+      <xsd:element name="PalmerRate" type="ce:stDoublePalmerRate" minOccurs="0"/>
+      <xsd:element name="PolarizationModRate" type="ce:stDoublePolarizationModRate" minOccurs="0"/>
+      <xsd:element name="AntennaRotation" type="ce:stBoolAntennaRotation" minOccurs="0"/>
+      <xsd:element name="PalmerExitCondition" type="ce:stBoolPalmerExitCondition" minOccurs="0"/>
+      <xsd:element name="DwellStatus" type="ce:stBoolDwellStatus" minOccurs="0"/>
+      <xsd:element name="DwellKind" type="ce:stEnumDwellKind" minOccurs="0"/>
+      <xsd:element name="DwellTime" type="ce:stDoubleDwellTime" minOccurs="0"/>
+      <xsd:element name="DwellTimePulses" type="ce:stIntDwellTimePulses" minOccurs="0"/>
+      <xsd:element name="AzScanShape" type="ce:stTextAzScanShape" minOccurs="0"/>
+      <xsd:element name="AzBeamwidth" type="ce:stDoubleAzBeamwidth" minOccurs="0"/>
+      <xsd:element name="AzSidelobeRatio" type="ce:stDoubleAzSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="ElScanShape" type="ce:stTextElScanShape" minOccurs="0"/>
+      <xsd:element name="ElBeamwidth" type="ce:stDoubleElBeamwidth" minOccurs="0"/>
+      <xsd:element name="ElSidelobeRatio" type="ce:stDoubleElSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="AntennaModelKind" type="ce:stEnumAntennaModelKind" minOccurs="0"/>
+      <xsd:element name="PolarizationModelKind" type="ce:stEnumPolarizationModelKind" minOccurs="0"/>
+      <xsd:element name="VhPhaseDelta" type="ce:stDoubleVhPhaseDelta" minOccurs="0"/>
+      <xsd:element name="VhPolRatio" type="ce:stDoubleVhPolRatio" minOccurs="0"/>
+      <xsd:element name="AzElPatternName" type="ce:stTextAzElPatternName" minOccurs="0"/>
+      <xsd:element name="EllipticalAxisScaling" type="ce:stBoolEllipticalAxisScaling" minOccurs="0"/>
+      <xsd:element name="AzimuthFrequencyTrigger" type="ce:stBoolAzimuthFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="AzimuthPriTrigger" type="ce:stBoolAzimuthPriTrigger" minOccurs="0"/>
+      <xsd:element name="AzimuthPulseTrigger" type="ce:stBoolAzimuthPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ElevationFrequencyTrigger" type="ce:stBoolElevationFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="ElevationPriTrigger" type="ce:stBoolElevationPriTrigger" minOccurs="0"/>
+      <xsd:element name="ElevationPulseTrigger" type="ce:stBoolElevationPulseTrigger" minOccurs="0"/>
+      <xsd:element name="DwellFrequencyTrigger" type="ce:stBoolDwellFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="DwellPriTrigger" type="ce:stBoolDwellPriTrigger" minOccurs="0"/>
+      <xsd:element name="DwellPulseTrigger" type="ce:stBoolDwellPulseTrigger" minOccurs="0"/>
+      <xsd:element name="PalmerFrequencyTrigger" type="ce:stBoolPalmerFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PalmerPriTrigger" type="ce:stBoolPalmerPriTrigger" minOccurs="0"/>
+      <xsd:element name="PalmerPulseTrigger" type="ce:stBoolPalmerPulseTrigger" minOccurs="0"/>
+      <xsd:element name="AzimuthTestPoint" type="ce:stBoolAzimuthTestPoint" minOccurs="0"/>
+      <xsd:element name="ElevationTestPoint" type="ce:stBoolElevationTestPoint" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctScanSegmentConical">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="InitialBeamOffset" type="ce:stDoubleInitialBeamOffset" minOccurs="0"/>
+      <xsd:element name="SquintAngle" type="ce:stDoubleSquintAngle" minOccurs="0"/>
+      <xsd:element name="ConicalModRate" type="ce:stDoubleConicalModRate" minOccurs="0"/>
+      <xsd:element name="PolarizationModRate" type="ce:stDoublePolarizationModRate" minOccurs="0"/>
+      <xsd:element name="DirectionKind" type="ce:stEnumDirectionKind" minOccurs="0"/>
+      <xsd:element name="AzPointAngle" type="ce:stDoubleAzPointAngle" minOccurs="0"/>
+      <xsd:element name="ElPointAngle" type="ce:stDoubleElPointAngle" minOccurs="0"/>
+      <xsd:element name="TrackPlatform" type="ce:stIntTrackPlatformNumber" minOccurs="0"/>
+      <xsd:element name="AzTrackOffset" type="ce:stDoubleAzTrackOffset" minOccurs="0"/>
+      <xsd:element name="ElTrackOffset" type="ce:stDoubleElTrackOffset" minOccurs="0"/>
+      <xsd:element name="AntennaRotation" type="ce:stBoolAntennaRotation" minOccurs="0"/>
+      <xsd:element name="CoupledAxisMotionModel" type="ce:stBoolCoupledAxisMotionModel" minOccurs="0"/>
+      <xsd:element name="ScanBlanking" type="ce:stBoolScanBlanking" minOccurs="0"/>
+      <xsd:element name="DwellStatus" type="ce:stBoolDwellStatus" minOccurs="0"/>
+      <xsd:element name="DwellKind" type="ce:stEnumDwellKind" minOccurs="0"/>
+      <xsd:element name="DwellTime" type="ce:stDoubleDwellTime" minOccurs="0"/>
+      <xsd:element name="DwellTimePulses" type="ce:stIntDwellTimePulses" minOccurs="0"/>
+      <xsd:element name="AzScanShape" type="ce:stTextAzScanShape" minOccurs="0"/>
+      <xsd:element name="AzBeamwidth" type="ce:stDoubleAzBeamwidth" minOccurs="0"/>
+      <xsd:element name="AzSidelobeRatio" type="ce:stDoubleAzSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="ElScanShape" type="ce:stTextElScanShape" minOccurs="0"/>
+      <xsd:element name="ElBeamwidth" type="ce:stDoubleElBeamwidth" minOccurs="0"/>
+      <xsd:element name="ElSidelobeRatio" type="ce:stDoubleElSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="AntennaModelKind" type="ce:stEnumAntennaModelKind" minOccurs="0"/>
+      <xsd:element name="PolarizationModelKind" type="ce:stEnumPolarizationModelKind" minOccurs="0"/>
+      <xsd:element name="VhPhaseDelta" type="ce:stDoubleVhPhaseDelta" minOccurs="0"/>
+      <xsd:element name="VhPolRatio" type="ce:stDoubleVhPolRatio" minOccurs="0"/>
+      <xsd:element name="AzElPatternName" type="ce:stTextAzElPatternName" minOccurs="0"/>
+      <xsd:element name="EllipticalAxisScaling" type="ce:stBoolEllipticalAxisScaling" minOccurs="0"/>
+      <xsd:element name="FrequencyTrigger" type="ce:stBoolFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctScanSegmentElectronic">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="Beams" type="ce:ctBeamList" minOccurs="0"/>
+      <xsd:element name="InterruptGeneratorKind" type="ce:stEnumInterruptGeneratorKind" minOccurs="0"/>
+      <xsd:element name="InterruptGenerators" type="ce:ctInterruptGeneratorList" minOccurs="0"/>
+      <xsd:element name="CoupledAxisMotionModel" type="ce:stBoolCoupledAxisMotionModel" minOccurs="0"/>
+      <xsd:element name="ScanBlanking" type="ce:stBoolScanBlanking" minOccurs="0"/>
+      <xsd:element name="SwitchDelayState" type="ce:stBoolSwitchDelayState" minOccurs="0"/>
+      <xsd:element name="SwitchDelayKind" type="ce:stEnumSwitchDelayKind" minOccurs="0"/>
+      <xsd:element name="SwitchDelayTime" type="ce:stDoubleSwitchDelayTime" minOccurs="0"/>
+      <xsd:element name="SwitchDelayTimePulses" type="ce:stIntSwitchDwellTimePulses" minOccurs="0"/>
+      <xsd:element name="BeamListOrder" type="ce:stEnumBeamListOrder" minOccurs="0"/>
+      <xsd:element name="AzReferencePoint" type="ce:stDoubleAzReferencePoint" minOccurs="0"/>
+      <xsd:element name="ElReferencePoint" type="ce:stDoubleElReferencePoint" minOccurs="0"/>
+      <xsd:element name="AzPlatformTrackRefOffset" type="ce:stDoubleAzPlatformTrackRefOffset" minOccurs="0"/>
+      <xsd:element name="ElPlatformTrackRefOffset" type="ce:stDoubleElPlatformTrackRefOffset" minOccurs="0"/>
+      <xsd:element name="AzSutTrackRefOffset" type="ce:stDoubleAzSutTrackRefOffset" minOccurs="0"/>
+      <xsd:element name="ElSutTrackRefOffset" type="ce:stDoubleElSutTrackRefOffset" minOccurs="0"/>
+      <xsd:element name="AzScanShape" type="ce:stTextAzScanShape" minOccurs="0"/>
+      <xsd:element name="AzBeamwidth" type="ce:stDoubleAzBeamwidth" minOccurs="0"/>
+      <xsd:element name="AzSidelobeRatio" type="ce:stDoubleAzSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="ElScanShape" type="ce:stTextElScanShape" minOccurs="0"/>
+      <xsd:element name="ElBeamwidth" type="ce:stDoubleElBeamwidth" minOccurs="0"/>
+      <xsd:element name="ElSidelobeRatio" type="ce:stDoubleElSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="AntennaModelKind" type="ce:stEnumAntennaModelKind" minOccurs="0"/>
+      <xsd:element name="PolarizationModelKind" type="ce:stEnumPolarizationModelKind" minOccurs="0"/>
+      <xsd:element name="VhPhaseDelta" type="ce:stDoubleVhPhaseDelta" minOccurs="0"/>
+      <xsd:element name="VhPolRatio" type="ce:stDoubleVhPolRatio" minOccurs="0"/>
+      <xsd:element name="AzElPatternName" type="ce:stTextAzElPatternName" minOccurs="0"/>
+      <xsd:element name="EllipticalAxisScaling" type="ce:stBoolEllipticalAxisScaling" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctBeamList">
+    <xsd:sequence minOccurs="0" maxOccurs="4096">
+      <xsd:element name="Beam" type="ce:ctBeam"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctBeam">
+    <xsd:all minOccurs="1">
+      <xsd:element name="BeamDirectionKind" type="ce:stEnumBeamDirectionKind" minOccurs="0"/>
+      <xsd:element name="BeamAzPointAngle" type="ce:stDoubleBeamAzPointAngle" minOccurs="0"/>
+      <xsd:element name="BeamElPointAngle" type="ce:stDoubleBeamElPointAngle" minOccurs="0"/>
+      <xsd:element name="BeamTrackPlatform" type="ce:stIntTrackPlatformNumber" minOccurs="0"/>
+      <xsd:element name="BeamAzTrackOffset" type="ce:stDoubleBeamAzTrackOffset" minOccurs="0"/>
+      <xsd:element name="BeamElTrackOffset" type="ce:stDoubleBeamElTrackOffset" minOccurs="0"/>
+      <xsd:element name="BeamDwellStatus" type="ce:stBoolBeamDwellStatus" minOccurs="0"/>
+      <xsd:element name="BeamDwellKind" type="ce:stEnumBeamDwellKind" minOccurs="0"/>
+      <xsd:element name="BeamDwellTime" type="ce:stDoubleDwellTime" minOccurs="0"/>
+      <xsd:element name="BeamDwellVariation" type="ce:stDoubleDwellVariation" minOccurs="0"/>
+      <xsd:element name="BeamDwellTimePulses" type="ce:stIntBeamDwellTimePulses" minOccurs="0"/>
+      <xsd:element name="BeamDwellVariationPulses" type="ce:stIntDwellVariationPulses" minOccurs="0"/>
+      <xsd:element name="BeamAzimuthTestPoint" type="ce:stBoolBeamAzimuthTestPoint" minOccurs="0"/>
+      <xsd:element name="BeamElevationTestPoint" type="ce:stBoolBeamElevationTestPoint" minOccurs="0"/>
+      <xsd:element name="BeamFrequencyTrigger" type="ce:stBoolBeamFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="BeamPriTrigger" type="ce:stBoolBeamPriTrigger" minOccurs="0"/>
+      <xsd:element name="BeamPulseTrigger" type="ce:stBoolBeamPulseTrigger" minOccurs="0"/>
+      <xsd:element name="BeamBlankingList" type="ce:stBoolBeamBlankingList" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctInterruptGeneratorList">
+    <xsd:sequence minOccurs="0" maxOccurs="31">
+      <xsd:element name="InterruptGenerator" type="ce:ctInterruptGenerator"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctInterruptGenerator">
+    <xsd:all minOccurs="1">
+      <xsd:element name="InterruptGeneratorGenNumber" type="ce:stIntGeneratorNumber" minOccurs="0"/>
+      <xsd:element name="InterruptGeneratorInterruptActive" type="ce:stBoolInterruptGeneratorInterruptActive" minOccurs="0"/>
+      <xsd:element name="InterruptGeneratorDuration" type="ce:stDoubleInterruptGeneratorDuration" minOccurs="0"/>
+      <xsd:element name="InterruptGeneratorRevisit" type="ce:stDoubleInterruptGeneratorRevisit" minOccurs="0"/>
+      <xsd:element name="InterruptGeneratorStartTime" type="ce:stDoubleInterruptGeneratorStartTime" minOccurs="0"/>
+      <xsd:element name="InterruptGeneratorDurationPulses" type="ce:stIntInterruptGeneratorDurationPulses" minOccurs="0"/>
+      <xsd:element name="InterruptGeneratorRevisitPulses" type="ce:stIntInterruptGeneratorRevisitPulses" minOccurs="0"/>
+      <xsd:element name="InterruptGeneratorStartTimePulses" type="ce:stIntInterruptGeneratorStartTimePulses" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctScanSegmentHelical">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="AzStartAngle" type="ce:stDoubleAzStartAngle" minOccurs="0"/>
+      <xsd:element name="ElStartAngle" type="ce:stDoubleElStartAngle" minOccurs="0"/>
+      <xsd:element name="AzScanDirection" type="ce:stEnumAzScanDirection" minOccurs="0"/>
+      <xsd:element name="ElScanDirection" type="ce:stEnumElScanDirection" minOccurs="0"/>
+      <xsd:element name="NumberOfElevationLevels" type="ce:stIntNumberOfElevationLevels" minOccurs="0"/>
+      <xsd:element name="SectorWidth" type="ce:stDoubleHelicalSectorWidth" minOccurs="0"/>
+      <xsd:element name="AzInitialBeamOffset" type="ce:stDoubleAzInitialBeamOffset" minOccurs="0"/>
+      <xsd:element name="ScanPeriod" type="ce:stDoubleHelicalScanPeriod" minOccurs="0"/>
+      <xsd:element name="ScanMotion" type="ce:stEnumScanMotion" minOccurs="0"/>
+      <xsd:element name="FlybackTime" type="ce:stDoubleFlybackTime" minOccurs="0"/>
+      <xsd:element name="CoupledAxisMotionModel" type="ce:stBoolCoupledAxisMotionModel" minOccurs="0"/>
+      <xsd:element name="ScanBlanking" type="ce:stBoolScanBlanking" minOccurs="0"/>
+      <xsd:element name="PalmerStatus" type="ce:stBoolPalmerStatus" minOccurs="0"/>
+      <xsd:element name="PalmerInitialOffset" type="ce:stDoublePalmerInitialOffset" minOccurs="0"/>
+      <xsd:element name="PalmerSquintAngle" type="ce:stDoublePalmerSquintAngle" minOccurs="0"/>
+      <xsd:element name="PalmerRate" type="ce:stDoublePalmerRate" minOccurs="0"/>
+      <xsd:element name="PolarizationModRate" type="ce:stDoublePolarizationModRate" minOccurs="0"/>
+      <xsd:element name="AntennaRotation" type="ce:stBoolAntennaRotation" minOccurs="0"/>
+      <xsd:element name="AzScanShape" type="ce:stTextAzScanShape" minOccurs="0"/>
+      <xsd:element name="AzBeamwidth" type="ce:stDoubleAzBeamwidth" minOccurs="0"/>
+      <xsd:element name="AzSidelobeRatio" type="ce:stDoubleAzSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="ElScanShape" type="ce:stTextElScanShape" minOccurs="0"/>
+      <xsd:element name="ElBeamwidth" type="ce:stDoubleElBeamwidth" minOccurs="0"/>
+      <xsd:element name="ElSidelobeRatio" type="ce:stDoubleElSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="AntennaModelKind" type="ce:stEnumAntennaModelKind" minOccurs="0"/>
+      <xsd:element name="PolarizationModelKind" type="ce:stEnumPolarizationModelKind" minOccurs="0"/>
+      <xsd:element name="VhPhaseDelta" type="ce:stDoubleVhPhaseDelta" minOccurs="0"/>
+      <xsd:element name="VhPolRatio" type="ce:stDoubleVhPolRatio" minOccurs="0"/>
+      <xsd:element name="AzElPatternName" type="ce:stTextAzElPatternName" minOccurs="0"/>
+      <xsd:element name="EllipticalAxisScaling" type="ce:stBoolEllipticalAxisScaling" minOccurs="0"/>
+      <xsd:element name="FrequencyTrigger" type="ce:stBoolFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="AzimuthTestPoint" type="ce:stBoolAzimuthTestPoint" minOccurs="0"/>
+      <xsd:element name="ElevationTestPoint" type="ce:stBoolElevationTestPoint" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctScanSegmentSpiral">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="InitialBeamOffset" type="ce:stDoubleInitialBeamOffset" minOccurs="0"/>
+      <xsd:element name="SquintAngle" type="ce:stDoubleSquintAngle" minOccurs="0"/>
+      <xsd:element name="SpiralModulationRate" type="ce:stDoubleSpiralModulationRate" minOccurs="0"/>
+      <xsd:element name="PolarizationModRate" type="ce:stDoublePolarizationModRate" minOccurs="0"/>
+      <xsd:element name="NumberOfRevolutions" type="ce:stIntNumberOfRevolutions" minOccurs="0"/>
+      <xsd:element name="ScanMotion" type="ce:stEnumScanMotion" minOccurs="0"/>
+      <xsd:element name="FlybackTime" type="ce:stDoubleFlybackTime" minOccurs="0"/>
+      <xsd:element name="SpiralDirection" type="ce:stEnumSpiralDirection" minOccurs="0"/>
+      <xsd:element name="DirectionKind" type="ce:stEnumDirectionKind" minOccurs="0"/>
+      <xsd:element name="AzPointAngle" type="ce:stDoubleAzPointAngle" minOccurs="0"/>
+      <xsd:element name="ElPointAngle" type="ce:stDoubleElPointAngle" minOccurs="0"/>
+      <xsd:element name="TrackPlatform" type="ce:stIntTrackPlatformNumber" minOccurs="0"/>
+      <xsd:element name="AzTrackOffset" type="ce:stDoubleAzTrackOffset" minOccurs="0"/>
+      <xsd:element name="ElTrackOffset" type="ce:stDoubleElTrackOffset" minOccurs="0"/>
+      <xsd:element name="AntennaRotation" type="ce:stBoolAntennaRotation" minOccurs="0"/>
+      <xsd:element name="CoupledAxisMotionModel" type="ce:stBoolCoupledAxisMotionModel" minOccurs="0"/>
+      <xsd:element name="ScanBlanking" type="ce:stBoolScanBlanking" minOccurs="0"/>
+      <xsd:element name="AzScanShape" type="ce:stTextAzScanShape" minOccurs="0"/>
+      <xsd:element name="AzBeamwidth" type="ce:stDoubleAzBeamwidth" minOccurs="0"/>
+      <xsd:element name="AzSidelobeRatio" type="ce:stDoubleAzSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="ElScanShape" type="ce:stTextElScanShape" minOccurs="0"/>
+      <xsd:element name="ElBeamwidth" type="ce:stDoubleElBeamwidth" minOccurs="0"/>
+      <xsd:element name="ElSidelobeRatio" type="ce:stDoubleElSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="AntennaModelKind" type="ce:stEnumAntennaModelKind" minOccurs="0"/>
+      <xsd:element name="PolarizationModelKind" type="ce:stEnumPolarizationModelKind" minOccurs="0"/>
+      <xsd:element name="VhPhaseDelta" type="ce:stDoubleVhPhaseDelta" minOccurs="0"/>
+      <xsd:element name="VhPolRatio" type="ce:stDoubleVhPolRatio" minOccurs="0"/>
+      <xsd:element name="AzElPatternName" type="ce:stTextAzElPatternName" minOccurs="0"/>
+      <xsd:element name="EllipticalAxisScaling" type="ce:stBoolEllipticalAxisScaling" minOccurs="0"/>
+      <xsd:element name="FrequencyTrigger" type="ce:stBoolFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctScanSegmentInterleavedRaster">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="RasterOrientation" type="ce:stEnumRasterOrientation" minOccurs="0"/>
+      <xsd:element name="InitialBarDirection" type="ce:stEnumInitialBarDirection" minOccurs="0"/>
+      <xsd:element name="InitialBeamOffset" type="ce:stDoubleInitialBeamOffset" minOccurs="0"/>
+      <xsd:element name="BarScanRate" type="ce:stDoubleBarScanRate" minOccurs="0"/>
+      <xsd:element name="BarTransitRate" type="ce:stDoubleBarTransitRate" minOccurs="0"/>
+      <xsd:element name="RasterFlybackStatus" type="ce:stBoolRasterFlybackStatus" minOccurs="0"/>
+      <xsd:element name="RasterFlybackTime" type="ce:stDoubleRasterFlybackTime" minOccurs="0"/>
+      <xsd:element name="ScanMotion" type="ce:stEnumScanMotion" minOccurs="0"/>
+      <xsd:element name="BarFlybackTime" type="ce:stDoubleFlybackTime" minOccurs="0"/>
+      <xsd:element name="BarDirectionKind" type="ce:stEnumBarDirectionKind" minOccurs="0"/>
+      <xsd:element name="BarAzPointAngle" type="ce:stDoubleBarAzPointAngle" minOccurs="0"/>
+      <xsd:element name="BarElPointAngle" type="ce:stDoubleBarElPointAngle" minOccurs="0"/>
+      <xsd:element name="BarTrackPlatform" type="ce:stIntBarTrackPlatformNumber" minOccurs="0"/>
+      <xsd:element name="BarAzTrackOffset" type="ce:stDoubleBarAzTrackOffset" minOccurs="0"/>
+      <xsd:element name="BarElTrackOffset" type="ce:stDoubleBarElTrackOffset" minOccurs="0"/>
+      <xsd:element name="Bars" type="ce:ctBarList" minOccurs="0"/>
+      <xsd:element name="InterbarBlankingStatus" type="ce:stBoolInterbarBlankingStatus" minOccurs="0"/>
+      <xsd:element name="CoupledAxisMotionModel" type="ce:stBoolCoupledAxisMotionModel" minOccurs="0"/>
+      <xsd:element name="ScanBlanking" type="ce:stBoolScanBlanking" minOccurs="0"/>
+      <xsd:element name="PalmerStatus" type="ce:stBoolPalmerStatus" minOccurs="0"/>
+      <xsd:element name="PalmerInitialOffset" type="ce:stDoublePalmerInitialOffset" minOccurs="0"/>
+      <xsd:element name="PalmerSquintAngle" type="ce:stDoublePalmerSquintAngle" minOccurs="0"/>
+      <xsd:element name="PalmerRate" type="ce:stDoublePalmerRate" minOccurs="0"/>
+      <xsd:element name="PolarizationModRate" type="ce:stDoublePolarizationModRate" minOccurs="0"/>
+      <xsd:element name="AntennaRotation" type="ce:stBoolAntennaRotation" minOccurs="0"/>
+      <xsd:element name="AzScanShape" type="ce:stTextAzScanShape" minOccurs="0"/>
+      <xsd:element name="AzBeamwidth" type="ce:stDoubleAzBeamwidth" minOccurs="0"/>
+      <xsd:element name="AzSidelobeRatio" type="ce:stDoubleAzSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="ElScanShape" type="ce:stTextElScanShape" minOccurs="0"/>
+      <xsd:element name="ElBeamwidth" type="ce:stDoubleElBeamwidth" minOccurs="0"/>
+      <xsd:element name="ElSidelobeRatio" type="ce:stDoubleElSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="AntennaModelKind" type="ce:stEnumAntennaModelKind" minOccurs="0"/>
+      <xsd:element name="PolarizationModelKind" type="ce:stEnumPolarizationModelKind" minOccurs="0"/>
+      <xsd:element name="VhPhaseDelta" type="ce:stDoubleVhPhaseDelta" minOccurs="0"/>
+      <xsd:element name="VhPolRatio" type="ce:stDoubleVhPolRatio" minOccurs="0"/>
+      <xsd:element name="AzElPatternName" type="ce:stTextAzElPatternName" minOccurs="0"/>
+      <xsd:element name="EllipticalAxisScaling" type="ce:stBoolEllipticalAxisScaling" minOccurs="0"/>
+      <xsd:element name="AzimuthTestPoint" type="ce:stBoolAzimuthTestPoint" minOccurs="0"/>
+      <xsd:element name="ElevationTestPoint" type="ce:stBoolElevationTestPoint" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctBarList">
+    <xsd:sequence minOccurs="0" maxOccurs="100">
+      <xsd:element name="Bar" type="ce:ctBar"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctBar">
+    <xsd:all minOccurs="1">
+      <xsd:element name="BarWidth" type="ce:stDoubleBarWidth" minOccurs="0"/>
+      <xsd:element name="BarOffset" type="ce:stDoubleBarOffset" minOccurs="0"/>
+      <xsd:element name="BarFrequencyTrigger" type="ce:stBoolBarFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="BarPriTrigger" type="ce:stBoolBarPriTrigger" minOccurs="0"/>
+      <xsd:element name="BarPulseTrigger" type="ce:stBoolBarPulseTrigger" minOccurs="0"/>
+      <xsd:element name="BarScanTrigger" type="ce:stBoolBarScanTrigger" minOccurs="0"/>
+      <xsd:element name="InterbarFrequencyTrigger" type="ce:stBoolInterbarFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="InterbarPriTrigger" type="ce:stBoolInterbarPriTrigger" minOccurs="0"/>
+      <xsd:element name="InterbarPulseTrigger" type="ce:stBoolInterbarPulseTrigger" minOccurs="0"/>
+      <xsd:element name="InterbarScanTrigger" type="ce:stBoolInterbarScanTrigger" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctScanSegmentNonInterleavedRaster">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="RasterOrientation" type="ce:stEnumRasterOrientation" minOccurs="0"/>
+      <xsd:element name="InitialBarDirection" type="ce:stEnumInitialBarDirection" minOccurs="0"/>
+      <xsd:element name="InterbarDirection" type="ce:stEnumInterbarDirection" minOccurs="0"/>
+      <xsd:element name="NumberOfBars" type="ce:stIntNumberOfBars" minOccurs="0"/>
+      <xsd:element name="BarWidth" type="ce:stDoubleBarWidth" minOccurs="0"/>
+      <xsd:element name="InitialBeamOffset" type="ce:stDoubleInitialBeamOffset" minOccurs="0"/>
+      <xsd:element name="CoverageAngle" type="ce:stDoubleCoverageAngle" minOccurs="0"/>
+      <xsd:element name="BarScanRate" type="ce:stDoubleBarScanRate" minOccurs="0"/>
+      <xsd:element name="BarTransitRate" type="ce:stDoubleBarTransitRate" minOccurs="0"/>
+      <xsd:element name="RasterFlybackStatus" type="ce:stBoolRasterFlybackStatus" minOccurs="0"/>
+      <xsd:element name="RasterFlybackTime" type="ce:stDoubleRasterFlybackTime" minOccurs="0"/>
+      <xsd:element name="BarScanMotion" type="ce:stEnumBarScanMotion" minOccurs="0"/>
+      <xsd:element name="BarFlybackTime" type="ce:stDoubleFlybackTime" minOccurs="0"/>
+      <xsd:element name="BidirectionReturnOnSameBar" type="ce:stBoolBidirectionReturnOnSameBar" minOccurs="0"/>
+      <xsd:element name="InterbarBlankingStatus" type="ce:stBoolInterbarBlankingStatus" minOccurs="0"/>
+      <xsd:element name="BarDirectionKind" type="ce:stEnumBarDirectionKind" minOccurs="0"/>
+      <xsd:element name="BarAzPointAngle" type="ce:stDoubleBarAzPointAngle" minOccurs="0"/>
+      <xsd:element name="BarElPointAngle" type="ce:stDoubleBarElPointAngle" minOccurs="0"/>
+      <xsd:element name="BarTrackPlatform" type="ce:stIntTrackPlatformNumber" minOccurs="0"/>
+      <xsd:element name="BarAzTrackOffset" type="ce:stDoubleBarAzTrackOffset" minOccurs="0"/>
+      <xsd:element name="BarElTrackOffset" type="ce:stDoubleBarElTrackOffset" minOccurs="0"/>
+      <xsd:element name="CoupledAxisMotionModel" type="ce:stBoolCoupledAxisMotionModel" minOccurs="0"/>
+      <xsd:element name="ScanBlanking" type="ce:stBoolScanBlanking" minOccurs="0"/>
+      <xsd:element name="PalmerStatus" type="ce:stBoolPalmerStatus" minOccurs="0"/>
+      <xsd:element name="PalmerInitialOffset" type="ce:stDoublePalmerInitialOffset" minOccurs="0"/>
+      <xsd:element name="PalmerSquintAngle" type="ce:stDoublePalmerSquintAngle" minOccurs="0"/>
+      <xsd:element name="PalmerRate" type="ce:stDoublePalmerRate" minOccurs="0"/>
+      <xsd:element name="PolarizationModRate" type="ce:stDoublePolarizationModRate" minOccurs="0"/>
+      <xsd:element name="AntennaRotation" type="ce:stBoolAntennaRotation" minOccurs="0"/>
+      <xsd:element name="AzScanShape" type="ce:stTextAzScanShape" minOccurs="0"/>
+      <xsd:element name="AzBeamwidth" type="ce:stDoubleAzBeamwidth" minOccurs="0"/>
+      <xsd:element name="AzSidelobeRatio" type="ce:stDoubleAzSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="ElScanShape" type="ce:stTextElScanShape" minOccurs="0"/>
+      <xsd:element name="ElBeamwidth" type="ce:stDoubleElBeamwidth" minOccurs="0"/>
+      <xsd:element name="ElSidelobeRatio" type="ce:stDoubleElSidelobeRatio" minOccurs="0"/>
+      <xsd:element name="AntennaModelKind" type="ce:stEnumAntennaModelKind" minOccurs="0"/>
+      <xsd:element name="PolarizationModelKind" type="ce:stEnumPolarizationModelKind" minOccurs="0"/>
+      <xsd:element name="VhPhaseDelta" type="ce:stDoubleVhPhaseDelta" minOccurs="0"/>
+      <xsd:element name="VhPolRatio" type="ce:stDoubleVhPolRatio" minOccurs="0"/>
+      <xsd:element name="AzElPatternName" type="ce:stTextAzElPatternName" minOccurs="0"/>
+      <xsd:element name="EllipticalAxisScaling" type="ce:stBoolEllipticalAxisScaling" minOccurs="0"/>
+      <xsd:element name="TriggerType" type="ce:stEnumTriggerType" minOccurs="0"/>
+      <xsd:element name="FrequencyTrigger" type="ce:stBoolFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="PulseTrigger" type="ce:stBoolPulseTrigger" minOccurs="0"/>
+      <xsd:element name="EndOfRasterTriggerStatus" type="ce:stBoolEndOfRasterTriggerStatus" minOccurs="0"/>
+      <xsd:element name="AzimuthTestPoint" type="ce:stBoolAzimuthTestPoint" minOccurs="0"/>
+      <xsd:element name="ElevationTestPoint" type="ce:stBoolElevationTestPoint" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPulseSequence">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      
+      <xsd:element name="PulseSegmentSingle" type="ce:ctPulseSegmentSingle" minOccurs="0"/>
+      <xsd:element name="PulseSegmentSeries" type="ce:ctPulseSegmentSeries" minOccurs="0"/>      
+      <xsd:element name="PulseSegmentCw" type="ce:ctPulseSegmentCw" minOccurs="0"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPulseSegmentSingle">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="Erp" type="ce:stDoubleErp" minOccurs="0"/>
+      <xsd:element name="TransmitAttenuation" type="ce:stDoubleTransmitAttenuation" minOccurs="0"/>
+      <xsd:element name="PulseWidth" type="ce:stDoublePulseWidth" minOccurs="0"/>
+      <xsd:element name="DwellStatus" type="ce:stBoolDwellStatus" minOccurs="0"/>
+      <xsd:element name="DwellKind" type="ce:stEnumDwellKind" minOccurs="0"/>
+      <xsd:element name="DwellTime" type="ce:stDoubleDwellTime" minOccurs="0"/>
+      <xsd:element name="DwellTimePulses" type="ce:stIntDwellTimePulses" minOccurs="0"/>
+      <xsd:element name="SlowRiseTimeStatus" type="ce:stBoolSlowRiseTimeStatus" minOccurs="0"/>
+      <xsd:element name="PulseInvisibleState" type="ce:stBoolPulseInvisibleState" minOccurs="0"/>
+      <xsd:element name="NoiseBandwidthState" type="ce:stBoolNoiseBandwidthState" minOccurs="0"/>
+      <xsd:element name="NoiseBandwidth" type="ce:stDoubleNoiseBandwidth" minOccurs="0"/>
+      <xsd:element name="ModStatus" type="ce:stBoolModStatus" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationStatus" type="ce:stBoolInterpulseModulationStatus" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationKind" type="ce:stEnumInterpulseModulationKind" minOccurs="0"/>
+      <xsd:element name="InterpulseModPriPercentage" type="ce:stDoubleInterpulseModPriPercentage" minOccurs="0"/>
+      <xsd:element name="JitterDstrbName" type="ce:stStringJitterDstrbName" minOccurs="0"/>
+      <xsd:element name="JitterLimit" type="ce:stDoubleJitterLimitPulse" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationPatternName" type="ce:stTextInterpulseModulationPatternName" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationPeakDeviation" type="ce:stDoubleInterpulseModulationPeakDeviation" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationPeriodKind" type="ce:stEnumInterpulseModulationPeriodKind" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationPeriodPulses" type="ce:stIntInterpulseModulationPeriodPulses" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationPeriod" type="ce:stDoubleInterpulseModulationPeriod" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationPriSync" type="ce:stBoolInterpulseModulationPriSync" minOccurs="0"/>
+      <xsd:element name="IntrapulseModulationStatus" type="ce:stBoolIntrapulseModulationStatus" minOccurs="0"/>
+      <xsd:element name="DiscreteAmplitudeState" type="ce:stBoolDiscreteAmplitudeState" minOccurs="0"/>
+      <xsd:element name="AmplitudeCells" type="ce:ctAmplitudeCellList" minOccurs="0"/>
+      <xsd:element name="DiscreteFrequencyState" type="ce:stBoolDiscreteFrequencyState" minOccurs="0"/>
+      
+      <xsd:element name="FrequencyCells" type="ce:ctFrequencyCellList" minOccurs="0"/>
+      <xsd:element name="DiscretePhaseShiftState" type="ce:stBoolDiscretePhaseShiftState" minOccurs="0"/>
+      <xsd:element name="BiQuadPhaseMode" type="ce:stEnumBiQuadPhaseMode" minOccurs="0"/>
+      
+      <xsd:element name="PhaseCells" type="ce:ctPhaseCellList" minOccurs="0"/>
+      <xsd:element name="LinearFrequencyState" type="ce:stBoolLinearFrequencyState" minOccurs="0"/>
+      
+      <xsd:element name="LinearFreqMods" type="ce:ctLinearFreqModList" minOccurs="0"/>
+      
+      <xsd:element name="HfimState" type="ce:stBoolHfimState" minOccurs="0"/>
+      
+      <xsd:element name="HfimCells" type="ce:ctHfimCellList" minOccurs="0"/>
+      
+      <xsd:element name="PulseGroupState" type="ce:stBoolPulseGroupState" minOccurs="0"/>
+      <xsd:element name="PulseGroupKind" type="ce:stEnumPulseGroupKind" minOccurs="0"/>
+      <xsd:element name="BurstPri" type="ce:stDoubleBurstPri" minOccurs="0"/>
+      <xsd:element name="BurstPulseWidth" type="ce:stDoubleBurstPulseWidth" minOccurs="0"/>
+      <xsd:element name="BurstDwell" type="ce:stDoubleBurstDwell" minOccurs="0"/>
+      <xsd:element name="BurstModBasePri" type="ce:stDoubleBurstModBasePri" minOccurs="0"/>
+      <xsd:element name="BurstModPatternName" type="ce:stTextBurstModPatternName" minOccurs="0"/>
+      <xsd:element name="BurstModDeviation" type="ce:stDoubleBurstModDeviation" minOccurs="0"/>
+      <xsd:element name="BurstModPulseWidth" type="ce:stDoubleBurstModPulseWidth" minOccurs="0"/>
+      <xsd:element name="BurstModPeriod" type="ce:stDoubleBurstModPeriod" minOccurs="0"/>
+      <xsd:element name="BurstModDwell" type="ce:stDoubleBurstModDwell" minOccurs="0"/>
+      
+      <xsd:element name="BurstPulseCells" type="ce:ctBurstPulseCellList" minOccurs="0"/>
+      
+      <xsd:element name="StaggerModDwellTime" type="ce:stDoubleStaggerModDwellTimeSinglePulse" minOccurs="0"/>
+      <xsd:element name="FrequencyTrigger" type="ce:stBoolFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctAmplitudeCellList">
+    <xsd:sequence minOccurs="0" maxOccurs="256">
+      <xsd:element name="AmplitudeCell" type="ce:ctAmplitudeCell"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctAmplitudeCell">
+    <xsd:all minOccurs="1">
+      <xsd:element name="AmplitudeCellSize" type="ce:stDoubleAmplitudeCellSize" minOccurs="0"/>
+      <xsd:element name="Attenuation"       type="ce:stDoubleAttenuation"       minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctFrequencyCellList">
+    <xsd:sequence minOccurs="0" maxOccurs="256">
+      <xsd:element name="FrequencyCell" type="ce:ctFrequencyCell"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctFrequencyCell">
+    <xsd:all minOccurs="1">
+      <xsd:element name="FrequencyCellSize" type="ce:stDoubleFrequencyCellSize" minOccurs="0"/>
+      <xsd:element name="FrequencyDeviation" type="ce:stDoubleFrequencyDeviation" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPhaseCellList">
+    <xsd:sequence minOccurs="0" maxOccurs="256">
+      <xsd:element name="PhaseCell" type="ce:ctPhaseCell"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPhaseCell">
+    <xsd:all minOccurs="1">
+      <xsd:element name="PhaseCellSize" type="ce:stDoublePhaseCellSize" minOccurs="0"/>
+      <xsd:element name="PhaseShiftKind" type="ce:stEnumPhaseShiftKind" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctLinearFreqModList">
+    <xsd:sequence minOccurs="0" maxOccurs="256">
+      <xsd:element name="LinearFreqMod" type="ce:ctLinearFreqMod"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctLinearFreqMod">
+    <xsd:all minOccurs="1">
+      <xsd:element name="LinearFreqDeviation" type="ce:stDoubleLinearFreqDeviation" minOccurs="0"/>
+      <xsd:element name="LinearFreqDuration"  type="ce:stDoubleLinearFreqDuration" minOccurs="0"/>
+      <xsd:element name="LinearFreqResetFlag" type="ce:stBoolLinearFreqResetFlag" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctHfimCellList">
+    <xsd:sequence minOccurs="0" maxOccurs="1024">
+      <xsd:element name="HfimCell" type="ce:ctHfimCell"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctHfimCell">
+    <xsd:all minOccurs="1">
+      <xsd:element name="HfimSize" type="ce:stDoubleHfimSize" minOccurs="0"/>
+      <xsd:element name="HfimSampleName" type="ce:stTextHfimSampleName" minOccurs="0"/>
+      <xsd:element name="HfimSamplePeriodKind" type="ce:stEnumHfimSamplePeriodKind" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctBurstPulseCellList">
+    <xsd:sequence minOccurs="0" maxOccurs="128">
+      <xsd:element name="BurstPulseCell" type="ce:ctBurstPulseCell"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctBurstPulseCell">
+    <xsd:all minOccurs="1">
+      <xsd:element name="BurstPri" type="ce:stDoubleBurstPri" minOccurs="0"/>
+      <xsd:element name="BurstPulseWidth" type="ce:stDoubleBurstPulseWidth" minOccurs="0"/>
+      <xsd:element name="BurstPulseDuration" type="ce:stDoubleBurstPulseDuration" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPulseSegmentSeries">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+      <xsd:element name="Subsegments" type="ce:ctSeriesPulseSegmentList" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctSeriesPulseSegmentList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="SeriesPulseSegment" type="ce:ctSeriesPulseSegment"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:complexType name="ctSeriesPulseSegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="Erp" type="ce:stDoubleErp" minOccurs="0"/>
+      <xsd:element name="TransmitAttenuation" type="ce:stDoubleTransmitAttenuation" minOccurs="0"/>
+      <xsd:element name="PulseWidth" type="ce:stDoublePulseWidth" minOccurs="0"/>
+      <xsd:element name="DwellStatus" type="ce:stBoolDwellStatus" minOccurs="0"/>
+      <xsd:element name="DwellKind" type="ce:stEnumDwellKind" minOccurs="0"/>
+      <xsd:element name="DwellTime" type="ce:stDoubleDwellTime" minOccurs="0"/>
+      <xsd:element name="DwellTimePulses" type="ce:stIntDwellTimePulses" minOccurs="0"/>
+      <xsd:element name="SlowRiseTimeStatus" type="ce:stBoolSlowRiseTimeStatus" minOccurs="0"/>
+      <xsd:element name="PulseInvisibleState" type="ce:stBoolPulseInvisibleState" minOccurs="0"/>
+      <xsd:element name="NoiseBandwidthState" type="ce:stBoolNoiseBandwidthState" minOccurs="0"/>
+      <xsd:element name="NoiseBandwidth" type="ce:stDoubleNoiseBandwidth" minOccurs="0"/>
+      <xsd:element name="ModStatus" type="ce:stBoolModStatus" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationStatus" type="ce:stBoolInterpulseModulationStatus" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationKind" type="ce:stEnumInterpulseModulationKind" minOccurs="0"/>
+      <xsd:element name="InterpulseModPriPercentage" type="ce:stDoubleInterpulseModPriPercentage" minOccurs="0"/>
+      <xsd:element name="JitterDstrbName" type="ce:stStringJitterDstrbName" minOccurs="0"/>
+      <xsd:element name="JitterLimit" type="ce:stDoubleJitterLimitPulse" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationPatternName" type="ce:stTextInterpulseModulationPatternName" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationPeakDeviation" type="ce:stDoubleInterpulseModulationPeakDeviation" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationPeriodKind" type="ce:stEnumInterpulseModulationPeriodKind" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationPeriodPulses" type="ce:stIntInterpulseModulationPeriodPulses" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationPeriod" type="ce:stDoubleInterpulseModulationPeriod" minOccurs="0"/>
+      <xsd:element name="InterpulseModulationPriSync" type="ce:stBoolInterpulseModulationPriSync" minOccurs="0"/>
+      <xsd:element name="IntrapulseModulationStatus" type="ce:stBoolIntrapulseModulationStatus" minOccurs="0"/>
+      <xsd:element name="DiscreteAmplitudeState" type="ce:stBoolDiscreteAmplitudeState" minOccurs="0"/>
+      
+      <xsd:element name="AmplitudeCells" type="ce:ctAmplitudeCellList" minOccurs="0"/>
+      
+      <xsd:element name="DiscreteFrequencyState" type="ce:stBoolDiscreteFrequencyState" minOccurs="0"/>
+      
+      <xsd:element name="FrequencyCells" type="ce:ctFrequencyCellList" minOccurs="0"/>
+      
+      <xsd:element name="DiscretePhaseShiftState" type="ce:stBoolDiscretePhaseShiftState" minOccurs="0"/>
+      <xsd:element name="BiQuadPhaseMode" type="ce:stEnumBiQuadPhaseMode" minOccurs="0"/>
+      
+      <xsd:element name="PhaseCells" type="ce:ctPhaseCellList" minOccurs="0"/>
+      
+      <xsd:element name="LinearFrequencyState" type="ce:stBoolLinearFrequencyState" minOccurs="0"/>
+      
+      <xsd:element name="LinearFreqMods" type="ce:ctLinearFreqModList" minOccurs="0"/>
+      <xsd:element name="HfimState" type="ce:stBoolHfimState" minOccurs="0"/>
+      
+      <xsd:element name="HfimCells" type="ce:ctHfimCellList" minOccurs="0"/>
+      
+      <xsd:element name="PulseGroupState" type="ce:stBoolPulseGroupState" minOccurs="0"/>
+      <xsd:element name="PulseGroupKind" type="ce:stEnumPulseGroupKind" minOccurs="0"/>
+      <xsd:element name="BurstPri" type="ce:stDoubleBurstPri" minOccurs="0"/>
+      <xsd:element name="BurstPulseWidth" type="ce:stDoubleBurstPulseWidth" minOccurs="0"/>
+      <xsd:element name="BurstDwell" type="ce:stDoubleBurstDwell" minOccurs="0"/>
+      <xsd:element name="BurstModBasePri" type="ce:stDoubleBurstModBasePri" minOccurs="0"/>
+      <xsd:element name="BurstModPatternName" type="ce:stTextBurstModPatternName" minOccurs="0"/>
+      <xsd:element name="BurstModDeviation" type="ce:stDoubleBurstModDeviation" minOccurs="0"/>
+      <xsd:element name="BurstModPulseWidth" type="ce:stDoubleBurstModPulseWidth" minOccurs="0"/>
+      <xsd:element name="BurstModPeriod" type="ce:stDoubleBurstModPeriod" minOccurs="0"/>
+      <xsd:element name="BurstModDwell" type="ce:stDoubleBurstModDwell" minOccurs="0"/>
+      <xsd:element name="BurstPulseCells" type="ce:ctBurstPulseCellList" minOccurs="0"/>
+      <xsd:element name="StaggerModDwellTime" type="ce:stDoubleStaggerModDwellTime" minOccurs="0"/>
+      <xsd:element name="FrequencyTrigger" type="ce:stBoolFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPulseSegmentCw">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SegmentNumber" type="ce:stIntSegmentNumber" minOccurs="0"/>
+      <xsd:element name="SegmentName" type="ce:stStringSegmentName" minOccurs="0"/>
+      <xsd:element name="Erp" type="ce:stDoubleErp" minOccurs="0"/>
+      <xsd:element name="TransmitAttenuation" type="ce:stDoubleTransmitAttenuation" minOccurs="0"/>
+      <xsd:element name="DwellTime" type="ce:stDoubleDwellTime" minOccurs="0"/>
+      <xsd:element name="PulseInvisibleState" type="ce:stBoolPulseInvisibleState" minOccurs="0"/>
+      <xsd:element name="NoiseBandwidthState" type="ce:stBoolNoiseBandwidthState" minOccurs="0"/>
+      <xsd:element name="NoiseBandwidth" type="ce:stDoubleNoiseBandwidth" minOccurs="0"/>
+      <xsd:element name="IntrapulseModulationStatus" type="ce:stBoolIntrapulseModulationStatus" minOccurs="0"/>
+      <xsd:element name="DiscreteAmplitudeState" type="ce:stBoolDiscreteAmplitudeState" minOccurs="0"/>
+      
+      <xsd:element name="AmplitudeCells" type="ce:ctAmplitudeCellList" minOccurs="0"/>
+      <xsd:element name="DiscreteFrequencyState" type="ce:stBoolDiscreteFrequencyState" minOccurs="0"/>
+      
+      <xsd:element name="FrequencyCells" type="ce:ctFrequencyCellList" minOccurs="0"/>
+      
+      <xsd:element name="DiscretePhaseShiftState" type="ce:stBoolDiscretePhaseShiftState" minOccurs="0"/>
+      <xsd:element name="BiQuadPhaseMode" type="ce:stEnumBiQuadPhaseMode" minOccurs="0"/>
+      
+      <xsd:element name="PhaseCells" type="ce:ctPhaseCellList" minOccurs="0"/>
+
+      <xsd:element name="LinearFrequencyState" type="ce:stBoolLinearFrequencyState" minOccurs="0"/>
+      
+      <xsd:element name="LinearFreqMods" type="ce:ctLinearFreqModList" minOccurs="0"/>
+      
+      <xsd:element name="HfimState" type="ce:stBoolHfimState" minOccurs="0"/>
+      
+      <xsd:element name="HfimCells" type="ce:ctHfimCellList" minOccurs="0"/>
+      <xsd:element name="FrequencyTrigger" type="ce:stBoolFrequencyTrigger" minOccurs="0"/>
+      <xsd:element name="PriTrigger" type="ce:stBoolPriTrigger" minOccurs="0"/>
+      <xsd:element name="ScanTrigger" type="ce:stBoolScanTrigger" minOccurs="0"/>
+      <xsd:element name="ExternalLink" type="ce:stIntExternalLinkSegment" minOccurs="0"/>
+      <xsd:element name="NormalLink" type="ce:stIntNormalLinkSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctEmitterSubmode">
+    <xsd:all minOccurs="1">
+      <xsd:element name="EmitterSubmodeHeader" type="ce:ctEmitterSubmodeHeader" minOccurs="1"/>
+      <xsd:element name="GeneratorNumbers" type="ce:ctGeneratorNumberList" minOccurs="0">
+        <xsd:unique name="uniqueSubmodeGeneratorNumber">
+          <xsd:selector xpath="ce:GeneratorNumber"/>
+          <xsd:field xpath="."/>
+        </xsd:unique>
+      </xsd:element>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctEmitterSubmodeHeader">
+    <xsd:all minOccurs="1">
+      <xsd:element name="SubmodeId" type="ce:stIntSubmodeId" minOccurs="1"/>
+      <xsd:element name="SubmodeName" type="ce:stStringSubmodeName" minOccurs="1"/>
+      <xsd:element name="PgpDefaultMode" type="ce:stBoolPgpDefaultMode" minOccurs="0"/>
+      <xsd:element name="PgpDropTrackMode" type="ce:stBoolPgpDropTrackMode" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctGeneratorNumberList">
+    <xsd:sequence minOccurs="0" maxOccurs="32">
+      <xsd:element name="GeneratorNumber" type="ce:stIntSubmodeGeneratorNumber"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+</xsd:schema>
+

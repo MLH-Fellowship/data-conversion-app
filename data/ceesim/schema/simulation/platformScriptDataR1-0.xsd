@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+
+  <!--
+    Note:
+    
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+    
+    Change History:
+    
+    Date        Who  Revision  Description
+    2013-03-11  XXX  1.0       Original.
+  -->
+
+  <xsd:include schemaLocation="commonComplexTypesR1-0.xsd"/>
+
+  <xsd:complexType name="ctPlatformScriptEventList">
+    <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="PlatformScriptEvent" type="ce:ctPlatformScriptEvent"/>
+    </xsd:sequence>
+    <xsd:attribute name="PerId" type="xsd:string" use="optional" default=""/>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPlatformScriptEvent">
+    <xsd:all minOccurs="1">
+      <xsd:element name="StartTime" type="ce:stDoubleStartTime" minOccurs="0"/>
+      <xsd:element name="Deactivate" type="ce:stBoolDeactivate" minOccurs="0"/>
+      <xsd:element name="Segment" type="ce:ctPathSegment" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPathSegment">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:element name="Point" type="ce:ctPointSegment" minOccurs="0"/>
+      <xsd:element name="Line" type="ce:ctLineSegment" minOccurs="0"/>
+      <xsd:element name="Arc" type="ce:ctArcSegment" minOccurs="0"/>
+      <xsd:element name="Compound" type="ce:ctCompoundSegment" minOccurs="0"/>
+    </xsd:choice>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctPointSegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="AltitudeKind" type="ce:stEnumAltitudeKind" minOccurs="0"/>
+      <xsd:element name="FirstSegmentOnPath" type="ce:stBoolFirstSegmentOnPath" minOccurs="0"/>
+      <xsd:element name="StartPoint" type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="CoupledMotionEnable" type="ce:stBoolCoupledMotionEnable" minOccurs="0"/>
+      <xsd:element name="StartRoll" type="ce:stDoubleStartRoll" minOccurs="0"/>
+      <xsd:element name="StartPitch" type="ce:stDoubleStartPitch" minOccurs="0"/>
+      <xsd:element name="StartYaw" type="ce:stDoubleStartYaw" minOccurs="0"/>
+      <xsd:element name="RollRate" type="ce:stDoubleRollRate" minOccurs="0"/>
+      <xsd:element name="PitchRate" type="ce:stDoublePitchRate" minOccurs="0"/>
+      <xsd:element name="YawRate" type="ce:stDoubleYawRate" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctLineSegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="AltitudeKind" type="ce:stEnumAltitudeKind" minOccurs="0"/>
+      <xsd:element name="FirstSegmentOnPath" type="ce:stBoolFirstSegmentOnPath" minOccurs="0"/>
+      
+      <xsd:element name="StartPoint" type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="EndPoint" type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="CoupledMotionEnable" type="ce:stBoolCoupledMotionEnable" minOccurs="0"/>
+      
+      <xsd:element name="StartRoll" type="ce:stDoubleStartRoll" minOccurs="0"/>
+      <xsd:element name="StartPitch" type="ce:stDoubleStartPitch" minOccurs="0"/>
+      <xsd:element name="StartYaw" type="ce:stDoubleStartYaw" minOccurs="0"/>
+      
+      <xsd:element name="EndRoll" type="ce:stDoubleEndRoll" minOccurs="0"/>
+      <xsd:element name="EndPitch" type="ce:stDoubleEndPitch" minOccurs="0"/>
+      <xsd:element name="EndYaw" type="ce:stDoubleEndYaw" minOccurs="0"/>
+
+      <xsd:element name="RollRate" type="ce:stDoubleRollRate" minOccurs="0"/>
+      <xsd:element name="PitchRate" type="ce:stDoublePitchRate" minOccurs="0"/>
+      <xsd:element name="YawRate" type="ce:stDoubleYawRate" minOccurs="0"/>
+
+      <xsd:element name="EndRollRate" type="ce:stDoubleEndRollRate" minOccurs="0"/>
+      <xsd:element name="EndPitchRate" type="ce:stDoubleEndPitchRate" minOccurs="0"/>
+      <xsd:element name="EndYawRate" type="ce:stDoubleEndYawRate" minOccurs="0"/>
+
+      <xsd:element name="StartSpeed" type="ce:stDoubleStartSpeed" minOccurs="0"/>
+      <xsd:element name="EndSpeed" type="ce:stDoubleEndSpeed" minOccurs="0"/>
+      <xsd:element name="PitchKind" type="ce:stEnumPitchKind" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctArcSegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="AltitudeKind" type="ce:stEnumAltitudeKind" minOccurs="0"/>
+      <xsd:element name="FirstSegmentOnPath" type="ce:stBoolFirstSegmentOnPath" minOccurs="0"/>
+      
+      <xsd:element name="StartPoint" type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="CenterPoint" type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="EndPoint" type="ce:ctPoint" minOccurs="0"/>
+      
+      <xsd:element name="StartRoll" type="ce:stDoubleStartRoll" minOccurs="0"/>
+      <xsd:element name="StartPitch" type="ce:stDoubleStartPitch" minOccurs="0"/>
+      <xsd:element name="StartYaw" type="ce:stDoubleStartYaw" minOccurs="0"/>
+      
+      <xsd:element name="EndRoll" type="ce:stDoubleEndRoll" minOccurs="0"/>
+      <xsd:element name="EndPitch" type="ce:stDoubleEndPitch" minOccurs="0"/>
+      <xsd:element name="EndYaw" type="ce:stDoubleEndYaw" minOccurs="0"/>
+      
+      <xsd:element name="StartSpeed" type="ce:stDoubleStartSpeed" minOccurs="0"/>
+      <xsd:element name="EndSpeed" type="ce:stDoubleEndSpeed" minOccurs="0"/>
+      
+      <xsd:element name="PitchKind" type="ce:stEnumPitchKind" minOccurs="0"/>
+      <xsd:element name="TurnKind" type="ce:stEnumTurnKind" minOccurs="0"/>
+      
+      <xsd:element name="LoadFactor" type="ce:stDoubleLoadFactor" minOccurs="0"/>
+      
+      <xsd:element name="RollRate" type="ce:stDoubleRollRate" minOccurs="0"/>
+      
+      <xsd:element name="BankAngle" type="ce:stDoubleBankAngle" minOccurs="0"/>
+      <xsd:element name="Heading" type="ce:stDoubleHeading" minOccurs="0"/>
+      <xsd:element name="ClimbAngle" type="ce:stDoubleClimbAngle" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+  <xsd:complexType name="ctCompoundSegment">
+    <xsd:all minOccurs="1">
+      <xsd:element name="AltitudeKind" type="ce:stEnumAltitudeKind" minOccurs="0"/>
+      <xsd:element name="FirstSegmentOnPath" type="ce:stBoolFirstSegmentOnPath" minOccurs="0"/>
+      
+      <xsd:element name="StartPoint" type="ce:ctPoint" minOccurs="0"/>
+      <xsd:element name="EndPoint" type="ce:ctPoint" minOccurs="0"/>
+      
+      <xsd:element name="StartRoll" type="ce:stDoubleStartRoll" minOccurs="0"/>
+      <xsd:element name="StartPitch" type="ce:stDoubleStartPitch" minOccurs="0"/>
+      <xsd:element name="StartYaw" type="ce:stDoubleStartYaw" minOccurs="0"/>
+      
+      <xsd:element name="EndRoll" type="ce:stDoubleEndRoll" minOccurs="0"/>
+      <xsd:element name="EndPitch" type="ce:stDoubleEndPitch" minOccurs="0"/>
+      <xsd:element name="EndYaw" type="ce:stDoubleEndYaw" minOccurs="0"/>
+      
+      <xsd:element name="StartSpeed" type="ce:stDoubleStartSpeed" minOccurs="0"/>
+      <xsd:element name="EndSpeed" type="ce:stDoubleEndSpeed" minOccurs="0"/>
+      
+      <xsd:element name="PitchKind" type="ce:stEnumPitchKind" minOccurs="0"/>
+      <xsd:element name="TurnKind" type="ce:stEnumTurnKind" minOccurs="0"/>
+      
+      <xsd:element name="LoadFactor" type="ce:stDoubleLoadFactor" minOccurs="0"/>
+      
+      <xsd:element name="RollRate" type="ce:stDoubleRollRate" minOccurs="0"/>
+      
+      <xsd:element name="BankAngle" type="ce:stDoubleBankAngle" minOccurs="0"/>
+      <xsd:element name="Heading" type="ce:stDoubleHeading" minOccurs="0"/>
+      <xsd:element name="ClimbAngle" type="ce:stDoubleClimbAngle" minOccurs="0"/>
+    </xsd:all>
+  </xsd:complexType>
+
+</xsd:schema>

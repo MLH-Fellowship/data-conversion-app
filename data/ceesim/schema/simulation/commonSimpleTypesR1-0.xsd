@@ -1,0 +1,5570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////
+     // 
+     // All CEESIM file formats and templates, whether ASCII or binary, and whether
+     // electronic or print, are proprietary to Northrop Grumman. Protected from
+     // further disclosure by the Trade Secrets Act, 18 U.S.C. section 1905, and
+     // exempt from disclosure under the Freedom of Information Act, 5 U.S.C.
+     // section 552(b)(4). No license, express or implied, is granted under any
+     // patents, copyrights, trade secrets, or any other intellectual property right
+     // of Northrop Grumman.
+     //
+     /////////////////////////////////////////////////////////////////////////////////////////////// -->
+<xsd:schema 
+    targetNamespace="http://www.amherst.com/CEESIM/XML"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:ce="http://www.amherst.com/CEESIM/XML"
+    attributeFormDefault="unqualified"
+    elementFormDefault="qualified"
+>
+
+  <!--
+    Note:
+    
+    If a change to be made will cause the revision of this file to be incremented, then first
+    create a copy of this file and rename with the new revision number.  Add a change comment
+    to the new copy of the file only and introduce the new file into CM when the change is
+    complete.
+    
+    Change History:
+    
+    Date        Who  Revision  Description
+    2013-03-11  XXX  1.0       Original.
+    2013-03-22  JSP  1.0       Remove stDoubleModeTransitionPeriod, stBoolModeTransitionPeriodActive,
+                               and stDoubleInterruptDurationOverride.
+                               Reduce upper bounds of Interrupt Generator time fields.
+                               These changes will be moved to the rev 1.1 schema.
+    2013-07-08  JSP  1.0       Change ThreeD_View to Threed_View.
+    2013-10-18  JSP  1.0       Change lower limit of stDoubleFrequencyOffset.
+    2015-02-03  JSP  1.0       Fix ranges for stDoubleDisplayIntensity and stDoubleDisplayScale.
+  -->
+  
+  <xsd:simpleType name="stIntDwellTimePulses">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2147483647"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntSwitchDwellTimePulses">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2147483647"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntBeamDwellTimePulses">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2147483647"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntSubmodeId">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2147483647"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntEventNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="2147483647"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntInterruptGeneratorDurationPulses">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="268435455"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntInterruptGeneratorRevisitPulses">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="268435455"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntInterruptGeneratorStartTimePulses">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="268435455"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntVirtualNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="65535"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntDwellVariationPulses">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="65535"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stIntSiteId">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="8192"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntExternalModeId">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="8192"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntSubmodeGeneratorNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntMasterGeneratorNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntAzMasterGeneratorNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntElMasterGeneratorNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntSynchronizedGeneratorNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntGeneratorNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntScriptGeneratorNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntInterruptGeneratorNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntAzTrackPlatformNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntElTrackPlatformNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntUserEmitterNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntUserPlatformNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntSutPlatformNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntLowerEmitterNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntUpperEmitterNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntTrackPlatformNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntBarTrackPlatformNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntGpOrPoolNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="64"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntChannelNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="64"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntPoolNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="64"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntTestPointChannelNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="8"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntSegmentNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="8192"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntNormalLinkSegment">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="8192"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntExternalLinkSegment">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="8192"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntAssociatedFrequencySegment">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="8192"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntAssociatedPulseSegment">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="8192"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntPlatformTrackNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="32767"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntNumberOfElevationLevels">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="999"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntNumberOfBars">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>2</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="2"/>
+      <xsd:maxInclusive value="100"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntDelayTimeModPeriodPulses">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>2</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="2"/>
+      <xsd:maxInclusive value="268435455"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntModPeriodPulses">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>2</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="2"/>
+      <xsd:maxInclusive value="268435455"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntInterpulseModulationPeriodPulses">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>2</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="2"/>
+      <xsd:maxInclusive value="268435455"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntNumberOfRevolutions">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>2</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="2"/>
+      <xsd:maxInclusive value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntScenarioRevision">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntSoftwareReleaseOfLastHeaderEdit">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntDisplayServer">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntDisplayId">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntLowerGeneratorNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2047"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntUpperGeneratorNumber">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2047"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntNavIfRtAddress">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="31"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stIntNavIfRtSubAddress">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:int">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="31"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSecJitterLimit">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.00000000000000023283</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.00000000000000023283"/>
+      <xsd:maxInclusive value="0.00000099996948"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSecModAmp">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.00000000000000023283</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.00000000000000023283"/>
+      <xsd:maxInclusive value="0.00000099996948"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSecDtJitterLimit">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.00000000000000023283</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.00000000000000023283"/>
+      <xsd:maxInclusive value="0.00000099996948196"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSecDtModAmp">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.00000000000000023283</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.00000000000000023283"/>
+      <xsd:maxInclusive value="0.00000099996948196"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoublePriCrystalValue">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.00001525879</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.00000000000000023283"/>
+      <xsd:maxInclusive value="0.00051199998474121"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleRasterFlybackTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.000001</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000001"/>
+      <xsd:maxInclusive value="120"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoublePalmerRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.003725</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0002328"/>
+      <xsd:maxInclusive value="31250"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoublePolarizationModRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.003725</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0002328"/>
+      <xsd:maxInclusive value="31250"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleConicalModRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.003725</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0002328"/>
+      <xsd:maxInclusive value="31250"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSpiralModulationRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.003725</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0002328"/>
+      <xsd:maxInclusive value="31250"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElScanPeriod">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1.048576</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000256"/>
+      <xsd:maxInclusive value="1073.741824"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleHelicalScanPeriod">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.000256</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000256"/>
+      <xsd:maxInclusive value="1073.741824"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzScanPeriod">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1.048576</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000511984375"/>
+      <xsd:maxInclusive value="2147.418112"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoublePulseWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>100</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.00000000390625"/>
+      <xsd:maxInclusive value="0.13107199609375"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleJitterLimitPulse">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.00390625</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.00000000390625"/>
+      <xsd:maxInclusive value="0.06553599609375"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStaggerModDwellTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.00000000391</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.00000000391"/>
+      <xsd:maxInclusive value="0.131071996"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleHfimSize">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.00000002</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.00000002"/>
+      <xsd:maxInclusive value="0.065535"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElSectorWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>90</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.02197"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleHelicalSectorWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.02197</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.02197"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzSectorWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>90</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.02197"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBarWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>90</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.02197"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleCoverageAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>90</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.02197"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBurstPri">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.0625</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000000015625"/>
+      <xsd:maxInclusive value="0.001024"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBurstModBasePri">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.0625</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000000015625"/>
+      <xsd:maxInclusive value="0.001024"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBurstPulseWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.03125</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0000000078125"/>
+      <xsd:maxInclusive value="0.000512"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBurstModPulseWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.03125</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0000000078125"/>
+      <xsd:maxInclusive value="0.000512"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAmplitudeCellSize">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.0078125</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0000000078125"/>
+      <xsd:maxInclusive value="0.131072"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleFrequencyCellSize">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.0078125</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0000000078125"/>
+      <xsd:maxInclusive value="0.131072"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoublePhaseCellSize">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.0078125</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0000000078125"/>
+      <xsd:maxInclusive value="0.131072"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLinearFreqDuration">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.0078125</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0000000078125"/>
+      <xsd:maxInclusive value="0.131072"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBurstModDeviation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.0625</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000000015625"/>
+      <xsd:maxInclusive value="0.001023984375"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBurstDwell">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.0625</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000000015625"/>
+      <xsd:maxInclusive value="0.1310719921875"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBurstModDwell">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.0625</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000000015625"/>
+      <xsd:maxInclusive value="0.1310719921875"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStaggerModDwellTimeSinglePulse">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.0625</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000000015625"/>
+      <xsd:maxInclusive value="0.1310719921875"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBurstPulseDuration">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.0625</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000000015625"/>
+      <xsd:maxInclusive value="0.1310719921875"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBarScanRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.1676</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.1676"/>
+      <xsd:maxInclusive value="703125.0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSwitchDelayTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.001"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDwellVariation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.065535"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzFlybackTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="120"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElFlybackTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="120"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleFlybackTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="120"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleTransmitAttenuation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="127.75"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleHighRange">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.0"/>
+      <xsd:maxInclusive value="14724656.0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleFrequencyOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-16000000000"/>
+      <xsd:maxInclusive value="16000000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleNoiseBandwidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2000000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDwellTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2147.483647"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleInterruptGeneratorDuration">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2147.483647996"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleInterruptGeneratorRevisit">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2147.483647996"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleInterruptGeneratorStartTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2147.483647996"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAttenuation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="31.5"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleModAmpFrequency">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="32000000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDelayTimeModAmp">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.032000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzInitialBeamOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stDoubleInitialBeamOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoublePalmerInitialOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzBeamwidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="360"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLowerAz">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="360"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleUpperAz">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="360"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDelayTimeJitterLimit">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.499998"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleJitterLimitPri">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.499998"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleClockedPriJitterExcursion">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.499998"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAgilityLimit">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="65499940000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleModAmpPri">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.0655359999999997672"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleInterpulseModulationPeakDeviation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.06553599999999977"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleFrequency">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="65535000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBarTransitRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="703125.0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEventTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="137438.953471"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStartTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="86400"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoublePalmerSquintAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSquintAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleVhPolRatio">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBankAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleNorthLatitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSouthLatitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElBeamwidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElInitialBeamOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleWestLongitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEastLongitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleClockedPriJitterVariance">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="99.99"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleInterpulseModPriPercentage">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="99.99"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleMissingPulseFactor">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="99.99847"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDelayTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.999999"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoublePri">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.999999"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBurstModPeriod">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>.000001</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value=".000001"/>
+      <xsd:maxInclusive value="0.131071992"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleFreqChannelization">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="1"/>
+      <xsd:maxInclusive value="511937500"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDelayTimeModPeriod">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.000100</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000100"/>
+      <xsd:maxInclusive value="268.435456"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSecDtModPeriod">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.000100</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000100"/>
+      <xsd:maxInclusive value="268.435456"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleSecModPeriod">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.000100</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000100"/>
+      <xsd:maxInclusive value="268.435456"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleModPeriod">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.000100</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000100"/>
+      <xsd:maxInclusive value="268.435456"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleInterpulseModulationPeriod">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.000100</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000100"/>
+      <xsd:maxInclusive value="268.435456"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleFrequencyDeviation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000000000"/>
+      <xsd:maxInclusive value="1000000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLinearFreqDeviation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000000000"/>
+      <xsd:maxInclusive value="1000000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzTrackOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElPointAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElMasterOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleVhPhaseDelta">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzReferencePoint">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElPlatformTrackRefOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElSutTrackRefOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBeamElPointAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBeamAzTrackOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElStartAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBarElPointAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBarAzTrackOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBarOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStartRoll">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStartPitch">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStartYaw">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndRoll">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndPitch">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndYaw">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleHeading">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLongitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleGeopoliticalCenterLongitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-180"/>
+      <xsd:maxInclusive value="180"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleErp">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-255.75"/>
+      <xsd:maxInclusive value="255.75"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzPointAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-359.978"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzMasterOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-359.978"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzPlatformTrackRefOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-359.978"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzSutTrackRefOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-359.978"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBeamAzPointAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-359.978"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzStartAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-359.978"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBarAzPointAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-359.978"/>
+      <xsd:maxInclusive value="359.978"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAzSidelobeRatio">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-63.75"/>
+      <xsd:maxInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElSidelobeRatio">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-63.75"/>
+      <xsd:maxInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElTrackOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleElReferencePoint">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBeamElTrackOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleBarElTrackOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleClimbAngle">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLowerElevation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleUpperElevation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleGeopoliticalCenterLatitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLatitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-90"/>
+      <xsd:maxInclusive value="90"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleXOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-999999.999"/>
+      <xsd:maxInclusive value="999999.999"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleYOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-999999.999"/>
+      <xsd:maxInclusive value="999999.999"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleZOffset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-999999.999"/>
+      <xsd:maxInclusive value="999999.999"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDwellDurationScript">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0.000001</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.000001"/>
+      <xsd:maxInclusive value="137438.953471"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDisplayIntensity">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.01"/>
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEarthRadiusFactor">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1.33</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.1"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDisplayScale">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1.0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0.01"/>
+      <xsd:maxInclusive value="8"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleScale">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleIntensity">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLoadFactor">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="100"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleStartSpeed">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2777.77777777778"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndSpeed">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="2777.77777777778"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDuctingHeight">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="1000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLowerFrequency">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="131071000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleUpperFrequency">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="131071000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLowerPulseWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.131071"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleUpperPulseWidth">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="0.131071"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleActivationTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="137438.953471"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLowerTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="137438"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleUpperTime">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="137438"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleDuctingRefractivity">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="32"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleRollRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoublePitchRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleYawRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndRollRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndPitchRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleEndYawRate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000"/>
+      <xsd:maxInclusive value="1000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleZ">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000000"/>
+      <xsd:maxInclusive value="1000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleAltitude">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-1000000"/>
+      <xsd:maxInclusive value="1000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleVelocityVectorDuration">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>1</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="600"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleX">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-2000000"/>
+      <xsd:maxInclusive value="2000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleY">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-2000000"/>
+      <xsd:maxInclusive value="2000000"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleLowerPower">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-256"/>
+      <xsd:maxInclusive value="255.75"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDoubleUpperPower">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:double">
+      <xsd:minInclusive value="-256"/>
+      <xsd:maxInclusive value="255.75"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumAntennaModelKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Elliptical</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Elliptical"/>
+      <xsd:enumeration value="Rectangular"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumRasterOrientation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Azimuth</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Azimuth"/>
+      <xsd:enumeration value="Elevation"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumInitialBarDirection">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Clockwise</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Clockwise"/>
+      <xsd:enumeration value="Counter_Clockwise"/>
+      <xsd:enumeration value="Up"/>
+      <xsd:enumeration value="Down"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumInterbarDirection">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Clockwise</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Clockwise"/>
+      <xsd:enumeration value="Counter_Clockwise"/>
+      <xsd:enumeration value="Up"/>
+      <xsd:enumeration value="Down"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumAzScanDirection">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Clockwise</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Clockwise"/>
+      <xsd:enumeration value="Counter_Clockwise"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumBeamListOrder">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Random</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Random"/>
+      <xsd:enumeration value="Sequential"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumBiQuadPhaseMode">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Bi_Phase</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="None" />
+      <xsd:enumeration value="Bi_Phase" />
+      <xsd:enumeration value="Quad_Phase" />
+      <xsd:enumeration value="Bi_And_Quad_Phase" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDirectionKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Pointing_Angle</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Pointing_Angle"/>
+      <xsd:enumeration value="Tracking"/>
+      <xsd:enumeration value="Sut_Tracking"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumBeamDirectionKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Pointing_Angle</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Pointing_Angle"/>
+      <xsd:enumeration value="Tracking"/>
+      <xsd:enumeration value="Sut_Tracking"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumBarDirectionKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Pointing_Angle</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Pointing_Angle"/>
+      <xsd:enumeration value="Tracking"/>
+      <xsd:enumeration value="Sut_Tracking"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumElScanDirection">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Up</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Up"/>
+      <xsd:enumeration value="Down"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+
+  <xsd:simpleType name="stEnumGeneratorKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Independent</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Independent"/>
+      <xsd:enumeration value="Synchronized"/>
+      <xsd:enumeration value="Interrupt"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumHfimSamplePeriodKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Period_15_625_Nanosec</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Period_15_625_Nanosec" />
+      <xsd:enumeration value="Period_62_5_Nanosec" />
+      <xsd:enumeration value="Period_250_Nanosec" />
+      <xsd:enumeration value="Period_1_Usec" />
+      <xsd:enumeration value="Period_7_813_Nanosec" />
+      <xsd:enumeration value="Period_31_25_Nanosec" />
+      <xsd:enumeration value="Period_125_Nanosec" />
+      <xsd:enumeration value="Period_500_Nanosec" />
+      <xsd:enumeration value="Period_2_Usec" />
+      <xsd:enumeration value="Period_3_90625_Nanosec" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumInterpulseModulationKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Constant_Duty_Cycle</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Constant_Duty_Cycle"/>
+      <xsd:enumeration value="Pulse_Width_Jitter"/>
+      <xsd:enumeration value="Periodic_Modulation"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPowerLevelKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Low_Power</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Low_Power"/>
+      <xsd:enumeration value="High_Power"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPhaseShiftKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Of_0</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Of_0"/>
+      <xsd:enumeration value="Of_90"/>
+      <xsd:enumeration value="Of_180"/>
+      <xsd:enumeration value="Of_270"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPolarizationModelKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>None</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="None"/>
+      <xsd:enumeration value="Uniform_Polarization"/>
+      <xsd:enumeration value="Az_El_Polarization"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPolarizationKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>PolNone</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="PolNone"/>
+      <xsd:enumeration value="Horizontal"/>
+      <xsd:enumeration value="Vertical"/>
+      <xsd:enumeration value="Right_Slant"/>
+      <xsd:enumeration value="Left_Slant"/>
+      <xsd:enumeration value="RH_Circular"/>
+      <xsd:enumeration value="LH_Circular"/>
+      <xsd:enumeration value="Elliptical"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumFrequencySource">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Primary</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Primary"/>
+      <xsd:enumeration value="Secondary"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPriority">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>None</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="None"/>
+      <xsd:enumeration value="Digital"/>
+      <xsd:enumeration value="Digital_Rf_Interrupt"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPulseGroupKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Stable</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Stable"/>
+      <xsd:enumeration value="Modulation"/>
+      <xsd:enumeration value="Stagger"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDwellKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Time_Based</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Pulse_Based"/>
+      <xsd:enumeration value="Time_Based"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDelayTimeModPeriodKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Time_Based</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Pulse_Based"/>
+      <xsd:enumeration value="Time_Based"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumModPeriodKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Time_Based</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Pulse_Based"/>
+      <xsd:enumeration value="Time_Based"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumInterruptGeneratorKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Time_Based</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Pulse_Based"/>
+      <xsd:enumeration value="Time_Based"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumSwitchDelayKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Time_Based</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Pulse_Based"/>
+      <xsd:enumeration value="Time_Based"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumBeamDwellKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Time_Based</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Pulse_Based"/>
+      <xsd:enumeration value="Time_Based"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumInterpulseModulationPeriodKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Time_Based</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Pulse_Based"/>
+      <xsd:enumeration value="Time_Based"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumAzScanKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Omni</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Circular"/>
+      <xsd:enumeration value="Omni"/>
+      <xsd:enumeration value="Sector"/>
+      <xsd:enumeration value="Steady"/>
+      <xsd:enumeration value="Synchronized"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumElScanKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Omni</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Circular"/>
+      <xsd:enumeration value="Omni"/>
+      <xsd:enumeration value="Sector"/>
+      <xsd:enumeration value="Steady"/>
+      <xsd:enumeration value="Synchronized"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumScanMotion">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Bidirectional</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Bidirectional"/>
+      <xsd:enumeration value="Unidirectional"/>
+      <xsd:enumeration value="Unidirectional_Flyback"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumAzScanMotion">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Bidirectional</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Bidirectional"/>
+      <xsd:enumeration value="Unidirectional"/>
+      <xsd:enumeration value="Unidirectional_Flyback"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumElScanMotion">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Bidirectional</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Bidirectional"/>
+      <xsd:enumeration value="Unidirectional"/>
+      <xsd:enumeration value="Unidirectional_Flyback"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumBarScanMotion">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Bidirectional</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Bidirectional"/>
+      <xsd:enumeration value="Unidirectional"/>
+      <xsd:enumeration value="Unidirectional_Flyback"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumSpiralDirection">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Inward</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Inward"/>
+      <xsd:enumeration value="Outward"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumTriggerType">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Bar</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Bar"/>
+      <xsd:enumeration value="Raster"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumAltitudeKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Km_Above_Sea_Level</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Km_Above_Sea_Level"/>
+      <xsd:enumeration value="Km_Above_Terrain"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPitchKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Absolute</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Absolute"/>
+      <xsd:enumeration value="Relative"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPulseContendedStateKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Ignore</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Ignore"/>
+      <xsd:enumeration value="Store_Only_Pulses_Contended"/>
+      <xsd:enumeration value="Store_Only_Pulses_Not_Contended"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPulseInhibitStateKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Ignore</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Ignore"/>
+      <xsd:enumeration value="Store_Only_Pulses_Inhibited"/>
+      <xsd:enumeration value="Store_Only_Pulses_Not_Inhibited"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumExternalGatingStateKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Ignore</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Ignore"/>
+      <xsd:enumeration value="Store_Only_Gated_Pulses"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDgsVideoStateKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Ignore</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Ignore"/>
+      <xsd:enumeration value="Store_Only_Video_Enabled_Pulses"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumPdwKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Gp</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Gp"/>
+      <xsd:enumeration value="Ntp"/>
+      <xsd:enumeration value="Ntp_With_Rp"/>
+      <xsd:enumeration value="Ntp_With_Spinner"/>
+      <xsd:enumeration value="Ntp_With_Esa"/>
+      <xsd:enumeration value="Prb"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDistanceUnits">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Kilometers</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Kilometers"/>
+      <xsd:enumeration value="Nautical_Miles"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumEnvironmentKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Round</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Round"/>
+      <xsd:enumeration value="Flat"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumRainfallRateKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>No_Rain</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="No_Rain"/>
+      <xsd:enumeration value="Drizzle"/>
+      <xsd:enumeration value="Light_Rain"/>
+      <xsd:enumeration value="Medium_Rain"/>
+      <xsd:enumeration value="Heavy_Rain"/>
+      <xsd:enumeration value="Tropical_Downpour"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumSituationDisplayModeKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Rectangular</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Rectangular"/>
+      <xsd:enumeration value="Polar"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumGuiDisplayModeKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Plan_View</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Plan_View"/>
+      <xsd:enumeration value="Threed_View"/>
+      <xsd:enumeration value="Polar_View"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDisplayGridKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Decimal</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Decimal"/>
+      <xsd:enumeration value="Deg_Min_Sec"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumSituationDisplayCenterKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>On_Sut</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="On_Sut"/>
+      <xsd:enumeration value="At_Point"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDisplayCenterKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>On_Sut</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="On_Sut"/>
+      <xsd:enumeration value="On_Platform"/>
+      <xsd:enumeration value="At_Fixed_Point"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumSpeedUnits">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Km_Per_Hr</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Ft_Per_Sec"/>
+      <xsd:enumeration value="Km_Per_Hr"/>
+      <xsd:enumeration value="Kt"/>
+      <xsd:enumeration value="M_Per_Sec"/>
+      <xsd:enumeration value="Miles_Per_Hour"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumTurnKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Load_Factor</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Load_Factor"/>
+      <xsd:enumeration value="Radius"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumTerrainDtedKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Ceesim_Elv</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Level_0"/>
+      <xsd:enumeration value="Level_1"/>
+      <xsd:enumeration value="Ceesim_Elv"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumNorthSouthDirectionKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>North</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="North"/>
+      <xsd:enumeration value="South"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumEastWestDirectionKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>East</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="East"/>
+      <xsd:enumeration value="West"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumDuctingBoundaryKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Independent_Of_Surface_Type</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Independent_Of_Surface_Type"/>
+      <xsd:enumeration value="Land_Sea_Boundaries"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumSurfaceKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Smooth_Land</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Calm_Sea"/>
+      <xsd:enumeration value="Smooth_Sea"/>
+      <xsd:enumeration value="Slight_Sea"/>
+      <xsd:enumeration value="Moderate_Sea"/>
+      <xsd:enumeration value="Rough_Sea"/>
+      <xsd:enumeration value="Very_Rough_Sea"/>
+      <xsd:enumeration value="High_Sea"/>
+      <xsd:enumeration value="Very_High_Sea"/>
+      <xsd:enumeration value="Smooth_Land"/>
+      <xsd:enumeration value="Rough_Land"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumEventType">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Activate</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Activate"/>
+      <xsd:enumeration value="Change_Mode"/>
+      <xsd:enumeration value="Deactivate"/>
+      <xsd:enumeration value="Disable_Radiation"/>
+      <xsd:enumeration value="Enable_Radiation"/>
+      <xsd:enumeration value="Range_Base_Mode_Change"/>
+      <xsd:enumeration value="Mode_Dwell"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumNavIfPhysicalIfKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Nav_Ethernet</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Nav_1553b"/>
+      <xsd:enumeration value="Nav_Ethernet"/>
+      <xsd:enumeration value="Nav_Rm"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumNavIf1553BusKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Bus_A</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Bus_A"/>
+      <xsd:enumeration value="Bus_B"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumNavIfUpdateInterval">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Nav_Interval_1_Ms</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Nav_Interval_1_Ms"/>
+      <xsd:enumeration value="Nav_Interval_2_Ms"/>
+      <xsd:enumeration value="Nav_Interval_5_Ms"/>
+      <xsd:enumeration value="Nav_Interval_10_Ms"/>
+      <xsd:enumeration value="Nav_Interval_20_Ms"/>
+      <xsd:enumeration value="Nav_Interval_30_Ms"/>
+      <xsd:enumeration value="Nav_Interval_40_Ms"/>
+      <xsd:enumeration value="Nav_Interval_50_Ms"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stEnumNavIfTransferDirection">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Receive</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Receive"/>
+      <xsd:enumeration value="Transmit"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stStringPlatformId">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="12"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringSegmentName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringDelayTimeJitterDstrbKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Uniform</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringSecDtJitterDstrbKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Uniform</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringJitterDstrbKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Uniform</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringSecJitterDstrbKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Uniform</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringAgilityPatternName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Uniform</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringJitterDstrbName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Uniform</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringCommentScenarioHeader">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="30"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringModeComment">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="250"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringGeneratorComment">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringGeneratorName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="250"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringModeName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>mode</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1"/>
+      <xsd:maxLength value="22"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringEmitterId">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="5"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringEmitterName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="22"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringModeNameScript">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Mode</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="22"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringRangeModeName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="22"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringSubmodeName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>submode n</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="22"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringEmitterLibraryName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="255"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringDuctingFileName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="255"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringDxFileName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="255"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stStringComplexPriEntryId">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1"/>
+      <xsd:maxLength value="40"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextCommentHeader">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextAzElPatternName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextHfimSampleName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextSymbolKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextScenarioElementLibraryName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextGeotiffPath">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>$GT</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextAzScanShape">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextElScanShape">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextDelayTimeModPatternKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Rising Ramp</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextSecDtModPatternKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Rising Ramp</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextSecModPatternKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Rising Ramp</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextModPatternKind">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Rising Ramp</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextInterpulseModulationPatternName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Rising Ramp</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextPerId">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Rising Ramp</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stTextBurstModPatternName">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>Rising Ramp</DefaultValue>
+      </xsd:appinfo>
+   </xsd:annotation>
+    <xsd:restriction base="xsd:string"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolAgilityResolutionSwitch">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolAgilityStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolAntennaRotation">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolAtmosphericAbsorptionAttenuationEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolAzExitCondition">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolAzimuthFrequencyTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolAzimuthPriTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolAzimuthPulseTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolAzimuthTestPoint">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolAzPeriodSynchronization">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolAzScanReset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolAzSutTrackingSwitch">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolAzTrackingSwitch">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolBarFrequencyTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolBarPriTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolBarPulseTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolBarScanTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolBeamAzimuthTestPoint">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolBeamBlankingList">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolBeamDwellStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolBeamElevationTestPoint">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolBeamFrequencyTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolBeamPriTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolBeamPulseTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolBidirectionReturnOnSameBar">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolChangeTracking">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolChannelAudioTestPoint">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolChannelVideoTestPoint">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolCircularBufferCollection">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolClockedPriJitterState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolComplexPriState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolCoupledAxisMotionModel">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolCoupledMotionEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolCwInterruptEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDataRecordingEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDeactivate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDedicatedChannelStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDelayTimeJitterResSwitch">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDelayTimeJitterStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDelayTimeModPeriodSync">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDelayTimeModStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDigitalVideoTestPoint">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDiscreteAmplitudeState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDiscreteFrequencyState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDiscretePhaseShiftState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayGeopolitical">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayGrids">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayHud">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayInactivePlatforms">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayBarriers">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayCanals">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayCoastline">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayDepthLines">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayLandforms">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayPipelines">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayPoliticalLines">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayRailroads">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayRoads">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayStructures">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayTrails">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayUtilities">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayWaterways">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayPath">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayPathHistory">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayPlatform">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayPlatformDetails">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayProjectedPath">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayRoughness">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayRoughnessLegend">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplaySymbol">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolDisplaySymbolLegend">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayTerrain">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayTerrainLegend">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayVisibility">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDisplayVmapLegend">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDpmBoardCollectionEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDuctingEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDwellFrequencyTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDwellPriTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDwellPulseTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolDwellStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolEarSequenceTriggerState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolElevationFrequencyTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolElevationPriTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolElevationPulseTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolElevationTestPoint">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolElExitCondition">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolEllipticalAxisScaling">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolElPeriodSynchronization">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolElScanReset">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolElSutTrackingSwitch">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolElTrackingSwitch">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolScenarioElementLibraryEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolEmitterLibraryEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolEndOfRasterTriggerStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolExternalSutFlag">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolFirstSegmentOnPath">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolFrequencyAttenuationEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolFrequencyDopplerShiftEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolFrequencyTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolGeneratorEventDefined">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolGeneratorTriggerState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolGeotiffEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolGpAssigned">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolGpPooled">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolHfimState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolHorizonMaskingEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolInterbarBlankingStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolInterbarFrequencyTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolInterbarPriTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolInterbarPulseTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolInterbarScanTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolInterpulseModulationPriSync">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolInterpulseModulationStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolInterruptActive">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolInterruptGeneratorInterruptActive">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolIntrapulseModulationStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolInvalidPdwsFlag">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolJammerStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolJitterResSwitch">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolJitterStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolLinearFreqResetFlag">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolLinearFrequencyState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolVmapEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolModeProtectionSwitch">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolModPeriodSync">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolModStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolMultipathEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolNavIfEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolNoiseBandwidthState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolOldTrackDataValid">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolOldTrackIsSut">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolOverrideInterruptGenerators">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolOverrideScanInterrupts">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolOverrideTrack">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPalmerExitCondition">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPalmerFrequencyTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPalmerPriTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPalmerPulseTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPalmerStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPgpDefaultMode">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPgpDropTrackMode">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPooledStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPriTestPoint">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPriTestPoint2">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPriTestPoint3">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPriTestPoint4">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPriTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPulseGroupState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPulseInvisibleState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPulseTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolPulseTruncationEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRadiationEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRadiationState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRangeAndPriDopplerShiftEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRangeAttenuationEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRangeRadiationState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRangeResyncOnModeChangeState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRasterFlybackStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRecordEmitterEventsEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRecordEmitterStatusEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRecordPlatformEventsEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRecordPlatformStatusEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRecordPulseCountsEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolResyncOnModeChangeState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRfBlanking">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRfBlankingVideoTestPoint">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolRoughnessEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolScanBlanking">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolScanTrigger">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolScenarioIsAnElementLibrary">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolSecDtJitterStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolSecDtModStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolSecJitterStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolSecModStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolSensitivityOverride">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolSensitivityThresholdEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolSlowRiseTimeStatus">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolSutEmitterEarthReflectionEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolSwitchDelayState">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolTerminalSegment">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolTerrainEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+  
+  <xsd:simpleType name="stBoolTerrainMaskingAttenuationEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stBoolWaveSplashEnable">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>false</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:boolean"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDateCreationDate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue></DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:dateTime"/>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="stDateModificationDate">
+    <xsd:annotation>
+      <xsd:appinfo>
+        <DefaultValue>CurrentDateTime</DefaultValue>
+      </xsd:appinfo>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:dateTime"/>
+  </xsd:simpleType>
+
+</xsd:schema>
