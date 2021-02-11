@@ -14,3 +14,13 @@ About USAF
 We are working with a very technically advanced US Air Force division that deals with new technology the USAF works on such as the F-35 program.
 
 
+
+#Email info from Dion outlining project files:
+
+CEESIM files are different. I will send them to you in an XML format, and ASCII format and the CEESIM format.
+
+You will not be able to read the CEESIM format as you do not have a CEESIM system.
+
+I think you will want to work with the XML format as you should be able to tell more from that and the XML format can be directly uploaded to CEESIM so that will probably be the one to go with.
+
+You can open the ASCII as well but not sure if you will use that.
