@@ -15,7 +15,7 @@ We are working with a very technically advanced US Air Force division that deals
 
 
 
-#Email info from Dion outlining project files:
+# Email details from Dion outlining project files:
 
 CEESIM files are different. I will send them to you in an XML format, and ASCII format and the CEESIM format.
 
