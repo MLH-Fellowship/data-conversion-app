@@ -24,3 +24,14 @@ You will not be able to read the CEESIM format as you do not have a CEESIM syste
 I think you will want to work with the XML format as you should be able to tell more from that and the XML format can be directly uploaded to CEESIM so that will probably be the one to go with.
 
 You can open the ASCII as well but not sure if you will use that.
+
+# Resources:
+
+http://pyxb.sourceforge.net/
+
+https://www.radartutorial.eu/index.en.html
+
+http://visualxsd.com/
+
+https://www.radartutorial.eu/index.en.html
+
