@@ -1,0 +1,2 @@
+class DatastoreError(Exception):
+    pass
