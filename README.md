@@ -27,11 +27,13 @@ You can open the ASCII as well but not sure if you will use that.
 
 # Resources:
 
-http://pyxb.sourceforge.net/
+[XML to Data Structure Python Packaging](http://pyxb.sourceforge.net/)
 
-https://www.radartutorial.eu/index.en.html
+[Glossary of Terms Used In Aviation as it relates to Electrical Engineering](https://www.radartutorial.eu/index.en.html)
 
-http://visualxsd.com/
+[Tool for Visualizing XSD Files](http://visualxsd.com/)
 
-https://www.radartutorial.eu/index.en.html
+[3D Airplane Antenna Visualizer](https://www.youtube.com/watch?v=jtxXOfzPdK4&ab_channel=TheVindicators)
+
+[A2PATS Family Promotional Video](https://www.youtube.com/watch?v=xBHQJwdqe58&ab_channel=textronsystems)
 
