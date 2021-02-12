@@ -17,7 +17,6 @@ class datastore:
         '''Convert a datastore child to a datastore parent.
 
         :param downgrade_peaceful: Whether or not to downgrade peacefully when function is called
-
         :type downgrade_peaceful: bool
 
         :returns: Datastore object

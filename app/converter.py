@@ -16,7 +16,7 @@ def convert(data: Union[a2pats, ceesim]) -> Union[a2pats, ceesim]:
         return convert_to_ceesim(data)
     elif type(data) is ceesim:
         return convert_to_a2pats(data)
-    elif type(data) is datastore:
+    elif isinstance(data, datastore):
         # TODO: Replace print with logger.warning
         print('Provided type to convert was correct, but unrecognized')
         return data.to_datastore()
