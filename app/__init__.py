@@ -41,6 +41,18 @@ class a2pats(datastore):
         # TODO
         pass
 
+    def export(self, file: str) -> bool:
+        '''Exports A²PATS to file
+
+        :param file: File location to export to
+        :type file: str
+
+        :returns: Success of export
+        :rtype: bool
+        '''
+        # TODO
+        return True
+
 
 class ceesim(datastore):
     '''Contains all generated signals in a CEESIM format
@@ -51,3 +63,15 @@ class ceesim(datastore):
         '''
         # TODO
         pass
+
+    def export(self, file: str) -> bool:
+        '''Exports CEESIM to file
+
+        :param file: File location to export to
+        :type file: str
+
+        :returns: Success of export
+        :rtype: bool
+        '''
+        # TODO
+        return True
