@@ -1,2 +1,5 @@
 # Editor
 .idea
+
+# Cache
+__pycache__

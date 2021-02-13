@@ -1,6 +1,7 @@
 from app import a2pats, ceesim
 from app.converter import convert_to_a2pats
 from app.importer import import_
+from app.util import config as config_
 from sys import argv
 
 
@@ -27,5 +28,8 @@ def convert(input_file: str, output_file: str) -> a2pats:
 
 
 if __name__ == '__main__':
-    if len(argv) > 0:
-        convert(argv[0])
+    config = config_('data/config.json')
+    print(config.header)
+    print(config.credits)
+    if len(argv) > 2:
+        convert(argv[1], argv[2])
