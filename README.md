@@ -40,6 +40,6 @@ You can open the ASCII as well but not sure if you will use that.
 # Building and testing Python
 See the github/workflows files, for more: https://docs.github.com/en/actions/guides/building-and-testing-python
 
-GitHub provides a Python workflow template that should work for most Python projects. This guide includes examples that you can use to customize the template. For more information, see the Python workflow template links above
+GitHub provides a Python workflow template that should work for most Python projects. This guide includes examples that you can use to customize the template. For more information, see the Python workflow template link above
 
 
