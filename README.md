@@ -44,8 +44,6 @@ GitHub provides a Python workflow template that should work for most Python proj
 
 You don't have to install anything! 
 
-Prerequisites
-You should be familiar with YAML and the syntax for GitHub Actions. For more information, see "Learn GitHub Actions."
-We recommend that you have a basic understanding of Python, PyPy, and pip.
+Prerequisites:
+You should be familiar with YAML and the syntax for GitHub Actions. We recommend that you have a basic understanding of Python, PyPy, and pip.
 
-GitHub provides a Python workflow template that should work for most Python projects. 
