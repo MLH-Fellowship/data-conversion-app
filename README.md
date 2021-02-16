@@ -41,16 +41,11 @@ You can open the ASCII as well but not sure if you will use that.
 [Testing your code](https://docs.github.com/en/actions/guides/building-and-testing-python#testing-your-code)
 
 GitHub provides a Python workflow template that should work for most Python projects. 
-This guide includes examples that you can use to customize the template.
 
-GitHub-hosted runners have a tools cache with pre-installed software, which includes Python and PyPy. You don't have to install anything! For a full list of up-to-date software and the pre-installed versions of Python and PyPy, see "Specifications for GitHub-hosted runners", in the link above.
+You don't have to install anything! 
 
 Prerequisites
 You should be familiar with YAML and the syntax for GitHub Actions. For more information, see "Learn GitHub Actions."
-We recommend that you have a basic understanding of Python, PyPy, and pip. For more information, see:
+We recommend that you have a basic understanding of Python, PyPy, and pip.
 
-Getting started with Python
-PyPy
-Pip package manager
-Starting with the Python workflow template
-GitHub provides a Python workflow template that should work for most Python projects. This guide includes examples that you can use to customize the template. For more information, see the Python workflow template.
+GitHub provides a Python workflow template that should work for most Python projects. 
