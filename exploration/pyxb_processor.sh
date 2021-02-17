@@ -1,22 +1,22 @@
 #!/bin/bash
 
 DEFAULT_DIRS=(
-    'data/ceesim/schema/pattern'
-    'data/ceesim/schema/simulation'
+    "data/ceesim/schema/pattern"
+    "data/ceesim/schema/simulation"
 )
 
 process_files_in_directory () {
-    echo $0
+    echo $0 $1
 }
 
-if [ "$#" -ne 1 ]; then
-    for folder in "$@"
+if [ "$#" -ge 1 ]; then
+    for folder in "$@";
     do
-        process_files_in_directory folder
+        process_files_in_directory $folder
     done
 else
-    for folder in DEFAULT_DIRS
+    for folder in ${DEFAULT_DIRS[@]};
     do
-        process_files_in_directory folder
+        process_files_in_directory $folder
     done
 fi
