@@ -1,1 +1,5 @@
-# Go Gideon
+#!/bin/bash/env python
+
+'''Creates PyXB bindings
+'''
+

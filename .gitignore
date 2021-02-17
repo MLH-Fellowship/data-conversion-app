@@ -1,5 +1,11 @@
 # Editor
 .idea
+.vscode
+
+# Environment
+venv
+env
+
 
 # Cache
 __pycache__
