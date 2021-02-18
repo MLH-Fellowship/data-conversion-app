@@ -1,0 +1,20 @@
+//**************** FREQUENCY DEFINITION FILE ****************
+//
+// Model:   Test2_Freq
+//
+// Created: Wed Feb 17, 2021  1:08 PM
+
+
+//******************** FREQUENCY MODEL ********************
+
+FREQUENCY NOTES:    ""
+
+FREQUENCY MODEL:    AGILE
+
+MODULATION:         RAMP
+RISE TIME:          100.00 %
+INVERT:             NO
+LOWER LIMIT:        8500.0000000000 MHZ
+UPPER LIMIT:        9800.0000000000 MHZ
+FREQUENCIES:        15
+QUANTIZATION:       10.0000000000 MHZ

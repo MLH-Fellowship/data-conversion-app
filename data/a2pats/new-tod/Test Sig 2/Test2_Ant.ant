@@ -1,0 +1,52 @@
+//***************** ANTENNA DEFINITION FILE *****************
+//
+// Model:   Test2_Ant
+//
+// Created: Wed Feb 17, 2021  1:13 PM
+
+
+//********************* ANTENNA MODEL *********************
+
+ANTENNA NOTES:      ""
+
+ANTENNA MODEL:      RECTANGULAR
+
+BEAM MODEL:         AZIMUTH
+
+MAIN LOBE WIDTH:    3.500 DEG
+DISTRIBUTION:       SIN X/X
+PHASED ARRAY:       NO
+
+            LOBE       LOBE      LOBE      LOBE 
+         ATTENUATION  WIDTH   SEPARATION  REPEAT
+            (DB)      (DEG)     (DEG)     COUNT 
+  +/-    25.0000     N/A       7.000        1 
+  +/-    30.0000     N/A      10.000        1 
+  +/-    33.0000     N/A      15.000        1 
+
+DEPTH OF NULLS DEPTH : 127.8250 DB
+
+DEPTH OF NULLS SPAN : 0.000 DEG
+
+LOW RESOLUTION:     10 POINTS PER DEG
+HIGH RESOLUTION:    DISABLED
+
+BEAM MODEL:         ELEVATION
+
+MAIN LOBE WIDTH:    5.000 DEG
+DISTRIBUTION:       SIN X/X
+PHASED ARRAY:       NO
+
+            LOBE       LOBE      LOBE      LOBE 
+         ATTENUATION  WIDTH   SEPARATION  REPEAT
+            (DB)      (DEG)     (DEG)     COUNT 
+  +/-    20.0000     N/A       9.000        1 
+  +/-    35.0000     N/A      14.000        1 
+  +/-    40.0000     N/A      18.000        1 
+
+DEPTH OF NULLS DEPTH : 127.8250 DB
+
+DEPTH OF NULLS SPAN : 0.000 DEG
+
+LOW RESOLUTION:     10 POINTS PER DEG
+HIGH RESOLUTION:    DISABLED
