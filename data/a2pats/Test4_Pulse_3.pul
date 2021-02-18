@@ -1,0 +1,38 @@
+//****************** PULSE DEFINITION FILE ******************
+//
+// Model:   Test4_Pulse_3
+//
+// Created: Wed Jan 20, 2021  10:20 AM
+
+
+//********************** PULSE MODEL **********************
+
+PULSE NOTES:        ""
+
+PULSE MODEL:        STAGGER
+
+PRI TIMING MODE:    TIME
+
+PW TIMING MODE:     TIME
+
+        PRI              PW                                                                                                                                   INTRAPULSE                                                                                                                                PULSE             DWELL           ATTENUATION     FREQUENCY    
+       (USEC)          (USEC)                                                                                                                                    NAME                                                                                                                                  REPEAT             (MSEC)             (DB)           (MHZ)      
+         100.00000        0.00000                                                                                                                                N/A                                                                                                                                           1           N/A               0.0000        0.0000000000
+          10.00000        0.10000                                                                                                                                N/A                                                                                                                                     N/A                 10.00000000     0.0000        0.0000000000
+         100.00000        0.00000                                                                                                                                N/A                                                                                                                                           1           N/A               0.0000        0.0000000000
+           5.00000        0.10000                                                                                                                                N/A                                                                                                                                     N/A                 10.00000000     0.0000        0.0000000000
+         100.00000        0.00000                                                                                                                                N/A                                                                                                                                           1           N/A               0.0000        0.0000000000
+
+USE LOCAL FREQ:     NO
+
+PRI FILL:           NONE
+
+PW FILL:            NONE
+
+PULSE REPEAT FILL:  NONE
+
+DWELL TIME FILL:    NONE
+
+ATTENUATION FILL:   NONE
+
+FREQUENCY FILL:     NONE
