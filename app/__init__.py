@@ -8,10 +8,7 @@ class datastore:
     def __init__(self):
         '''Create a datastore
         '''
-        # TODO
-        self.signals = None
-        self.shifts = None
-        self.keys = None
+        self.models = list()
 
     def to_datastore(self, downgrade_peaceful=True) -> 'datastore':
         '''Convert a datastore child to a datastore parent.
@@ -39,7 +36,6 @@ class a2pats(datastore):
         '''Initialize A²PATS to datastore
         '''
         # TODO
-        pass
 
     def export(self, file: str) -> bool:
         '''Exports A²PATS to file
