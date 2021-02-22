@@ -4,16 +4,39 @@ from arrow.arrow import Arrow
 from types import SimpleNamespace
 from typing import Union
 
-sample_data = {"ModeName":"A123Z_TEST01", "CreationDate": "2021-01-21T17:26:11", "EmitterId": "A123Z",
-    "EmitterName": "NSIN-EMITTER", "ComplexPriState": "false", "DwellStatus": "false", "Pri": 0.0001, "PulseWidth": 5e-06,
-    "ModStatus": "false", "Frequency": 5000000000, "AzScanKind": "Circular", "AzInitialBeamOffset": 0, "ElInitialBeamOffset": 0,
-    "AzScanPeriod": 1, "AzDirection": "Clockwise", "ElScanMotion": "Unidirectional", "ElDirection": "Up", "ElTrackOffset": 0,
-    "ElSectorWidth": 90, "ElScanPeriod": 1.048576, "AntennaModelKind": "Elliptical", "AzScanShape": "Sin(x)/x R1", "AzBeamwidth": 2.9443359375,
-    "AzSidelobeRatio": -24, "ElBeamWidth": 2.5937594433, "ElSidelobeRatio": -24, "ElScanShape": "Sin(x)/x R1"
-    }
+sample_data = {
+    "ModeName": "A123Z_TEST01",
+    "CreationDate": "2021-01-21T17:26:11",
+    "EmitterId": "A123Z",
+    "EmitterName": "NSIN-EMITTER",
+    "ComplexPriState": "false",
+    "DwellStatus": "false",
+    "Pri": 0.0001,
+    "PulseWidth": 5e-06,
+    "ModStatus": "false",
+    "Frequency": 5000000000,
+    "AzScanKind": "Circular",
+    "AzInitialBeamOffset": 0,
+    "ElInitialBeamOffset": 0,
+    "AzScanPeriod": 1,
+    "AzDirection": "Clockwise",
+    "ElScanMotion": "Unidirectional",
+    "ElDirection": "Up",
+    "ElTrackOffset": 0,
+    "ElSectorWidth": 90,
+    "ElScanPeriod": 1.048576,
+    "AntennaModelKind": "Elliptical",
+    "AzScanShape": "Sin(x)/x R1",
+    "AzBeamwidth": 2.9443359375,
+    "AzSidelobeRatio": -24,
+    "ElBeamWidth": 2.5937594433,
+    "ElSidelobeRatio": -24,
+    "ElScanShape": "Sin(x)/x R1"
+}
 
 # Certain units for numerical values need adjustment. Furthermore, the data needs to change format
 # Boolean strings need switching to Python boolean
+
 
 def to_timestamp(time: Union[Arrow, str], downgrade_peaceful=True) -> str:
     '''Convert a time to an A²PATS-compatible timestamp (ISO 8601)
@@ -27,13 +50,14 @@ def to_timestamp(time: Union[Arrow, str], downgrade_peaceful=True) -> str:
     :returns: ISO 8601 timestamp
     :rtype: str
     '''
-    to_str = lambda obj: get(obj).format('YYYY-MM-DDTHH:MM:ss')
+    def to_str(obj): return get(obj).format('YYYY-MM-DDTHH:MM:ss')
     if downgrade_peaceful:
         try:
             return to_str(time)
         except:
             return to_str(None)
-    assert type(time) in {Arrow, str}, 'Timestamp must be either date object or string!'
+    assert type(time) in {
+        Arrow, str}, 'Timestamp must be either date object or string!'
     return to_str(time)
 
 
@@ -200,7 +224,7 @@ SCAN RATE:          {n.ElScanPeriod} HZ
 SCAN PERSPECTIVE:   TARGET
 
 DEFAULT OFFSET:     0.0000 DBM
-""") 
+""")
 
     with open("AntName.ant", "wt") as ant:
         ant.write(f"""//***************** ANTENNA DEFINITION FILE *****************
