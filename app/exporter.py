@@ -1,3 +1,4 @@
+from app import model
 from arrow import get
 from arrow.arrow import Arrow
 from types import SimpleNamespace
@@ -34,6 +35,10 @@ def to_timestamp(time: Union[Arrow, str], downgrade_peaceful=True) -> str:
             return to_str(None)
     assert type(time) in {Arrow, str}, 'Timestamp must be either date object or string!'
     return to_str(time)
+
+
+def to_str_header(data: model) -> str:
+    pass
 
 
 def simple_file_writes(xml_dictionary):
@@ -251,5 +256,5 @@ HIGH RESOLUTION:    DISABLED
 """)
 
 
-
-simple_file_writes(sample_data)
+if __name__ == '__main__':
+    simple_file_writes(sample_data)
