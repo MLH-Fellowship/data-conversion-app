@@ -30,6 +30,7 @@ class model:
         self.type = type
         self.name = name
         self.creation_date = creation_date
+        self.data = list()
 
 class datastore:
     '''Contains all generated signals in a Pythonic format

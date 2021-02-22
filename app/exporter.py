@@ -57,7 +57,7 @@ def to_timestamp(time: Union[Arrow, str], downgrade_peaceful=True) -> str:
     :returns: ISO 8601 timestamp
     :rtype: str
     '''
-    def to_str(obj): return get(obj).format('YYYY-MM-DDTHH:MM:ss')
+    def to_str(obj): return get(obj).format('ddd MMM DD, YYYY  hh:mm A')
     if downgrade_peaceful:
         try:
             return to_str(time)
