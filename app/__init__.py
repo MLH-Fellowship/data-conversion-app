@@ -13,7 +13,7 @@ ALLOWED_MODELS = {
 class model:
     '''Contains a simple model
     '''
-    
+
     def __init__(self, type: str, name: str, creation_date=utcnow(), **kwargs):
         '''Create a model
 
@@ -31,6 +31,7 @@ class model:
         self.name = name
         self.creation_date = creation_date
         self.data = list()
+
 
 class datastore:
     '''Contains all generated signals in a Pythonic format
