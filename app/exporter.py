@@ -4,6 +4,12 @@ from arrow.arrow import Arrow
 from types import SimpleNamespace
 from typing import Union
 
+CONSTANTS = {
+    'header': {
+        'length': 62
+    }
+}
+
 sample_data = {
     "ModeName": "A123Z_TEST01",
     "CreationDate": "2021-01-21T17:26:11",

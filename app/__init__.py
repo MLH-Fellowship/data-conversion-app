@@ -6,9 +6,19 @@ class model:
     '''Contains a simple model
     '''
     
-    def __init__(self, name: str, creation_date=utcnow(), **kwargs):
+    def __init__(self, type: str, name: str, creation_date=utcnow(), **kwargs):
         '''Create a model
+
+        :param type: Type of model
+        :type type: str
+
+        :param name: Name of model
+        :type name: str
+
+        :param creation_date: Timestamp of creation
+        :type creation_date: Arrow
         '''
+        self.type = type
         self.name = name
         self.creation_date = creation_date
 
@@ -16,7 +26,7 @@ class datastore:
     '''Contains all generated signals in a Pythonic format
     '''
 
-    def __init__(self, type: str):
+    def __init__(self):
         '''Create a datastore
         '''
         self.models = list()
