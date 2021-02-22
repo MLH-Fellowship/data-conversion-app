@@ -1,11 +1,12 @@
 from app.errors import DatastoreError
+from arrow import utcnow
 
 
 class model:
     '''Contains a simple model
     '''
     
-    def __init__(self, name: str, creation_date=None, **kwargs):
+    def __init__(self, name: str, creation_date=utcnow(), **kwargs):
         '''Create a model
         '''
         self.name = name
