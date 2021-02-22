@@ -6,7 +6,8 @@ from typing import Union
 
 CONSTANTS = {
     'header': {
-        'length': 62
+        'length': 60,
+        'title': 'DEFINITION FILE'
     }
 }
 
@@ -68,7 +69,21 @@ def to_timestamp(time: Union[Arrow, str], downgrade_peaceful=True) -> str:
 
 
 def to_str_header(data: model) -> str:
-    pass
+    '''Create a header for a model
+    '''
+    assert type(data) is model, 'You can only convert headers of entire models!'
+    left = (CONSTANTS['header']['length'] -
+            len(data.type) - len(CONSTANTS['header']['title']) - 3) / 2
+    lleft = int(left)
+    right = lleft
+    if lleft == left:
+        left = lleft
+        right = lleft + 1
+    title = ' '.join(
+        ['*' * left, data.type, CONSTANTS['header']['title'], '*' * right])
+    lines = [title, '', f' {"Model:":<9}{data.name}', '',
+             f' {"Created:":<9}{to_timestamp(data.creation_date)}']
+    return '\n'.join(['//' + line for line in lines])
 
 
 def simple_file_writes(xml_dictionary):
