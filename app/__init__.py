@@ -1,6 +1,14 @@
 from app.errors import DatastoreError
 from arrow import utcnow
 
+ALLOWED_MODELS = {
+    'SIGNAL',
+    'PULSE',
+    'PULSE SEQUENCE',
+    'SCAN',
+    'ANTENNA'
+}
+
 
 class model:
     '''Contains a simple model
@@ -18,6 +26,7 @@ class model:
         :param creation_date: Timestamp of creation
         :type creation_date: Arrow
         '''
+        assert type in ALLOWED_MODELS, 'Model type was not an allowed type!'
         self.type = type
         self.name = name
         self.creation_date = creation_date
