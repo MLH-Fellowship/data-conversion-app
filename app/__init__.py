@@ -1,11 +1,21 @@
 from app.errors import DatastoreError
 
 
+class model:
+    '''Contains a simple model
+    '''
+    
+    def __init__(self, name: str, creation_date=None, **kwargs):
+        '''Create a model
+        '''
+        self.name = name
+        self.creation_date = creation_date
+
 class datastore:
     '''Contains all generated signals in a Pythonic format
     '''
 
-    def __init__(self):
+    def __init__(self, type: str):
         '''Create a datastore
         '''
         self.models = list()
