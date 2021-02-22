@@ -1,4 +1,7 @@
+from arrow import get
+from arrow.arrow import Arrow
 from types import SimpleNamespace
+from typing import Union
 
 sample_data = {"ModeName":"A123Z_TEST01", "CreationDate": "2021-01-21T17:26:11", "EmitterId": "A123Z",
     "EmitterName": "NSIN-EMITTER", "ComplexPriState": "false", "DwellStatus": "false", "Pri": 0.0001, "PulseWidth": 5e-06,
@@ -10,6 +13,28 @@ sample_data = {"ModeName":"A123Z_TEST01", "CreationDate": "2021-01-21T17:26:11",
 
 # Certain units for numerical values need adjustment. Furthermore, the data needs to change format
 # Boolean strings need switching to Python boolean
+
+def to_timestamp(time: Union[Arrow, str], downgrade_peaceful=True) -> str:
+    '''Convert a time to an A²PATS-compatible timestamp (ISO 8601)
+
+    :param time: Time or timestamp-like object
+    :type time: Arrow or str
+
+    :param downgrade_peaceful: Whether or not to downgrade peacefully when function is called
+    :type downgrade_peaceful: bool
+
+    :returns: ISO 8601 timestamp
+    :rtype: str
+    '''
+    to_str = lambda obj: get(obj).format('YYYY-MM-DDTHH:MM:ss')
+    if downgrade_peaceful:
+        try:
+            return to_str(time)
+        except:
+            return to_str(None)
+    assert type(time) in {Arrow, str}, 'Timestamp must be either date object or string!'
+    return to_str(time)
+
 
 def simple_file_writes(xml_dictionary):
     n = SimpleNamespace(**xml_dictionary)
