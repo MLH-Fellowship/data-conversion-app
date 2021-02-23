@@ -303,7 +303,3 @@ HIGH RESOLUTION:    DISABLED
 
 if __name__ == '__main__':
     simple_file_writes(sample_data)
-
-
-
-print("testin")

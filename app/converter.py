@@ -1,6 +1,6 @@
 from app.errors import DatastoreError
 from app import a2pats, ceesim, datastore
-from typing import Union a
+from typing import Union
 
 
 def convert(data: Union[a2pats, ceesim]) -> Union[a2pats, ceesim]:

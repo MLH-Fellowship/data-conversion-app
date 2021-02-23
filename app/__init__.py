@@ -1,5 +1,4 @@
-# from app.errors import DatastoreError
-from errors import DatastoreError
+from app.errors import DatastoreError
 from arrow import utcnow
 
 ALLOWED_MODELS = {
