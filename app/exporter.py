@@ -1,4 +1,4 @@
-from app import model
+from app import model 
 from arrow import get
 from arrow.arrow import Arrow
 from types import SimpleNamespace
@@ -303,3 +303,7 @@ HIGH RESOLUTION:    DISABLED
 
 if __name__ == '__main__':
     simple_file_writes(sample_data)
+
+
+
+print("testin")

@@ -1,4 +1,11 @@
-# File Conversion App
+# Getting Started:
+### Install all packages
+```pip3 install -r requirements.txt```
+
+### Run files
+```python3 file_name.py```
+
+# About the Project
 
 The Problem/Project
 Essentially, we need to convert CEESIM files to A2PATS files. These files are used in army flight simulators. I believe we need to convert these so that the same patterns can be used on different simulation systems to prevent redundancy of work. This will either be a desktop app but more likely a script that runs a file and creates its converted variant. This project is highly technical in nature and will require much guidance from the USAF.
@@ -12,8 +19,6 @@ Point of Contact: Dion Carrieri
 
 About USAF
 We are working with a very technically advanced US Air Force division that deals with new technology the USAF works on such as the F-35 program.
-
-
 
 # Email details from Dion outlining project files:
 
@@ -36,6 +41,7 @@ You can open the ASCII as well but not sure if you will use that.
 [3D Airplane Antenna Visualizer](https://www.youtube.com/watch?v=jtxXOfzPdK4&ab_channel=TheVindicators)
 
 [A2PATS Family Promotional Video](https://www.youtube.com/watch?v=xBHQJwdqe58&ab_channel=textronsystems)
+
 
 # Building and testing Python
 [Testing your code](https://docs.github.com/en/actions/guides/building-and-testing-python#testing-your-code)
