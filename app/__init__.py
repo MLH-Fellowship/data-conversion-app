@@ -6,7 +6,8 @@ ALLOWED_MODELS = {
     'PULSE',
     'PULSE SEQUENCE',
     'SCAN',
-    'ANTENNA'
+    'ANTENNA',
+    'FREQUENCY'
 }
 
 

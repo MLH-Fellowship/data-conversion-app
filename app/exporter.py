@@ -8,6 +8,16 @@ CONSTANTS = {
     'header': {
         'length': 60,
         'title': 'DEFINITION FILE'
+    },
+
+    'model_desc': {
+        'length': 58,
+        'title': 'MODEL'
+    },
+
+    'mss': {
+        'length': 73,
+        'title': 'MULTIPLE SIMULTANEOUS SIGNALS'
     }
 }
 
@@ -68,22 +78,29 @@ def to_timestamp(time: Union[Arrow, str], downgrade_peaceful=True) -> str:
     return to_str(time)
 
 
-def to_str_header(data: model) -> str:
-    '''Create a header for a model
+def to_str_section(data: model, sect="header") -> str:
+    '''Create a header or model description for a model
     '''
-    assert type(data) is model, 'You can only convert headers of entire models!'
-    left = (CONSTANTS['header']['length'] -
-            len(data.type) - len(CONSTANTS['header']['title']) - 3) / 2
+    assert type(data) is model, 'You can only convert sections of entire models!'
+    left = (CONSTANTS[sect]['length'] -
+            len(data.type) - len(CONSTANTS[sect]['title']) - 3) / 2
     lleft = int(left)
     right = lleft
     if lleft == left:
         left = lleft
         right = lleft + 1
     title = ' '.join(
-        ['*' * left, data.type, CONSTANTS['header']['title'], '*' * right])
-    lines = [title, '', f' {"Model:":<9}{data.name}', '',
-             f' {"Created:":<9}{to_timestamp(data.creation_date)}']
-    return '\n'.join(['//' + line for line in lines])
+        ['*' * lleft, data.type, CONSTANTS[sect]['title'], '*' * right])
+    
+    if sect == "header":
+        lines = [title, '', f' {"Model:":<9}{data.name}', '',
+                f' {"Created:":<9}{to_timestamp(data.creation_date)}']
+        return '\n'.join(['//' + line for line in lines])
+
+    elif sect == "model_desc":
+        top = ['//' + title, f'{data.type} NOTES:   ""'] if data.type in \
+            ["FREQUENCY", "INTRAPULSE"] else ['//' + title]
+        lines = top + [f'{data.type} MODEL:']
 
 
 def simple_file_writes(xml_dictionary):
