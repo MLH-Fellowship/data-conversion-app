@@ -1,16 +1,16 @@
 # Getting Started:
-### Install all packages
+### Installing packages
 ```pip3 install -r requirements.txt```
 
 ### Running the app
-``python3 app.py```
+```python3 app.py```
 
 ### Running functions
 start the python shell: ```python3```  
 
 example command: 
 ```from app.exporter import to_timestamp```
-``to_timestamp("2021-01-21T17:26:11")
+```to_timestamp("2021-01-21T17:26:11")```
 
 
 
