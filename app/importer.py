@@ -26,7 +26,7 @@ class functions:
     @staticmethod
     def extract_name(name: str) -> str:
         '''Extracts A2PATS name from CEESIM name
-        
+
         :param name: ModelName of CEESIM
         :type name: str
 
@@ -35,11 +35,11 @@ class functions:
         '''
         this_name, version, mode = functions.extract_metadata(name)
         return this_name
-    
+
     @staticmethod
     def extract_version(name: str) -> str:
         '''Extracts A2PATS version from CEESIM version
-        
+
         :param name: ModelName of CEESIM
         :type name: str
 
@@ -48,7 +48,7 @@ class functions:
         '''
         this_name, version, mode = functions.extract_metadata(name)
         return version
-    
+
     @staticmethod
     def extract_mode(name: str) -> str:
         '''Extracts A2PATS mode from CEESIM name
@@ -61,7 +61,7 @@ class functions:
         '''
 
     @staticmethod
-    def convert_frequency(frequency: Union[int, float, str]) -> str:
+    def to_mhz(frequency: Union[int, float, str]) -> str:
         '''Convert Hz to MHz
 
         :param frequency: Hz frequency
@@ -70,9 +70,25 @@ class functions:
         :returns: MHz Frequency
         :rtype: str
         '''
-        to_str = lambda f: f'{f:.10f}'
+        def to_str(f): return f'{f:.10f}'
         try:
             return to_str(float(frequency) / 1000000)
+        except:
+            return to_str(0)
+
+    @staticmethod
+    def to_usec(time: Union[int, float, str]) -> str:
+        '''Convert s to us
+
+        :param time: s
+        :type time: int, float, or str
+
+        :returns: us
+        :rtype: str
+        '''
+        def to_str(f): return f'{f:.5f}'
+        try:
+            return to_str(float(time) * 1000000)
         except:
             return to_str(0)
 
