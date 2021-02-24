@@ -10,6 +10,9 @@
 - example command: 
 ```from app.exporter import to_timestamp```
 ```to_timestamp("2021-01-21T17:26:11")```
+- example command importing function & data: 
+```from app.exporter import simple_file_writes, sample_data
+```simple_file_writes(sample_data)```
 
 
 # About the Project
