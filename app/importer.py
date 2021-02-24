@@ -1,5 +1,80 @@
 from app import datastore
-from typing import Union, TextIO
+from typing import Tuple, Union, TextIO
+
+
+class functions:
+    '''A collection of functions for importing
+    '''
+
+    @staticmethod
+    def extract_metadata(name: str) -> Tuple[str, str, str]:
+        '''Extracts A2PATS meta from CEESIM name
+
+        :param name: ModeName of CEESIM
+        :type name: str
+
+        :returns: name, version, mode
+        :rtype: tuple
+        '''
+        if '_' in name:
+            values = name.split('_')
+            half = len(values[1]) / 2
+            return values[0], values[1][:half], values[1][half:]
+        else:
+            return name, name, name
+
+    @staticmethod
+    def extract_name(name: str) -> str:
+        '''Extracts A2PATS name from CEESIM name
+        
+        :param name: ModelName of CEESIM
+        :type name: str
+
+        :returns: Name
+        :rtype: str
+        '''
+        this_name, version, mode = functions.extract_metadata(name)
+        return this_name
+    
+    @staticmethod
+    def extract_version(name: str) -> str:
+        '''Extracts A2PATS version from CEESIM version
+        
+        :param name: ModelName of CEESIM
+        :type name: str
+
+        :returns: Version
+        :rtype: str
+        '''
+        this_name, version, mode = functions.extract_metadata(name)
+        return version
+    
+    @staticmethod
+    def extract_mode(name: str) -> str:
+        '''Extracts A2PATS mode from CEESIM name
+
+        :param name: ModelName of CEESIM
+        :type name: str
+
+        :returns: Mode
+        :rtype: str
+        '''
+
+    @staticmethod
+    def convert_frequency(frequency: Union[int, float, str]) -> str:
+        '''Convert Hz to MHz
+
+        :param frequency: Hz frequency
+        :type frequency: int, float, or str
+
+        :returns: MHz Frequency
+        :rtype: str
+        '''
+        to_str = lambda f: f'{f:.10f}'
+        try:
+            return to_str(float(frequency) / 1000000)
+        except:
+            return to_str(0)
 
 
 def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True) -> 'datastore':
@@ -36,6 +111,3 @@ def import_ceesim():
     '''Import a CEESIM file for conversion
     '''
     pass
-
-
-
