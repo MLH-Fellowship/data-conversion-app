@@ -81,7 +81,7 @@ I think you will want to work with the XML format as you should be able to tell 
 You can open the ASCII as well but not sure if you will use that.
 
 ### Links
-
+* [CESSIM to A2PATS Lookup Tabel](https://docs.google.com/spreadsheets/d/1ENsy1Ia1xtXSf6RaxW97A5YNb0TnNML9w7mTQQ_rxl8/edit#gid=0)
 * [XML to Data Structure Python Packaging](http://pyxb.sourceforge.net/)
 * [Glossary of Terms Used In Aviation as it relates to Electrical Engineering](https://www.radartutorial.eu/index.en.html)
 * [Tool for Visualizing XSD Files](http://visualxsd.com/)
