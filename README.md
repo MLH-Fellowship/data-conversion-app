@@ -1,4 +1,4 @@
-https://github.com/ainneo/data-translation/blob/main/README.md# Getting Started:
+# Getting Started:
 ### Install all packages
 ```pip3 install -r requirements.txt```
 
