@@ -5,13 +5,11 @@
 ### Running the app
 ```python3 app.py```
 
-### Running functions
-start the python shell: ```python3```  
-
-example command: 
+### Testing functions
+- start python shell: ```python3```  
+- example command: 
 ```from app.exporter import to_timestamp```
 ```to_timestamp("2021-01-21T17:26:11")```
-
 
 
 # About the Project
