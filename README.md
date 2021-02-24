@@ -1,9 +1,18 @@
-# Getting Started:
+https://github.com/ainneo/data-translation/blob/main/README.md# Getting Started:
 ### Install all packages
 ```pip3 install -r requirements.txt```
 
-### Run files
-```python3 file_name.py```
+### Running the app
+``python3 app.py```
+
+### Running functions
+start the python shell: ```python3```  
+
+example command: 
+```from app.exporter import to_timestamp```
+``to_timestamp("2021-01-21T17:26:11")
+
+
 
 # About the Project
 
