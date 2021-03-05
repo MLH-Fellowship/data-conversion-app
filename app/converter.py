@@ -141,6 +141,20 @@ class functions:
             return to_str(0)
 
 
+    @staticmethod
+    def intra_status(modstatus: str) -> str:
+        '''Convert modstatus to intrapulse model
+
+        :param modstatus: XML ModeStatus tag
+        :type modstatus: str
+
+        :returns: intrapulse model
+        :rtype: str
+        '''
+
+        return "OFF" if modstatus == "false" else "REFERENCE"
+
+
 def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True) -> 'datastore':
     '''Import data dynamically
 

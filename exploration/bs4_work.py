@@ -1,8 +1,19 @@
 from bs4 import BeautifulSoup
+from xml.etree import ElementTree as et
 
-with open("NSIN_Test_Scenario_Export.xml", "rt", encoding="utf-8") as ex:
+with open("..\\data\\ceesim\\NSIN_Test_Scenario_Export.xml", "rt") as ex:
     data = ex.read()
 soup = BeautifulSoup(data, 'lxml')
 
-# Shows first generator element and its children
-print(soup.generator)
+emitters = soup.findAll("emittermode")
+nsin_1 = emitters[0]
+
+for child in nsin_1.emittermodeheader.children:
+    if child == "\n" or child == "":
+        continue
+    print(child, "\ni\n")
+    if child.name == "lastupdatedate":
+        break
+
+# for generator in nsin_1.generators.children:
+#     print(generator, "\n")

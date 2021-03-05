@@ -30,21 +30,25 @@ def determine_datatype(it: str) -> type:
         return str
 
 
-def traverse_subtree(parent: et.Element, indent=0) -> dict:
+def traverse_subtree(parent: et.Element, indent=0, values=False) -> dict:
     data = dict()
     for child in parent:
         if child.text:
             text = child.text.strip()
         if PRINT:
             print(f'{"* " * indent}{child.tag} {f"({text})" if text else ""}')
-        if text:
+        if values and text:
+            data[child.tag] = text
+        elif text:
             data[child.tag] = DATATYPES[determine_datatype(text)]
+        elif values:
+            data[child.tag] = traverse_subtree(child, indent + 1, values=True)
         else:
             data[child.tag] = traverse_subtree(child, indent + 1)
     return data
 
 
-def traverse_tree(fp: str) -> dict:
+def traverse_tree(fp: str, show_val=False) -> dict:
     it = et.iterparse(fp)
     for _, el in it:
         if '}' in el.tag:
@@ -58,7 +62,7 @@ def traverse_tree(fp: str) -> dict:
     data = dict()
     if PRINT:
         print(root.tag)
-    data[root.tag] = traverse_subtree(root)
+    data[root.tag] = traverse_subtree(root, values=show_val)
     return data
 
 
