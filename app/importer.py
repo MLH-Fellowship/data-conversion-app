@@ -1,6 +1,20 @@
 from app import a2pats, ceesim, datastore
 from io import IOBase
-from typing import Union, TextIO
+from typing import Iterator, Union, TextIO
+from xml.etree.ElementTree import iterparse
+
+
+def strip_xml_namespaces(itr: Iterator) -> None:
+    '''Strip XML namespaces from an iterator provided by XML parser
+    '''
+    for _, element in itr:
+        if '}' in element.tag:
+            element.tag = element.tag.split('}', 1)[1]
+        for attribute in list(element.attrib.keys()):
+            if '}' in attribute:
+                new_attribute = attribute.split('}', 1)[1]
+                element.attrib[new_attribute] = element.attrib[attribute]
+                del element.attrib[attribute]
 
 
 def import_a2pats(fp: TextIO) -> a2pats:
@@ -13,7 +27,8 @@ def import_a2pats(fp: TextIO) -> a2pats:
 def import_ceesim(fp: TextIO) -> ceesim:
     '''Import a CEESIM file for conversion
     '''
-    pass
+    itr = iterparse(fp)
+    strip_xml_namespaces(itr)
 
 
 def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True) -> datastore:
@@ -55,4 +70,3 @@ def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True
         return import_ceesim(fp)
     else:
         raise ValueError('This type of datastore isn\'t supported yet!')
-
