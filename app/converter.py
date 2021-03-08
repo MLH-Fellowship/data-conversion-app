@@ -3,53 +3,6 @@ from app import a2pats, ceesim, datastore
 from typing import Tuple, Union, TextIO
 
 
-def convert(data: Union[a2pats, ceesim]) -> Union[a2pats, ceesim]:
-    '''Dynamically convert data to its corresponding format
-
-    :param data: A²PATS or CEESIM data to import
-    :type data: a2pats or ceesim
-
-    :returns: A²PATS or CEESIM data
-    :rtype: a2pats or ceesim
-    '''
-    if type(data) is a2pats:
-        return convert_to_ceesim(data)
-    elif type(data) is ceesim:
-        return convert_to_a2pats(data)
-    elif isinstance(data, datastore):
-        # TODO: Replace print with logger.warning
-        print('Provided type to convert was correct, but unrecognized')
-        return data.to_datastore()
-    else:
-        raise DatastoreError('Provided type to convert was neither of class a2pats or ceesim.')
-
-
-def convert_to_a2pats(data: ceesim) -> a2pats:
-    '''Convert CEESIM data to A²PATS data
-
-    :param data: CEESIM data to import
-    :type data: ceesim
-
-    :returns: A²PATS data
-    :rtype: a2pats
-    '''
-    # TODO
-    pass
-
-
-def convert_to_ceesim(data: a2pats) -> ceesim:
-    '''Convert A²PATS data to CEESIM data
-
-    :param data: A²PATS data to import
-    :type data: a2pats
-
-    :returns: CEESIM data
-    :rtype: ceesim
-    '''
-    # TODO
-    pass
-
-
 class functions:
     '''A collection of functions for importing
     '''
@@ -303,28 +256,51 @@ class functions:
             return "BOTTOM"
         else:
             return "TOP"
-        
 
 
-def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True) -> 'datastore':
-    '''Import data dynamically
+def convert(data: Union[a2pats, ceesim]) -> Union[a2pats, ceesim]:
+    '''Dynamically convert data to its corresponding format
 
-    :param fp: File pointer or string to import file
-    :type fp: str or TextIO
+    :param data: A²PATS or CEESIM data to import
+    :type data: a2pats or ceesim
 
-    :param classtype: Class type to import as (must be of instance datastore)
-    :type classtype: datastore or datastore-like
-
-    :param downgrade_peaceful: Whether or not to ignore errors
-    :type downgrade_peaceful: bool
-
-    :returns: Database object for typing
-    :rtype: datastore or datastore-like
+    :returns: A²PATS or CEESIM data
+    :rtype: a2pats or ceesim
     '''
-    if downgrade_peaceful:
-        if not issubclass(classtype, datastore):
-            classtype = datastore
+    if type(data) is a2pats:
+        return convert_to_ceesim(data)
+    elif type(data) is ceesim:
+        return convert_to_a2pats(data)
+    elif isinstance(data, datastore):
+        # TODO: Replace print with logger.warning
+        print('Provided type to convert was correct, but unrecognized')
+        return data.to_datastore()
     else:
-        assert issubclass(
-            classtype, datastore), 'Your import_ call must be of datastore or datastore-like type!'
+        raise DatastoreError('Provided type to convert was neither of class a2pats or ceesim.')
+
+
+def convert_to_a2pats(data: ceesim) -> a2pats:
+    '''Convert CEESIM data to A²PATS data
+
+    :param data: CEESIM data to import
+    :type data: ceesim
+
+    :returns: A²PATS data
+    :rtype: a2pats
+    '''
     # TODO
+    pass
+
+
+def convert_to_ceesim(data: a2pats) -> ceesim:
+    '''Convert A²PATS data to CEESIM data
+
+    :param data: A²PATS data to import
+    :type data: a2pats
+
+    :returns: CEESIM data
+    :rtype: ceesim
+    '''
+    # TODO
+    pass
+
