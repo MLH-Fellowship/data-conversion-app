@@ -31,6 +31,7 @@ class model:
         self.type = type
         self.name = name
         self.creation_date = creation_date
+        self.imported_data = dict()
         self.data = list()
 
 

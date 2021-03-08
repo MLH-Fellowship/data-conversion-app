@@ -1,4 +1,4 @@
-from app import a2pats, ceesim, datastore
+from app import a2pats, ceesim, datastore, model
 from io import IOBase
 from typing import Iterator, Union, TextIO
 from xml.etree.ElementTree import iterparse
@@ -29,6 +29,12 @@ def import_ceesim(fp: TextIO) -> ceesim:
     '''
     itr = iterparse(fp)
     strip_xml_namespaces(itr)
+    store = ceesim()
+    # TODO: Parse
+    # TODO: Replace type
+    # TODO: Replace name
+    store.models.append(model('SCAN', 'type', 'name'))
+    return store
 
 
 def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True) -> datastore:
