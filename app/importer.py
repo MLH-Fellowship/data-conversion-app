@@ -6,13 +6,17 @@ from xml.etree import ElementTree
 
 def traverse_xml_tree(parent: ElementTree.Element, stack_size=0) -> dict:
     data = dict()
-    for child in parents:
+    for child in parent:
         if child.text:
             text = child.text.strip()
-        if text:
-            data[child.tag] = text
+        if not text:
+            text = traverse_xml_tree(child, stack_size + 1)
+        if child.tag in data:
+            if type(data[child.tag]) is not list:
+                data[child.tag] = [data[child.tag]]
+            data[child.tag].append(text)
         else:
-            data[child.tag] = traverse_xml_tree(child, stack_size + 1)
+            data[child.tag] = text
     return data
 
 
@@ -44,6 +48,7 @@ def import_ceesim(fp: TextIO) -> ceesim:
     store = ceesim()
     # TODO: Add more models
     scan_data = model('SCAN', 'type', 'name')
+    data = traverse_xml_tree(itr.root)
     # TODO: Replace type
     # TODO: Replace name
     store.models.append(scan_data)
@@ -71,7 +76,7 @@ def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True
             classtype = ceesim
         if type(fp) is str:
             try:
-                fp = open(fp)
+                fp = open(fp, encoding='utf-8')
             except:
                 return datastore()
         elif not isinstance(fp, IOBase):
@@ -80,7 +85,7 @@ def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True
         assert issubclass(
             classtype, datastore), 'Your import_ call must be of datastore or datastore-like type!'
         if type(fp) is str:
-            fp = open(fp)
+            fp = open(fp, encoding='utf-8')
         assert isinstance(
             fp, IOBase), 'Your import_ call must provide a valid files-like pointer or file path!'
     if classtype is a2pats:
