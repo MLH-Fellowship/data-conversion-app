@@ -15,5 +15,3 @@ for child in nsin_1.emittermodeheader.children:
     if child.name == "lastupdatedate":
         break
 
-# for generator in nsin_1.generators.children:
-#     print(generator, "\n")

@@ -1,10 +1,12 @@
 from app import a2pats, ceesim, datastore, model
+from app.util.logging import logger
 from io import IOBase
 from typing import Iterator, Union, TextIO
 from xml.etree import ElementTree
 
 
 def traverse_xml_tree(parent: ElementTree.Element, stack_size=0) -> dict:
+    logger.debug(f'Traversing down the XML tree, current stack iteration is: {stack_size}')
     data = dict()
     for child in parent:
         if child.text:
@@ -23,6 +25,7 @@ def traverse_xml_tree(parent: ElementTree.Element, stack_size=0) -> dict:
 def strip_xml_namespaces(itr: Iterator) -> None:
     '''Strip XML namespaces from an iterator provided by XML parser
     '''
+    logger.debug('Stripping all namespaces from imported CEESIM file...')
     for _, element in itr:
         if '}' in element.tag:
             element.tag = element.tag.split('}', 1)[1]
@@ -75,6 +78,7 @@ def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True
             # Assume CEESIM import
             classtype = ceesim
         if type(fp) is str:
+            logger.debug(f'Now opening file {fp} for import')
             try:
                 fp = open(fp, encoding='utf-8')
             except:
@@ -85,6 +89,7 @@ def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True
         assert issubclass(
             classtype, datastore), 'Your import_ call must be of datastore or datastore-like type!'
         if type(fp) is str:
+            logger.debug(f'Now opening file {fp} for import')
             fp = open(fp, encoding='utf-8')
         assert isinstance(
             fp, IOBase), 'Your import_ call must provide a valid files-like pointer or file path!'

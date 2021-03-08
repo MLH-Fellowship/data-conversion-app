@@ -1,8 +1,13 @@
 from app import a2pats, ceesim
-from app.converter import convert
+from app.converter import convert_to_a2pats
 from app.importer import import_
 from app.util import config as config_
+from app.util.logging import logger, set_up_logger
+from logging import DEBUG
 from sys import argv
+
+
+set_up_logger(DEBUG)
 
 
 def convert(input_file: str, output_file: str) -> a2pats:
@@ -18,13 +23,12 @@ def convert(input_file: str, output_file: str) -> a2pats:
     :rtype: a2pats
     '''
     input_data = import_(input_file, ceesim)
-    output_data = convert(input_data)
+    output_data = convert_to_a2pats(input_data)
     success = output_data.export(output_file)
     if success:
         return output_data
     else:
-        # TODO: Replace with logger
-        print('File failed to export!')
+        logger.error('File failed to export!')
         return None
 
 

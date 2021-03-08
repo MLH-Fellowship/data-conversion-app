@@ -6,6 +6,8 @@
 venv
 env
 
+# Logging
+*.log
 
 # Cache
 __pycache__

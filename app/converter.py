@@ -1,6 +1,7 @@
-from app.errors import DatastoreError
 from app import a2pats, ceesim, datastore
-from typing import Tuple, Union, TextIO
+from app.errors import DatastoreError
+from app.util.logging import logger
+from typing import Tuple, Union
 
 
 class functions:
@@ -93,7 +94,6 @@ class functions:
         except:
             return to_str(0)
 
-
     @staticmethod
     def intra_status(modstatus: str) -> str:
         '''Convert modstatus to intrapulse model
@@ -107,7 +107,6 @@ class functions:
 
         return "OFF" if modstatus == "false" else "REFERENCE"
 
-    
     @staticmethod
     def to_caps(word: str) -> str:
         '''Convert string to all caps
@@ -120,7 +119,6 @@ class functions:
         '''
 
         return word.upper()
-
 
     @staticmethod
     def format_degree(num: Union[int, float]) -> str:
@@ -138,7 +136,6 @@ class functions:
         except:
             return to_str(0)
 
-
     @staticmethod
     def format_second(num: Union[int, float]) -> str:
         '''Convert degree single/double digit to five decimal points
@@ -155,7 +152,6 @@ class functions:
         except:
             return to_str(0)
 
-    
     @staticmethod
     def dir_abrev(azdirection: str) -> str:
         '''Convert full direction to abbreviation
@@ -172,7 +168,6 @@ class functions:
         else:
             return "CCW"
 
-    
     @staticmethod
     def motion_overlay(motion: str) -> str:
         '''Convert elevation scan motion to a2pats scan overlay model
@@ -189,7 +184,6 @@ class functions:
         else:
             return "OFF"
 
-    
     @staticmethod
     def dir_typ(eldirection: str) -> str:
         '''Convert up/down direction to a2pats scan type
@@ -206,7 +200,6 @@ class functions:
         else:
             return "SAWTOOTH"
 
-    
     @staticmethod
     def dir_dir(eldirection: str) -> str:
         '''Convert up/down direction to vertical/horizontal
@@ -220,9 +213,8 @@ class functions:
 
         if eldirection == "Up":
             return "VERTICAL"
-        elif eldirection == "Down": # it is possible that both up and down should correspond to VERTICAL
+        elif eldirection == "Down":  # it is possible that both up and down should correspond to VERTICAL
             return "HORIZONTAL"
-
 
     @staticmethod
     def period_to_hz(num: Union[int, float]) -> str:
@@ -240,7 +232,6 @@ class functions:
         except:
             return to_str(0)
 
-    
     @staticmethod
     def offset_origin(eloffset: int) -> str:
         '''Convert offset to origin
@@ -272,11 +263,11 @@ def convert(data: Union[a2pats, ceesim]) -> Union[a2pats, ceesim]:
     elif type(data) is ceesim:
         return convert_to_a2pats(data)
     elif isinstance(data, datastore):
-        # TODO: Replace print with logger.warning
-        print('Provided type to convert was correct, but unrecognized')
+        logger.warn('Provided type to convert was correct, but unrecognized')
         return data.to_datastore()
     else:
-        raise DatastoreError('Provided type to convert was neither of class a2pats or ceesim.')
+        raise DatastoreError(
+            'Provided type to convert was neither of class a2pats or ceesim.')
 
 
 def convert_to_a2pats(data: ceesim) -> a2pats:
@@ -289,7 +280,8 @@ def convert_to_a2pats(data: ceesim) -> a2pats:
     :rtype: a2pats
     '''
     # TODO
-    pass
+    store = a2pats()
+    return store
 
 
 def convert_to_ceesim(data: a2pats) -> ceesim:
@@ -303,4 +295,3 @@ def convert_to_ceesim(data: a2pats) -> ceesim:
     '''
     # TODO
     pass
-
