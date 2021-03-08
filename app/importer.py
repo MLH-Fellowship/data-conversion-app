@@ -2,6 +2,18 @@ from app import a2pats, ceesim, datastore
 from typing import Tuple, Union, TextIO
 
 
+def import_a2pats():
+    '''Import an A²PATS file for conversion
+    '''
+    pass
+
+
+def import_ceesim():
+    '''Import a CEESIM file for conversion
+    '''
+    pass
+
+
 def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True) -> 'datastore':
     '''Import data dynamically
 
@@ -23,19 +35,8 @@ def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True
     else:
         assert issubclass(
             classtype, datastore), 'Your import_ call must be of datastore or datastore-like type!'
-    # TODO
-
-
-def import_a2pats():
-    '''Import an A²PATS file for conversion
-    '''
-    pass
-
-
-def import_ceesim():
-    '''Import a CEESIM file for conversion
-    '''
-    pass
+    if classtype is a2pats:
+        return import_a2pats(fp)
 
 
 def xml_to_dictionary(filepath: str) -> dict:
