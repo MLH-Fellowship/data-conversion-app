@@ -52,10 +52,10 @@ class SIGNAL(model):
 
 class PULSE(model):
 
-    def __init__(self, name, use_ref_frequency, use_ref_scan, non_coherent, 
-                time_stagger, pri_timing_mode, pw_timing_mode, 
-                use_local_freq, pri_fill, pw_fill, pulse_repeat_fill, dwell_time_fill,
-                attenuation_fill, frequency_fill, creation_date=utcnow()):
+    def __init__(self, name, use_ref_frequency, use_ref_scan, non_coherent,
+                 time_stagger, pri_timing_mode, pw_timing_mode,
+                 use_local_freq, pri_fill, pw_fill, pulse_repeat_fill, dwell_time_fill,
+                 attenuation_fill, frequency_fill, creation_date=utcnow()):
         self.sig_model = "SEQUENCE REFERENCE"
         self.urf = use_ref_frequency
         self.urs = use_ref_scan

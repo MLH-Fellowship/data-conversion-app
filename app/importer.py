@@ -6,6 +6,7 @@ from typing import Union, TextIO
 def import_a2pats(fp: TextIO) -> a2pats:
     '''Import an A²PATS file for conversion
     '''
+    # TODO
     pass
 
 
@@ -55,6 +56,3 @@ def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True
     else:
         raise ValueError('This type of datastore isn\'t supported yet!')
 
-
-def xml_to_dictionary(filepath: str) -> dict:
-    pass
