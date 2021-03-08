@@ -6,7 +6,8 @@ from xml.etree import ElementTree
 
 
 def traverse_xml_tree(parent: ElementTree.Element, stack_size=0) -> dict:
-    logger.debug(f'Traversing down the XML tree, current stack iteration is: {stack_size}')
+    if stack_size == 0:
+        logger.debug('Now traversing XML tree beginning at initial stack')
     data = dict()
     for child in parent:
         if child.text:
@@ -25,7 +26,7 @@ def traverse_xml_tree(parent: ElementTree.Element, stack_size=0) -> dict:
 def strip_xml_namespaces(itr: Iterator) -> None:
     '''Strip XML namespaces from an iterator provided by XML parser
     '''
-    logger.debug('Stripping all namespaces from imported CEESIM file...')
+    logger.debug('Stripping all namespaces from imported CEESIM file')
     for _, element in itr:
         if '}' in element.tag:
             element.tag = element.tag.split('}', 1)[1]
@@ -46,6 +47,7 @@ def import_a2pats(fp: TextIO) -> a2pats:
 def import_ceesim(fp: TextIO) -> ceesim:
     '''Import a CEESIM file for conversion
     '''
+    logger.debug('CEESIM importer called, begining CEESIM import with XML file')
     itr = ElementTree.iterparse(fp)
     strip_xml_namespaces(itr)
     store = ceesim()

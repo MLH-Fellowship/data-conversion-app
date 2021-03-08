@@ -22,6 +22,7 @@ def convert(input_file: str, output_file: str) -> a2pats:
     :returns: A²PATS object (if successful)
     :rtype: a2pats
     '''
+    logger.debug('Main app converter called, using provided input and output files')
     input_data = import_(input_file, ceesim)
     output_data = convert_to_a2pats(input_data)
     success = output_data.export(output_file)
