@@ -1,15 +1,15 @@
 from app import a2pats, ceesim, datastore
 from io import IOBase
-from typing import Tuple, Union, TextIO
+from typing import Union, TextIO
 
 
-def import_a2pats():
+def import_a2pats(fp: TextIO) -> a2pats:
     '''Import an A²PATS file for conversion
     '''
     pass
 
 
-def import_ceesim(fp: Union[str, TextIO]):
+def import_ceesim(fp: TextIO) -> ceesim:
     '''Import a CEESIM file for conversion
     '''
     pass
