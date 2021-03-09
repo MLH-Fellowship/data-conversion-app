@@ -248,6 +248,39 @@ class functions:
         else:
             return "TOP"
 
+    @staticmethod
+    def model_kind(kind: str) -> str:
+        '''Convert kind to model
+
+        :param kind: kind of model (usually a shape)
+        :type kind: str
+
+        :returns: antenna model
+        :rtype: str
+        '''
+
+        assert kind == "Elliptical", f"Unexpected AntennaModelKind - {kind}"
+        return "RECTANGULAR"
+
+    
+    @staticmethod
+    def format_func(func: str) -> str:
+        '''Convert func to formatted_func
+
+        :param func: distribution function
+        :type kind: str
+
+        :returns: formatted distribution function
+        :rtype: str
+        '''
+
+        function = func.split()[0].upper()
+        trig = function[:3]
+        arg = function[3:]
+
+        return " ".join([trig, arg]).replace("(X)", "X")
+
+
 
 def convert(data: Union[a2pats, ceesim]) -> Union[a2pats, ceesim]:
     '''Dynamically convert data to its corresponding format
