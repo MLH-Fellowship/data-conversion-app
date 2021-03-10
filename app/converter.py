@@ -313,7 +313,7 @@ def convert_to_a2pats(data: ceesim) -> a2pats:
     :rtype: a2pats
     '''
     # TODO
-    store = a2pats()
+    store = a2pats(imported_type='A2PATS')
     return store
 
 

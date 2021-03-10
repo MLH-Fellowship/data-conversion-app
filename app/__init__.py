@@ -82,12 +82,12 @@ class datastore:
     '''Contains all generated signals in a Pythonic format
     '''
 
-    def __init__(self, imported_data=dict()):
+    def __init__(self, imported_data=dict(), imported_type='CEESIM'):
         '''Create a datastore
         '''
         self.imported_data = imported_data
         # TODO: Change logic if A2PATS importer written
-        self.ceesim_data = True
+        self.imported_type = imported_type
         self.models = list()
 
     def to_datastore(self, downgrade_peaceful=True) -> 'datastore':
