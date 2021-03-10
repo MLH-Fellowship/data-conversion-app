@@ -112,19 +112,32 @@ def to_str_section(data: model, sect='header') -> str:
         lines = top + [f'{data.type} MODEL:']
 
 
-def dump_a2pats(obj):
+def dump_a2pats(obj: a2pats, folder: str) -> bool:
+    # TODO
+    return False
+
+
+def dump_ceesim(obj: ceesim, folder: str) -> bool:
+    '''Dump CEESIM object
+
+    :param obj: CEESIM object
+    :type obj: CEESIM-like object
+
+    :returns: True on success:
+    :rtype: boolean
+    '''
+    # TODO
     pass
 
 
-def dump_ceesim(obj):
-    pass
-
-
-def dump(obj: datastore, export_type=a2pats) -> None:
+def dump(obj: datastore, folder: str, export_type=a2pats) -> bool:
     '''Dump data dynmically
 
     :param obj: Datastore object
     :type obj: datastore-like object
+
+    :returns: True on success
+    :rtype: boolean
     '''
     assert issubclass(type(obj), datastore), 'Your data must be a datastore-like object!'
     if type(obj) is a2pats:

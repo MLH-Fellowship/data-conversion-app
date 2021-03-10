@@ -1,4 +1,5 @@
 from app.errors import DatastoreError
+from app.exporter import dump as dump_datastore
 from arrow import utcnow
 from json import dump
 from typing import TextIO, Union
@@ -85,6 +86,8 @@ class datastore:
         '''Create a datastore
         '''
         self.imported_data = imported_data
+        # TODO: Change logic if A2PATS importer written
+        self.ceesim_data = True
         self.models = list()
 
     def to_datastore(self, downgrade_peaceful=True) -> 'datastore':
@@ -117,17 +120,16 @@ class datastore:
             fp = open(fp, 'w')
         dump(self.imported_data, fp, indent=4, sort_keys=True)
     
-    def export(self, file: str) -> bool:
+    def export(self, folder: str) -> bool:
         '''Exports dynamically
 
-        :param file: File location to export to
-        :type file: str
+        :param folder: Folder location to export to
+        :type folder: str
 
         :returns: Success of export
         :rtype: bool
         '''
-        # TODO
-        return False
+        return dump_datastore(self, folder)
 
 
 class a2pats(datastore):
