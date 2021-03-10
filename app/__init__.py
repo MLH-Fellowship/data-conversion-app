@@ -40,16 +40,16 @@ class SIGNAL(model):
 
     def __init__(self, name, database, nato, system, version, mode, creation_date=utcnow()):
         self.database = database
-        self.classifcation = "UNCLASSIFIED"
+        self.classifcation = 'UNCLASSIFIED'
         self.nato = nato
         self.system = system
         self.version = version
         self.mode = mode
-        self.enable_doppler = "NO"
-        self.enable_multipath = "NO"
-        self.enable_mss = "NO"
+        self.enable_doppler = 'NO'
+        self.enable_multipath = 'NO'
+        self.enable_mss = 'NO'
 
-        super().__init__("SIGNAL", name, creation_date)
+        super().__init__('SIGNAL', name, creation_date)
 
 
 class PULSE(model):
@@ -58,7 +58,7 @@ class PULSE(model):
                  time_stagger, pri_timing_mode, pw_timing_mode,
                  use_local_freq, pri_fill, pw_fill, pulse_repeat_fill, dwell_time_fill,
                  attenuation_fill, frequency_fill, creation_date=utcnow()):
-        self.sig_model = "SEQUENCE REFERENCE"
+        self.sig_model = 'SEQUENCE REFERENCE'
         self.urf = use_ref_frequency
         self.urs = use_ref_scan
         self.non_coherent = non_coherent
@@ -74,7 +74,7 @@ class PULSE(model):
         self.a_fill = attenuation_fill
         self.f_fill = frequency_fill
 
-        super().__init__("PULSE", name, creation_date)
+        super().__init__('PULSE', name, creation_date)
 
 
 class datastore:
