@@ -58,7 +58,6 @@ def import_ceesim(fp: TextIO) -> ceesim:
     strip_xml_namespaces(itr)
     data = traverse_xml_tree(itr.root)
     store = ceesim(data)
-    # TODO: Add import models
     return store
 
 
