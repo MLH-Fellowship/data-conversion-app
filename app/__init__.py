@@ -33,8 +33,11 @@ class model:
         self.type = type
         self.name = name
         self.creation_date = creation_date
-        self.data = list()
+        self.data = kwargs
 
+
+# 2021.03.09 Gideon Tong:
+# I don't really think these SIGNAL or PULSE classes are necessary
 
 class SIGNAL(model):
 
