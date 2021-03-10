@@ -1,4 +1,4 @@
-from app import a2pats, ceesim, datastore, model
+from app import a2pats, ceesim, datastore
 from app.util.logging import logger
 from io import IOBase
 from typing import Iterator, Union, TextIO
