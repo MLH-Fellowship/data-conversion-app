@@ -104,7 +104,7 @@ class datastore:
         if type(fp) is str:
             fp = open(fp, 'w')
         dump(self.imported_data, fp, indent=4, sort_keys=True)
-    
+
     def export(self, folder: str) -> bool:
         '''Exports dynamically
 
@@ -121,6 +121,7 @@ class a2pats(datastore):
     '''Contains all generated signals in an A²PATS format
     '''
     pass
+
 
 class ceesim(datastore):
     '''Contains all generated signals in a CEESIM format
