@@ -90,23 +90,6 @@ class datastore:
         self.imported_type = imported_type
         self.models = list()
 
-    def to_datastore(self, downgrade_peaceful=True) -> 'datastore':
-        '''Convert a datastore child to a datastore parent.
-
-        :param downgrade_peaceful: Whether or not to downgrade peacefully when function is called
-        :type downgrade_peaceful: bool
-
-        :returns: Datastore object
-        :rtype: datastore
-
-        note:: Parent function should not be called in normal usage
-        '''
-        if downgrade_peaceful:
-            return self
-        else:
-            raise DatastoreError(
-                'You cannot call to_datastore on a parent datastore object!')
-
     def dump_imported_data(self, fp: Union[str, TextIO]) -> bool:
         '''Dumps imported data to a file
 
@@ -135,18 +118,9 @@ class datastore:
 class a2pats(datastore):
     '''Contains all generated signals in an A²PATS format
     '''
-
-    def to_datastore(self) -> datastore:
-        '''Initialize A²PATS to datastore
-        '''
-        # TODO
+    pass
 
 class ceesim(datastore):
     '''Contains all generated signals in a CEESIM format
     '''
-
-    def to_datastore(self) -> datastore:
-        '''Initialize CEESIM to datastore
-        '''
-        # TODO
-        pass
+    pass
