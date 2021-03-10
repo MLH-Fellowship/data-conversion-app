@@ -1,5 +1,5 @@
 from app import a2pats, ceesim, datastore
-from app.errors import DatastoreError
+from app.util.errors import DatastoreError
 from app.util.logging import logger
 from typing import Tuple, Union
 

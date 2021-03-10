@@ -1,4 +1,3 @@
-from app.errors import DatastoreError
 from app.exporter import dump as dump_datastore
 from arrow import utcnow
 from json import dump
