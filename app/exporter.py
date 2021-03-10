@@ -2,6 +2,7 @@ from app import a2pats, ceesim, datastore, model
 from app.util.logging import logger
 from arrow import get
 from arrow.arrow import Arrow
+from os import PathLike
 from typing import Union
 
 CONSTANTS = {
@@ -112,29 +113,46 @@ def to_str_section(data: model, sect='header') -> str:
         lines = top + [f'{data.type} MODEL:']
 
 
-def dump_a2pats(obj: a2pats, folder: str) -> bool:
+def dump_a2pats(obj: a2pats, folder: PathLike) -> bool:
+    '''Dump A2PATS object
+
+    :param obj: A2PATS object
+    :type obj: A2PATS-like object
+
+    :param folder: Folder location
+    :type folder: str
+
+    :returns: True on success
+    :rtype: boolean
+    '''
     # TODO
     return False
 
 
-def dump_ceesim(obj: ceesim, folder: str) -> bool:
+def dump_ceesim(obj: ceesim, folder: PathLike) -> bool:
     '''Dump CEESIM object
 
     :param obj: CEESIM object
     :type obj: CEESIM-like object
 
+    :param folder: Folder location
+    :type folder: str
+
     :returns: True on success:
     :rtype: boolean
     '''
     # TODO
-    pass
+    return False
 
 
-def dump(obj: datastore, folder: str, export_type=a2pats) -> bool:
+def dump(obj: datastore, folder: PathLike, export_type=a2pats) -> bool:
     '''Dump data dynmically
 
     :param obj: Datastore object
     :type obj: datastore-like object
+
+    :param folder: Folder location
+    :type folder: str
 
     :returns: True on success
     :rtype: boolean
