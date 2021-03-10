@@ -76,17 +76,21 @@ def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True
     :returns: Database object for typing
     :rtype: datastore or datastore-like
     '''
+    logger.debug('Generic importer called, automatically detecting import type')
     if downgrade_peaceful:
         if not issubclass(classtype, datastore):
             # Assume CEESIM import
+            logger.debug('Unable to determine type, assuming CEESIM')
             classtype = ceesim
         if type(fp) is str:
             logger.debug(f'Now opening file {fp} for import')
             try:
                 fp = open(fp, encoding='utf-8')
             except:
+                logger.debug('Failed to open, returning empty object')
                 return datastore()
         elif not isinstance(fp, IOBase):
+            logger.debug('Unrecognizable file pointer, returning empty object')
             return datastore()
     else:
         assert issubclass(
@@ -97,8 +101,10 @@ def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True
         assert isinstance(
             fp, IOBase), 'Your import_ call must provide a valid files-like pointer or file path!'
     if classtype is a2pats:
+        logger.debug('A2PATS file provided, importing as A2PATS')
         return import_a2pats(fp)
     elif classtype is ceesim:
+        logger.debug('CEESIM file provided, imporrting as CEESIM')
         return import_ceesim(fp)
     else:
         raise ValueError('This type of datastore isn\'t supported yet!')

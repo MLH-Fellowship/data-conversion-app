@@ -157,10 +157,13 @@ def dump(obj: datastore, folder: PathLike, export_type=a2pats) -> bool:
     :returns: True on success
     :rtype: boolean
     '''
+    logger.debug('Generic dump function called, auto-detcting type...')
     assert issubclass(type(obj), datastore), 'Your data must be a datastore-like object!'
     if type(obj) is a2pats:
+        logger.debug('Detected A2PATS, exporting as A2PATS')
         return dump_a2pats(obj)
     elif type(obj) is ceesim:
+        logger.debug('Detected CEESIM, exporting as CEESIM')
         return dump_ceesim(obj)
     assert type(obj) is not export_type, 'You cannot auto-dump a datastore object!'
 

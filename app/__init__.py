@@ -1,4 +1,5 @@
 from app.exporter import dump as dump_datastore
+from app.util.logging import logger
 from arrow import utcnow
 from json import dump
 from typing import TextIO, Union
@@ -101,6 +102,7 @@ class datastore:
         :returns: True on success
         :rtype: boolean
         '''
+        logger.info('Dumping imported data as JSON object...')
         if type(fp) is str:
             fp = open(fp, 'w')
         dump(self.imported_data, fp, indent=4, sort_keys=True)
