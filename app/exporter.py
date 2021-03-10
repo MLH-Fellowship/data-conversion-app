@@ -1,4 +1,4 @@
-from app import model 
+from app import a2pats, ceesim, datastore, model 
 from app.util.logging import logger
 from arrow import get
 from arrow.arrow import Arrow
@@ -78,8 +78,17 @@ def to_timestamp(time: Union[Arrow, str], downgrade_peaceful=True) -> str:
     return to_str(time)
 
 
-def to_str_section(data: model, sect="header") -> str:
+def to_str_section(data: model, sect='header') -> str:
     '''Create a header or model description for a model
+
+    :param data: Data to serialize
+    :type data: model
+
+    :param sect: Section type
+    :type sect: str
+
+    :returns: Serialized object
+    :rtype: str
     '''
     assert type(data) is model, 'You can only convert sections of entire models!'
     left = (CONSTANTS[sect]['length'] -
@@ -101,6 +110,28 @@ def to_str_section(data: model, sect="header") -> str:
         top = ['//' + title, f'{data.type} NOTES:   ""'] if data.type in \
             ["FREQUENCY", "INTRAPULSE"] else ['//' + title]
         lines = top + [f'{data.type} MODEL:']
+
+
+def dump_a2pats(obj):
+    pass
+
+
+def dump_ceesim(obj):
+    pass
+
+
+def dump(obj: datastore, export_type=a2pats) -> None:
+    '''Dump data dynmically
+
+    :param obj: Datastore object
+    :type obj: datastore-like object
+    '''
+    assert issubclass(type(obj), datastore), 'Your data must be a datastore-like object!'
+    if type(obj) is a2pats:
+        return dump_a2pats(obj)
+    elif type(obj) is ceesim:
+        return dump_ceesim(obj)
+    assert type(obj) is not export_type, 'You cannot auto-dump a datastore object!'
 
 
 if __name__ == '__main__':

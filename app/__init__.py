@@ -116,6 +116,18 @@ class datastore:
         if type(fp) is str:
             fp = open(fp, 'w')
         dump(self.imported_data, fp, indent=4, sort_keys=True)
+    
+    def export(self, file: str) -> bool:
+        '''Exports dynamically
+
+        :param file: File location to export to
+        :type file: str
+
+        :returns: Success of export
+        :rtype: bool
+        '''
+        # TODO
+        return False
 
 
 class a2pats(datastore):
@@ -127,19 +139,6 @@ class a2pats(datastore):
         '''
         # TODO
 
-    def export(self, file: str) -> bool:
-        '''Exports A²PATS to file
-
-        :param file: File location to export to
-        :type file: str
-
-        :returns: Success of export
-        :rtype: bool
-        '''
-        # TODO
-        return True
-
-
 class ceesim(datastore):
     '''Contains all generated signals in a CEESIM format
     '''
@@ -149,15 +148,3 @@ class ceesim(datastore):
         '''
         # TODO
         pass
-
-    def export(self, file: str) -> bool:
-        '''Exports CEESIM to file
-
-        :param file: File location to export to
-        :type file: str
-
-        :returns: Success of export
-        :rtype: bool
-        '''
-        # TODO
-        return True
