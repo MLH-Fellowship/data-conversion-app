@@ -1,5 +1,7 @@
 from app.errors import DatastoreError
 from arrow import utcnow
+from json import dump
+from typing import TextIO, Union
 
 ALLOWED_MODELS = {
     'SIGNAL',
@@ -31,7 +33,6 @@ class model:
         self.type = type
         self.name = name
         self.creation_date = creation_date
-        self.imported_data = dict()
         self.data = list()
 
 
@@ -80,9 +81,10 @@ class datastore:
     '''Contains all generated signals in a Pythonic format
     '''
 
-    def __init__(self):
+    def __init__(self, imported_data=dict()):
         '''Create a datastore
         '''
+        self.imported_data = imported_data
         self.models = list()
 
     def to_datastore(self, downgrade_peaceful=True) -> 'datastore':
@@ -101,6 +103,19 @@ class datastore:
         else:
             raise DatastoreError(
                 'You cannot call to_datastore on a parent datastore object!')
+
+    def dump_imported_data(self, fp: Union[str, TextIO]) -> bool:
+        '''Dumps imported data to a file
+
+        :param fp: File pointer
+        :type fp: str or file-like pointer
+
+        :returns: True on success
+        :rtype: boolean
+        '''
+        if type(fp) is str:
+            fp = open(fp, 'w')
+        dump(self.imported_data, fp, indent=4, sort_keys=True)
 
 
 class a2pats(datastore):

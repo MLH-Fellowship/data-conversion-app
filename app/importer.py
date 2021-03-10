@@ -39,6 +39,9 @@ def strip_xml_namespaces(itr: Iterator) -> None:
 
 def import_a2pats(fp: TextIO) -> a2pats:
     '''Import an A²PATS file for conversion
+
+    :param fp: File pointer
+    :type fp: File-like pointer
     '''
     # TODO
     pass
@@ -46,17 +49,16 @@ def import_a2pats(fp: TextIO) -> a2pats:
 
 def import_ceesim(fp: TextIO) -> ceesim:
     '''Import a CEESIM file for conversion
+
+    :param fp: File pointer
+    :type fp: File-like pointer
     '''
     logger.debug('CEESIM importer called, begining CEESIM import with XML file')
     itr = ElementTree.iterparse(fp)
     strip_xml_namespaces(itr)
-    store = ceesim()
-    # TODO: Add more models
-    scan_data = model('SCAN', 'type', 'name')
     data = traverse_xml_tree(itr.root)
-    # TODO: Replace type
-    # TODO: Replace name
-    store.models.append(scan_data)
+    store = ceesim(data)
+    # TODO: Add import models
     return store
 
 
@@ -64,7 +66,7 @@ def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True
     '''Import data dynamically
 
     :param fp: File pointer or string to import file
-    :type fp: str or TextIO
+    :type fp: str or file-like pointer
 
     :param classtype: Class type to import as (must be of instance datastore)
     :type classtype: datastore or datastore-like
