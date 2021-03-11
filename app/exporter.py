@@ -103,14 +103,14 @@ def to_str_section(data: model, sect='header') -> str:
         ['*' * lleft, data.type, CONSTANTS[sect]['title'], '*' * right])
 
     if sect == "header":
-        lines = [title, '', f' {"Model:":<9}{data.name}', '',
-                 f' {"Created:":<9}{to_timestamp(data.creation_date)}']
+        lines = [title, '', ' {:<9}{}'.format('Model:', data.name), '',
+                 ' {:<9}{}'.format('Created:', to_timestamp(data.creation_date))]
         return '\n'.join(['//' + line for line in lines])
 
     elif sect == "model_desc":
-        top = ['//' + title, f'{data.type} NOTES:   ""'] if data.type in \
+        top = ['//' + title, '{} NOTES:   ""'.format(data.type)] if data.type in \
             ["FREQUENCY", "INTRAPULSE"] else ['//' + title]
-        lines = top + [f'{data.type} MODEL:']
+        lines = top + ['{} MODEL:'.format(data.type)]
 
 
 def dump_a2pats(obj: a2pats, folder: PathLike) -> bool:
