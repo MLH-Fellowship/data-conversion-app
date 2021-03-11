@@ -6,6 +6,7 @@ from app.util import config as config_
 from app.util.logging import logger, set_up_logger
 from argparse import ArgumentParser
 from logging import DEBUG, INFO, ERROR, CRITICAL
+from sys import argv
 
 
 def convert(input_file: str, output_file: str) -> a2pats:
@@ -20,7 +21,8 @@ def convert(input_file: str, output_file: str) -> a2pats:
     :returns: A²PATS object (if successful)
     :rtype: a2pats
     '''
-    logger.debug('Main app converter called, using provided input and output files')
+    logger.debug(
+        'Main app converter called, using provided input and output files')
     input_data = import_(input_file, ceesim)
     output_data = convert_to_a2pats(input_data)
     success = dump_a2pats(output_data, output_file)
@@ -35,20 +37,33 @@ def parse_arguments():
     '''Parse arguments
     '''
     parser = ArgumentParser()
-    parser.add_argument('-v', '--verbose', action='count', help='Enable verbose mode, overrides -s')
-    parser.add_argument('-s', '--suppress', action='count', help='Supress logging, -ss to completely silence')
-    parser.add_argument('input', default=None, help='Input file to convert')
-    parser.add_argument('output', default=None, help='Output file after conversion')
+    parser.add_argument('-i', '--input', help='Input file to convert')
+    parser.add_argument('-o', '--output', help='Output file after conversion')
+    parser.add_argument('-v', '--verbose', action='count',
+                        help='Enable verbose mode, overrides -s')
+    parser.add_argument('-s', '--suppress', action='count',
+                        help='Supress logging, -ss to completely silence')
+    parser.add_argument('-w', '--server', action='store_true',
+                        help='Start the app in webserver mode')
+    if len(argv) == 1:
+        parser.print_help()
+        exit(2)
     args = parser.parse_args()
     if args.verbose:
         set_up_logger(DEBUG)
-    elif args.suppress > 1:
-        set_up_logger(CRITICAL)
     elif args.suppress:
-        set_up_logger(ERROR)
+        if args.suppress > 1:
+            set_up_logger(CRITICAL)
+        else:
+            set_up_logger(ERROR)
     else:
         set_up_logger(INFO)
-    print(args.input, args.output)
+    if args.server:
+        # TODO: If we have time
+        logger.error('This is coming in a future update!')
+        exit(2)
+    if args.input and args.output:
+        convert(args.input, args.output)
 
 
 if __name__ == '__main__':
