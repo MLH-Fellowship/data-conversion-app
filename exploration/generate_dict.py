@@ -35,8 +35,6 @@ def traverse_subtree(parent: et.Element, indent=0, values=False) -> dict:
     for child in parent:
         if child.text:
             text = child.text.strip()
-        if PRINT:
-            print(f'{"* " * indent}{child.tag} {f"({text})" if text else ""}')
         if values and text:
             data[child.tag] = text
         elif text:

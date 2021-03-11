@@ -83,7 +83,7 @@ def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True
             logger.debug('Unable to determine type, assuming CEESIM')
             classtype = ceesim
         if type(fp) is str:
-            logger.debug(f'Now opening file {fp} for import')
+            logger.debug('Now opening file {} for import'.format(fp))
             try:
                 fp = open(fp, encoding='utf-8')
             except:
@@ -96,7 +96,7 @@ def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True
         assert issubclass(
             classtype, datastore), 'Your import_ call must be of datastore or datastore-like type!'
         if type(fp) is str:
-            logger.debug(f'Now opening file {fp} for import')
+            logger.debug('Now opening file {} for import'.format(fp))
             fp = open(fp, encoding='utf-8')
         assert isinstance(
             fp, IOBase), 'Your import_ call must provide a valid files-like pointer or file path!'
