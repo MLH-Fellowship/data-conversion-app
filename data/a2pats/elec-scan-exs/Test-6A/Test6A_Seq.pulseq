@@ -1,0 +1,15 @@
+//************** PULSE SEQUENCE DEFINITION FILE *************
+//
+// Model:   Test6A_Seq
+//
+// Created: Mon Mar 8, 2021  9:45 AM		<xsd:elementname="LastUpdateDate"
+
+
+PULSE NOTES:        ""
+
+SCAN MODEL:         ""
+USE LOCAL SCAN:     NO
+  PULSE                            PULSE                          GROUP          DWELL TIME             SCAN       AZIMUTH   ELEVATION    CELL    TRACK  ATTENUATION
+  MODEL                            GROUP                          REPEAT           (MSEC)             COMMAND       (DEG)      (DEG)     NUMBER    ID       (DB)    
+
+  "Test6A_Pulse1"                                                                                                                                                                                                                                                   ""                                                         0              0.00000000       NONE          0.000     0.000          0     0      0.0000  

@@ -1,0 +1,74 @@
+//****************** PULSE DEFINITION FILE ******************
+//
+// Model:   Test6B_Pulse1
+//
+// Created: Mon Mar 8, 2021  9:54 AM	<xsd:elementname="LastUpdateDate"
+
+
+//********************** PULSE MODEL **********************
+
+PULSE NOTES:        ""		Always (Template)                    
+
+PULSE MODEL:        USER		If Dwell Kind = Pulse_Based <xsd:element name="DwellKind"
+
+PRI TIMING MODE:    TIME		Always (Template)                    
+
+PW TIMING MODE:     TIME		Always (Template)                    
+
+SEQUENCE REPEAT:    1			<xsd:element name="SegmentNumber" type="
+
+        PRI          PULSE WIDTH   PULSE REPEAT  ATTENUATION     FREQUENCY    
+       (USEC)          (USEC)                       (DB)           (MHZ)      
+          20.00000        2.00000         1000      0.0000        0.0000000000
+		PRI           <xsd:element name="Pri" type="ce:stDoublePri" minOccurs="0"/> and If Dwell Statuse = True <xsd:element name="DwellStatus" type="
+		PULSE WIDTH   <xsd:element name="PulseWidth" type="
+		Pulse Repeat  <xsd:element name="DwellTimePulses" 
+		Atennuation   Always (Template)
+           Frequency     Depends on Mode (In this Case - NO)
+
+SEQUENCE REPEAT:    1			<xsd:element name="SegmentNumber" type="	
+
+        PRI          PULSE WIDTH   PULSE REPEAT  ATTENUATION     FREQUENCY    
+       (USEC)          (USEC)                       (DB)           (MHZ)      
+          25.00000        2.00000          800      0.0000        0.0000000000
+		PRI           <xsd:element name="Pri" type="ce:stDoublePri" minOccurs="0"/> and If Dwell Statuse = True <xsd:element name="DwellStatus" type="
+		PULSE WIDTH   <xsd:element name="PulseWidth" type="
+		Pulse Repeat  <xsd:element name="DwellTimePulses" 
+		Atennuation   Always (Template)
+           Frequency     Depends on Mode (In this Case - NO)
+
+SEQUENCE REPEAT:    1			<xsd:element name="SegmentNumber" type="
+
+        PRI          PULSE WIDTH   PULSE REPEAT  ATTENUATION     FREQUENCY    
+       (USEC)          (USEC)                       (DB)           (MHZ)      
+          40.00000        2.00000          500      0.0000        0.0000000000
+		PRI           <xsd:element name="Pri" type="ce:stDoublePri" minOccurs="0"/> and If Dwell Statuse = True <xsd:element name="DwellStatus" type="
+		PULSE WIDTH   <xsd:element name="PulseWidth" type="
+		Pulse Repeat  <xsd:element name="DwellTimePulses" 
+		Atennuation   Always (Template)
+           Frequency     Depends on Mode (In this Case - NO)
+
+SEQUENCE REPEAT:    1			<xsd:element name="SegmentNumber" type="
+
+        PRI          PULSE WIDTH   PULSE REPEAT  ATTENUATION     FREQUENCY    
+       (USEC)          (USEC)                       (DB)           (MHZ)      
+          50.00000        2.00000          400      0.0000        0.0000000000
+		PRI           <xsd:element name="Pri" type="ce:stDoublePri" minOccurs="0"/> and If Dwell Statuse = True <xsd:element name="DwellStatus" type="
+		PULSE WIDTH   <xsd:element name="PulseWidth" type="
+		Pulse Repeat  <xsd:element name="DwellTimePulses" 
+		Atennuation   Always (Template)
+           Frequency     Depends on Mode (In this Case - NO)
+
+SEQUENCE REPEAT:    1			<xsd:element name="SegmentNumber" type="
+
+        PRI          PULSE WIDTH   PULSE REPEAT  ATTENUATION     FREQUENCY    
+       (USEC)          (USEC)                       (DB)           (MHZ)      
+          10.00000        2.00000         2000      0.0000        0.0000000000
+		PRI           <xsd:element name="Pri" type="ce:stDoublePri" minOccurs="0"/> and If Dwell Statuse = True <xsd:element name="DwellStatus" type="
+		PULSE WIDTH   <xsd:element name="PulseWidth" type="
+		Pulse Repeat  <xsd:element name="DwellTimePulses" 
+		Atennuation   Always (Template)
+           Frequency     Depends on Mode (In this Case - NO)
+
+USE LOCAL FREQ:     NO	Depends on Mode (In this Case - NO)
+

@@ -1,0 +1,56 @@
+//***************** ANTENNA DEFINITION FILE *****************
+//
+// Model:   Test7_ANT
+//
+// Created: Thu Mar 4, 2021  12:36 PM  <xsd:elementname="LastUpdateDate"
+
+
+//********************* ANTENNA MODEL *********************
+
+ANTENNA NOTES:      ""				Always (Template)
+	
+ANTENNA MODEL:      RECTANGULAR			<xsd:element name="AntennaModelKind" type="
+
+BEAM MODEL:         AZIMUTH			Always (Template)
+
+MAIN LOBE WIDTH:    2.000 DEG			<xsd:element name="AzBeamwidth" type="
+DISTRIBUTION:       SIN X/X			<xsd:element name="AzScanShape" type="
+PHASED ARRAY:       NO				Always (Template)
+
+            LOBE       LOBE      LOBE      LOBE 
+         ATTENUATION  WIDTH   SEPARATION  REPEAT
+            (DB)      (DEG)     (DEG)     COUNT 
+  +/-    24.0000     N/A       2.000        1 
+
+	Lobe Attenuation =		<xsd:element name="AzSidelobeRatio" type="ce:stDoubleAzSidelobeRatio"
+	Lobe Width = N/A =  		Always (Template)
+	Lobe Separation = 2.000 = 	Always (Template)
+	Lobe Repeat = 1 =		Always (Template)
+
+DEPTH OF NULLS DEPTH : 127.8250 DB		Always (Template)
+DEPTH OF NULLS SPAN : 0.000 DEG			Always (Template)
+
+LOW RESOLUTION:     10 POINTS PER DEG		Always (Template)
+HIGH RESOLUTION:    DISABLED			Always (Template)
+
+BEAM MODEL:         ELEVATION			Always (Template)
+
+MAIN LOBE WIDTH:    2.000 DEG			<xsd:element name="ElBeamwidth" type="ce:stDoubleElBeamwidth"
+DISTRIBUTION:       SIN X/X			<xsd:element name="ElScanShape" type="ce:stTextElScanShape" 
+PHASED ARRAY:       NO				Always (Template)
+
+            LOBE       LOBE      LOBE      LOBE 
+         ATTENUATION  WIDTH   SEPARATION  REPEAT
+            (DB)      (DEG)     (DEG)     COUNT 
+  +/-    24.0000     N/A       0.000        1 
+
+	Lobe Attenuation =		<xsd:element name="ElSidelobeRatio" type="
+	Lobe Width = N/A =  		Always (Template)
+	Lobe Separation = 2.000 = 	Always (Template)
+	Lobe Repeat = 1 =		Always (Template)
+
+DEPTH OF NULLS DEPTH : 127.8250 DB		Always (Template)
+DEPTH OF NULLS SPAN : 0.000 DEG			Always (Template)
+
+LOW RESOLUTION:     10 POINTS PER DEG		Always (Template)
+HIGH RESOLUTION:    DISABLED			Always (Template)

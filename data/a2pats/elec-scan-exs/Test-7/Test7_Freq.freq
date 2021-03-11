@@ -1,0 +1,25 @@
+//**************** FREQUENCY DEFINITION FILE ****************
+//
+// Model:   Test7_Freq
+//
+// Created: Thu Mar 4, 2021  12:31 PM		<xsd:elementname="LastUpdateDate"
+
+
+//******************** FREQUENCY MODEL ********************
+
+FREQUENCY NOTES:    ""				Always (Template)                    
+
+FREQUENCY MODEL:    STAGGER			<xsd:complexType name="ctFrequencySegmentSeries" and <xsd:element name="SegmentName"
+
+     FREQUENCY       DWELL TIME 
+       (MHZ)           (MSEC)   
+   9000.0000000000      20.00000	<xsd:element name="Frequency" and <xsd:element name="DwellKind" and <xsd:element name="DwellTime"
+   9200.0000000000      20.00000	<xsd:element name="Frequency" and <xsd:element name="DwellKind" and <xsd:element name="DwellTime"
+   9400.0000000000      20.00000	<xsd:element name="Frequency" and <xsd:element name="DwellKind" and <xsd:element name="DwellTime"
+   9600.0000000000      20.00000	<xsd:element name="Frequency" and <xsd:element name="DwellKind" and <xsd:element name="DwellTime"
+
+FREQUENCY FILL:     NONE				Always (Template)                    			
+
+DWELL TIME FILL:    STABLE				Depends on Mode (In this Case - STABLE)
+
+VALUE:              20.00000 MSEC		<xsd:element name="DwellTime"

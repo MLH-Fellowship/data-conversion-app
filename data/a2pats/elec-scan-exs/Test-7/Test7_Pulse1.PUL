@@ -1,0 +1,42 @@
+//****************** PULSE DEFINITION FILE ******************
+//
+// Model:   Test7_Pulse1
+//
+// Created: Mon Mar 8, 2021  9:52 AM  <xsd:elementname="LastUpdateDate"
+
+
+//********************** PULSE MODEL **********************
+
+PULSE NOTES:        ""					Always (Template)                    
+
+PULSE MODEL:        STAGGER			If Dwell Kind = Time_Based <xsd:element name="DwellKind"
+
+PRI TIMING MODE:    TIME					Always (Template)
+
+PW TIMING MODE:     TIME					Always (Template)                    
+
+        PRI              PW                   All entries in this section use the following:     INTRAPULSE           PULSE             DWELL           ATTENUATION     FREQUENCY    
+       (USEC)          (USEC)                  <xsd:element name="ExternalLink" type="             NAME              REPEAT            (MSEC)             (DB)           (GHZ)      
+          20.00000        2.00000              <xsd:element name="SegmentNumber" type="              N/A               N/A             20.00000000         0.0000     0.0000000000000
+          25.00000        2.00000              <xsd:element name="Pri" type="                        N/A               N/A             20.00000000         0.0000     0.0000000000000
+          40.00000        2.00000              <xsd:element name="DwellStatus" type="                N/A               N/A             20.00000000         0.0000     0.0000000000000
+          50.00000        2.00000              <xsd:element name="DwellTime" type="                  N/A               N/A             20.00000000         0.0000     0.0000000000000
+          10.00000        2.00000              <xsd:element name="PulseWidth" type="                 N/A               N/A             20.00000000         0.0000     0.0000000000000
+
+USE LOCAL FREQ:     NO				Depends on Mode (In this Case - NO)
+
+PRI FILL:           NONE				Always (Template)
+
+PW FILL:            STABLE				<xsd:complexType name="ctPulseSegmentSingle"
+
+VALUE:              2.00000 USEC		<xsd:element name="PulseWidth" type="	
+
+PULSE REPEAT FILL:  NONE				Always (Template)				  
+
+DWELL TIME FILL:    STABLE				Depends on Mode (In this Case - STABLE)
+
+VALUE:              20.00000000 MSEC		<xsd:element name="DwellTime" type="                  
+
+ATTENUATION FILL:   NONE				Always (Template)	
+
+FREQUENCY FILL:     NONE				Always (Template)	

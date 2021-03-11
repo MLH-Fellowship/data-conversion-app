@@ -1,0 +1,74 @@
+//****************** SCAN DEFINITION FILE *******************
+//
+// Model:   Test6A_Scan
+//
+// Created: Thu Mar 4, 2021  12:34 PM		<xsd:elementname="LastUpdateDate"
+
+
+//********************** SCAN MODEL ***********************
+
+SCAN NOTES:         ""			Always (Template)
+
+SCAN MODEL:         DWELL			<xsd:complexType name="ctScanSegmentElectronic">
+
+AZIMUTH OFFSET:     0.000 DEG		<xsd:element name="AzSutTrackRefOffset"
+ELEVATION OFFSET:   0.000 DEG		<xsd:element name="ElSutTrackRefOffset"
+
+****Note*** Applies to the list below:	<xsd:complexType name="ctBeamList">
+								 <xsd:element name="Beam" type="ce:ctBeam"/>
+  								  </xsd:sequence>
+
+     AZ       EL          DWELL       DWELL      SWITCH       SWITCH
+   OFFSET   OFFSET        TIME        TRIG        TIME         TRIG 
+   (DEG)     (DEG)       (MSEC)                  (MSEC)     
+    -8.000    0.000        20.000000   NO           0.000000    NO  
+    -6.000    0.000        20.000000   NO           0.000000    NO  
+    -4.000    0.000        20.000000   NO           0.000000    NO  
+    -2.000    0.000        20.000000   NO           0.000000    NO  
+     0.000    0.000        20.000000   NO           0.000000    NO  
+     2.000    0.000        20.000000   NO           0.000000    NO  
+     4.000    0.000        20.000000   NO           0.000000    NO  
+     6.000    0.000        20.000000   NO           0.000000    NO  
+     8.000    0.000        20.000000   NO           0.000000    NO  
+    10.000    0.000        20.000000   NO           0.000000    NO  
+    -8.000    2.000        20.000000   NO           0.000000    NO  
+    -6.000    2.000        20.000000   NO           0.000000    NO  
+    -4.000    2.000        20.000000   NO           0.000000    NO  
+    -2.000    2.000        20.000000   NO           0.000000    NO  
+     0.000    2.000        20.000000   NO           0.000000    NO  
+     2.000    2.000        20.000000   NO           0.000000    NO  
+     4.000    2.000        20.000000   NO           0.000000    NO  
+     6.000    2.000        20.000000   NO           0.000000    NO  
+     8.000    2.000        20.000000   NO           0.000000    NO  
+    10.000    2.000        20.000000   NO           0.000000    NO 
+
+
+****NOTE***  The following schema will be used for each line (Beam) above:
+</xsd:complexType>
+    <xsd:element name="BeamDirectionKind" type="
+AZ OFFSET (DEG)=		<xsd:element name="BeamAzPointAngle"				
+EL OFFSET (DEG)=		<xsd:element name="BeamElPointAngle"
+DWELL TIME (MSEC)=		<xsd:element name="BeamDwellStatus" 
+					<xsd:element name="BeamDwellKind"
+					<xsd:element name="BeamDwellTime"					 
+
+DWELL TRIG = NO			Always (Template)
+SWITCH TIME (MSEC)=		Depends on Mode (In this Case - 0.000000)
+DWELL TRIG = NO			Always (Template)
+
+AZ OFFSET FILL:     NONE			Always (Template)
+
+EL OFFSET FILL:     NONE			Always (Template)
+
+DWELL TIME FILL:    STABLE			Depends on Mode (In this Case - STABLE)
+
+VALUE:              20.000000 MSEC	<xsd:element name="BeamDwellTime"	
+
+SWITCH TIME FILL:   NONE			Always (Template)
+
+PULSE TRIG ENABLE:  NO			Always (Template)
+
+SCAN PERSPECTIVE:   TARGET			Always (Template)
+
+DEFAULT OFFSET:     0.0000 DBM		Always (Template)
+
