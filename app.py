@@ -1,13 +1,11 @@
 from app import a2pats, ceesim
 from app.converter import convert_to_a2pats
+from app.exporter import dump_a2pats
 from app.importer import import_
 from app.util import config as config_
 from app.util.logging import logger, set_up_logger
-from logging import DEBUG
-from sys import argv
-
-
-set_up_logger(DEBUG)
+from argparse import ArgumentParser
+from logging import DEBUG, INFO, ERROR, CRITICAL
 
 
 def convert(input_file: str, output_file: str) -> a2pats:
@@ -25,7 +23,7 @@ def convert(input_file: str, output_file: str) -> a2pats:
     logger.debug('Main app converter called, using provided input and output files')
     input_data = import_(input_file, ceesim)
     output_data = convert_to_a2pats(input_data)
-    success = output_data.export(output_file)
+    success = dump_a2pats(output_data, output_file)
     if success:
         return output_data
     else:
@@ -33,9 +31,28 @@ def convert(input_file: str, output_file: str) -> a2pats:
         return None
 
 
+def parse_arguments():
+    '''Parse arguments
+    '''
+    parser = ArgumentParser()
+    parser.add_argument('-v', '--verbose', action='count', help='Enable verbose mode, overrides -s')
+    parser.add_argument('-s', '--suppress', action='count', help='Supress logging, -ss to completely silence')
+    parser.add_argument('input', default=None, help='Input file to convert')
+    parser.add_argument('output', default=None, help='Output file after conversion')
+    args = parser.parse_args()
+    if args.verbose:
+        set_up_logger(DEBUG)
+    elif args.suppress > 1:
+        set_up_logger(CRITICAL)
+    elif args.suppress:
+        set_up_logger(ERROR)
+    else:
+        set_up_logger(INFO)
+    print(args.input, args.output)
+
+
 if __name__ == '__main__':
     config = config_('data/config.json')
     print(config.header)
     print(config.credits)
-    if len(argv) > 2:
-        convert(argv[1], argv[2])
+    parse_arguments()

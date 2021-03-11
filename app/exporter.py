@@ -1,4 +1,4 @@
-from app import a2pats, ceesim, datastore, model 
+from app import a2pats, ceesim, datastore, model
 from app.util.logging import logger
 from arrow import get
 from arrow.arrow import Arrow
@@ -101,10 +101,10 @@ def to_str_section(data: model, sect='header') -> str:
         right = lleft + 1
     title = ' '.join(
         ['*' * lleft, data.type, CONSTANTS[sect]['title'], '*' * right])
-    
+
     if sect == "header":
         lines = [title, '', f' {"Model:":<9}{data.name}', '',
-                f' {"Created:":<9}{to_timestamp(data.creation_date)}']
+                 f' {"Created:":<9}{to_timestamp(data.creation_date)}']
         return '\n'.join(['//' + line for line in lines])
 
     elif sect == "model_desc":
@@ -158,14 +158,16 @@ def dump(obj: datastore, folder: PathLike, export_type=a2pats) -> bool:
     :rtype: boolean
     '''
     logger.debug('Generic dump function called, auto-detcting type...')
-    assert issubclass(type(obj), datastore), 'Your data must be a datastore-like object!'
+    assert issubclass(
+        type(obj), datastore), 'Your data must be a datastore-like object!'
     if type(obj) is a2pats:
         logger.debug('Detected A2PATS, exporting as A2PATS')
         return dump_a2pats(obj)
     elif type(obj) is ceesim:
         logger.debug('Detected CEESIM, exporting as CEESIM')
         return dump_ceesim(obj)
-    assert type(obj) is not export_type, 'You cannot auto-dump a datastore object!'
+    assert type(
+        obj) is not export_type, 'You cannot auto-dump a datastore object!'
 
 
 if __name__ == '__main__':

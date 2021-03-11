@@ -1,4 +1,3 @@
-from app.exporter import dump as dump_datastore
 from app.util.logging import logger
 from arrow import utcnow
 from json import dump
@@ -107,25 +106,12 @@ class datastore:
             fp = open(fp, 'w')
         dump(self.imported_data, fp, indent=4, sort_keys=True)
 
-    def export(self, folder: str) -> bool:
-        '''Exports dynamically
-
-        :param folder: Folder location to export to
-        :type folder: str
-
-        :returns: Success of export
-        :rtype: bool
-        '''
-        return dump_datastore(self, folder)
-
 
 class a2pats(datastore):
     '''Contains all generated signals in an A²PATS format
     '''
-    pass
 
 
 class ceesim(datastore):
     '''Contains all generated signals in a CEESIM format
     '''
-    pass
