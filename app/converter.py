@@ -72,7 +72,7 @@ class functions:
         :returns: MHz Frequency
         :rtype: str
         '''
-        def to_str(f): return f'{f:.10f}'
+        def to_str(f): return '{:.10f}'.format(f)
         try:
             return to_str(float(frequency) / 1000000)
         except:
@@ -88,7 +88,7 @@ class functions:
         :returns: us
         :rtype: str
         '''
-        def to_str(f): return f'{f:.5f}'
+        def to_str(f): return '{:.5f}'.format(f)
         try:
             return to_str(float(time) * 1000000)
         except:
@@ -130,7 +130,7 @@ class functions:
         :returns: formatted degrees
         :rtype: str
         '''
-        def to_str(f): return f'{f:.3f} DEG'
+        def to_str(f): return '{:.3f} DEG'.format(f)
         try:
             return to_str(float(num))
         except:
@@ -146,7 +146,7 @@ class functions:
         :returns: formatted seconds
         :rtype: str
         '''
-        def to_str(f): return f'{f:.5f} SEC'
+        def to_str(f): return '{:.5f} SEC'.format(f)
         try:
             return to_str(float(num))
         except:
@@ -226,7 +226,7 @@ class functions:
         :returns: formatted hertz
         :rtype: str
         '''
-        def to_str(f): return f'{f:.5f} HZ'
+        def to_str(f): return '{:.5f} HZ'.format(f)
         try:
             return to_str(float(1/num))
         except:
