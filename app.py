@@ -39,12 +39,12 @@ def parse_arguments():
     parser = ArgumentParser()
     parser.add_argument('-i', '--input', help='Input file to convert')
     parser.add_argument('-o', '--output', help='Output file after conversion')
+    parser.add_argument('-w', '--server', action='store_true',
+                        help='Start the app in webserver mode')
     parser.add_argument('-v', '--verbose', action='count',
                         help='Enable verbose mode, overrides -s')
     parser.add_argument('-s', '--suppress', action='count',
                         help='Supress logging, -ss to completely silence')
-    parser.add_argument('-w', '--server', action='store_true',
-                        help='Start the app in webserver mode')
     if len(argv) == 1:
         parser.print_help()
         exit(2)
