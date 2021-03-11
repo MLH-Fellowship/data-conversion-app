@@ -1,4 +1,4 @@
-from app import a2pats, ceesim, datastore
+from app import a2pats, ceesim, datastore, model, ALLOWED_MODELS
 from app.util.errors import DatastoreError
 from app.util.logging import logger
 from typing import Tuple, Union
@@ -312,8 +312,11 @@ def convert_to_a2pats(data: ceesim) -> a2pats:
     :returns: A²PATS data
     :rtype: a2pats
     '''
-    # TODO
     store = a2pats(imported_type='A2PATS')
+    for type_ in ALLOWED_MODELS:
+        # TODO
+        next_model = model(type_, 'insert_name')
+        store.models.append(next_model)
     return store
 
 
