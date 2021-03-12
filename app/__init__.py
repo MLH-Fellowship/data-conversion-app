@@ -1,5 +1,5 @@
 from app.util.logging import logger
-from arrow import utcnow
+from datetime import datetime
 from json import dump
 from typing import TextIO, Union
 
@@ -17,7 +17,7 @@ class model:
     '''Contains a simple model
     '''
 
-    def __init__(self, type: str, name: str, creation_date=utcnow(), **kwargs):
+    def __init__(self, type: str, name: str, creation_date=datetime.utcnow(), **kwargs):
         '''Create a model
 
         :param type: Type of model

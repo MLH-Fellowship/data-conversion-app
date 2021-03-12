@@ -1,5 +1,5 @@
 from csv import DictReader
-from json import dump, load
+from json import load
 from typing import TextIO, Union
 
 

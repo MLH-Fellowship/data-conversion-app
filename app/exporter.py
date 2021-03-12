@@ -1,9 +1,7 @@
 from app import a2pats, ceesim, datastore, model
 from app.util.logging import logger
-from arrow import get
-from arrow.arrow import Arrow
+from datetime import datetime
 from os import PathLike
-from typing import Union
 
 CONSTANTS = {
     'header': {
@@ -56,11 +54,11 @@ sample_data = {
 # Boolean strings need switching to Python boolean
 
 
-def to_timestamp(time: Union[Arrow, str], downgrade_peaceful=True) -> str:
+def to_timestamp(time: datetime, downgrade_peaceful=True) -> str:
     '''Convert a time to an A²PATS-compatible timestamp (ISO 8601)
 
     :param time: Time or timestamp-like object
-    :type time: Arrow or str
+    :type time: datetime
 
     :param downgrade_peaceful: Whether or not to downgrade peacefully when function is called
     :type downgrade_peaceful: bool
@@ -68,14 +66,13 @@ def to_timestamp(time: Union[Arrow, str], downgrade_peaceful=True) -> str:
     :returns: ISO 8601 timestamp
     :rtype: str
     '''
-    def to_str(obj): return get(obj).format('ddd MMM DD, YYYY  hh:mm A')
+    def to_str(obj): return time.strftime('%a %b %d, %Y  %I:%M %p')
     if downgrade_peaceful:
         try:
             return to_str(time)
         except:
             return to_str(None)
-    assert type(time) in {
-        Arrow, str}, 'Timestamp must be either date object or string!'
+    assert type(time) is datetime, 'Timestamp must be either date object or string!'
     return to_str(time)
 
 
