@@ -6,7 +6,7 @@ from app.converter import convert_to_a2pats
 from app.exporter import dump_a2pats
 from app.importer import import_
 from app.util import config as config_
-from app.util.logging import logger, set_up_logger
+from app.util.logger import logger, set_up_logger
 from argparse import ArgumentParser
 from logging import DEBUG, INFO, ERROR, CRITICAL
 from sys import argv

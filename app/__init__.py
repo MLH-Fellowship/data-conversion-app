@@ -1,10 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from app.util.logging import logger
+from app.util.logger import logger
 from datetime import datetime
 from json import dump
-from typing import TextIO, Union
+from sys import version_info
+
+if version_info > (3, 5):
+    from typing import TextIO, Union
 
 ALLOWED_MODELS = {
     'SIGNAL',

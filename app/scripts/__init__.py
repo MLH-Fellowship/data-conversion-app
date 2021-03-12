@@ -3,7 +3,10 @@
 
 from csv import DictReader
 from json import load
-from typing import TextIO, Union
+from sys import version_info
+
+if version_info > (3, 5):
+    from typing import TextIO, Union
 
 
 CSV_HEADERS = ('TAG', 'FILE')

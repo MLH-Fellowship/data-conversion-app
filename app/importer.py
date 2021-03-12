@@ -2,10 +2,13 @@
 # -*- coding: utf-8 -*-
 
 from app import a2pats, ceesim, datastore
-from app.util.logging import logger
+from app.util.logger import logger
 from io import IOBase
-from typing import Iterator, Union, TextIO
+from sys import version_info
 from xml.etree import ElementTree
+
+if version_info > (3, 5):
+    from typing import Iterator, Union, TextIO
 
 
 def traverse_xml_tree(parent, stack_size=0):

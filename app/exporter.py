@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from app import a2pats, ceesim, datastore, model
-from app.util.logging import logger
+from app.util.logger import logger
 from datetime import datetime
 from os import PathLike
 
