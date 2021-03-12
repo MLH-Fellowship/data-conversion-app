@@ -54,7 +54,8 @@ sample_data = {
 # Boolean strings need switching to Python boolean
 
 
-def to_timestamp(time: datetime, downgrade_peaceful=True) -> str:
+def to_timestamp(time, downgrade_peaceful=True):
+    # type: (datetime, bool) -> str
     '''Convert a time to an A²PATS-compatible timestamp (ISO 8601)
 
     :param time: Time or timestamp-like object
@@ -76,7 +77,8 @@ def to_timestamp(time: datetime, downgrade_peaceful=True) -> str:
     return to_str(time)
 
 
-def to_str_section(data: model, sect='header') -> str:
+def to_str_section(data, sect='header'):
+    # type: (model, str) -> str
     '''Create a header or model description for a model
 
     :param data: Data to serialize
@@ -110,7 +112,8 @@ def to_str_section(data: model, sect='header') -> str:
         lines = top + ['{} MODEL:'.format(data.type)]
 
 
-def dump_a2pats(obj: a2pats, folder: PathLike) -> bool:
+def dump_a2pats(obj, folder):
+    # type: (a2pats, PathLike) -> bool
     '''Dump A2PATS object
 
     :param obj: A2PATS object
@@ -126,7 +129,8 @@ def dump_a2pats(obj: a2pats, folder: PathLike) -> bool:
     return False
 
 
-def dump_ceesim(obj: ceesim, folder: PathLike) -> bool:
+def dump_ceesim(obj, folder):
+    # type: (ceesim, PathLike) -> bool
     '''Dump CEESIM object
 
     :param obj: CEESIM object
@@ -142,7 +146,8 @@ def dump_ceesim(obj: ceesim, folder: PathLike) -> bool:
     return False
 
 
-def dump(obj: datastore, folder: PathLike, export_type=a2pats) -> bool:
+def dump(obj, folder, export_type=a2pats):
+    # type: (datastore, PathLike, type) -> bool
     '''Dump data dynmically
 
     :param obj: Datastore object
