@@ -17,7 +17,8 @@ class model:
     '''Contains a simple model
     '''
 
-    def __init__(self, type: str, name: str, creation_date=datetime.utcnow(), **kwargs):
+    def __init__(self, type, name, creation_date=datetime.utcnow(), **kwargs):
+        # type: (str, str, datetime, dict) -> model
         '''Create a model
 
         :param type: Type of model
@@ -41,6 +42,7 @@ class datastore:
     '''
 
     def __init__(self, imported_data=dict(), imported_type='CEESIM'):
+        # type: (dict, str) -> datastore
         '''Create a datastore
         '''
         self.imported_data = imported_data
@@ -48,7 +50,8 @@ class datastore:
         self.imported_type = imported_type
         self.models = list()
 
-    def dump_imported_data(self, fp: Union[str, TextIO]) -> bool:
+    def dump_imported_data(self, fp):
+        # type: (Union[str, TextIO]) -> bool
         '''Dumps imported data to a file
 
         :param fp: File pointer
