@@ -5,7 +5,8 @@ from typing import Iterator, Union, TextIO
 from xml.etree import ElementTree
 
 
-def traverse_xml_tree(parent: ElementTree.Element, stack_size=0) -> dict:
+def traverse_xml_tree(parent, stack_size=0):
+    # type: (ElementTree.Element, int) -> dict
     if stack_size == 0:
         logger.debug('Now traversing XML tree beginning at initial stack')
     data = dict()
@@ -23,7 +24,8 @@ def traverse_xml_tree(parent: ElementTree.Element, stack_size=0) -> dict:
     return data
 
 
-def strip_xml_namespaces(itr: Iterator) -> None:
+def strip_xml_namespaces(itr):
+    # type: (Iterator) -> None
     '''Strip XML namespaces from an iterator provided by XML parser
     '''
     logger.debug('Stripping all namespaces from imported CEESIM file')
@@ -37,7 +39,8 @@ def strip_xml_namespaces(itr: Iterator) -> None:
                 del element.attrib[attribute]
 
 
-def import_a2pats(fp: TextIO) -> a2pats:
+def import_a2pats(fp):
+    # type: (TextIO) -> a2pats
     '''Import an A²PATS file for conversion
 
     :param fp: File pointer
@@ -47,7 +50,8 @@ def import_a2pats(fp: TextIO) -> a2pats:
     pass
 
 
-def import_ceesim(fp: TextIO) -> ceesim:
+def import_ceesim(fp):
+    # type: (TextIO) -> ceesim
     '''Import a CEESIM file for conversion
 
     :param fp: File pointer
@@ -61,7 +65,8 @@ def import_ceesim(fp: TextIO) -> ceesim:
     return store
 
 
-def import_(fp: Union[str, TextIO], classtype=datastore, downgrade_peaceful=True) -> datastore:
+def import_(fp, classtype=datastore, downgrade_peaceful=True):
+    # type: (Union[str, TextIO], type, bool) -> datastore
     '''Import data dynamically
 
     :param fp: File pointer or string to import file
