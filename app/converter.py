@@ -9,7 +9,8 @@ class functions:
     '''
 
     @staticmethod
-    def extract_metadata(name: str) -> Tuple[str, str, str]:
+    def extract_metadata(name):
+        # type: (str) -> Tuple[str, str, str]
         '''Extracts A2PATS meta from CEESIM name
 
         :param name: ModeName of CEESIM
@@ -26,7 +27,8 @@ class functions:
             return name, name, name
 
     @staticmethod
-    def extract_name(name: str) -> str:
+    def extract_name(name):
+        # type: (str) -> str
         '''Extracts A2PATS name from CEESIM name
 
         :param name: ModelName of CEESIM
@@ -39,7 +41,8 @@ class functions:
         return this_name
 
     @staticmethod
-    def extract_version(name: str) -> str:
+    def extract_version(name):
+        # type: (str) -> str
         '''Extracts A2PATS version from CEESIM version
 
         :param name: ModelName of CEESIM
@@ -52,7 +55,8 @@ class functions:
         return version
 
     @staticmethod
-    def extract_mode(name: str) -> str:
+    def extract_mode(name):
+        # type: (str) -> str
         '''Extracts A2PATS mode from CEESIM name
 
         :param name: ModelName of CEESIM
@@ -63,7 +67,8 @@ class functions:
         '''
 
     @staticmethod
-    def to_mhz(frequency: Union[int, float, str]) -> str:
+    def to_mhz(frequency):
+        # type: (Union[int, float, str]) -> str
         '''Convert Hz to MHz
 
         :param frequency: Hz frequency
