@@ -9,7 +9,8 @@ from logging import DEBUG, INFO, ERROR, CRITICAL
 from sys import argv
 
 
-def convert(input_file: str, output_file: str) -> a2pats:
+def convert(input_file, output_file):
+    # type: (str, str) -> a2pats
     '''Load CEESIM file and convert to A²PATS
 
     :param input_file: Location of file to import
