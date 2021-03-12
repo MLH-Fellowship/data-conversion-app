@@ -8,5 +8,7 @@ class config:
     def __init__(self, fp):
         # type: (str) -> config
         self.data = load(open(fp))
-        self.header = self.data['header']
-        self.credits = self.data['credits']
+        for key in self.data:
+            if type(self.data[key]) is list:
+                self.data[key] = '\n'.join(self.data[key])
+            setattr(self, key, self.data[key])

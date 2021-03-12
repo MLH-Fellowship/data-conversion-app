@@ -37,10 +37,11 @@ def convert(input_file, output_file):
         return None
 
 
-def parse_arguments():
+def parse_arguments(epilog):
+    # type: (str) -> None
     '''Parse arguments
     '''
-    parser = ArgumentParser()
+    parser = ArgumentParser(epilog=epilog)
     parser.add_argument('-i', '--input', help='Input file to convert')
     parser.add_argument('-o', '--output', help='Output file after conversion')
     parser.add_argument('-w', '--server', action='store_true',
@@ -74,4 +75,4 @@ if __name__ == '__main__':
     config = config_('data/config.json')
     print(config.header)
     print(config.credits)
-    parse_arguments()
+    parse_arguments(config.help)
