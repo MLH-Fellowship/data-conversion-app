@@ -280,6 +280,15 @@ class functions:
 
         return " ".join([trig, arg]).replace("(X)", "X")
 
+    @staticmethod
+    def ant_model(emitterid): return "_".join([emitterid, "ANT"]) # TODO: if possible, we should really accept a second parameter here to
+    @staticmethod
+    def freq_model(emitterid): return "_".join([emitterid, "Freq"]) # consolidate these four very similar functions
+    @staticmethod
+    def seq_model(emitterid): return "_".join([emitterid, "Seq"])
+    @staticmethod
+    def scan_model(emitterid): return "_".join([emitterid, "Scan"])
+
 
 
 def convert(data: Union[a2pats, ceesim]) -> Union[a2pats, ceesim]:
