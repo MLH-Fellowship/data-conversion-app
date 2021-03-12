@@ -282,7 +282,7 @@ class functions:
         :rtype: str
         '''
 
-        assert kind == "Elliptical", f"Unexpected AntennaModelKind - {kind}"
+        assert kind == "Elliptical", "Unexpected AntennaModelKind - {}".format(kind)
         return "RECTANGULAR"
 
     @staticmethod

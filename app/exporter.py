@@ -4,7 +4,10 @@
 from app import a2pats, ceesim, datastore, model
 from app.util.logger import logger
 from datetime import datetime
-from os import PathLike
+from sys import version_info
+
+if version_info > (3, 5):
+    from os import PathLike
 
 CONSTANTS = {
     'header': {
