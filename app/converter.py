@@ -248,7 +248,8 @@ class functions:
             return to_str(0)
 
     @staticmethod
-    def offset_origin(eloffset: int) -> str:
+    def offset_origin(eloffset):
+        # type: (int) -> str
         '''Convert offset to origin
 
         :param eloffset: numerical track offset
@@ -264,7 +265,8 @@ class functions:
             return "TOP"
 
     @staticmethod
-    def model_kind(kind: str) -> str:
+    def model_kind(kind):
+        # type: (str) -> str
         '''Convert kind to model
 
         :param kind: kind of model (usually a shape)
@@ -277,9 +279,9 @@ class functions:
         assert kind == "Elliptical", f"Unexpected AntennaModelKind - {kind}"
         return "RECTANGULAR"
 
-    
     @staticmethod
-    def format_func(func: str) -> str:
+    def format_func(func):
+        # type: (str) -> str
         '''Convert func to formatted_func
 
         :param func: distribution function
@@ -296,17 +298,22 @@ class functions:
         return " ".join([trig, arg]).replace("(X)", "X")
 
     @staticmethod
-    def ant_model(emitterid): return "_".join([emitterid, "ANT"]) # TODO: if possible, we should really accept a second parameter here to
+    # TODO: if possible, we should really accept a second parameter here to
+    def ant_model(emitterid): return "_".join([emitterid, "ANT"])
+
     @staticmethod
-    def freq_model(emitterid): return "_".join([emitterid, "Freq"]) # consolidate these four very similar functions
+    # consolidate these four very similar functions
+    def freq_model(emitterid): return "_".join([emitterid, "Freq"])
+    
     @staticmethod
     def seq_model(emitterid): return "_".join([emitterid, "Seq"])
+    
     @staticmethod
     def scan_model(emitterid): return "_".join([emitterid, "Scan"])
 
 
-
-def convert(data: Union[a2pats, ceesim]) -> Union[a2pats, ceesim]:
+def convert(data):
+    # type: (Union[a2pats, ceesim]) -> Union[a2pats, ceesim]
     '''Dynamically convert data to its corresponding format
 
     :param data: A²PATS or CEESIM data to import
@@ -327,7 +334,8 @@ def convert(data: Union[a2pats, ceesim]) -> Union[a2pats, ceesim]:
             'Provided type to convert was neither of class a2pats or ceesim.')
 
 
-def convert_to_a2pats(data: ceesim) -> a2pats:
+def convert_to_a2pats(data):
+    # type: (ceesim) -> a2pats
     '''Convert CEESIM data to A²PATS data
 
     :param data: CEESIM data to import
@@ -344,7 +352,8 @@ def convert_to_a2pats(data: ceesim) -> a2pats:
     return store
 
 
-def convert_to_ceesim(data: a2pats) -> ceesim:
+def convert_to_ceesim(data):
+    # type: (a2pats) -> ceesim
     '''Convert A²PATS data to CEESIM data
 
     :param data: A²PATS data to import
