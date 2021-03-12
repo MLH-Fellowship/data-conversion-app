@@ -84,7 +84,8 @@ class functions:
             return to_str(0)
 
     @staticmethod
-    def to_usec(time: Union[int, float, str]) -> str:
+    def to_usec(time):
+        # type: (Union[int, float, str]) -> str
         '''Convert s to us
 
         :param time: s
@@ -100,7 +101,8 @@ class functions:
             return to_str(0)
 
     @staticmethod
-    def intra_status(modstatus: str) -> str:
+    def intra_status(modstatus):
+        # type: (str) -> str
         '''Convert modstatus to intrapulse model
 
         :param modstatus: XML ModeStatus tag
@@ -113,7 +115,8 @@ class functions:
         return "OFF" if modstatus == "false" else "REFERENCE"
 
     @staticmethod
-    def to_caps(word: str) -> str:
+    def to_caps(word):
+        # type: (str) -> str
         '''Convert string to all caps
 
         :param word: XML tag text
@@ -126,7 +129,8 @@ class functions:
         return word.upper()
 
     @staticmethod
-    def format_degree(num: Union[int, float]) -> str:
+    def format_degree(num):
+        # type: (Union[int, float]) -> str
         '''Convert degree single/double digit to triple decimal point
 
         :param num: number of degrees
@@ -142,7 +146,8 @@ class functions:
             return to_str(0)
 
     @staticmethod
-    def format_second(num: Union[int, float]) -> str:
+    def format_second(num):
+        # type: (Union[int, float]) -> str
         '''Convert degree single/double digit to five decimal points
 
         :param num: number of seconds
@@ -158,7 +163,8 @@ class functions:
             return to_str(0)
 
     @staticmethod
-    def dir_abrev(azdirection: str) -> str:
+    def dir_abrev(azdirection):
+        # type: (str) -> str
         '''Convert full direction to abbreviation
 
         :param num: direction as a word
@@ -174,7 +180,8 @@ class functions:
             return "CCW"
 
     @staticmethod
-    def motion_overlay(motion: str) -> str:
+    def motion_overlay(motion):
+        # type: (str) -> str
         '''Convert elevation scan motion to a2pats scan overlay model
 
         :param motion: direction of motion
@@ -190,7 +197,8 @@ class functions:
             return "OFF"
 
     @staticmethod
-    def dir_typ(eldirection: str) -> str:
+    def dir_typ(eldirection):
+        # type: (str) -> str
         '''Convert up/down direction to a2pats scan type
 
         :param num: direction up/down
@@ -206,7 +214,8 @@ class functions:
             return "SAWTOOTH"
 
     @staticmethod
-    def dir_dir(eldirection: str) -> str:
+    def dir_dir(eldirection):
+        # type: (str) -> str
         '''Convert up/down direction to vertical/horizontal
 
         :param num: direction up/down
@@ -222,7 +231,8 @@ class functions:
             return "HORIZONTAL"
 
     @staticmethod
-    def period_to_hz(num: Union[int, float]) -> str:
+    def period_to_hz(num):
+        # type: (Union[int, float]) -> str
         '''Convert period single/double in seconds to hertz with five decimal points
 
         :param num: period in seconds
