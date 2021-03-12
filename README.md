@@ -4,14 +4,18 @@
 
 ### Install Dependencies
 
+This program is currently compatible with major versions of Python, and is tested for verification on Python 2.7, 3.7, and 3.9.
+
+Note: Dependencies are only required for development. To use, no dependencies are required.
+
 ```bash
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Run in Development
 
 ```bash
-python3 app.py
+python app.py
 ```
 
 ### Testing for Development
@@ -19,7 +23,7 @@ python3 app.py
 * Start Python interactive interpreter:
 
   ```bash
-  python3
+  python
   ```
 
 * Examples:
