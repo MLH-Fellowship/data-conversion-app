@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from app import a2pats, ceesim, datastore
 from app.util.logging import logger
 from io import IOBase

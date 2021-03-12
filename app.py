@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from app import a2pats, ceesim
 from app.converter import convert_to_a2pats
 from app.exporter import dump_a2pats

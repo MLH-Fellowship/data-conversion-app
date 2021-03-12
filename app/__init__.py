@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from app.util.logging import logger
 from datetime import datetime
 from json import dump

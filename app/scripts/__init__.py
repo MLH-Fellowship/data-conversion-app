@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from csv import DictReader
 from json import load
 from typing import TextIO, Union

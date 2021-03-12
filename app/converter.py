@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from app import a2pats, ceesim, datastore, model, ALLOWED_MODELS
 from app.util.errors import DatastoreError
 from app.util.logging import logger
