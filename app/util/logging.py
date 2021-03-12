@@ -8,6 +8,7 @@ logger = logging.getLogger(LOGGING_NAME)
 
 
 def set_up_logger(level=DEFAULT_LEVEL, enable_file_log=False):
+    # type: (int, bool) -> None
     '''Set up logging
     '''
     logger.setLevel(logging.DEBUG)

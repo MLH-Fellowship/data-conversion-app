@@ -6,7 +6,8 @@ from typing import TextIO, Union
 CSV_HEADERS = ('TAG', 'FILE')
 
 
-def load_lookup_table(fp: Union[str, TextIO]) -> dict:
+def load_lookup_table(fp):
+    # type: (Union[str, TextIO]) -> dict
     '''Loads a previously dumped lookup table
 
     :param fp: Lookup table file
@@ -17,7 +18,8 @@ def load_lookup_table(fp: Union[str, TextIO]) -> dict:
     return load(fp)
 
 
-def dump_lookup_table(in_fp: Union[str, TextIO], out_fp: Union[str, TextIO]) -> dict:
+def dump_lookup_table(in_fp, out_fp):
+    # type: (Union[str, TextIO], Union[str, TextIO]) -> dict
     '''Dumps lookup table to a file
 
     :param in_fp: Input file
