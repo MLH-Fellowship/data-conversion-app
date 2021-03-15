@@ -4,7 +4,7 @@
 
 ### Install Dependencies
 
-This program is currently compatible with major versions of Python, and is tested for verification on Python 2.7, 3.7, and 3.9.
+This program is currently compatible with major versions of Python, and is tested for verification on Python 2.6, 2.7, 3.7, and 3.9.
 
 Note: Dependencies are only required for development. To use, no dependencies are required.
 
