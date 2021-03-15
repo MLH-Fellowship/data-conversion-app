@@ -31,6 +31,15 @@ def prepare_lookup_table(unparsed=DEFAULT_UNPARSED_TABLE_PATH, parsed=DEFAULT_TA
             return dict()
 
 
+def load_lookup_table(file):
+    # type: (str) -> None
+    '''Prints stats about the lookup table
+    '''
+    data = prepare_lookup_table(file)
+    logger.info(
+        'Table has {} keys and was successfully dumped'.format(len(data)))
+
+
 def convert(input_file, output_file):
     # type: (str, str) -> a2pats
     '''Load CEESIM file and convert to A²PATS
@@ -64,6 +73,7 @@ def parse_arguments(epilog):
     parser = ArgumentParser(add_help=False)
     parser.add_argument('-i', '--input', help='Input file to convert')
     parser.add_argument('-o', '--output', help='Output file after conversion')
+    parser.add_argument('-t', '--table', help='Dump a lookup table and exit')
     parser.add_argument('-w', '--server', action='store_true',
                         help='Start the app in server mode')
     parser.add_argument('-v', '--verbose', action='count',
@@ -89,6 +99,8 @@ def parse_arguments(epilog):
             set_up_logger(ERROR)
     else:
         set_up_logger(INFO)
+    if args.table:
+        load_lookup_table(args.table)
     if args.server:
         from app.server import server
         server.run()
