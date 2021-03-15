@@ -31,11 +31,11 @@ def prepare_lookup_table(unparsed=DEFAULT_UNPARSED_TABLE_PATH, parsed=DEFAULT_TA
             return dict()
 
 
-def load_lookup_table(file):
+def print_lookup_table(file):
     # type: (str) -> None
     '''Prints stats about the lookup table
     '''
-    data = prepare_lookup_table(file)
+    data = dump_lookup_table(file, DEFAULT_TABLE_PATH)
     logger.info(
         'Table has {} keys and was successfully dumped'.format(len(data)))
 
@@ -100,7 +100,7 @@ def parse_arguments(epilog):
     else:
         set_up_logger(INFO)
     if args.table:
-        load_lookup_table(args.table)
+        print_lookup_table(args.table)
     if args.server:
         from app.server import server
         server.run()

@@ -1,0 +1,467 @@
+{
+    "": {
+        "ANT": {
+            "DEFAULT": "AZIMUTH",
+            "FILE": "ANT",
+            "FUNCTION": "",
+            "LABEL": "BEAM MODEL",
+            "PRIORITY": "4",
+            "SECTION": "ANTENNA MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": ""
+        }
+    },
+    "ANT": {
+        "DEFAULT": "ELEVATION",
+        "FILE": "ANT",
+        "FUNCTION": "",
+        "LABEL": "BEAM MODEL",
+        "PRIORITY": "19",
+        "SECTION": "ANTENNA MODEL",
+        "STRING": "FALSE",
+        "TABLE": "FALSE",
+        "TAG": ""
+    },
+    "AntennaModelKind": {
+        "ANT": {
+            "DEFAULT": "RECTANGULAR",
+            "FILE": "ANT",
+            "FUNCTION": "model_kind",
+            "LABEL": "ANTENNA MODEL",
+            "PRIORITY": "2",
+            "SECTION": "ANTENNA MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "AntennaModelKind"
+        }
+    },
+    "AzBeamwidth": {
+        "ANT": {
+            "DEFAULT": "3.000 DEG",
+            "FILE": "ANT",
+            "FUNCTION": "format_degree",
+            "LABEL": "MAIN LOBE WIDTH",
+            "PRIORITY": "6",
+            "SECTION": "ANTENNA MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "AzBeamwidth"
+        }
+    },
+    "AzDirection": {
+        "SCAN": {
+            "DEFAULT": "CW",
+            "FILE": "SCAN",
+            "FUNCTION": "dir_abrev",
+            "LABEL": "ROTATION",
+            "PRIORITY": "7",
+            "SECTION": "SCAN MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "AzDirection"
+        }
+    },
+    "AzInitialBeamOfset": {
+        "SCAN": {
+            "DEFAULT": "0.000 DEG",
+            "FILE": "SCAN",
+            "FUNCTION": "format_degree",
+            "LABEL": "AZIMUTH OFFSET",
+            "PRIORITY": "4",
+            "SECTION": "SCAN MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "AzInitialBeamOfset"
+        }
+    },
+    "AzScanKind": {
+        "SCAN": {
+            "DEFAULT": "CIRCULAR",
+            "FILE": "SCAN",
+            "FUNCTION": "to_caps",
+            "LABEL": "SCAN MODEL",
+            "PRIORITY": "2",
+            "SECTION": "SCAN MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "AzScanKind"
+        }
+    },
+    "AzScanPeriod": {
+        "SCAN": {
+            "DEFAULT": "1.00000 SEC",
+            "FILE": "SCAN",
+            "FUNCTION": "format_second",
+            "LABEL": "SCAN PERIOD",
+            "PRIORITY": "6",
+            "SECTION": "SCAN MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "AzScanPeriod"
+        }
+    },
+    "AzScanShape": {
+        "ANT": {
+            "DEFAULT": "SIN X/X",
+            "FILE": "ANT",
+            "FUNCTION": "format_func",
+            "LABEL": "DISTRIBUTION",
+            "PRIORITY": "7",
+            "SECTION": "ANTENNA MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "AzScanShape"
+        }
+    },
+    "AzSidelobeRatio": {
+        "ANT": {
+            "DEFAULT": "N/A",
+            "FILE": "ANT",
+            "FUNCTION": "",
+            "LABEL": "LOBE ATENNUATION (DB)",
+            "PRIORITY": "10",
+            "SECTION": "ANTENNA MODEL",
+            "STRING": "FALSE",
+            "TABLE": "TRUE",
+            "TAG": "AzSidelobeRatio"
+        }
+    },
+    "ComplexPriState": {
+        "PUL": {
+            "DEFAULT": "TIME",
+            "FILE": "PUL",
+            "FUNCTION": "",
+            "LABEL": "PRI TIMING MODE",
+            "PRIORITY": "4",
+            "SECTION": "PULSE MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ComplexPriState"
+        }
+    },
+    "DEFAULT": "0.00000 MSEC",
+    "DwellStatus": {
+        "PUL": {
+            "DEFAULT": "TIME",
+            "FILE": "PUL",
+            "FUNCTION": "",
+            "LABEL": "PW TIMING MODE",
+            "PRIORITY": "6",
+            "SECTION": "PULSE MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "DwellStatus"
+        }
+    },
+    "DwellTime": {
+        "FREQ": {
+            "DEFAULT": "0.000000000",
+            "FILE": "FREQ",
+            "FUNCTION": "to_usec",
+            "LABEL": "DWELL TIME (MSEC)",
+            "PRIORITY": "11",
+            "SECTION": "FREQUENCY MODEL",
+            "STRING": "FALSE",
+            "TABLE": "TRUE",
+            "TAG": "DwellTime"
+        }
+    },
+    "ElBeamwidth": {
+        "ANT": {
+            "DEFAULT": "3.000 DEG",
+            "FILE": "ANT",
+            "FUNCTION": "format_degree",
+            "LABEL": "MAIN LOBE WIDTH",
+            "PRIORITY": "21",
+            "SECTION": "ANTENNA MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ElBeamwidth"
+        }
+    },
+    "ElDirection": {
+        "SCAN": {
+            "DEFAULT": "TRIANGULAR",
+            "FILE": "SCAN",
+            "FUNCTION": "dir_typ",
+            "LABEL": "TYPE",
+            "PRIORITY": "12",
+            "SECTION": "SCAN MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ElDirection"
+        }
+    },
+    "ElInitialBeamOffset": {
+        "SCAN": {
+            "DEFAULT": "45.000 DEG",
+            "FILE": "SCAN",
+            "FUNCTION": "format_degree",
+            "LABEL": "ELEVATION OFFSET",
+            "PRIORITY": "5",
+            "SECTION": "SCAN MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ElInitialBeamOffset"
+        }
+    },
+    "ElScanMotion": {
+        "SCAN": {
+            "DEFAULT": "NODDING",
+            "FILE": "SCAN",
+            "FUNCTION": "motion_overlay",
+            "LABEL": "OVERLAY MODEL",
+            "PRIORITY": "11",
+            "SECTION": "SCAN MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ElScanMotion"
+        }
+    },
+    "ElScanPeriod": {
+        "SCAN": {
+            "DEFAULT": "30.00000 HZ",
+            "FILE": "SCAN",
+            "FUNCTION": "period_to_hz",
+            "LABEL": "SCAN RATE",
+            "PRIORITY": "16",
+            "SECTION": "SCAN MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ElScanPeriod"
+        }
+    },
+    "ElScanShape": {
+        "ANT": {
+            "DEFAULT": "SIN X/X",
+            "FILE": "ANT",
+            "FUNCTION": "format_func",
+            "LABEL": "DISTRIBUTION",
+            "PRIORITY": "22",
+            "SECTION": "ANTENNA MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ElScanShape"
+        }
+    },
+    "ElSectorWidth": {
+        "SCAN": {
+            "DEFAULT": "90.000 DEG",
+            "FILE": "SCAN",
+            "FUNCTION": "format_degree",
+            "LABEL": "SPAN",
+            "PRIORITY": "15",
+            "SECTION": "SCAN MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ElSectorWidth"
+        }
+    },
+    "ElSidelobeRatio": {
+        "ANT": {
+            "DEFAULT": "N/A",
+            "FILE": "ANT",
+            "FUNCTION": "",
+            "LABEL": "LOBE ATENNUATION (DB)",
+            "PRIORITY": "25",
+            "SECTION": "ANTENNA MODEL",
+            "STRING": "FALSE",
+            "TABLE": "TRUE",
+            "TAG": "ElSidelobeRatio"
+        }
+    },
+    "ElTrackOffset": {
+        "SCAN": {
+            "DEFAULT": "BOTTOM",
+            "FILE": "SCAN",
+            "FUNCTION": "offset_origin",
+            "LABEL": "ORIGIN",
+            "PRIORITY": "14",
+            "SECTION": "SCAN MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ElTrackOffset"
+        }
+    },
+    "EmitterId": {
+        "SIG": {
+            "DEFAULT": "SIG EXPORT",
+            "FILE": "SIG",
+            "FUNCTION": "",
+            "LABEL": "DATABASE NAME",
+            "PRIORITY": "2",
+            "SECTION": "SIGNAL IDENTIFICATION",
+            "STRING": "TRUE",
+            "TABLE": "FALSE",
+            "TAG": "EmitterId"
+        }
+    },
+    "EmitterName": {
+        "SIG": {
+            "DEFAULT": "EMITTER",
+            "FILE": "SIG",
+            "FUNCTION": "",
+            "LABEL": "NATO NAME",
+            "PRIORITY": "4",
+            "SECTION": "SIGNAL IDENTIFICATION",
+            "STRING": "TRUE",
+            "TABLE": "FALSE",
+            "TAG": "EmitterName"
+        }
+    },
+    "FILE": "FREQ",
+    "FREQ": {
+        "DEFAULT": "A123Z_EMITTER01",
+        "FILE": "FREQ",
+        "FUNCTION": "",
+        "LABEL": "Model",
+        "PRIORITY": "0",
+        "SECTION": "Main",
+        "STRING": "FALSE",
+        "TABLE": "FALSE",
+        "TAG": "ModeName"
+    },
+    "FUNCTION": "to_usec",
+    "Frequency": {
+        "PUL": {
+            "DEFAULT": "0",
+            "FILE": "PUL",
+            "FUNCTION": "to_mhz",
+            "LABEL": "FREQUENCY (MHZ)",
+            "PRIORITY": "8",
+            "SECTION": "PULSE MODEL",
+            "STRING": "FALSE",
+            "TABLE": "TRUE",
+            "TAG": "Frequency"
+        }
+    },
+    "LABEL": "VALUE",
+    "LastUpdateDate": {
+        "ANT": {
+            "DEFAULT": "",
+            "FILE": "ANT",
+            "FUNCTION": "to_timestamp",
+            "LABEL": "Created",
+            "PRIORITY": "2",
+            "SECTION": "Main",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "LastUpdateDate"
+        }
+    },
+    "ModStatus": {
+        "PUL": {
+            "DEFAULT": "",
+            "FILE": "PUL",
+            "FUNCTION": "",
+            "LABEL": "INTRAPULSE NAME",
+            "PRIORITY": "8",
+            "SECTION": "PULSE MODEL",
+            "STRING": "TRUE",
+            "TABLE": "TRUE",
+            "TAG": "ModStatus"
+        }
+    },
+    "ModeName": {
+        "ANT": {
+            "DEFAULT": "A123Z_EMITTER01",
+            "FILE": "ANT",
+            "FUNCTION": "",
+            "LABEL": "Model",
+            "PRIORITY": "0",
+            "SECTION": "Main",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ModeName"
+        }
+    },
+    "PRIORITY": "24",
+    "PUL": {
+        "DEFAULT": "A123Z_EMITTER01",
+        "FILE": "PUL",
+        "FUNCTION": "",
+        "LABEL": "Model",
+        "PRIORITY": "0",
+        "SECTION": "Main",
+        "STRING": "FALSE",
+        "TABLE": "FALSE",
+        "TAG": "ModeName"
+    },
+    "PULSEQ": {
+        "DEFAULT": "A123Z_EMITTER01",
+        "FILE": "PULSEQ",
+        "FUNCTION": "",
+        "LABEL": "Model",
+        "PRIORITY": "0",
+        "SECTION": "Main",
+        "STRING": "FALSE",
+        "TABLE": "FALSE",
+        "TAG": "ModeName"
+    },
+    "Pri": {
+        "PUL": {
+            "DEFAULT": "0",
+            "FILE": "PUL",
+            "FUNCTION": "to_usec",
+            "LABEL": "PRI (USEC)",
+            "PRIORITY": "8",
+            "SECTION": "PULSE MODEL",
+            "STRING": "FALSE",
+            "TABLE": "TRUE",
+            "TAG": "Pri"
+        }
+    },
+    "PulseWidth": {
+        "PUL": {
+            "DEFAULT": "0",
+            "FILE": "PUL",
+            "FUNCTION": "to_usec",
+            "LABEL": "PW (USEC)",
+            "PRIORITY": "8",
+            "SECTION": "PULSE MODEL",
+            "STRING": "FALSE",
+            "TABLE": "TRUE",
+            "TAG": "PulseWidth"
+        }
+    },
+    "SCAN": {
+        "DEFAULT": "A123Z_EMITTER01",
+        "FILE": "SCAN",
+        "FUNCTION": "",
+        "LABEL": "Model",
+        "PRIORITY": "0",
+        "SECTION": "Main",
+        "STRING": "FALSE",
+        "TABLE": "FALSE",
+        "TAG": "ModeName"
+    },
+    "SECTION": "FREQUENCY MODEL",
+    "SIG": {
+        "DEFAULT": "REFERENCE",
+        "FILE": "SIG",
+        "FUNCTION": "",
+        "LABEL": "ANTENNA MODEL",
+        "PRIORITY": "0",
+        "SECTION": "ANTENNA MODEL",
+        "STRING": "FALSE",
+        "TABLE": "FALSE",
+        "TAG": ""
+    },
+    "STRING": "FALSE",
+    "SegmentName": {
+        "FREQ": {
+            "DEFAULT": "STABLE",
+            "FILE": "FREQ",
+            "FUNCTION": "",
+            "LABEL": "FREQUENCY MODEL",
+            "PRIORITY": "9",
+            "SECTION": "FREQUENCY MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "SegmentName"
+        }
+    },
+    "TABLE": "FALSE",
+    "TAG": "DwellTime"
+}

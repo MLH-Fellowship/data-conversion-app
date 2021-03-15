@@ -48,9 +48,11 @@ def dump_lookup_table(in_fp, out_fp):
         for header in CSV_HEADERS:
             assert header in row, 'Input file is not a recognized format!'
             if row[header] not in frame:
+                # FIXME: Does not allow multiple rows with the same name
                 frame[row[header]] = dict()
                 frame = frame[row[header]]
-    dump(lookup_table, out_fp)
+        frame.update(row)
+    dump(lookup_table, out_fp, indent=4, sort_keys=True)
     return lookup_table
 
 
