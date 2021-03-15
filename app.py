@@ -41,7 +41,7 @@ def parse_arguments(epilog):
     # type: (str) -> None
     '''Parse arguments
     '''
-    parser = ArgumentParser(epilog=epilog)
+    parser = ArgumentParser(add_help=False)
     parser.add_argument('-i', '--input', help='Input file to convert')
     parser.add_argument('-o', '--output', help='Output file after conversion')
     parser.add_argument('-w', '--server', action='store_true',
@@ -50,10 +50,16 @@ def parse_arguments(epilog):
                         help='Enable verbose mode, overrides -s')
     parser.add_argument('-s', '--suppress', action='count',
                         help='Supress logging, -ss to completely silence')
+    parser.add_argument('-h', '--help', action='store_true',
+                        help='Show this help message and exit')
     if len(argv) == 1:
         parser.print_help()
         exit(2)
     args = parser.parse_args()
+    if args.help:
+        parser.print_help()
+        print(epilog)
+        exit()
     if args.verbose:
         set_up_logger(DEBUG)
     elif args.suppress:
