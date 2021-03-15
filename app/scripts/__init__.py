@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from csv import DictReader
-from json import load
+from json import dump, load
 from sys import version_info
 
 if version_info > (3, 5):
@@ -40,7 +40,7 @@ def dump_lookup_table(in_fp, out_fp):
     if type(in_fp) is str:
         in_fp = open(in_fp)
     if type(out_fp) is str:
-        out_fp = open(out_fp)
+        out_fp = open(out_fp, 'w')
     in_reader = DictReader(in_fp)
     lookup_table = dict()
     for row in in_reader:
@@ -50,6 +50,8 @@ def dump_lookup_table(in_fp, out_fp):
             if row[header] not in frame:
                 frame[row[header]] = dict()
                 frame = frame[row[header]]
+    dump(lookup_table, out_fp)
+    return lookup_table
 
 
 if __name__ == '__main__':

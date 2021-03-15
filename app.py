@@ -5,11 +5,30 @@ from app import a2pats, ceesim
 from app.converter import convert_to_a2pats
 from app.exporter import dump_a2pats
 from app.importer import import_
+from app.scripts import load_lookup_table, dump_lookup_table
 from app.util import config as config_
 from app.util.logger import logger, set_up_logger
 from argparse import ArgumentParser
 from logging import DEBUG, INFO, ERROR, CRITICAL
+from os.path import isfile
 from sys import argv
+
+
+DEFAULT_UNPARSED_TABLE_PATH = 'data/table.csv'
+DEFAULT_TABLE_PATH = 'data/table.json'
+
+
+def prepare_lookup_table(unparsed=DEFAULT_UNPARSED_TABLE_PATH, parsed=DEFAULT_TABLE_PATH):
+    # type: (str, str) -> dict
+    '''Prepares a lookup table
+    '''
+    if isfile(parsed):
+        return load_lookup_table(parsed)
+    else:
+        if isfile(unparsed):
+            return dump_lookup_table(unparsed, parsed)
+        else:
+            return dict()
 
 
 def convert(input_file, output_file):
@@ -27,7 +46,8 @@ def convert(input_file, output_file):
     '''
     logger.debug(
         'Main app converter called, using provided input and output files')
-    input_data = import_(input_file, ceesim)
+    lookup_table = prepare_lookup_table()
+    input_data = import_(input_file, ceesim)  # -> CEESIM object
     output_data = convert_to_a2pats(input_data)
     success = dump_a2pats(output_data, output_file)
     if success:
