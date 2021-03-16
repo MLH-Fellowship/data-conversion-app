@@ -340,22 +340,6 @@ def convert(data):
             'Provided type to convert was neither of class a2pats or ceesim.')
 
 
-def flatten_table(table):
-    # type: (dict) -> dict
-    '''Flattens a lookup table for speed optimization
-    '''
-    # TODO
-    return dict()
-
-
-def search_table(table, flattened_table, query):
-    # type: (dict, dict, str) -> str
-    '''Searches a table for a query
-    '''
-    # TODO
-    return str()
-
-
 def traverse_data_and_convert(data, table):
     # type: (dict, dict) -> dict
     '''Traverses a dictionary and converts it
@@ -375,7 +359,6 @@ def convert_to_a2pats(data, table):
     :rtype: a2pats
     '''
     store = a2pats(imported_type='A2PATS')
-    flattened_table = flatten_table(table)
     for type_ in ALLOWED_MODELS:
         # TODO
         next_model = model(type_, 'insert_name')
