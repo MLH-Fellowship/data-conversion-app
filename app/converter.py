@@ -355,7 +355,9 @@ def convert_one_key(lookup_data, value):
     if FUNC_HDR in lookup_data:
         funcp_data = getattr(functions, lookup_data[FUNC_HDR])(value)
         if lookup_data[STRING_HDR]:
-            pass
+            return '"{}"'.format(funcp_data)
+        else:
+            return funcp_data
     else:
         return value
 

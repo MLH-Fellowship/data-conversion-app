@@ -11,6 +11,8 @@ if version_info > (3, 5):
 
 BOOLEANS = {'TRUE': True, 'FALSE': False}
 CSV_HEADERS = ('TAG', 'FILE')
+TABLE_MULTI_HDR = 'MULTI'
+TABLE_DATA_HDR = 'DATA'
 
 
 def load_lookup_table(fp):
@@ -55,13 +57,13 @@ def dump_lookup_table(in_fp, out_fp):
                 frame[row[header]] = dict()
             frame = frame[row[header]]
         if len(frame) > 0:
-            if 'MULTI' in frame:
-                frame['DATA'].append(row)
+            if TABLE_MULTI_HDR in frame:
+                frame[TABLE_DATA_HDR].append(row)
             else:
                 last_row = frame.copy()
                 frame.clear()
-                frame['MULTI'] = True
-                frame['DATA'] = [last_row, row]
+                frame[TABLE_MULTI_HDR] = True
+                frame[TABLE_DATA_HDR] = [last_row, row]
         else:
             frame.update(row)
     dump(lookup_table, out_fp, indent=4, sort_keys=True)
