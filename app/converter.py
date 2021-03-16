@@ -10,7 +10,9 @@ if version_info > (3, 5):
     from typing import Tuple, Union
 
 
+FUNC_HDR = 'FUNCTION'
 INTRAPULSE_NAME = 'INP'
+STRING_HDR = 'STRING'
 TABLE_LIST = 'MULTI'
 
 
@@ -345,6 +347,19 @@ def convert(data):
             'Provided type to convert was neither of class a2pats or ceesim.')
 
 
+def convert_one_key(lookup_data, value):
+    # type: (dict, str) -> str
+    '''Converts one key given the table lookup parameters
+    '''
+    # TODO: Table Handler
+    if FUNC_HDR in lookup_data:
+        funcp_data = getattr(functions, lookup_data[FUNC_HDR])(value)
+        if lookup_data[STRING_HDR]:
+            pass
+    else:
+        return value
+
+
 def generate_intrapulse(data, table):
     # type: (dict, dict) -> dict
     '''Converts intrapulse signals in an imported table using a lookup table
@@ -358,7 +373,7 @@ def generate_intrapulse(data, table):
             else:
                 # TODO: What if table is flat
                 pass
-    funcp = getattr(functions, '')
+    # TODO: Return data
 
 
 def convert_to_a2pats(data, table):

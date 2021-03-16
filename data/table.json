@@ -9,8 +9,8 @@
                     "LABEL": "BEAM MODEL",
                     "PRIORITY": "4",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -20,8 +20,8 @@
                     "LABEL": "BEAM MODEL",
                     "PRIORITY": "19",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -31,8 +31,8 @@
                     "LABEL": "PHASED ARRAY",
                     "PRIORITY": "10",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -42,8 +42,8 @@
                     "LABEL": "PHASED ARRAY",
                     "PRIORITY": "31",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -53,8 +53,8 @@
                     "LABEL": "DEPTH OF NULLS DEPTH",
                     "PRIORITY": "39",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -64,8 +64,8 @@
                     "LABEL": "DEPTH OF NULLS SPAN",
                     "PRIORITY": "41",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -75,8 +75,8 @@
                     "LABEL": "LOW RESOLUTION",
                     "PRIORITY": "43",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -86,8 +86,8 @@
                     "LABEL": "HIGH RESOLUTION",
                     "PRIORITY": "44",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -97,8 +97,8 @@
                     "LABEL": "DEPTH OF NULLS DEPTH",
                     "PRIORITY": "17",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -108,8 +108,8 @@
                     "LABEL": "DEPTH OF NULLS SPAN",
                     "PRIORITY": "19",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -119,8 +119,8 @@
                     "LABEL": "LOW RESOLUTION",
                     "PRIORITY": "21",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -130,8 +130,8 @@
                     "LABEL": "HIGH RESOLUTION",
                     "PRIORITY": "22",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -141,8 +141,8 @@
                     "LABEL": "LOBE WIDTH (DEG)",
                     "PRIORITY": "10",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -152,8 +152,8 @@
                     "LABEL": "LOBE SEPARATION (DEG)",
                     "PRIORITY": "10",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -163,8 +163,8 @@
                     "LABEL": "LOBE REPEAT COUNT",
                     "PRIORITY": "10",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -174,8 +174,8 @@
                     "LABEL": "LOBE WIDTH (DEG)",
                     "PRIORITY": "25",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -185,8 +185,8 @@
                     "LABEL": "LOBE SEPARATION (DEG)",
                     "PRIORITY": "25",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -196,8 +196,8 @@
                     "LABEL": "LOBE REPEAT COUNT",
                     "PRIORITY": "25",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 }
             ],
@@ -212,8 +212,8 @@
                     "LABEL": "FREQUENCY NOTES",
                     "PRIORITY": "7",
                     "SECTION": "FREQUENCY MODEL",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -223,8 +223,8 @@
                     "LABEL": "FREQUENCY FILL",
                     "PRIORITY": "20",
                     "SECTION": "FREQUENCY MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -234,8 +234,8 @@
                     "LABEL": "DWELL TIME FILL",
                     "PRIORITY": "22",
                     "SECTION": "FREQUENCY MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 }
             ],
@@ -250,8 +250,8 @@
                     "LABEL": "PULSE NOTES",
                     "PRIORITY": "0",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -261,8 +261,8 @@
                     "LABEL": "PULSE MODEL",
                     "PRIORITY": "2",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -272,8 +272,8 @@
                     "LABEL": "ATTENUATION (DB)",
                     "PRIORITY": "8",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -283,8 +283,8 @@
                     "LABEL": "USE LOCAL FREQ",
                     "PRIORITY": "10",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -294,8 +294,8 @@
                     "LABEL": "PRI FILL",
                     "PRIORITY": "12",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -305,8 +305,8 @@
                     "LABEL": "PW FILL",
                     "PRIORITY": "14",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -316,8 +316,8 @@
                     "LABEL": "PULSE REPEAT FILL",
                     "PRIORITY": "16",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -327,8 +327,8 @@
                     "LABEL": "DWELL TIME FILL",
                     "PRIORITY": "18",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -338,8 +338,8 @@
                     "LABEL": "ATTENUATION FILL",
                     "PRIORITY": "20",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -349,8 +349,8 @@
                     "LABEL": "FREQUENCY FILL",
                     "PRIORITY": "22",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 }
             ],
@@ -365,8 +365,8 @@
                     "LABEL": "PULSE NOTES",
                     "PRIORITY": "0",
                     "SECTION": "",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -376,8 +376,8 @@
                     "LABEL": "SCAN MODEL",
                     "PRIORITY": "2",
                     "SECTION": "",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -387,8 +387,8 @@
                     "LABEL": "USE LOCAL SCAN",
                     "PRIORITY": "3",
                     "SECTION": "",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -398,8 +398,8 @@
                     "LABEL": "PULSE MODEL",
                     "PRIORITY": "5",
                     "SECTION": "",
-                    "STRING": "TRUE",
-                    "TABLE": "TRUE",
+                    "STRING": true,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -409,8 +409,8 @@
                     "LABEL": "PULSE GROUP",
                     "PRIORITY": "5",
                     "SECTION": "",
-                    "STRING": "TRUE",
-                    "TABLE": "TRUE",
+                    "STRING": true,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -420,8 +420,8 @@
                     "LABEL": "GROUP REPEAT",
                     "PRIORITY": "5",
                     "SECTION": "",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -431,8 +431,8 @@
                     "LABEL": "DWELL TIME (MSEC)",
                     "PRIORITY": "5",
                     "SECTION": "",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -442,8 +442,8 @@
                     "LABEL": "SCAN COMMAND",
                     "PRIORITY": "5",
                     "SECTION": "",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -453,8 +453,8 @@
                     "LABEL": "AZIMUTH (DEG)",
                     "PRIORITY": "5",
                     "SECTION": "",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -464,8 +464,8 @@
                     "LABEL": "ELEVATION (DEG)",
                     "PRIORITY": "5",
                     "SECTION": "",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -475,8 +475,8 @@
                     "LABEL": "CELL NUMBER",
                     "PRIORITY": "5",
                     "SECTION": "",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -486,8 +486,8 @@
                     "LABEL": "TRACK ID",
                     "PRIORITY": "5",
                     "SECTION": "",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -497,8 +497,8 @@
                     "LABEL": "ATENNUATION (DB)",
                     "PRIORITY": "5",
                     "SECTION": "",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": ""
                 }
             ],
@@ -513,8 +513,8 @@
                     "LABEL": "PULSE TRIG ON REV",
                     "PRIORITY": "9",
                     "SECTION": "SCAN MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -524,8 +524,8 @@
                     "LABEL": "SCAN PERSPECTIVE",
                     "PRIORITY": "18",
                     "SECTION": "SCAN MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -535,8 +535,8 @@
                     "LABEL": "DEFAULT OFFSET",
                     "PRIORITY": "20",
                     "SECTION": "SCAN MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 }
             ],
@@ -551,8 +551,8 @@
                     "LABEL": "ANTENNA MODEL",
                     "PRIORITY": "0",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -562,8 +562,8 @@
                     "LABEL": "MODEL NAME",
                     "PRIORITY": "2",
                     "SECTION": "ANTENNA MODEL",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -573,8 +573,8 @@
                     "LABEL": "FREQUENCY NOTES",
                     "PRIORITY": "0",
                     "SECTION": "FREQUENCY MODEL",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -584,8 +584,8 @@
                     "LABEL": "FREQUENCY MODEL",
                     "PRIORITY": "2",
                     "SECTION": "FREQUENCY MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -595,8 +595,8 @@
                     "LABEL": "FREQUENCY",
                     "PRIORITY": "4",
                     "SECTION": "FREQUENCY MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -606,8 +606,8 @@
                     "LABEL": "SYNC TO SCAN",
                     "PRIORITY": "6",
                     "SECTION": "FREQUENCY MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -617,8 +617,8 @@
                     "LABEL": "INTRAPULSE NOTES",
                     "PRIORITY": "0",
                     "SECTION": "INTRAPULSE MODEL",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -628,8 +628,8 @@
                     "LABEL": "INTRAPULSE MODEL",
                     "PRIORITY": "2",
                     "SECTION": "INTRAPULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -639,8 +639,8 @@
                     "LABEL": "ENABLE MSS",
                     "PRIORITY": "0",
                     "SECTION": "MULTIPLE SIMULTANEOUS SIGNALS",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -650,8 +650,8 @@
                     "LABEL": "PULSE MODEL",
                     "PRIORITY": "0",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -661,8 +661,8 @@
                     "LABEL": "MODEL NAME",
                     "PRIORITY": "2",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -672,8 +672,8 @@
                     "LABEL": "USE REF FREQUENCY",
                     "PRIORITY": "3",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -683,8 +683,8 @@
                     "LABEL": "USE REF SCAN",
                     "PRIORITY": "4",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -694,8 +694,8 @@
                     "LABEL": "NON-COHERENT",
                     "PRIORITY": "6",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -705,8 +705,8 @@
                     "LABEL": "SCAN MODEL",
                     "PRIORITY": "0",
                     "SECTION": "SCAN MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -716,8 +716,8 @@
                     "LABEL": "MODEL NAME",
                     "PRIORITY": "2",
                     "SECTION": "SCAN MODEL",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -727,8 +727,8 @@
                     "LABEL": "SCAN PERSPECTIVE",
                     "PRIORITY": "4",
                     "SECTION": "SCAN MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -738,8 +738,8 @@
                     "LABEL": "DEFAULT OFFSET",
                     "PRIORITY": "6",
                     "SECTION": "SCAN MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -749,8 +749,8 @@
                     "LABEL": "ID NOTES",
                     "PRIORITY": "0",
                     "SECTION": "SIGNAL IDENTIFICATION",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -760,8 +760,8 @@
                     "LABEL": "CLASSIFICATION",
                     "PRIORITY": "3",
                     "SECTION": "SIGNAL IDENTIFICATION",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -771,8 +771,8 @@
                     "LABEL": "ENABLE DOPPLER",
                     "PRIORITY": "0",
                     "SECTION": "SPECIAL FEATURES",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -782,8 +782,8 @@
                     "LABEL": "ENABLE MULTIPATH",
                     "PRIORITY": "1",
                     "SECTION": "SPECIAL FEATURES",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": ""
                 }
             ],
@@ -798,8 +798,8 @@
             "LABEL": "ANTENNA MODEL",
             "PRIORITY": "2",
             "SECTION": "ANTENNA MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "AntennaModelKind"
         }
     },
@@ -811,8 +811,8 @@
             "LABEL": "MAIN LOBE WIDTH",
             "PRIORITY": "6",
             "SECTION": "ANTENNA MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "AzBeamwidth"
         }
     },
@@ -824,8 +824,8 @@
             "LABEL": "ROTATION",
             "PRIORITY": "7",
             "SECTION": "SCAN MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "AzDirection"
         }
     },
@@ -837,8 +837,8 @@
             "LABEL": "AZIMUTH OFFSET",
             "PRIORITY": "4",
             "SECTION": "SCAN MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "AzInitialBeamOfset"
         }
     },
@@ -850,8 +850,8 @@
             "LABEL": "SCAN MODEL",
             "PRIORITY": "2",
             "SECTION": "SCAN MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "AzScanKind"
         }
     },
@@ -863,8 +863,8 @@
             "LABEL": "SCAN PERIOD",
             "PRIORITY": "6",
             "SECTION": "SCAN MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "AzScanPeriod"
         }
     },
@@ -876,8 +876,8 @@
             "LABEL": "DISTRIBUTION",
             "PRIORITY": "7",
             "SECTION": "ANTENNA MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "AzScanShape"
         }
     },
@@ -889,8 +889,8 @@
             "LABEL": "LOBE ATENNUATION (DB)",
             "PRIORITY": "10",
             "SECTION": "ANTENNA MODEL",
-            "STRING": "FALSE",
-            "TABLE": "TRUE",
+            "STRING": false,
+            "TABLE": true,
             "TAG": "AzSidelobeRatio"
         }
     },
@@ -904,8 +904,8 @@
                     "LABEL": "PRI TIMING MODE",
                     "PRIORITY": "4",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": "ComplexPriState"
                 },
                 {
@@ -915,8 +915,8 @@
                     "LABEL": "DWELL (MSEC)",
                     "PRIORITY": "8",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": "ComplexPriState"
                 },
                 {
@@ -926,8 +926,8 @@
                     "LABEL": "PULSE REPEAT",
                     "PRIORITY": "8",
                     "SECTION": "PULSE MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": "ComplexPriState"
                 }
             ],
@@ -942,8 +942,8 @@
             "LABEL": "PW TIMING MODE",
             "PRIORITY": "6",
             "SECTION": "PULSE MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "DwellStatus"
         }
     },
@@ -957,8 +957,8 @@
                     "LABEL": "DWELL TIME (MSEC)",
                     "PRIORITY": "11",
                     "SECTION": "FREQUENCY MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "TRUE",
+                    "STRING": false,
+                    "TABLE": true,
                     "TAG": "DwellTime"
                 },
                 {
@@ -968,8 +968,8 @@
                     "LABEL": "VALUE",
                     "PRIORITY": "24",
                     "SECTION": "FREQUENCY MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": "DwellTime"
                 }
             ],
@@ -984,8 +984,8 @@
             "LABEL": "MAIN LOBE WIDTH",
             "PRIORITY": "21",
             "SECTION": "ANTENNA MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "ElBeamwidth"
         }
     },
@@ -999,8 +999,8 @@
                     "LABEL": "TYPE",
                     "PRIORITY": "12",
                     "SECTION": "SCAN MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": "ElDirection"
                 },
                 {
@@ -1010,8 +1010,8 @@
                     "LABEL": "DIRECTION",
                     "PRIORITY": "13",
                     "SECTION": "SCAN MODEL",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": "ElDirection"
                 }
             ],
@@ -1026,8 +1026,8 @@
             "LABEL": "ELEVATION OFFSET",
             "PRIORITY": "5",
             "SECTION": "SCAN MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "ElInitialBeamOffset"
         }
     },
@@ -1039,8 +1039,8 @@
             "LABEL": "OVERLAY MODEL",
             "PRIORITY": "11",
             "SECTION": "SCAN MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "ElScanMotion"
         }
     },
@@ -1052,8 +1052,8 @@
             "LABEL": "SCAN RATE",
             "PRIORITY": "16",
             "SECTION": "SCAN MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "ElScanPeriod"
         }
     },
@@ -1065,8 +1065,8 @@
             "LABEL": "DISTRIBUTION",
             "PRIORITY": "22",
             "SECTION": "ANTENNA MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "ElScanShape"
         }
     },
@@ -1078,8 +1078,8 @@
             "LABEL": "SPAN",
             "PRIORITY": "15",
             "SECTION": "SCAN MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "ElSectorWidth"
         }
     },
@@ -1091,8 +1091,8 @@
             "LABEL": "LOBE ATENNUATION (DB)",
             "PRIORITY": "25",
             "SECTION": "ANTENNA MODEL",
-            "STRING": "FALSE",
-            "TABLE": "TRUE",
+            "STRING": false,
+            "TABLE": true,
             "TAG": "ElSidelobeRatio"
         }
     },
@@ -1104,8 +1104,8 @@
             "LABEL": "ORIGIN",
             "PRIORITY": "14",
             "SECTION": "SCAN MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "ElTrackOffset"
         }
     },
@@ -1117,8 +1117,8 @@
             "LABEL": "DATABASE NAME",
             "PRIORITY": "2",
             "SECTION": "SIGNAL IDENTIFICATION",
-            "STRING": "TRUE",
-            "TABLE": "FALSE",
+            "STRING": true,
+            "TABLE": false,
             "TAG": "EmitterId"
         }
     },
@@ -1130,8 +1130,8 @@
             "LABEL": "NATO NAME",
             "PRIORITY": "4",
             "SECTION": "SIGNAL IDENTIFICATION",
-            "STRING": "TRUE",
-            "TABLE": "FALSE",
+            "STRING": true,
+            "TABLE": false,
             "TAG": "EmitterName"
         }
     },
@@ -1143,8 +1143,8 @@
             "LABEL": "FREQUENCY (MHZ)",
             "PRIORITY": "11",
             "SECTION": "FREQUENCY MODEL",
-            "STRING": "FALSE",
-            "TABLE": "TRUE",
+            "STRING": false,
+            "TABLE": true,
             "TAG": "Frequency"
         },
         "PUL": {
@@ -1154,8 +1154,8 @@
             "LABEL": "FREQUENCY (MHZ)",
             "PRIORITY": "8",
             "SECTION": "PULSE MODEL",
-            "STRING": "FALSE",
-            "TABLE": "TRUE",
+            "STRING": false,
+            "TABLE": true,
             "TAG": "Frequency"
         }
     },
@@ -1167,8 +1167,8 @@
             "LABEL": "Created",
             "PRIORITY": "2",
             "SECTION": "Main",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "LastUpdateDate"
         },
         "FREQ": {
@@ -1178,8 +1178,8 @@
             "LABEL": "Created",
             "PRIORITY": "2",
             "SECTION": "Main",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "LastUpdateDate"
         },
         "PUL": {
@@ -1189,8 +1189,8 @@
             "LABEL": "Created",
             "PRIORITY": "2",
             "SECTION": "Main",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "LastUpdateDate"
         },
         "PULSEQ": {
@@ -1200,8 +1200,8 @@
             "LABEL": "Created",
             "PRIORITY": "2",
             "SECTION": "Main",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "LastUpdateDate"
         },
         "SCAN": {
@@ -1211,8 +1211,8 @@
             "LABEL": "Created",
             "PRIORITY": "2",
             "SECTION": "Main",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "LastUpdateDate"
         },
         "SIG": {
@@ -1222,8 +1222,8 @@
             "LABEL": "Created",
             "PRIORITY": "2",
             "SECTION": "Main",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "LastUpdateDate"
         }
     },
@@ -1235,8 +1235,8 @@
             "LABEL": "INTRAPULSE NAME",
             "PRIORITY": "8",
             "SECTION": "PULSE MODEL",
-            "STRING": "TRUE",
-            "TABLE": "TRUE",
+            "STRING": true,
+            "TABLE": true,
             "TAG": "ModStatus"
         }
     },
@@ -1248,8 +1248,8 @@
             "LABEL": "Model",
             "PRIORITY": "0",
             "SECTION": "Main",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "ModeName"
         },
         "FREQ": {
@@ -1259,8 +1259,8 @@
             "LABEL": "Model",
             "PRIORITY": "0",
             "SECTION": "Main",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "ModeName"
         },
         "PUL": {
@@ -1270,8 +1270,8 @@
             "LABEL": "Model",
             "PRIORITY": "0",
             "SECTION": "Main",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "ModeName"
         },
         "PULSEQ": {
@@ -1281,8 +1281,8 @@
             "LABEL": "Model",
             "PRIORITY": "0",
             "SECTION": "Main",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "ModeName"
         },
         "SCAN": {
@@ -1292,8 +1292,8 @@
             "LABEL": "Model",
             "PRIORITY": "0",
             "SECTION": "Main",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "ModeName"
         },
         "SIG": {
@@ -1305,8 +1305,8 @@
                     "LABEL": "Model",
                     "PRIORITY": "0",
                     "SECTION": "Main",
-                    "STRING": "FALSE",
-                    "TABLE": "FALSE",
+                    "STRING": false,
+                    "TABLE": false,
                     "TAG": "ModeName"
                 },
                 {
@@ -1316,8 +1316,8 @@
                     "LABEL": "SYSTEM NAME",
                     "PRIORITY": "5",
                     "SECTION": "SIGNAL IDENTIFICATION",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": "ModeName"
                 },
                 {
@@ -1327,8 +1327,8 @@
                     "LABEL": "VERSION",
                     "PRIORITY": "6",
                     "SECTION": "SIGNAL IDENTIFICATION",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": "ModeName"
                 },
                 {
@@ -1338,8 +1338,8 @@
                     "LABEL": "MODE",
                     "PRIORITY": "7",
                     "SECTION": "SIGNAL IDENTIFICATION",
-                    "STRING": "TRUE",
-                    "TABLE": "FALSE",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": "ModeName"
                 }
             ],
@@ -1354,8 +1354,8 @@
             "LABEL": "PRI (USEC)",
             "PRIORITY": "8",
             "SECTION": "PULSE MODEL",
-            "STRING": "FALSE",
-            "TABLE": "TRUE",
+            "STRING": false,
+            "TABLE": true,
             "TAG": "Pri"
         }
     },
@@ -1367,8 +1367,8 @@
             "LABEL": "PW (USEC)",
             "PRIORITY": "8",
             "SECTION": "PULSE MODEL",
-            "STRING": "FALSE",
-            "TABLE": "TRUE",
+            "STRING": false,
+            "TABLE": true,
             "TAG": "PulseWidth"
         }
     },
@@ -1380,8 +1380,8 @@
             "LABEL": "FREQUENCY MODEL",
             "PRIORITY": "9",
             "SECTION": "FREQUENCY MODEL",
-            "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "STRING": false,
+            "TABLE": false,
             "TAG": "SegmentName"
         }
     }

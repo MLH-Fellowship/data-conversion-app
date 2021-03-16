@@ -9,6 +9,7 @@ if version_info > (3, 5):
     from typing import TextIO, Union
 
 
+BOOLEANS = {'TRUE': True, 'FALSE': False}
 CSV_HEADERS = ('TAG', 'FILE')
 
 
@@ -44,6 +45,9 @@ def dump_lookup_table(in_fp, out_fp):
     in_reader = DictReader(in_fp)
     lookup_table = dict()
     for row in in_reader:
+        for key in row:
+            if row[key] in BOOLEANS:
+                row[key] = BOOLEANS[row[key]]
         frame = lookup_table
         for header in CSV_HEADERS:
             assert header in row, 'Input file is not a recognized format!'
