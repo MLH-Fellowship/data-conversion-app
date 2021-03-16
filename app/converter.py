@@ -362,6 +362,14 @@ def convert_one_key(lookup_data, value):
         return value
 
 
+def generate_other_models(data, table):
+    # type: (dict, dict) -> dict
+    '''Generate all non INP/PUL models
+    '''
+    # TODO
+    pass
+
+
 def generate_intrapulse(data, table):
     # type: (dict, dict) -> dict
     '''Converts intrapulse signals in an imported table using a lookup table
@@ -376,6 +384,14 @@ def generate_intrapulse(data, table):
                 # TODO: What if table is flat
                 pass
     # TODO: Return data
+
+
+def generate_pulse(data, table):
+    # type: (dict, dict) -> dict
+    '''Converts pulse signals in an imported table using a lookup table
+    '''
+    # TODO
+    pass
 
 
 def convert_to_a2pats(data, table):
