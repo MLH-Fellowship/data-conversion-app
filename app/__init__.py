@@ -15,7 +15,8 @@ ALLOWED_MODELS = {
     'PULSE SEQUENCE',
     'SCAN',
     'ANTENNA',
-    'FREQUENCY'
+    'FREQUENCY',
+    'INTRAPULSE'
 }
 
 

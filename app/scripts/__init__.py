@@ -10,7 +10,7 @@ if version_info > (3, 5):
 
 
 BOOLEANS = {'TRUE': True, 'FALSE': False}
-CSV_HEADERS = ('TAG', 'FILE')
+CSV_HEADERS = ('FILE', 'TAG')
 TABLE_MULTI_HDR = 'MULTI'
 TABLE_DATA_HDR = 'DATA'
 

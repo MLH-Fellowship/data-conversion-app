@@ -111,6 +111,8 @@ def import_(fp, classtype=datastore, downgrade_peaceful=True):
             fp = open(fp, encoding='utf-8')
         assert isinstance(
             fp, IOBase), 'Your import_ call must provide a valid files-like pointer or file path!'
+
+
     if classtype is a2pats:
         logger.debug('A2PATS file provided, importing as A2PATS')
         return import_a2pats(fp)

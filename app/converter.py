@@ -355,15 +355,15 @@ def convert_one_key(lookup_data, value):
     if FUNC_HDR in lookup_data:
         funcp_data = getattr(functions, lookup_data[FUNC_HDR])(value)
         if lookup_data[STRING_HDR]:
-            return '"{}"'.format(funcp_data)
+            return '"{:<15}:   {}"'.format(lookup_data["LABEL"], funcp_data)
         else:
-            return funcp_data
+            return 'funcp_data'.format()
     else:
         return value
 
 
 def generate_other_models(data, table):
-    # type: (dict, dict) -> dict
+    # type: (dict, dict) -> list
     '''Generate all non INP/PUL models
     '''
     # TODO
