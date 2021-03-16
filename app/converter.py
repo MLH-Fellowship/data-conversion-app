@@ -10,6 +10,10 @@ if version_info > (3, 5):
     from typing import Tuple, Union
 
 
+INTRAPULSE_NAME = 'INP'
+TABLE_LIST = 'MULTI'
+
+
 class functions:
     '''A collection of functions for importing
     '''
@@ -282,7 +286,8 @@ class functions:
         :rtype: str
         '''
 
-        assert kind == "Elliptical", "Unexpected AntennaModelKind - {}".format(kind)
+        assert kind == "Elliptical", "Unexpected AntennaModelKind - {}".format(
+            kind)
         return "RECTANGULAR"
 
     @staticmethod
@@ -310,10 +315,10 @@ class functions:
     @staticmethod
     # consolidate these four very similar functions
     def freq_model(emitterid): return "_".join([emitterid, "Freq"])
-    
+
     @staticmethod
     def seq_model(emitterid): return "_".join([emitterid, "Seq"])
-    
+
     @staticmethod
     def scan_model(emitterid): return "_".join([emitterid, "Scan"])
 
@@ -340,12 +345,20 @@ def convert(data):
             'Provided type to convert was neither of class a2pats or ceesim.')
 
 
-def traverse_data_and_convert(data, table):
+def generate_intrapulse(data, table):
     # type: (dict, dict) -> dict
-    '''Traverses a dictionary and converts it
+    '''Converts intrapulse signals in an imported table using a lookup table
     '''
-    # TODO
-    return dict()
+    # TODO: Logic to find signals -> list of signals
+    for tag in table:
+        if INTRAPULSE_NAME in table[tag]:
+            if TABLE_LIST in table[tag][INTRAPULSE_NAME] and table[tag][INTRAPULSE_NAME][TABLE_LIST]:
+                # TODO: What if table is list
+                pass
+            else:
+                # TODO: What if table is flat
+                pass
+    funcp = getattr(functions, '')
 
 
 def convert_to_a2pats(data, table):
@@ -358,6 +371,7 @@ def convert_to_a2pats(data, table):
     :returns: A²PATS data
     :rtype: a2pats
     '''
+    logger.info('Beginning CEESIM to A2PATS conversion')
     store = a2pats(imported_type='A2PATS')
     for type_ in ALLOWED_MODELS:
         # TODO
