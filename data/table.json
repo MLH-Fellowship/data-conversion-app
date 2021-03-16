@@ -1,27 +1,71 @@
 {
     "": {
         "ANT": {
-            "DEFAULT": "AZIMUTH",
+            "DEFAULT": "1",
             "FILE": "ANT",
             "FUNCTION": "",
-            "LABEL": "BEAM MODEL",
-            "PRIORITY": "4",
+            "LABEL": "LOBE REPEAT COUNT",
+            "PRIORITY": "25",
             "SECTION": "ANTENNA MODEL",
+            "STRING": "FALSE",
+            "TABLE": "TRUE",
+            "TAG": ""
+        },
+        "FREQ": {
+            "DEFAULT": "STABLE",
+            "FILE": "FREQ",
+            "FUNCTION": "",
+            "LABEL": "DWELL TIME FILL",
+            "PRIORITY": "22",
+            "SECTION": "FREQUENCY MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": ""
+        },
+        "PUL": {
+            "DEFAULT": "NONE",
+            "FILE": "PUL",
+            "FUNCTION": "",
+            "LABEL": "FREQUENCY FILL",
+            "PRIORITY": "22",
+            "SECTION": "PULSE MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": ""
+        },
+        "PULSEQ": {
+            "DEFAULT": "0.0000",
+            "FILE": "PULSEQ",
+            "FUNCTION": "",
+            "LABEL": "ATENNUATION (DB)",
+            "PRIORITY": "5",
+            "SECTION": "",
+            "STRING": "FALSE",
+            "TABLE": "TRUE",
+            "TAG": ""
+        },
+        "SCAN": {
+            "DEFAULT": "0.0000 DBM",
+            "FILE": "SCAN",
+            "FUNCTION": "",
+            "LABEL": "DEFAULT OFFSET",
+            "PRIORITY": "20",
+            "SECTION": "SCAN MODEL",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": ""
+        },
+        "SIG": {
+            "DEFAULT": "NO",
+            "FILE": "SIG",
+            "FUNCTION": "",
+            "LABEL": "ENABLE MULTIPATH",
+            "PRIORITY": "1",
+            "SECTION": "SPECIAL FEATURES",
             "STRING": "FALSE",
             "TABLE": "FALSE",
             "TAG": ""
         }
-    },
-    "ANT": {
-        "DEFAULT": "ELEVATION",
-        "FILE": "ANT",
-        "FUNCTION": "",
-        "LABEL": "BEAM MODEL",
-        "PRIORITY": "19",
-        "SECTION": "ANTENNA MODEL",
-        "STRING": "FALSE",
-        "TABLE": "FALSE",
-        "TAG": ""
     },
     "AntennaModelKind": {
         "ANT": {
@@ -129,18 +173,17 @@
     },
     "ComplexPriState": {
         "PUL": {
-            "DEFAULT": "TIME",
+            "DEFAULT": "1",
             "FILE": "PUL",
             "FUNCTION": "",
-            "LABEL": "PRI TIMING MODE",
-            "PRIORITY": "4",
+            "LABEL": "PULSE REPEAT",
+            "PRIORITY": "8",
             "SECTION": "PULSE MODEL",
             "STRING": "FALSE",
-            "TABLE": "FALSE",
+            "TABLE": "TRUE",
             "TAG": "ComplexPriState"
         }
     },
-    "DEFAULT": "0.00000 MSEC",
     "DwellStatus": {
         "PUL": {
             "DEFAULT": "TIME",
@@ -156,14 +199,14 @@
     },
     "DwellTime": {
         "FREQ": {
-            "DEFAULT": "0.000000000",
+            "DEFAULT": "0.00000 MSEC",
             "FILE": "FREQ",
             "FUNCTION": "to_usec",
-            "LABEL": "DWELL TIME (MSEC)",
-            "PRIORITY": "11",
+            "LABEL": "VALUE",
+            "PRIORITY": "24",
             "SECTION": "FREQUENCY MODEL",
             "STRING": "FALSE",
-            "TABLE": "TRUE",
+            "TABLE": "FALSE",
             "TAG": "DwellTime"
         }
     },
@@ -182,11 +225,11 @@
     },
     "ElDirection": {
         "SCAN": {
-            "DEFAULT": "TRIANGULAR",
+            "DEFAULT": "VERTICAL",
             "FILE": "SCAN",
-            "FUNCTION": "dir_typ",
-            "LABEL": "TYPE",
-            "PRIORITY": "12",
+            "FUNCTION": "dir_dir",
+            "LABEL": "DIRECTION",
+            "PRIORITY": "13",
             "SECTION": "SCAN MODEL",
             "STRING": "FALSE",
             "TABLE": "FALSE",
@@ -310,20 +353,18 @@
             "TAG": "EmitterName"
         }
     },
-    "FILE": "FREQ",
-    "FREQ": {
-        "DEFAULT": "A123Z_EMITTER01",
-        "FILE": "FREQ",
-        "FUNCTION": "",
-        "LABEL": "Model",
-        "PRIORITY": "0",
-        "SECTION": "Main",
-        "STRING": "FALSE",
-        "TABLE": "FALSE",
-        "TAG": "ModeName"
-    },
-    "FUNCTION": "to_usec",
     "Frequency": {
+        "FREQ": {
+            "DEFAULT": "0.000000000",
+            "FILE": "FREQ",
+            "FUNCTION": "to_mhz",
+            "LABEL": "FREQUENCY (MHZ)",
+            "PRIORITY": "11",
+            "SECTION": "FREQUENCY MODEL",
+            "STRING": "FALSE",
+            "TABLE": "TRUE",
+            "TAG": "Frequency"
+        },
         "PUL": {
             "DEFAULT": "0",
             "FILE": "PUL",
@@ -336,11 +377,65 @@
             "TAG": "Frequency"
         }
     },
-    "LABEL": "VALUE",
     "LastUpdateDate": {
         "ANT": {
             "DEFAULT": "",
             "FILE": "ANT",
+            "FUNCTION": "to_timestamp",
+            "LABEL": "Created",
+            "PRIORITY": "2",
+            "SECTION": "Main",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "LastUpdateDate"
+        },
+        "FREQ": {
+            "DEFAULT": "",
+            "FILE": "FREQ",
+            "FUNCTION": "to_timestamp",
+            "LABEL": "Created",
+            "PRIORITY": "2",
+            "SECTION": "Main",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "LastUpdateDate"
+        },
+        "PUL": {
+            "DEFAULT": "",
+            "FILE": "PUL",
+            "FUNCTION": "to_timestamp",
+            "LABEL": "Created",
+            "PRIORITY": "2",
+            "SECTION": "Main",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "LastUpdateDate"
+        },
+        "PULSEQ": {
+            "DEFAULT": "",
+            "FILE": "PULSEQ",
+            "FUNCTION": "to_timestamp",
+            "LABEL": "Created",
+            "PRIORITY": "2",
+            "SECTION": "Main",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "LastUpdateDate"
+        },
+        "SCAN": {
+            "DEFAULT": "",
+            "FILE": "SCAN",
+            "FUNCTION": "to_timestamp",
+            "LABEL": "Created",
+            "PRIORITY": "2",
+            "SECTION": "Main",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "LastUpdateDate"
+        },
+        "SIG": {
+            "DEFAULT": "",
+            "FILE": "SIG",
             "FUNCTION": "to_timestamp",
             "LABEL": "Created",
             "PRIORITY": "2",
@@ -374,30 +469,62 @@
             "STRING": "FALSE",
             "TABLE": "FALSE",
             "TAG": "ModeName"
+        },
+        "FREQ": {
+            "DEFAULT": "A123Z_EMITTER01",
+            "FILE": "FREQ",
+            "FUNCTION": "",
+            "LABEL": "Model",
+            "PRIORITY": "0",
+            "SECTION": "Main",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ModeName"
+        },
+        "PUL": {
+            "DEFAULT": "A123Z_EMITTER01",
+            "FILE": "PUL",
+            "FUNCTION": "",
+            "LABEL": "Model",
+            "PRIORITY": "0",
+            "SECTION": "Main",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ModeName"
+        },
+        "PULSEQ": {
+            "DEFAULT": "A123Z_EMITTER01",
+            "FILE": "PULSEQ",
+            "FUNCTION": "",
+            "LABEL": "Model",
+            "PRIORITY": "0",
+            "SECTION": "Main",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ModeName"
+        },
+        "SCAN": {
+            "DEFAULT": "A123Z_EMITTER01",
+            "FILE": "SCAN",
+            "FUNCTION": "",
+            "LABEL": "Model",
+            "PRIORITY": "0",
+            "SECTION": "Main",
+            "STRING": "FALSE",
+            "TABLE": "FALSE",
+            "TAG": "ModeName"
+        },
+        "SIG": {
+            "DEFAULT": "01",
+            "FILE": "SIG",
+            "FUNCTION": "extract_mode",
+            "LABEL": "MODE",
+            "PRIORITY": "7",
+            "SECTION": "SIGNAL IDENTIFICATION",
+            "STRING": "TRUE",
+            "TABLE": "FALSE",
+            "TAG": "ModeName"
         }
-    },
-    "PRIORITY": "24",
-    "PUL": {
-        "DEFAULT": "A123Z_EMITTER01",
-        "FILE": "PUL",
-        "FUNCTION": "",
-        "LABEL": "Model",
-        "PRIORITY": "0",
-        "SECTION": "Main",
-        "STRING": "FALSE",
-        "TABLE": "FALSE",
-        "TAG": "ModeName"
-    },
-    "PULSEQ": {
-        "DEFAULT": "A123Z_EMITTER01",
-        "FILE": "PULSEQ",
-        "FUNCTION": "",
-        "LABEL": "Model",
-        "PRIORITY": "0",
-        "SECTION": "Main",
-        "STRING": "FALSE",
-        "TABLE": "FALSE",
-        "TAG": "ModeName"
     },
     "Pri": {
         "PUL": {
@@ -425,30 +552,6 @@
             "TAG": "PulseWidth"
         }
     },
-    "SCAN": {
-        "DEFAULT": "A123Z_EMITTER01",
-        "FILE": "SCAN",
-        "FUNCTION": "",
-        "LABEL": "Model",
-        "PRIORITY": "0",
-        "SECTION": "Main",
-        "STRING": "FALSE",
-        "TABLE": "FALSE",
-        "TAG": "ModeName"
-    },
-    "SECTION": "FREQUENCY MODEL",
-    "SIG": {
-        "DEFAULT": "REFERENCE",
-        "FILE": "SIG",
-        "FUNCTION": "",
-        "LABEL": "ANTENNA MODEL",
-        "PRIORITY": "0",
-        "SECTION": "ANTENNA MODEL",
-        "STRING": "FALSE",
-        "TABLE": "FALSE",
-        "TAG": ""
-    },
-    "STRING": "FALSE",
     "SegmentName": {
         "FREQ": {
             "DEFAULT": "STABLE",
@@ -461,7 +564,5 @@
             "TABLE": "FALSE",
             "TAG": "SegmentName"
         }
-    },
-    "TABLE": "FALSE",
-    "TAG": "DwellTime"
+    }
 }

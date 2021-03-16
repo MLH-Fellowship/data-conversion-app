@@ -50,7 +50,7 @@ def dump_lookup_table(in_fp, out_fp):
             if row[header] not in frame:
                 # FIXME: Does not allow multiple rows with the same name
                 frame[row[header]] = dict()
-                frame = frame[row[header]]
+            frame = frame[row[header]]
         frame.update(row)
     dump(lookup_table, out_fp, indent=4, sort_keys=True)
     return lookup_table
