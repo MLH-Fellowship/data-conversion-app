@@ -12,3 +12,4 @@ env
 # Cache
 __pycache__
 *.pyc
+exploration/showntell.py
