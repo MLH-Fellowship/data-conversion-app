@@ -351,28 +351,6 @@ def flatten_table(data, stack_size=1):
     return data_
 
 
-def convert(data):
-    # type: (Union[a2pats, ceesim]) -> Union[a2pats, ceesim]
-    '''Dynamically convert data to its corresponding format
-
-    :param data: A²PATS or CEESIM data to import
-    :type data: a2pats or ceesim
-
-    :returns: A²PATS or CEESIM data
-    :rtype: a2pats or ceesim
-    '''
-    if type(data) is a2pats:
-        return convert_to_ceesim(data)
-    elif type(data) is ceesim:
-        return convert_to_a2pats(data)
-    elif isinstance(data, datastore):
-        logger.warn('Provided type to convert was correct, but unrecognized')
-        return data.to_datastore()
-    else:
-        raise DatastoreError(
-            'Provided type to convert was neither of class a2pats or ceesim.')
-
-
 def convert_one_key(lookup_data, value):
     # type: (dict, str) -> str
     '''Converts one key given the table lookup parameters
@@ -487,3 +465,25 @@ def convert_to_ceesim(data):
     '''
     # TODO
     pass
+
+
+def convert(data):
+    # type: (Union[a2pats, ceesim]) -> Union[a2pats, ceesim]
+    '''Dynamically convert data to its corresponding format
+
+    :param data: A²PATS or CEESIM data to import
+    :type data: a2pats or ceesim
+
+    :returns: A²PATS or CEESIM data
+    :rtype: a2pats or ceesim
+    '''
+    if type(data) is a2pats:
+        return convert_to_ceesim(data)
+    elif type(data) is ceesim:
+        return convert_to_a2pats(data)
+    elif isinstance(data, datastore):
+        logger.warn('Provided type to convert was correct, but unrecognized')
+        return data.to_datastore()
+    else:
+        raise DatastoreError(
+            'Provided type to convert was neither of class a2pats or ceesim.')
