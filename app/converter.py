@@ -333,19 +333,19 @@ class functions:
 
 
 # I'm not sure if this is the right method
-def flatten_table(data, stack_size=1):
+def flatten_table(ceesim_data, stack_size=1):
     # type: (dict, int) -> dict
     '''Flattens a table
     '''
     logger.debug(
         'Flattening input table with call stack size at {}'.format(stack_size))
     data_ = dict()
-    for key in data:
+    for key in ceesim_data:
         if key not in data_:
-            if type(data[key]) not in {dict, list}:
-                data_[key] = data[key]
+            if type(ceesim_data[key]) not in {dict, list}:
+                data_[key] = ceesim_data[key]
             else:
-                frame = data[key]
+                frame = ceesim_data[key]
                 if frame is list:
                     if len(frame) < 1 or frame[0] is not dict:
                         continue
@@ -373,20 +373,20 @@ def convert_one_key(lookup_data, value):
         return '{:<20}{}'.format(lookup_data["LABEL"] + ":", funcp_data)
 
 
-def obtain_relevant_tags(data, flattened_data, tag, fast=True):
+def obtain_relevant_tags(ceesim_data, ceesim_flattened, tag, fast=True):
     # type: (dict, dict, str, bool) -> Tuple[list, None]
     '''Checks the imported data for relevant data
     '''
     if fast:
-        if tag in flattened_data:
-            return flattened_data[tag]
+        if tag in ceesim_flattened:
+            return ceesim_flattened[tag]
     else:
         # TODO: Iterate through entire data
         pass
     return None
 
 
-def generate_other_models(data, flattened_data, table):
+def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
     # type: (dict, dict, dict) -> list
     '''Generate all non INP/PUL models
     '''
@@ -399,25 +399,25 @@ def generate_other_models(data, flattened_data, table):
         model.converted_data[pos] = value
 
     def create_converted(model, opt):
-        tags = obtain_relevant_tags(data, flattened_data, opt[TAG_HDR])
+        tags = obtain_relevant_tags(ceesim_data, ceesim_flattened, opt[TAG_HDR])
         if tags:
             value = tags[0]
         else:
             logger.debug('Could not find tag, using default tag for {}: {}: {}'.format(
                 opt[FILE_HDR], opt[TAG_HDR], opt[DEFAULT_HDR]))
-            value = table[opt[FILE_HDR]][opt[TAG_HDR]][DEFAULT_HDR]
+            value = lookup_table[opt[FILE_HDR]][opt[TAG_HDR]][DEFAULT_HDR]
         converted = convert_one_key(opt, value)
         fill_table(model, opt[PRI_HDR], converted)
 
     models = list()
-    name = obtain_relevant_tags(data, flattened_data, NAME_HDR)
+    name = obtain_relevant_tags(ceesim_data, ceesim_flattened, NAME_HDR)
     logger.debug('Generic model generator using name: {}'.format(name))
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name)
         table_key = MODEL_FILES[mtype]
-        for cdict_key in table[table_key]:
-            if table[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in table[table_key][cdict_key]:
-                data_opts = table[table_key][cdict_key][TABLE_DATA]
+        for cdict_key in lookup_table[table_key]:
+            if lookup_table[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in lookup_table[table_key][cdict_key]:
+                data_opts = lookup_table[table_key][cdict_key][TABLE_DATA]
                 for opt in data_opts:
                     create_converted(model, cdict_key, opt)
             else:
@@ -426,26 +426,26 @@ def generate_other_models(data, flattened_data, table):
     return models
 
 
-def generate_intrapulse(data, table):
+def generate_intrapulse(ceesim_data, lookup_table):
     # type: (dict, dict) -> List[model]
     '''Converts intrapulse signals in an imported table using a lookup table
     '''
 
-    for filetype in table:
+    for filetype in lookup_table:
         if filetype is INTRAPULSE_NAME:
             for tag in filetype:
-                tag_data = table[INTRAPULSE_NAME][tag]
+                tag_data = lookup_table[INTRAPULSE_NAME][tag]
 
                 if TABLE_LIST in tag_data:
                     for feature_data in tag_data["DATA"]:
-                        convert_one_key(feature_data, data[feature_data["TAG"]])
+                        convert_one_key(feature_data, ceesim_data[feature_data["TAG"]])
                 else:
                     # TODO: What if table is flat
                     pass
     # TODO: Return data
 
 
-def generate_pulse(data, table):
+def generate_pulse(ceesim_data, lookup_table):
     # type: (dict, dict) -> List[model]
     '''Converts pulse signals in an imported table using a lookup table
     '''
@@ -453,7 +453,7 @@ def generate_pulse(data, table):
     pass
 
 
-def convert_to_a2pats(data, table):
+def convert_to_a2pats(ceesim_data, lookup_table):
     # type: (ceesim, dict) -> a2pats
     '''Convert CEESIM data to A²PATS data
 
@@ -464,16 +464,16 @@ def convert_to_a2pats(data, table):
     :rtype: a2pats
     '''
     logger.info('Beginning CEESIM to A2PATS conversion')
-    flattened_data = flatten_table(data.imported_data)
+    flattened_data = flatten_table(ceesim_data.imported_data)
     store = a2pats(imported_type='A2PATS')
     generic_models = generate_other_models(
-        data.imported_data, flattened_data, table)
+        ceesim_data.imported_data, flattened_data, lookup_table)
     store.models += generic_models
     # TODO: Generate models
     return store
 
 
-def convert_to_ceesim(data):
+def convert_to_ceesim(a2pats_data):
     # type: (a2pats) -> ceesim
     '''Convert A²PATS data to CEESIM data
 
