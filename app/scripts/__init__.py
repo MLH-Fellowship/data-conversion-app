@@ -13,6 +13,7 @@ BOOLEANS = {'TRUE': True, 'FALSE': False}
 CSV_HEADERS = ('FILE', 'TAG')
 TABLE_MULTI_HDR = 'MULTI'
 TABLE_DATA_HDR = 'DATA'
+PRI_HDR = 'PRIORITY'
 
 
 def load_lookup_table(fp):
@@ -50,6 +51,7 @@ def dump_lookup_table(in_fp, out_fp):
         for key in row:
             if row[key] in BOOLEANS:
                 row[key] = BOOLEANS[row[key]]
+        row[PRI_HDR] = int(row[PRI_HDR])
         frame = lookup_table
         for header in CSV_HEADERS:
             assert header in row, 'Input file is not a recognized format!'
