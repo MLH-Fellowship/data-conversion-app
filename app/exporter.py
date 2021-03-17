@@ -4,6 +4,7 @@
 from app import a2pats, ceesim, datastore, model
 from app.util.logger import logger
 from datetime import datetime
+from os.path import join
 from sys import version_info
 
 if version_info > (3, 5):
@@ -26,34 +27,13 @@ CONSTANTS = {
     }
 }
 
-sample_data = {
-    'ModeName': 'A123Z_TEST01',
-    'CreationDate': '2021-01-21T17:26:11',
-    'EmitterId': 'A123Z',
-    'EmitterName': 'NSIN-EMITTER',
-    'ComplexPriState': 'false',
-    'DwellStatus': 'false',
-    'Pri': 0.0001,
-    'PulseWidth': 5e-06,
-    'ModStatus': 'false',
-    'Frequency': 5000000000,
-    'AzScanKind': 'Circular',
-    'AzInitialBeamOffset': 0,
-    'ElInitialBeamOffset': 0,
-    'AzScanPeriod': 1,
-    'AzDirection': 'Clockwise',
-    'ElScanMotion': 'Unidirectional',
-    'ElDirection': 'Up',
-    'ElTrackOffset': 0,
-    'ElSectorWidth': 90,
-    'ElScanPeriod': 1.048576,
-    'AntennaModelKind': 'Elliptical',
-    'AzScanShape': 'Sin(x)/x R1',
-    'AzBeamwidth': 2.9443359375,
-    'AzSidelobeRatio': -24,
-    'ElBeamWidth': 2.5937594433,
-    'ElSidelobeRatio': -24,
-    'ElScanShape': 'Sin(x)/x R1'
+MODEL_FILES = {
+    'SIGNAL': 'sig',
+    'PULSE': 'pul',
+    'PULSE SEQUENCE': 'pulseq',
+    'SCAN': 'scan',
+    'ANTENNA': 'ant',
+    'INTRAPULSE': 'inp'
 }
 
 # Certain units for numerical values need adjustment. Furthermore, the data needs to change format
@@ -118,6 +98,30 @@ def to_str_section(data, sect='header'):
         lines = top + ['{} MODEL:'.format(data.type)]
 
 
+def dump_a2pats_file(model_, folder):
+    # type: (model, PathLike) -> bool
+    '''Dump single A2PATS object
+    '''
+    filename = '{}.{}'.format(model_.name, MODEL_FILES[model_.type])
+    # NOTE: The following path joiner works best in Python 3.5+
+    # due to the implemenation of os.path.join(path, *paths). If
+    # you are the maintainer of this project please be assured
+    # that os.path.join(path, *paths) does not accept all types
+    # of PathLike objects and you can replace this with a call
+    # to os.path.normpath or os.path.realpath should there
+    # be issues on legacy versions of Python.
+    filepath = join(folder, filename)
+    header = to_str_section(model_)
+    # TODO: All the other sections of a file
+    sections = [header]
+    try:
+        with open(filepath, 'w') as fp:
+            fp.writelines(sections)
+        return True
+    except:
+        return False
+
+
 def dump_a2pats(obj, folder):
     # type: (a2pats, PathLike) -> bool
     '''Dump A2PATS object
@@ -131,7 +135,8 @@ def dump_a2pats(obj, folder):
     :returns: True on success
     :rtype: boolean
     '''
-    # TODO
+    for model_ in obj.models:
+        pass
     return False
 
 

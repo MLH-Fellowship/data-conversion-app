@@ -42,6 +42,7 @@ class model:
         self.name = name
         self.creation_date = creation_date
         self.data = kwargs
+        self.converted_data = list()
 
 
 class datastore:
