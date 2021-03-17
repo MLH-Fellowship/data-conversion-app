@@ -28,10 +28,6 @@ CONSTANTS = {
 }
 
 
-# Certain units for numerical values need adjustment. Furthermore, the data needs to change format
-# Boolean strings need switching to Python boolean
-
-
 def to_timestamp(time, downgrade_peaceful=True):
     # type: (datetime, bool) -> str
     '''Convert a time to an A²PATS-compatible timestamp (ISO 8601)
@@ -94,6 +90,7 @@ def dump_a2pats_file(model_, folder):
     # type: (model, PathLike) -> bool
     '''Dump single A2PATS object
     '''
+    logger.debug('Now exporting A2PATS model {}'.format(model_.name))
     filename = '{}.{}'.format(model_.name, MODEL_FILES[model_.type])
     # NOTE: The following path joiner works best in Python 3.5+
     # due to the implemenation of os.path.join(path, *paths). If
@@ -104,8 +101,7 @@ def dump_a2pats_file(model_, folder):
     # be issues on legacy versions of Python.
     filepath = join(folder, filename)
     header = to_str_section(model_)
-    # TODO: All the other sections of a file
-    sections = [header]
+    sections = [header, ''] + model_.converted_data
     try:
         with open(filepath, 'w') as fp:
             fp.writelines(sections)
@@ -127,6 +123,7 @@ def dump_a2pats(obj, folder):
     :returns: True on success
     :rtype: boolean
     '''
+    logger.info('Now exporting A2PATS to folder {}'.format(folder))
     for model_ in obj.models:
         dump_a2pats_file(model_, folder)
     return True
