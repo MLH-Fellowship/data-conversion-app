@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from app import a2pats, ceesim, datastore, model, ALLOWED_MODELS, MODEL_FILES
+from app import a2pats, ceesim, datastore, model, MODEL_FILES
 from app.scripts import PRI_HDR
 from app.util.errors import DatastoreError
 from app.util.logger import logger
@@ -16,6 +16,7 @@ DEFAULT_HDR = 'DEFAULT'
 FILE_HDR = 'FILE'
 FUNC_HDR = 'FUNCTION'
 INTRAPULSE_NAME = 'INP'
+NAME_HDR = 'ModeName'
 STRING_HDR = 'STRING'
 TABLE_DATA = 'DATA'
 TABLE_LIST = 'MULTI'
@@ -409,8 +410,7 @@ def generate_other_models(data, flattened_data, table):
         fill_table(model, opt[PRI_HDR], converted)
 
     models = list()
-    # TODO: Generate name
-    name = 'PLACEHOLDER'
+    name = obtain_relevant_tags(data, flattened_data, NAME_HDR)
     logger.debug('Generic model generator using name: {}'.format(name))
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name)
