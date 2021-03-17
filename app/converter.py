@@ -11,11 +11,14 @@ if version_info > (3, 5):
 
 
 AUTO_MODELS = ('SCAN', 'ANTENNA', 'FREQUENCY')
+DEFAULT_HDR = 'DEFAULT'
+FILE_HDR = 'FILE'
 FUNC_HDR = 'FUNCTION'
 INTRAPULSE_NAME = 'INP'
 STRING_HDR = 'STRING'
 TABLE_DATA = 'DATA'
 TABLE_LIST = 'MULTI'
+TAG_HDR = 'TAG'
 
 
 class functions:
@@ -383,11 +386,13 @@ def generate_other_models(data, flattened_data, table):
     # type: (dict, dict, dict) -> list
     '''Generate all non INP/PUL models
     '''
-    def create_converted(model, cdict_key, opt):
-        tags = obtain_relevant_tags(data, flattened_data, cdict_key)
-        if not tags:
-            # TODO: Use default value
-        converted = convert_one_key(opt, tags[0])
+    def create_converted(model, opt):
+        tags = obtain_relevant_tags(data, flattened_data, opt[TAG_HDR])
+        if tags:
+            value = tags[0]
+        else:
+            value = table[opt[FILE_HDR]][opt[TAG_HDR]][DEFAULT_HDR]
+        converted = convert_one_key(opt, value)
         # TODO: Place value in correct position
 
     models = list()
@@ -395,12 +400,12 @@ def generate_other_models(data, flattened_data, table):
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name)
         table_key = MODEL_FILES[mtype]
-        for cdict_key in data[table_key]:
+        for cdict_key in table[table_key]:
             if not cdict_key:
                 # TODO: Fill all default values
                 continue
-            if data[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in data[table_key][cdict_key]:
-                data_opts = data[table_key][cdict_key][TABLE_DATA]
+            if table[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in table[table_key][cdict_key]:
+                data_opts = table[table_key][cdict_key][TABLE_DATA]
                 for opt in data_opts:
                     create_converted(model, cdict_key, opt)
             else:
