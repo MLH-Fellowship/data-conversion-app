@@ -336,7 +336,8 @@ def flatten_table(data, stack_size=1):
     # type: (dict, int) -> dict
     '''Flattens a table
     '''
-    logger.debug('Flattening input table with call stack size at {}'.format(stack_size))
+    logger.debug(
+        'Flattening input table with call stack size at {}'.format(stack_size))
     data_ = dict()
     for key in data:
         if key not in data_:
@@ -387,9 +388,12 @@ def generate_other_models(data, flattened_data, table):
     # type: (dict, dict, dict) -> list
     '''Generate all non INP/PUL models
     '''
+    logger.debug('Now generating all non-signal models')
+
     def fill_table(model, pos, value):
         if len(model.converted_data) <= pos:
-            model.converted_data += [''] * (pos - len(model.converted_data) + 1)
+            model.converted_data += [''] * \
+                (pos - len(model.converted_data) + 1)
         model.converted_data[pos] = value
 
     def create_converted(model, opt):
@@ -397,6 +401,8 @@ def generate_other_models(data, flattened_data, table):
         if tags:
             value = tags[0]
         else:
+            logger.debug('Could not find tag, using default tag for {}: {}: {}'.format(
+                opt[FILE_HDR], opt[TAG_HDR], opt[DEFAULT_HDR]))
             value = table[opt[FILE_HDR]][opt[TAG_HDR]][DEFAULT_HDR]
         converted = convert_one_key(opt, value)
         fill_table(model, opt[PRI_HDR], converted)
@@ -404,6 +410,7 @@ def generate_other_models(data, flattened_data, table):
     models = list()
     # TODO: Generate name
     name = 'PLACEHOLDER'
+    logger.debug('Generic model generator using name: {}'.format(name))
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name)
         table_key = MODEL_FILES[mtype]
@@ -455,7 +462,8 @@ def convert_to_a2pats(data, table):
     logger.info('Beginning CEESIM to A2PATS conversion')
     flattened_data = flatten_table(data.imported_data)
     store = a2pats(imported_type='A2PATS')
-    generic_models = generate_other_models(data.imported_data, flattened_data, table)
+    generic_models = generate_other_models(
+        data.imported_data, flattened_data, table)
     store.models += generic_models
     # TODO: Generate models
     return store
