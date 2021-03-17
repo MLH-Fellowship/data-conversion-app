@@ -1,0 +1,50 @@
+//***************** ANTENNA DEFINITION FILE *****************
+//
+// Model:   Test Sig 1 Ant
+//
+// Created: Wed Feb 17, 2021  12:23 PM
+
+
+//********************* ANTENNA MODEL *********************
+
+ANTENNA NOTES:      ""
+
+ANTENNA MODEL:      RECTANGULAR
+
+BEAM MODEL:         AZIMUTH
+
+MAIN LOBE WIDTH:    3.000 DEG
+DISTRIBUTION:       SIN X/X
+PHASED ARRAY:       NO
+
+            LOBE       LOBE      LOBE      LOBE 
+         ATTENUATION  WIDTH   SEPARATION  REPEAT
+            (DB)      (DEG)     (DEG)     COUNT 
+  +/-    23.0000     N/A       2.000        1 
+  +/-    29.0000     N/A       1.200        1 
+
+DEPTH OF NULLS DEPTH : 127.8250 DB
+
+DEPTH OF NULLS SPAN : 0.000 DEG
+
+LOW RESOLUTION:     10 POINTS PER DEG
+HIGH RESOLUTION:    DISABLED
+
+BEAM MODEL:         ELEVATION
+
+MAIN LOBE WIDTH:    3.000 DEG
+DISTRIBUTION:       SIN X/X
+PHASED ARRAY:       NO
+
+            LOBE       LOBE      LOBE      LOBE 
+         ATTENUATION  WIDTH   SEPARATION  REPEAT
+            (DB)      (DEG)     (DEG)     COUNT 
+  +/-    23.0000     N/A       2.000        1 
+  +/-    29.0000     N/A       1.200        1 
+
+DEPTH OF NULLS DEPTH : 127.8250 DB
+
+DEPTH OF NULLS SPAN : 0.000 DEG
+
+LOW RESOLUTION:     10 POINTS PER DEG
+HIGH RESOLUTION:    DISABLED
