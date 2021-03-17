@@ -17,6 +17,7 @@ FILE_HDR = 'FILE'
 FUNC_HDR = 'FUNCTION'
 INTRAPULSE_NAME = 'INP'
 NAME_HDR = 'ModeName'
+PULSE_NAME = 'PUL'
 STRING_HDR = 'STRING'
 TABLE_DATA = 'DATA'
 TABLE_LIST = 'MULTI'
@@ -430,10 +431,12 @@ def generate_intrapulse(ceesim_data, lookup_table):
     # type: (dict, dict) -> List[model]
     '''Converts intrapulse signals in an imported table using a lookup table
     '''
+    logger.debug("Now generating the intrapulse models")
 
     for filetype in lookup_table:
         if filetype is INTRAPULSE_NAME:
             for tag in filetype:
+
                 tag_data = lookup_table[INTRAPULSE_NAME][tag]
 
                 if TABLE_LIST in tag_data:
@@ -449,8 +452,22 @@ def generate_pulse(ceesim_data, lookup_table):
     # type: (dict, dict) -> List[model]
     '''Converts pulse signals in an imported table using a lookup table
     '''
-    # TODO
-    pass
+    logger.debug("Now generating the pulse models")
+
+    for filetype in lookup_table:
+        if filetype is PULSE_NAME:
+            for tag in filetype:
+
+                if tag:
+                    tag_data = lookup_table[PULSE_NAME][tag]
+
+                if TABLE_LIST in tag_data:
+                    for feature_data in tag_data["DATA"]:
+                        convert_one_key(feature_data, ceesim_data[feature_data["TAG"]])
+                else:
+                    # TODO: What if table is flat
+                    pass
+    # TODO: Return data
 
 
 def convert_to_a2pats(ceesim_data, lookup_table):
