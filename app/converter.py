@@ -8,7 +8,7 @@ from app.util.logger import logger
 from sys import version_info
 
 if version_info > (3, 5):
-    from typing import Tuple, Union
+    from typing import Tuple, Union, List
 
 
 AUTO_MODELS = ('SCAN', 'ANTENNA', 'FREQUENCY')
@@ -427,7 +427,7 @@ def generate_other_models(data, flattened_data, table):
 
 
 def generate_intrapulse(data, table):
-    # type: (dict, dict) -> dict
+    # type: (dict, dict) -> List[model]
     '''Converts intrapulse signals in an imported table using a lookup table
     '''
 
@@ -446,7 +446,7 @@ def generate_intrapulse(data, table):
 
 
 def generate_pulse(data, table):
-    # type: (dict, dict) -> dict
+    # type: (dict, dict) -> List[model]
     '''Converts pulse signals in an imported table using a lookup table
     '''
     # TODO
