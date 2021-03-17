@@ -388,11 +388,16 @@ def convert_one_key(lookup_data, value):
         return value
 
 
-def obtain_relevant_tags(data, flattened_data, tag):
-    # type: (dict, dict, str) -> Tuple[list, None]
+def obtain_relevant_tags(data, flattened_data, tag, fast=True):
+    # type: (dict, dict, str, bool) -> Tuple[list, None]
     '''Checks the imported data for relevant data
     '''
-    # TODO
+    if fast:
+        if tag in flattened_data:
+            return flattened_data[tag]
+    else:
+        # TODO: Iterate through entire data
+        pass
     return None
 
 
