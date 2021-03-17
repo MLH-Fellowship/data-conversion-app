@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from app import a2pats, ceesim, datastore, model, ALLOWED_MODELS
+from app import a2pats, ceesim, datastore, model, ALLOWED_MODELS, MODEL_FILES
 from app.util.errors import DatastoreError
 from app.util.logger import logger
 from sys import version_info
@@ -14,6 +14,7 @@ AUTO_MODELS = ('SCAN', 'ANTENNA', 'FREQUENCY')
 FUNC_HDR = 'FUNCTION'
 INTRAPULSE_NAME = 'INP'
 STRING_HDR = 'STRING'
+TABLE_DATA = 'DATA'
 TABLE_LIST = 'MULTI'
 
 
@@ -326,6 +327,30 @@ class functions:
     def scan_model(emitterid): return "_".join([emitterid, "Scan"])
 
 
+# I'm not sure if this is the right method
+def flatten_table(data, stack_size=1):
+    # type: (dict, int) -> dict
+    '''Flattens a table
+    '''
+    logger.debug('Flattening input table with call stack size at')
+    data_ = dict()
+    for key in data:
+        if key not in data_:
+            if type(data[key]) not in {dict, list}:
+                data_[key] = data[key]
+            else:
+                frame = data[key]
+                if frame is list:
+                    if len(frame) < 1 or frame[0] is not dict:
+                        continue
+                    else:
+                        frame = frame[0]
+                subdict = flatten_table(frame, stack_size + 1)
+                subdict.update(data_)
+                data_ = subdict
+    return data_
+
+
 def convert(data):
     # type: (Union[a2pats, ceesim]) -> Union[a2pats, ceesim]
     '''Dynamically convert data to its corresponding format
@@ -363,13 +388,28 @@ def convert_one_key(lookup_data, value):
         return value
 
 
-def generate_other_models(data, table):
-    # type: (dict, dict) -> list
+def process_one_header(data, lookup_data):
+    # type: (dict, dict) -> str
+    '''Processes one header
+    '''
+    pass
+
+
+def generate_other_models(data, flattened_data, table):
+    # type: (dict, dict, dict) -> list
     '''Generate all non INP/PUL models
     '''
-    # TODO
+    name = ''  # TODO: Generate name
     for mtype in AUTO_MODELS:
-        pass
+        next_model = model(mtype, name)
+        table_key = MODEL_FILES[mtype]
+        for cdict_key in data[table_key]:
+            if data[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in data[table_key][cdict_key]:
+                data_opts = data[table_key][cdict_key][TABLE_DATA]
+                # TODO
+            # TODO
+            pass
+        # TODO
 
 
 def generate_intrapulse(data, table):
@@ -407,6 +447,7 @@ def convert_to_a2pats(data, table):
     :rtype: a2pats
     '''
     logger.info('Beginning CEESIM to A2PATS conversion')
+    flattened_data = flatten_table(data)
     store = a2pats(imported_type='A2PATS')
     for type_ in ALLOWED_MODELS:
         # TODO
