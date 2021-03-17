@@ -19,6 +19,15 @@ ALLOWED_MODELS = {
     'INTRAPULSE'
 }
 
+MODEL_FILES = {
+    'SIGNAL': 'sig',
+    'PULSE': 'pul',
+    'PULSE SEQUENCE': 'pulseq',
+    'SCAN': 'scan',
+    'ANTENNA': 'ant',
+    'INTRAPULSE': 'inp'
+}
+
 
 class model:
     '''Contains a simple model

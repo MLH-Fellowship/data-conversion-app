@@ -10,6 +10,7 @@ if version_info > (3, 5):
     from typing import Tuple, Union
 
 
+AUTO_MODELS = ('SCAN', 'ANTENNA', 'FREQUENCY')
 FUNC_HDR = 'FUNCTION'
 INTRAPULSE_NAME = 'INP'
 STRING_HDR = 'STRING'
@@ -367,7 +368,8 @@ def generate_other_models(data, table):
     '''Generate all non INP/PUL models
     '''
     # TODO
-    pass
+    for mtype in AUTO_MODELS:
+        pass
 
 
 def generate_intrapulse(data, table):

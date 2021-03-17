@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from app import a2pats, ceesim, datastore, model
+from app import a2pats, ceesim, datastore, model, MODEL_FILES
 from app.util.logger import logger
 from datetime import datetime
 from os.path import join
@@ -27,14 +27,6 @@ CONSTANTS = {
     }
 }
 
-MODEL_FILES = {
-    'SIGNAL': 'sig',
-    'PULSE': 'pul',
-    'PULSE SEQUENCE': 'pulseq',
-    'SCAN': 'scan',
-    'ANTENNA': 'ant',
-    'INTRAPULSE': 'inp'
-}
 
 # Certain units for numerical values need adjustment. Furthermore, the data needs to change format
 # Boolean strings need switching to Python boolean
