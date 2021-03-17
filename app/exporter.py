@@ -136,8 +136,8 @@ def dump_a2pats(obj, folder):
     :rtype: boolean
     '''
     for model_ in obj.models:
-        pass
-    return False
+        dump_a2pats_file(model_, folder)
+    return True
 
 
 def dump_ceesim(obj, folder):
