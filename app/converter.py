@@ -363,12 +363,13 @@ def convert_one_key(lookup_data, value):
     # TODO: Table Handler
     if FUNC_HDR in lookup_data:
         funcp_data = getattr(functions, lookup_data[FUNC_HDR])(value)
-        if lookup_data[STRING_HDR]:
-            return '"{:<15}:   {}"'.format(lookup_data["LABEL"], funcp_data)
-        else:
-            return 'funcp_data'.format()
     else:
-        return value
+        funcp_data = lookup_data["DEFAULT"]
+
+    if lookup_data[STRING_HDR]:
+        return '"{:<20}{}"'.format(lookup_data["LABEL"] + ":", funcp_data)
+    else:
+        return '{:<20}{}'.format(lookup_data["LABEL"] + ":", funcp_data)
 
 
 def obtain_relevant_tags(data, flattened_data, tag, fast=True):
@@ -429,15 +430,18 @@ def generate_intrapulse(data, table):
     # type: (dict, dict) -> dict
     '''Converts intrapulse signals in an imported table using a lookup table
     '''
-    # TODO: Logic to find signals -> list of signals
-    for tag in table:
-        if INTRAPULSE_NAME in table[tag]:
-            if TABLE_LIST in table[tag][INTRAPULSE_NAME] and table[tag][INTRAPULSE_NAME][TABLE_LIST]:
-                # TODO: What if table is list
-                pass
-            else:
-                # TODO: What if table is flat
-                pass
+
+    for filetype in table:
+        if filetype is INTRAPULSE_NAME:
+            for tag in filetype:
+                tag_data = table[INTRAPULSE_NAME][tag]
+
+                if TABLE_LIST in tag_data:
+                    for feature_data in tag_data["DATA"]:
+                        convert_one_key(feature_data, data[feature_data["TAG"]])
+                else:
+                    # TODO: What if table is flat
+                    pass
     # TODO: Return data
 
 
