@@ -388,28 +388,42 @@ def convert_one_key(lookup_data, value):
         return value
 
 
-def process_one_header(data, lookup_data):
-    # type: (dict, dict) -> str
-    '''Processes one header
+def obtain_relevant_tags(data, flattened_data, tag):
+    # type: (dict, dict, str) -> Tuple[list, None]
+    '''Checks the imported data for relevant data
     '''
-    pass
+    # TODO
+    return None
 
 
 def generate_other_models(data, flattened_data, table):
     # type: (dict, dict, dict) -> list
     '''Generate all non INP/PUL models
     '''
+    def create_converted(model, cdict_key, opt):
+        tags = obtain_relevant_tags(data, flattened_data, cdict_key)
+        if not tags:
+            # TODO: Use default value
+        converted = convert_one_key(opt, tags[0])
+        # TODO: Place value in correct position
+
+    models = list()
     name = ''  # TODO: Generate name
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name)
         table_key = MODEL_FILES[mtype]
         for cdict_key in data[table_key]:
+            if not cdict_key:
+                # TODO: Fill all default values
+                continue
             if data[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in data[table_key][cdict_key]:
                 data_opts = data[table_key][cdict_key][TABLE_DATA]
-                # TODO
-            # TODO
-            pass
-        # TODO
+                for opt in data_opts:
+                    create_converted(model, cdict_key, opt)
+            else:
+                create_converted(model, cdict_key, opt)
+        models.append(next_model)
+    return models
 
 
 def generate_intrapulse(data, table):
