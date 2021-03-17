@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from app import a2pats, ceesim, datastore, model, ALLOWED_MODELS, MODEL_FILES
+from app.scripts import PRI_HDR
 from app.util.errors import DatastoreError
 from app.util.logger import logger
 from sys import version_info
@@ -335,7 +336,7 @@ def flatten_table(data, stack_size=1):
     # type: (dict, int) -> dict
     '''Flattens a table
     '''
-    logger.debug('Flattening input table with call stack size at')
+    logger.debug('Flattening input table with call stack size at {}'.format(stack_size))
     data_ = dict()
     for key in data:
         if key not in data_:
@@ -386,6 +387,11 @@ def generate_other_models(data, flattened_data, table):
     # type: (dict, dict, dict) -> list
     '''Generate all non INP/PUL models
     '''
+    def fill_table(model, pos, value):
+        if len(model.converted_data) <= pos:
+            model.converted_data += [''] * (pos - len(model.converted_data) + 1)
+        model.converted_data[pos] = value
+
     def create_converted(model, opt):
         tags = obtain_relevant_tags(data, flattened_data, opt[TAG_HDR])
         if tags:
@@ -393,17 +399,15 @@ def generate_other_models(data, flattened_data, table):
         else:
             value = table[opt[FILE_HDR]][opt[TAG_HDR]][DEFAULT_HDR]
         converted = convert_one_key(opt, value)
-        # TODO: Place value in correct position
+        fill_table(model, opt[PRI_HDR], converted)
 
     models = list()
-    name = ''  # TODO: Generate name
+    # TODO: Generate name
+    name = 'PLACEHOLDER'
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name)
         table_key = MODEL_FILES[mtype]
         for cdict_key in table[table_key]:
-            if not cdict_key:
-                # TODO: Fill all default values
-                continue
             if table[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in table[table_key][cdict_key]:
                 data_opts = table[table_key][cdict_key][TABLE_DATA]
                 for opt in data_opts:
@@ -449,12 +453,11 @@ def convert_to_a2pats(data, table):
     :rtype: a2pats
     '''
     logger.info('Beginning CEESIM to A2PATS conversion')
-    flattened_data = flatten_table(data)
+    flattened_data = flatten_table(data.imported_data)
     store = a2pats(imported_type='A2PATS')
-    for type_ in ALLOWED_MODELS:
-        # TODO
-        next_model = model(type_, 'insert_name')
-        store.models.append(next_model)
+    generic_models = generate_other_models(data.imported_data, flattened_data, table)
+    store.models += generic_models
+    # TODO: Generate models
     return store
 
 

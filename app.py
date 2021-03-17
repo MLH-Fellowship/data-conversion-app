@@ -57,7 +57,7 @@ def convert(input_file, output_file):
         'Main app converter called, using provided input and output files')
     lookup_table = prepare_lookup_table()
     input_data = import_(input_file, ceesim)  # -> CEESIM object
-    output_data = convert_to_a2pats(input_data)
+    output_data = convert_to_a2pats(input_data, lookup_table)
     success = dump_a2pats(output_data, output_file)
     if success:
         return output_data
