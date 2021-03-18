@@ -146,7 +146,12 @@ class functions:
         :rtype: str
         '''
 
-        return word.upper()
+        if word == "Circular":
+            return word.upper()
+
+        elif word == "Steady":
+            return "LORO"
+        
 
     @staticmethod
     def format_degree(num):
@@ -213,6 +218,7 @@ class functions:
 
         if motion == "Unidirectional":
             return "NODDING"
+            
         else:
             return "OFF"
 
@@ -414,7 +420,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
     name = obtain_relevant_tags(ceesim_data, ceesim_flattened, NAME_HDR)
     logger.debug('Generic model generator using name: {}'.format(name))
     for mtype in AUTO_MODELS:
-        next_model = model(mtype, name)
+        next_model = model(mtype, name + "_" + mtype)
         table_key = MODEL_FILES[mtype]
         for cdict_key in lookup_table[table_key]:
             if lookup_table[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in lookup_table[table_key][cdict_key]:
