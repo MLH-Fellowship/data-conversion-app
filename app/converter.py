@@ -470,6 +470,40 @@ def generate_pulse(ceesim_data, lookup_table):
     # TODO: Return data
 
 
+ITERATOR_KEYS = ('Scenario', 'Platforms', 'Platform')
+SEARCH_TO_RETURN_KEYS = ('Emitters', 'Emitter', 'EmitterModes', 'EmitterMode')
+
+
+def split_emitter_modes(ceesim_data):
+    # type: (dict) -> List[dict]
+    '''Converts CEESIM data to a list of emitter mode dicts
+    '''
+    def split_emitter_modes_helper(data):
+        # type: (dict) -> List[dict]
+        frame = data
+        for key in SEARCH_TO_RETURN_KEYS:
+            if key in frame:
+                frame = data[key]
+            else:
+                return list()
+        if type(frame) is list:
+            return frame
+        return list()
+
+    frame = ceesim_data
+    for key in ITERATOR_KEYS:
+        if key in frame:
+            frame = ceesim_data[key]
+        else:
+            return list()
+    if type(frame) is not list:
+        return list()
+    modes = list()
+    for platform in frame:
+        modes += split_emitter_modes_helper(platform)
+    return modes
+
+
 def convert_to_a2pats(ceesim_data, lookup_table):
     # type: (ceesim, dict) -> a2pats
     '''Convert CEESIM data to A²PATS data
@@ -482,7 +516,9 @@ def convert_to_a2pats(ceesim_data, lookup_table):
     '''
     logger.info('Beginning CEESIM to A2PATS conversion')
     flattened_data = flatten_table(ceesim_data.imported_data)
+    emitter_modes = split_emitter_modes(ceesim_data.imported_data)
     store = a2pats(imported_type='A2PATS')
+    # TODO: Use emitter modes instead
     generic_models = generate_other_models(
         ceesim_data.imported_data, flattened_data, lookup_table)
     store.models += generic_models
