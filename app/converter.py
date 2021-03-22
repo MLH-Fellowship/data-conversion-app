@@ -325,6 +325,36 @@ class functions:
         return " ".join([trig, arg]).replace("(X)", "X")
 
     @staticmethod
+    def get_dwell(cps):
+        # type: (str) -> str
+        '''Convert ComplexPriState to Dwell in MSEC
+
+        :param cps: ComplexPriState
+        :type kind: str
+
+        :returns: Dwell in MSEC
+        :rtype: str
+        '''
+
+        if cps == "false":
+            return "N/A"
+    
+    @staticmethod
+    def get_repeat(cps):
+        # type: (str) -> str
+        '''Convert ComplexPriState to pulse repeat
+
+        :param cps: ComplexPriState
+        :type kind: str
+
+        :returns: pulse repeat
+        :rtype: str
+        '''
+
+        if cps == "false":
+            return "1"
+
+    @staticmethod
     # TODO: if possible, we should really accept a second parameter here to
     def ant_model(emitterid): return "_".join([emitterid, "ANT"])
 

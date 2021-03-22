@@ -435,7 +435,7 @@
                     "TAG": ""
                 },
                 {
-                    "DEFAULT": "0",
+                    "DEFAULT": "0.0000",
                     "FILE": "PUL",
                     "FUNCTION": "",
                     "LABEL": "ATTENUATION (DB)",
@@ -540,6 +540,7 @@
                 },
                 {
                     "DEFAULT": "",
+                    "DEFAULT": "N/A",
                     "FILE": "PUL",
                     "FUNCTION": "",
                     "LABEL": "DWELL (MSEC)",
@@ -575,7 +576,7 @@
             "TAG": "DwellStatus"
         },
         "Frequency": {
-            "DEFAULT": "0",
+            "DEFAULT": "0.000",
             "FILE": "PUL",
             "FUNCTION": "to_mhz",
             "LABEL": "FREQUENCY (MHZ)",
@@ -619,7 +620,7 @@
             "TAG": "ModeName"
         },
         "Pri": {
-            "DEFAULT": "0",
+            "DEFAULT": "0.00000",
             "FILE": "PUL",
             "FUNCTION": "to_usec",
             "LABEL": "PRI (USEC)",
@@ -630,7 +631,7 @@
             "TAG": "Pri"
         },
         "PulseWidth": {
-            "DEFAULT": "0",
+            "DEFAULT": "0.00000",
             "FILE": "PUL",
             "FUNCTION": "to_usec",
             "LABEL": "PW (USEC)",
@@ -1329,7 +1330,7 @@
                     "TAG": "ModeName"
                 },
                 {
-                    "DEFAULT": "1",
+                    "DEFAULT": "01",
                     "FILE": "SIG",
                     "FUNCTION": "extract_mode",
                     "LABEL": "MODE",
