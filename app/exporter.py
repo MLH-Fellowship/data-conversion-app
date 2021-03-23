@@ -102,7 +102,7 @@ def dump_a2pats_file(model_, folder):
     # be issues on legacy versions of Python.
     filepath = join(folder, filename)
     header = to_str_section(model_)
-    sections = [header, ''] + reduce(lambda a, b: a + b, model_.converted_data)
+    sections = [header, ''] + model_.converted_data
     try:
         with open(filepath, 'w') as fp:
             fp.writelines(sections)
