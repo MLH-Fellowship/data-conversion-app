@@ -394,7 +394,7 @@ def flatten_table(ceesim_data, stack_size=1):
                 subdict = flatten_table(frame, stack_size + 1)
                 subdict.update(data_)
                 data_ = subdict
-    logger.debug('Now returning data with size of {}'.format(len(data_)))
+    logger.debug('Now returning flat table with size of {}'.format(len(data_)))
     return data_
 
 
@@ -468,9 +468,9 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             if lookup_table[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in lookup_table[table_key][cdict_key]:
                 data_opts = lookup_table[table_key][cdict_key][TABLE_DATA]
                 for opt in data_opts:
-                    create_converted(next_model, cdict_key, opt)
+                    create_converted(next_model, opt)
             else:
-                create_converted(next_model, cdict_key, opt)
+                create_converted(next_model, opt)
         models.append(next_model)
     return models
 
