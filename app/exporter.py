@@ -92,7 +92,7 @@ def dump_a2pats_file(model_, folder):
     '''Dump single A2PATS object
     '''
     logger.debug('Now exporting A2PATS model {}'.format(model_.name))
-    filename = '{}.{}'.format(model_.name, MODEL_FILES[model_.type])
+    filename = '{}.{}'.format(model_.name, MODEL_FILES[model_.type].lower())
     # NOTE: The following path joiner works best in Python 3.5+
     # due to the implemenation of os.path.join(path, *paths). If
     # you are the maintainer of this project please be assured

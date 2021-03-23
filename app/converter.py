@@ -409,7 +409,10 @@ def convert_one_key(lookup_data, value):
         funcp_data = lookup_data["DEFAULT"]
 
     if lookup_data[STRING_HDR]:
-        return '"{:<20}{}"'.format(lookup_data["LABEL"] + ":", funcp_data)
+        funcp_data = '"{}"'.format(funcp_data)
+
+    if len(lookup_data["LABEL"]) >= 19:
+        return '{} : {}'.format(lookup_data["LABEL"], funcp_data)
     else:
         return '{:<20}{}'.format(lookup_data["LABEL"] + ":", funcp_data)
 
@@ -452,8 +455,9 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         fill_table(model, opt[PRI_HDR], converted)
 
     models = list()
-    # FIXME: Get correct name, currently returns None
-    name = obtain_relevant_tags(ceesim_data, ceesim_flattened, NAME_HDR)
+    # TODO: Pull correct name from flatted data with obtain_relevant_tags, currently uses split_emitter_modes
+    # Path to ModeName: ceesim_data["Scenario"]["Platforms"]["Platform"][1]["Emitters"]["Emitter"]["Emitter_Modes"]["Emitter_Mode"][0]["EmitterModeHeader"]["ModeName"]
+    name = split_emitter_modes(ceesim_data)[0]["EmitterModeHeader"]["ModeName"] # obtain_relevant_tags(ceesim_data, ceesim_flattened, NAME_HDR)
     logger.debug('Generic model generator using name: {}'.format(name))
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name)
@@ -477,6 +481,9 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                 create_converted(next_model, opt)
         models.append(next_model)
     return models
+
+def scan_splitter():
+    pass
 
 
 def generate_intrapulse(ceesim_data, lookup_table):
