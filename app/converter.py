@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from app import a2pats, ceesim, datastore, model, MODEL_FILES
-from app.scripts import PRI_HDR
+from app.scripts import PRI_HDR, TABLE_MULTI_HDR as MULTI_HDR
 from app.util.errors import DatastoreError
 from app.util.logger import logger
 from sys import version_info
@@ -20,7 +20,6 @@ NAME_HDR = 'ModeName'
 PULSE_NAME = 'PUL'
 STRING_HDR = 'STRING'
 TABLE_DATA = 'DATA'
-MULTI_HDR = 'MULTI'
 TAG_HDR = 'TAG'
 
 
@@ -404,7 +403,7 @@ def convert_one_key(lookup_data, value):
     '''Converts one key given the table lookup parameters
     '''
     # TODO: Table Handler
-    if FUNC_HDR in lookup_data:
+    if FUNC_HDR in lookup_data and hasattr(functions, lookup_data[FUNC_HDR]):
         funcp_data = getattr(functions, lookup_data[FUNC_HDR])(value)
     else:
         funcp_data = lookup_data["DEFAULT"]
