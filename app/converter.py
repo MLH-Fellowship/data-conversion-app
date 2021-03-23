@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from app import a2pats, ceesim, datastore, model, MODEL_FILES
-from app.scripts import PRI_HDR
+from app.scripts import PRI_HDR, TABLE_MULTI_HDR
 from app.util.errors import DatastoreError
 from app.util.logger import logger
 from sys import version_info
@@ -151,7 +151,6 @@ class functions:
 
         elif word == "Steady":
             return "LORO"
-        
 
     @staticmethod
     def format_degree(num):
@@ -218,7 +217,7 @@ class functions:
 
         if motion == "Unidirectional":
             return "NODDING"
-            
+
         else:
             return "OFF"
 
@@ -338,7 +337,7 @@ class functions:
 
         if cps == "false":
             return "N/A"
-    
+
     @staticmethod
     def get_repeat(cps):
         # type: (str) -> str
@@ -381,10 +380,12 @@ def flatten_table(ceesim_data, stack_size=1):
         # logger.debug('Now checking for {} in data'.format(key))
         if key not in data_:
             if type(ceesim_data[key]) not in {dict, list}:
-                logger.debug('{} was not in data, and was added to the flat table'.format(key))
+                logger.debug(
+                    '{} was not in data, and was added to the flat table'.format(key))
                 data_[key] = ceesim_data[key]
             else:
-                logger.debug('Now processing lookup table for subkeys of {}'.format(key))
+                logger.debug(
+                    'Now processing lookup table for subkeys of {}'.format(key))
                 frame = ceesim_data[key]
                 if type(frame) is list:
                     if len(frame) < 1 or frame[0] is not dict:
@@ -441,13 +442,20 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         model.converted_data[pos] = value
 
     def create_converted(model, opt):
-        tags = obtain_relevant_tags(ceesim_data, ceesim_flattened, opt[TAG_HDR])
+        tags = obtain_relevant_tags(
+            ceesim_data, ceesim_flattened, opt[TAG_HDR])
         if tags:
             value = tags[0]
         else:
             logger.debug('Could not find tag, using default tag for {}: {}: {}'.format(
                 opt[FILE_HDR], opt[TAG_HDR], opt[DEFAULT_HDR]))
-            value = lookup_table[opt[FILE_HDR]][opt[TAG_HDR]][DEFAULT_HDR]
+            tag_data = lookup_table[opt[FILE_HDR]][opt[TAG_HDR]]
+            if TABLE_MULTI_HDR in tag_data:
+                # TODO: Support multidict
+                logger.warn('Data for tag {}: {}: {} skipped due to multidict not being supported yet'.format(
+                    opt[FILE_HDR], opt[TAG_HDR], opt[DEFAULT_HDR]))
+                return
+            value = tag_data[DEFAULT_HDR]
         converted = convert_one_key(opt, value)
         fill_table(model, opt[PRI_HDR], converted)
 
@@ -457,13 +465,16 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name + "_" + mtype)
         if mtype not in MODEL_FILES:
-            logger.warn('Could not find mtype {} in model files, skipping'.format(mtype))
+            logger.warn(
+                'Could not find mtype {} in model files, skipping'.format(mtype))
             continue
         table_key = MODEL_FILES[mtype]
         if table_key not in lookup_table:
-            logger.warn('Could not find key {} in lookup table, skipping'.format(table_key))
+            logger.warn(
+                'Could not find key {} in lookup table, skipping'.format(table_key))
             continue
-        logger.debug('Now processing table key {} with mtype {}'.format(table_key, mtype))
+        logger.debug(
+            'Now processing table key {} with mtype {}'.format(table_key, mtype))
         for cdict_key in lookup_table[table_key]:
             if lookup_table[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in lookup_table[table_key][cdict_key]:
                 data_opts = lookup_table[table_key][cdict_key][TABLE_DATA]
@@ -489,7 +500,8 @@ def generate_intrapulse(ceesim_data, lookup_table):
 
                 if TABLE_LIST in tag_data:
                     for feature_data in tag_data["DATA"]:
-                        convert_one_key(feature_data, ceesim_data[feature_data["TAG"]])
+                        convert_one_key(
+                            feature_data, ceesim_data[feature_data["TAG"]])
                 else:
                     # TODO: What if table is flat
                     pass
@@ -511,7 +523,8 @@ def generate_pulse(ceesim_data, lookup_table):
 
                 if TABLE_LIST in tag_data:
                     for feature_data in tag_data["DATA"]:
-                        convert_one_key(feature_data, ceesim_data[feature_data["TAG"]])
+                        convert_one_key(
+                            feature_data, ceesim_data[feature_data["TAG"]])
                 else:
                     # TODO: What if table is flat
                     pass
@@ -569,7 +582,8 @@ def convert_to_a2pats(ceesim_data, lookup_table):
     # TODO: Use emitter modes instead
     generic_models = generate_other_models(
         ceesim_data.imported_data, flattened_data, lookup_table)
-    logger.debug('Added {} models from generate_other_models'.format(len(generic_models)))
+    logger.debug('Added {} models from generate_other_models'.format(
+        len(generic_models)))
     store.models += generic_models
     # TODO: Generate models
     return store
