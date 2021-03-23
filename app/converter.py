@@ -378,9 +378,9 @@ def flatten_table(ceesim_data, stack_size=1):
         'Flattening input table with call stack size at {}'.format(stack_size))
     data_ = dict()
     for key in ceesim_data:
-        logger.debug(f'Now checking for {key} in data')
+        # logger.debug('Now checking for {} in data'.format(key))
         if key not in data_:
-            logger.debug(f'{key} was not in data, type is {type(key)}')
+            logger.debug('{} was not in data, type is {}'.format(key, type(key)))
             if type(ceesim_data[key]) not in {dict, list}:
                 data_[key] = ceesim_data[key]
             else:
@@ -393,6 +393,7 @@ def flatten_table(ceesim_data, stack_size=1):
                 subdict = flatten_table(frame, stack_size + 1)
                 subdict.update(data_)
                 data_ = subdict
+    logger.debug('Now returning data with size of {}'.format(len(data_)))
     return data_
 
 
@@ -454,7 +455,14 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
     logger.debug('Generic model generator using name: {}'.format(name))
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name + "_" + mtype)
+        if mtype not in MODEL_FILES:
+            logger.warn('Could not find mtype {} in model files, skipping'.format(mtype))
+            continue
         table_key = MODEL_FILES[mtype]
+        if table_key not in lookup_table:
+            logger.warn('Could not find key {} in lookup table, skipping'.format(table_key))
+            continue
+        logger.debug('Now processing table key {} with mtype {}'.format(table_key, mtype))
         for cdict_key in lookup_table[table_key]:
             if lookup_table[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in lookup_table[table_key][cdict_key]:
                 data_opts = lookup_table[table_key][cdict_key][TABLE_DATA]
