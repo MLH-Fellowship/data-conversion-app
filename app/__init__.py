@@ -20,12 +20,12 @@ ALLOWED_MODELS = {
 }
 
 MODEL_FILES = {
-    'SIGNAL': 'sig',
-    'PULSE': 'pul',
-    'PULSE SEQUENCE': 'pulseq',
-    'SCAN': 'scan',
-    'ANTENNA': 'ant',
-    'INTRAPULSE': 'inp'
+    'SIGNAL': 'SIG',
+    'PULSE': 'PUL',
+    'PULSE SEQUENCE': 'PULSEQ',
+    'SCAN': 'SCAN',
+    'ANTENNA': 'ANT',
+    'INTRAPULSE': 'INP'
 }
 
 

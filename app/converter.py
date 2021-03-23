@@ -380,10 +380,11 @@ def flatten_table(ceesim_data, stack_size=1):
     for key in ceesim_data:
         # logger.debug('Now checking for {} in data'.format(key))
         if key not in data_:
-            logger.debug('{} was not in data, type is {}'.format(key, type(key)))
             if type(ceesim_data[key]) not in {dict, list}:
+                logger.debug('{} was not in data, and was added to the flat table'.format(key))
                 data_[key] = ceesim_data[key]
             else:
+                logger.debug('Now processing lookup table for subkeys of {}'.format(key))
                 frame = ceesim_data[key]
                 if type(frame) is list:
                     if len(frame) < 1 or frame[0] is not dict:
