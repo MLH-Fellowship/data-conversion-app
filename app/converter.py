@@ -467,9 +467,9 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             if lookup_table[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in lookup_table[table_key][cdict_key]:
                 data_opts = lookup_table[table_key][cdict_key][TABLE_DATA]
                 for opt in data_opts:
-                    create_converted(model, cdict_key, opt)
+                    create_converted(next_model, cdict_key, opt)
             else:
-                create_converted(model, cdict_key, opt)
+                create_converted(next_model, cdict_key, opt)
         models.append(next_model)
     return models
 
@@ -568,6 +568,7 @@ def convert_to_a2pats(ceesim_data, lookup_table):
     # TODO: Use emitter modes instead
     generic_models = generate_other_models(
         ceesim_data.imported_data, flattened_data, lookup_table)
+    logger.debug('Added {} models from generate_other_models'.format(len(generic_models)))
     store.models += generic_models
     # TODO: Generate models
     return store

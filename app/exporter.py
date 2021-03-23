@@ -4,11 +4,11 @@
 from app import a2pats, ceesim, datastore, model, MODEL_FILES
 from app.util.logger import logger
 from datetime import datetime
-from os.path import join
+from os import mkdir
+from os.path import join, isdir, isfile
 from sys import version_info
 
 if version_info > (3, 5):
-    from functools import reduce
     from os import PathLike
 
 CONSTANTS = {
@@ -124,6 +124,12 @@ def dump_a2pats(obj, folder):
     :returns: True on success
     :rtype: boolean
     '''
+    if isfile(folder):
+        logger.error('{} is a filepath, a folder cannot be placed here. Aborting'.format(folder))
+        return False
+    if not isdir(folder):
+        logger.debug('{} does not exist, creating folder'.format(folder))
+        mkdir(folder)
     logger.info('Now exporting A2PATS to folder {}'.format(folder))
     for model_ in obj.models:
         dump_a2pats_file(model_, folder)
