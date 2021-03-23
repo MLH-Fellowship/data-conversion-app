@@ -105,7 +105,7 @@ def dump_a2pats_file(model_, folder):
     sections = [header, ''] + model_.converted_data
     try:
         with open(filepath, 'w') as fp:
-            fp.writelines(sections)
+            fp.write('\n'.join(sections))
         return True
     except:
         return False

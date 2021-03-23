@@ -1,0 +1,30 @@
+//******************* SCAN DEFINITION FILE ********************
+//
+// Model:   None
+//
+// Created: Tue Mar 23, 2021  08:23 PM
+
+
+
+
+"SCAN NOTES:         "
+
+
+
+
+
+
+
+
+PULSE TRIG ON REV:  NO
+
+
+TYPE:               SAWTOOTH
+DIRECTION:          None
+
+
+
+
+SCAN PERSPECTIVE:   TARGET
+
+DEFAULT OFFSET:     0.0000 DBM

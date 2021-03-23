@@ -424,8 +424,7 @@ def obtain_relevant_tags(ceesim_data, ceesim_flattened, tag, fast=True):
     else:
         # TODO: Iterate through entire data
         pass
-    # Temporary fix to fix error... make it None if possible
-    return ''
+    return None
 
 
 def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
@@ -453,10 +452,11 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         fill_table(model, opt[PRI_HDR], converted)
 
     models = list()
+    # FIXME: Get correct name, currently returns None
     name = obtain_relevant_tags(ceesim_data, ceesim_flattened, NAME_HDR)
     logger.debug('Generic model generator using name: {}'.format(name))
     for mtype in AUTO_MODELS:
-        next_model = model(mtype, name + "_" + mtype)
+        next_model = model(mtype, name)
         if mtype not in MODEL_FILES:
             logger.warn(
                 'Could not find mtype {} in model files, skipping'.format(mtype))
