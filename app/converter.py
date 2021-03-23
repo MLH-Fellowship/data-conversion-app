@@ -469,7 +469,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         logger.debug(
             'Now processing table key {} with mtype {}'.format(table_key, mtype))
         for cdict_key in lookup_table[table_key]:
-            if lookup_table[table_key][cdict_key][MULTI_HDR] and TABLE_DATA in lookup_table[table_key][cdict_key]:
+            if MULTI_HDR in lookup_table[table_key][cdict_key] and TABLE_DATA in lookup_table[table_key][cdict_key]:
                 data_opts = lookup_table[table_key][cdict_key][TABLE_DATA]
                 for opt in data_opts:
                     create_converted(next_model, opt)
