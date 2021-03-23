@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from app import a2pats, ceesim, datastore, model, MODEL_FILES
-from app.scripts import PRI_HDR, TABLE_MULTI_HDR
+from app.scripts import PRI_HDR
 from app.util.errors import DatastoreError
 from app.util.logger import logger
 from sys import version_info
@@ -20,7 +20,7 @@ NAME_HDR = 'ModeName'
 PULSE_NAME = 'PUL'
 STRING_HDR = 'STRING'
 TABLE_DATA = 'DATA'
-TABLE_LIST = 'MULTI'
+MULTI_HDR = 'MULTI'
 TAG_HDR = 'TAG'
 
 
@@ -449,13 +449,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         else:
             logger.debug('Could not find tag, using default tag for {}: {}: {}'.format(
                 opt[FILE_HDR], opt[TAG_HDR], opt[DEFAULT_HDR]))
-            tag_data = lookup_table[opt[FILE_HDR]][opt[TAG_HDR]]
-            if TABLE_MULTI_HDR in tag_data:
-                # TODO: Support multidict
-                logger.warn('Data for tag {}: {}: {} skipped due to multidict not being supported yet'.format(
-                    opt[FILE_HDR], opt[TAG_HDR], opt[DEFAULT_HDR]))
-                return
-            value = tag_data[DEFAULT_HDR]
+            value = opt[DEFAULT_HDR]
         converted = convert_one_key(opt, value)
         fill_table(model, opt[PRI_HDR], converted)
 
@@ -476,7 +470,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         logger.debug(
             'Now processing table key {} with mtype {}'.format(table_key, mtype))
         for cdict_key in lookup_table[table_key]:
-            if lookup_table[table_key][cdict_key][TABLE_LIST] and TABLE_DATA in lookup_table[table_key][cdict_key]:
+            if lookup_table[table_key][cdict_key][MULTI_HDR] and TABLE_DATA in lookup_table[table_key][cdict_key]:
                 data_opts = lookup_table[table_key][cdict_key][TABLE_DATA]
                 for opt in data_opts:
                     create_converted(next_model, opt)
@@ -498,7 +492,7 @@ def generate_intrapulse(ceesim_data, lookup_table):
 
                 tag_data = lookup_table[INTRAPULSE_NAME][tag]
 
-                if TABLE_LIST in tag_data:
+                if MULTI_HDR in tag_data:
                     for feature_data in tag_data["DATA"]:
                         convert_one_key(
                             feature_data, ceesim_data[feature_data["TAG"]])
@@ -521,7 +515,7 @@ def generate_pulse(ceesim_data, lookup_table):
                 if tag:
                     tag_data = lookup_table[PULSE_NAME][tag]
 
-                if TABLE_LIST in tag_data:
+                if MULTI_HDR in tag_data:
                     for feature_data in tag_data["DATA"]:
                         convert_one_key(
                             feature_data, ceesim_data[feature_data["TAG"]])
