@@ -1,0 +1,38 @@
+//****************** SCAN DEFINITION FILE *******************
+//
+// Model:   Horiz_Bi_dir
+//
+// Created: Mon Mar 22, 2021  1:43 PM
+
+
+//********************** SCAN MODEL ***********************
+
+SCAN NOTES:         ""			Template
+
+SCAN MODEL:         SECTOR			<xsd:element name="AzScanKind" or <xsd:element name="ElScanKind"
+
+AZIMUTH OFFSET:     30.000 DEG		<xsd:element name="AzTrackOffset"
+ELEVATION OFFSET:   0.000 DEG		<xsd:element name="ElTrackOffset" 
+AZ WIDTH:           120.000 DEG		<xsd:element name="AzSectorWidth"
+EL WIDTH:           0.000 DEG		<xsd:element name="ElSectorWidth"
+AZ START ANGLE:     POSITIVE		<xsd:element name="AzPointAngle"
+EL START ANGLE:     NEGATIVE		<xsd:element name="ElPointAngle"
+RASTERS:            2				Biidirectional will have 2 Rasters in Template
+ORIENTATION:        HORIZONTAL		<xsd:element name="AzDirection" 
+DIRECTION:          BI			<xsd:element name="AzScanMotion"
+1ST BAR TIME:       3000.00 MSEC	<xsd:element name="AzScanPeriod"/2
+2ND BAR TIME:       3000.00 MSEC	<xsd:element name="AzScanPeriod"/2
+TRANSITION TIME:    0.00 MSEC		<xsd:element name="AzScanReset"
+TRANSITION BLANK:   NO			<xsd:element name="AzScanReset"
+
+PULSE TRIG ENABLE:  NO			Template
+TRIG ON 1ST BAR:    NO			Template
+TRIG ON 2ND BAR:    NO			Template
+TRIG ON TRANSITION: NO			Template
+
+OVERLAY MODEL:      OFF			<xsd:element name="ElScanKind" or <xsd:element name="PalmerStatus"		
+
+SCAN PERSPECTIVE:   TARGET			Template
+
+DEFAULT OFFSET:     0.0000 DBM		Template
+

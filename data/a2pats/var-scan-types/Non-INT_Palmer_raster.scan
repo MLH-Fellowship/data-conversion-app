@@ -1,0 +1,54 @@
+//****************** SCAN DEFINITION FILE *******************
+//
+// Model:   Non-INT_Palmer_raster
+//
+// Created: Mon Mar 22, 2021  1:41 PM
+
+
+//********************** SCAN MODEL ***********************
+
+SCAN NOTES:         ""				Template
+
+SCAN MODEL:         RASTER				<xsd:complexType name="ctScanSegmentNonInterleavedRaster"> or
+								<xsd:complexType name="ctScanSegmentInterleavedRaster">
+
+AZIMUTH OFFSET:     15.000 DEG			<xsd:element name="BarAzTrackOffset" type="
+ELEVATION OFFSET:   0.000 DEG			<xsd:element name="BarElTrackOffset" type="
+MODE:               LEVEL				Template Always - "Level"
+ORIENTATION:        HORIZONTAL			<xsd:element name="RasterOrientation"
+AZ WIDTH:           45.000 DEG			<xsd:element name="BarWidth"
+									if Orientation is Vertical then <xsd:element name="CoverageAngle"
+EL WIDTH:           7.200 DEG			<xsd:element name="CoverageAngle" 
+									if Orientation is Vertical then <xsd:element name="BarWidth"
+LEVELS:             4					<xsd:element name="NumberOfBars"
+
+     SWEEP     SWEEP  SWEEP     TRANS     TRANS  TRANS  LEVEL      BAR   
+     TIME      BLANK  TRIG      TIME      BLANK  TRIG   NUMBER  DIRECTION
+    (MSEC)                     (MSEC)   
+     1000.000   NO     NO         10.000   NO     NO       1    UP-RIGHT 
+     1000.000   NO     NO         10.000   NO     NO       2    DOWN-LEFT
+     1000.000   NO     NO         10.000   NO     NO       3    UP-RIGHT 
+     1000.000   NO     NO         30.000   NO     NO       4    DOWN-LEFT
+
+***Note*** The Following applies to data listed above
+SWEEP TIME (MSEC) - Calculation of <xsd:element name="BarWidth" x <xsd:element name="BarScanRate"
+SWEEP BLANK - Template Always - "NO"
+SWEEP TRIG - Template Always - "NO"
+TRANS TIME (MSEC) - <xsd:element name="BarFlybackTime" and for the last Bar (4) <xsd:element name="RasterFlybackTime"
+or <xsd:element name="RasterFlybackStatus"
+TRANS BLANK - <xsd:element name="InterbarBlankingStatus"
+TRANS TRIG - Template Always - "NO"
+LEVEL NUMBER - One up numbering based on <xsd:element name="NumberOfBars" (ie. 1, 2, 3, 4)
+BAR DIRECTION - <xsd:element name="BarScanMotion" and <xsd:element name="InterbarDirection"
+
+PULSE TRIG ENABLE:  NO				Template Always - "NO"
+
+OVERLAY MODEL:      PALMER				<xsd:element name="PalmerStatus"
+TYPE:               SQUINT ANGLE		<xsd:element name="PalmerSquintAngle"
+SQUINT ANGLE:       0.600 DEG			<xsd:element name="PalmerSquintAngle"
+SCAN RATE:          20.00000 HZ			<xsd:element name="PalmerRate"
+ROTATION:           CW				Template "give option for CW or CCW"
+
+SCAN PERSPECTIVE:   TARGET				Template
+
+DEFAULT OFFSET:     0.0000 DBM			Template

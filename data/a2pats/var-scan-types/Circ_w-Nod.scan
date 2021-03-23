@@ -1,0 +1,30 @@
+//****************** SCAN DEFINITION FILE *******************
+//
+// Model:   Circ_w-Nod
+//
+// Created: Mon Mar 22, 2021  1:39 PM
+
+
+//********************** SCAN MODEL ***********************
+
+SCAN NOTES:         ""				Template
+
+SCAN MODEL:         CIRCULAR			<xsd:element name="AzScanKind"
+
+AZIMUTH OFFSET:     0.000 DEG			<xsd:element name="AzTrackOffset"
+ELEVATION OFFSET:   0.000 DEG			<xsd:element name="ElTrackOffset"
+SCAN PERIOD:        4000.00 MSEC		<xsd:element name="AzScanPeriod"
+ROTATION:           CW				<xsd:element name="AzDirection"
+
+PULSE TRIG ON REV:  NO				Template 
+
+OVERLAY MODEL:      NODDING			<xsd:element name="ElScanKind"
+TYPE:               TRIANGULAR			If Nodding Type will be Tiangular
+DIRECTION:          VERTICAL			<xsd:element name="ElDirection"
+ORIGIN:             BOTTOM				Template
+SPAN:               30.000 DEG			<xsd:element name="ElSectorWidth"
+SCAN RATE:          8.00000 HZ			<xsd:element name="ElScanPeriod" A2PATS reports Rate (invert Ceesim Period)
+
+SCAN PERSPECTIVE:   TARGET				Template
+
+DEFAULT OFFSET:     0.0000 DBM			Template
