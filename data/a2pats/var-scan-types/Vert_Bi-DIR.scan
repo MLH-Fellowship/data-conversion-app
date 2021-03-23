@@ -1,0 +1,37 @@
+//****************** SCAN DEFINITION FILE *******************
+//
+// Model:   Vert_Bi-DIR
+//
+// Created: Mon Mar 22, 2021  1:44 PM
+
+
+//********************** SCAN MODEL ***********************
+
+SCAN NOTES:         ""			Template
+
+SCAN MODEL:         SECTOR			<xsd:element name="ElScanKind" or <xsd:element name="AzScanKind" 
+
+AZIMUTH OFFSET:     0.000 DEG		<xsd:element name="AzTrackOffset"
+ELEVATION OFFSET:   -5.000 DEG		<xsd:element name="ElTrackOffset" 
+AZ WIDTH:           0.000 DEG		<xsd:element name="AzSectorWidth"
+EL WIDTH:           30.000 DEG		<xsd:element name="ElSectorWidth"
+AZ START ANGLE:     POSITIVE		<xsd:element name="AzPointAngle"
+EL START ANGLE:     NEGATIVE		<xsd:element name="ElPointAngle"
+RASTERS:            2				Biidirectional will have 2 Rasters in Template
+ORIENTATION:        VERTICAL		<xsd:element name="ElDirection"
+DIRECTION:          BI			<xsd:element name="ElScanMotion"
+1ST BAR TIME:       1000.00 MSEC	<xsd:element name="ElScanPeriod"/2
+2ND BAR TIME:       1000.00 MSEC	<xsd:element name="ElScanPeriod"/2
+TRANSITION TIME:    0.00 MSEC		<xsd:element name="ElScanReset"
+TRANSITION BLANK:   NO			<xsd:element name="ElScanReset"
+
+PULSE TRIG ENABLE:  NO			Template
+TRIG ON 1ST BAR:    NO			Template
+TRIG ON 2ND BAR:    NO			Template
+TRIG ON TRANSITION: NO			Template
+
+OVERLAY MODEL:      OFF			<xsd:element name="AzScanKind" or <xsd:element name="PalmerStatus"
+
+SCAN PERSPECTIVE:   TARGET			Template
+
+DEFAULT OFFSET:     0.0000 DBM		Template
