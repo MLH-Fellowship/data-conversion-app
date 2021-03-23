@@ -378,12 +378,14 @@ def flatten_table(ceesim_data, stack_size=1):
         'Flattening input table with call stack size at {}'.format(stack_size))
     data_ = dict()
     for key in ceesim_data:
+        logger.debug(f'Now checking for {key} in data')
         if key not in data_:
+            logger.debug(f'{key} was not in data, type is {type(key)}')
             if type(ceesim_data[key]) not in {dict, list}:
                 data_[key] = ceesim_data[key]
             else:
                 frame = ceesim_data[key]
-                if frame is list:
+                if type(frame) is list:
                     if len(frame) < 1 or frame[0] is not dict:
                         continue
                     else:
@@ -420,7 +422,8 @@ def obtain_relevant_tags(ceesim_data, ceesim_flattened, tag, fast=True):
     else:
         # TODO: Iterate through entire data
         pass
-    return None
+    # Temporary fix to fix error... make it None if possible
+    return ''
 
 
 def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
@@ -519,7 +522,7 @@ def split_emitter_modes(ceesim_data):
         frame = data
         for key in SEARCH_TO_RETURN_KEYS:
             if key in frame:
-                frame = data[key]
+                frame = frame[key]
             else:
                 return list()
         if type(frame) is list:
@@ -529,7 +532,7 @@ def split_emitter_modes(ceesim_data):
     frame = ceesim_data
     for key in ITERATOR_KEYS:
         if key in frame:
-            frame = ceesim_data[key]
+            frame = frame[key]
         else:
             return list()
     if type(frame) is not list:
