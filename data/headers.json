@@ -1,0 +1,84 @@
+{
+    "ANT": {
+        "ANTENNA MODEL": {
+            "FILE": "ANT",
+            "LENGTH": "58",
+            "NAME": "ANTENNA MODEL",
+            "PRIORITY": 1
+        }
+    },
+    "INP": {
+        "INTRAPULSE MODEL": {
+            "FILE": "INP",
+            "LENGTH": "58",
+            "NAME": "INTRAPULSE MODEL",
+            "PRIORITY": 1
+        }
+    },
+    "PUL": {
+        "PULSE MODEL": {
+            "FILE": "PUL",
+            "LENGTH": "58",
+            "NAME": "PULSE MODEL",
+            "PRIORITY": 1
+        }
+    },
+    "SCAN": {
+        "SCAN MODEL": {
+            "FILE": "SCAN",
+            "LENGTH": "58",
+            "NAME": "SCAN MODEL",
+            "PRIORITY": 1
+        }
+    },
+    "SIG": {
+        "ANTENNA MODEL": {
+            "FILE": "SIG",
+            "LENGTH": "58",
+            "NAME": "ANTENNA MODEL",
+            "PRIORITY": 52
+        },
+        "FREQUENCY MODEL": {
+            "FILE": "SIG",
+            "LENGTH": "58",
+            "NAME": "FREQUENCY MODEL",
+            "PRIORITY": 32
+        },
+        "INTRAPULSE MODEL": {
+            "FILE": "SIG",
+            "LENGTH": "58",
+            "NAME": "INTRAPULSE MODEL",
+            "PRIORITY": 26
+        },
+        "MULTIPLE SIMULTANEOUS SIGNALS": {
+            "FILE": "SIG",
+            "LENGTH": "114",
+            "NAME": "MULTIPLE SIMULTANEOUS SIGNALS",
+            "PRIORITY": 58
+        },
+        "PULSE MODEL": {
+            "FILE": "SIG",
+            "LENGTH": "58",
+            "NAME": "PULSE MODEL",
+            "PRIORITY": 16
+        },
+        "SCAN MODEL": {
+            "FILE": "SIG",
+            "LENGTH": "58",
+            "NAME": "SCAN MODEL",
+            "PRIORITY": 42
+        },
+        "SIGNAL IDENTIFICATION": {
+            "FILE": "SIG",
+            "LENGTH": "60",
+            "NAME": "SIGNAL IDENTIFICATION",
+            "PRIORITY": 0
+        },
+        "SPECIAL FEATURES": {
+            "FILE": "SIG",
+            "LENGTH": "60",
+            "NAME": "SPECIAL FEATURES",
+            "PRIORITY": 11
+        }
+    }
+}
