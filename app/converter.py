@@ -6,6 +6,7 @@ from app.scripts import PRI_HDR, TABLE_MULTI_HDR as MULTI_HDR
 from app.util.errors import DatastoreError
 from app.util.logger import logger
 from sys import version_info
+from csv import reader
 
 if version_info > (3, 5):
     from typing import Tuple, Union, List
@@ -454,6 +455,20 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         converted = convert_one_key(opt, value)
         fill_table(model, opt[PRI_HDR], converted)
 
+    def add_headers(mfile, model):
+        with open("data/headers.csv") as head:
+            headers = reader(head)
+            for header in headers:
+                if header[0] == mfile:
+                    left = (int(header[2]) - len(header[1]) - 3) / 2
+                    lleft = int(left)
+                    right = lleft
+                    if lleft == left:
+                        left = lleft
+                        right = lleft + 1
+                    htext = ' '.join(
+                        ['*' * lleft, header[1], '*' * right])
+                    fill_table(model, int(header[3]), htext)
     models = list()
     # TODO: Pull correct name from flatted data with obtain_relevant_tags, currently uses split_emitter_modes
     # Path to ModeName: ceesim_data["Scenario"]["Platforms"]["Platform"][1]["Emitters"]["Emitter"]["Emitter_Modes"]["Emitter_Mode"][0]["EmitterModeHeader"]["ModeName"]
@@ -466,6 +481,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                 'Could not find mtype {} in model files, skipping'.format(mtype))
             continue
         table_key = MODEL_FILES[mtype]
+        add_headers(table_key, next_model)
         if table_key not in lookup_table:
             logger.warn(
                 'Could not find key {} in lookup table, skipping'.format(table_key))
@@ -481,6 +497,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                 create_converted(next_model, opt)
         models.append(next_model)
     return models
+
 
 def scan_splitter():
     pass
