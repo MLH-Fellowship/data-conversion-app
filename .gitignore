@@ -1,5 +1,6 @@
 # Build
 build-staging
+build-*.zip
 
 # Editor
 .idea
