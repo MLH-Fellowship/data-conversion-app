@@ -12,7 +12,7 @@ if version_info > (3, 5):
     from typing import Tuple, Union, List
 
 
-AUTO_MODELS = ('SCAN', 'ANTENNA', 'FREQUENCY')
+AUTO_MODELS = ('SCAN', 'ANTENNA')
 DEFAULT_HDR = 'DEFAULT'
 FILE_HDR = 'FILE'
 FUNC_HDR = 'FUNCTION'
@@ -301,7 +301,7 @@ class functions:
         :rtype: str
         '''
 
-        assert kind == "Elliptical", "Unexpected AntennaModelKind - {}".format(
+        assert kind == "Elliptical" or kind == "RECTANGULAR", "Unexpected AntennaModelKind - {}".format(
             kind)
         return "RECTANGULAR"
 
@@ -447,7 +447,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         tags = obtain_relevant_tags(
             ceesim_data, ceesim_flattened, opt[TAG_HDR])
         if tags:
-            value = tags[0]
+            value = tags # removed taking the zero-indexed item because it isolated the first character of the ElDirection string value
             logger.debug("Found tag {} for {} in {} with value: {}".format(opt[TAG_HDR], 
                 opt["LABEL"], opt[FILE_HDR], value))
         else:
@@ -476,9 +476,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                         ['*' * lleft, header[1], '*' * right])
                     fill_table(model, int(header[3]), htext)
     models = list()
-    # TODO: Pull correct name from flatted data with obtain_relevant_tags, currently uses split_emitter_modes
-    # Path to ModeName: ceesim_data["Scenario"]["Platforms"]["Platform"][1]["Emitters"]["Emitter"]["Emitter_Modes"]["Emitter_Mode"][0]["EmitterModeHeader"]["ModeName"]
-    name = split_emitter_modes(ceesim_data)[0]["EmitterModeHeader"]["ModeName"] # obtain_relevant_tags(ceesim_data, ceesim_flattened, NAME_HDR)
+    name = obtain_relevant_tags(ceesim_data, ceesim_flattened, "ModeName")
     logger.debug('Generic model generator using name: {}'.format(name))
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name)
@@ -495,12 +493,15 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         logger.debug(
             'Now processing table key {} with mtype {}'.format(table_key, mtype))
         for cdict_key in lookup_table[table_key]:
-            if MULTI_HDR in lookup_table[table_key][cdict_key] and TABLE_DATA in lookup_table[table_key][cdict_key]:
-                data_opts = lookup_table[table_key][cdict_key][TABLE_DATA]
+            key_data = lookup_table[table_key][cdict_key]
+            if MULTI_HDR in key_data and TABLE_DATA in key_data:
+                data_opts = key_data[TABLE_DATA]
                 for opt in data_opts:
                     create_converted(next_model, opt)
             else:
-                create_converted(next_model, opt)
+                if key_data["SECTION"] == "Main":
+                    continue
+                create_converted(next_model, key_data)
         models.append(next_model)
     return models
 
@@ -599,12 +600,12 @@ def convert_to_a2pats(ceesim_data, lookup_table):
     :rtype: a2pats
     '''
     logger.info('Beginning CEESIM to A2PATS conversion')
-    emitter_modes = split_emitter_modes(ceesim_data.imported_data)
-    flattened_data = flatten_table(emitter_modes[0])
+    # emitter_modes = split_emitter_modes(ceesim_data.imported_data)
+    flattened_data = flatten_table(ceesim_data)
     store = a2pats(imported_type='A2PATS')
     # TODO: Use emitter modes instead
     generic_models = generate_other_models(
-        ceesim_data.imported_data, flattened_data, lookup_table)
+        ceesim_data, flattened_data, lookup_table)
     logger.debug('Added {} models from generate_other_models'.format(
         len(generic_models)))
     store.models += generic_models

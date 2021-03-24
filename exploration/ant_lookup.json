@@ -1,0 +1,304 @@
+{
+    "": {
+        "DATA": [
+            {
+                "DEFAULT": "AZIMUTH",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "BEAM MODEL",
+                "PRIORITY": 7,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": false,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "ELEVATION",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "BEAM MODEL",
+                "PRIORITY": 22,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": false,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "NO",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "PHASED ARRAY",
+                "PRIORITY": 11,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": false,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "NO",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "PHASED ARRAY",
+                "PRIORITY": 26,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": false,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "127.8250 DB",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "DEPTH OF NULLS DEPTH",
+                "PRIORITY": 30,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": false,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "0.000 DEG",
+                "FILE": "ANT",
+                "FUNCTION": "format_degree",
+                "LABEL": "DEPTH OF NULLS SPAN",
+                "PRIORITY": 32,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": false,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "10 POINTS PER DEGREE",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "LOW RESOLUTION",
+                "PRIORITY": 34,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": false,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "DISABLED",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "HIGH RESOLUTION",
+                "PRIORITY": 35,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": false,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "127.8250 DB",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "DEPTH OF NULLS DEPTH",
+                "PRIORITY": 15,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": false,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "0.000 DEG",
+                "FILE": "ANT",
+                "FUNCTION": "format_degree",
+                "LABEL": "DEPTH OF NULLS SPAN",
+                "PRIORITY": 17,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": false,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "10 POINTS PER DEGREE",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "LOW RESOLUTION",
+                "PRIORITY": 19,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": false,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "DISABLED",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "HIGH RESOLUTION",
+                "PRIORITY": 20,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": false,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "2.000 DEG",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "LOBE WIDTH (DEG)",
+                "PRIORITY": 10,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": true,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "N/A",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "LOBE SEPARATION (DEG)",
+                "PRIORITY": 10,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": true,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "1",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "LOBE REPEAT COUNT",
+                "PRIORITY": 10,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": true,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "2.000 DEG",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "LOBE WIDTH (DEG)",
+                "PRIORITY": 25,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": true,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "N/A",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "LOBE SEPARATION (DEG)",
+                "PRIORITY": 25,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": true,
+                "TAG": ""
+            },
+            {
+                "DEFAULT": "1",
+                "FILE": "ANT",
+                "FUNCTION": "",
+                "LABEL": "LOBE REPEAT COUNT",
+                "PRIORITY": 25,
+                "SECTION": "ANTENNA MODEL",
+                "STRING": false,
+                "TABLE": true,
+                "TAG": ""
+            }
+        ],
+        "MULTI": true
+    },
+    "AntennaModelKind": {
+        "DEFAULT": "RECTANGULAR",
+        "FILE": "ANT",
+        "FUNCTION": "model_kind",
+        "LABEL": "ANTENNA MODEL",
+        "PRIORITY": 5,
+        "SECTION": "ANTENNA MODEL",
+        "STRING": false,
+        "TABLE": false,
+        "TAG": "AntennaModelKind"
+    },
+    "AzBeamwidth": {
+        "DEFAULT": "3.000 DEG",
+        "FILE": "ANT",
+        "FUNCTION": "format_degree",
+        "LABEL": "MAIN LOBE WIDTH",
+        "PRIORITY": 9,
+        "SECTION": "ANTENNA MODEL",
+        "STRING": false,
+        "TABLE": false,
+        "TAG": "AzBeamwidth"
+    },
+    "AzScanShape": {
+        "DEFAULT": "SIN X/X",
+        "FILE": "ANT",
+        "FUNCTION": "format_func",
+        "LABEL": "DISTRIBUTION",
+        "PRIORITY": 10,
+        "SECTION": "ANTENNA MODEL",
+        "STRING": false,
+        "TABLE": false,
+        "TAG": "AzScanShape"
+    },
+    "AzSidelobeRatio": {
+        "DEFAULT": "N/A",
+        "FILE": "ANT",
+        "FUNCTION": "",
+        "LABEL": "LOBE ATENNUATION (DB)",
+        "PRIORITY": 13,
+        "SECTION": "ANTENNA MODEL",
+        "STRING": false,
+        "TABLE": true,
+        "TAG": "AzSidelobeRatio"
+    },
+    "ElBeamwidth": {
+        "DEFAULT": "3.000 DEG",
+        "FILE": "ANT",
+        "FUNCTION": "format_degree",
+        "LABEL": "MAIN LOBE WIDTH",
+        "PRIORITY": 24,
+        "SECTION": "ANTENNA MODEL",
+        "STRING": false,
+        "TABLE": false,
+        "TAG": "ElBeamwidth"
+    },
+    "ElScanShape": {
+        "DEFAULT": "SIN X/X",
+        "FILE": "ANT",
+        "FUNCTION": "format_func",
+        "LABEL": "DISTRIBUTION",
+        "PRIORITY": 25,
+        "SECTION": "ANTENNA MODEL",
+        "STRING": false,
+        "TABLE": false,
+        "TAG": "ElScanShape"
+    },
+    "ElSidelobeRatio": {
+        "DEFAULT": "N/A",
+        "FILE": "ANT",
+        "FUNCTION": "",
+        "LABEL": "LOBE ATENNUATION (DB)",
+        "PRIORITY": 28,
+        "SECTION": "ANTENNA MODEL",
+        "STRING": false,
+        "TABLE": true,
+        "TAG": "ElSidelobeRatio"
+    },
+    "LastUpdateDate": {
+        "DEFAULT": "",
+        "FILE": "ANT",
+        "FUNCTION": "to_timestamp",
+        "LABEL": "Created",
+        "PRIORITY": 2,
+        "SECTION": "Main",
+        "STRING": false,
+        "TABLE": false,
+        "TAG": "LastUpdateDate"
+    },
+    "ModeName": {
+        "DEFAULT": "A123Z_EMITTER01",
+        "FILE": "ANT",
+        "FUNCTION": "",
+        "LABEL": "Model",
+        "PRIORITY": 0,
+        "SECTION": "Main",
+        "STRING": false,
+        "TABLE": false,
+        "TAG": "ModeName"
+    }
+}

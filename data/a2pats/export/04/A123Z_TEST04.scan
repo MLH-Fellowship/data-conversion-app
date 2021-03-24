@@ -1,19 +1,19 @@
 //******************* SCAN DEFINITION FILE ********************
 //
-// Model:   A123Z_TEST01
+// Model:   A123Z_TEST04
 //
-// Created: Wed Mar 24, 2021  11:14 PM
+// Created: Wed Mar 24, 2021  11:34 PM
 
 
 //********************** SCAN MODEL **********************
 
 SCAN NOTES:         ""
 
-SCAN MODEL:         CIRCULAR
+SCAN MODEL:         LORO
 
 AZIMUTH OFFSET:     0.000 DEG
 ELEVATION OFFSET:   0.000 DEG
-SCAN PERIOD:        1.00000 SEC
+SCAN PERIOD:        1.04858 SEC
 ROTATION:           CW
 
 PULSE TRIG ON REV:  NO

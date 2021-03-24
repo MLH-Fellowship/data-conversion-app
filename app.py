@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from app import a2pats, ceesim
-from app.converter import convert_to_a2pats
+from app.converter import convert_to_a2pats, split_emitter_modes
 from app.exporter import dump_a2pats
 from app.importer import import_
 from app.scripts import load_lookup_table, dump_table
@@ -57,8 +57,12 @@ def convert(input_file, output_file):
         'Main app converter called, using provided input and output files')
     lookup_table = prepare_lookup_table()
     input_data = import_(input_file, ceesim)  # -> CEESIM object
-    output_data = convert_to_a2pats(input_data, lookup_table)
-    success = dump_a2pats(output_data, output_file)
+    emitter_modes = split_emitter_modes(input_data.imported_data)
+    for i, emitter_mode in enumerate(emitter_modes):
+        mode_num = "0" + str(i+1) if len(str(i+1)) == 1 else str(i+1)
+        logger.debug("!!Working on Emitter Mode {}".format(mode_num))
+        output_data = convert_to_a2pats(emitter_mode, lookup_table)
+        success = dump_a2pats(output_data, output_file + "/{}".format(mode_num))
     if success:
         return output_data
     else:

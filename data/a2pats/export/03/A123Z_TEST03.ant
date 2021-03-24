@@ -1,8 +1,8 @@
 //***************** ANTENNA DEFINITION FILE *****************
 //
-// Model:   A123Z_TEST01
+// Model:   A123Z_TEST03
 //
-// Created: Wed Mar 24, 2021  11:14 PM
+// Created: Wed Mar 24, 2021  11:34 PM
 
 
 //********************* ANTENNA MODEL **********************
@@ -13,8 +13,8 @@ ANTENNA MODEL:      RECTANGULAR
 
 BEAM MODEL:         AZIMUTH
 
-MAIN LOBE WIDTH:    2.944 DEG
-DISTRIBUTION:       SIN X/X
+MAIN LOBE WIDTH:    0.000 DEG
+DISTRIBUTION:       SIN 
 PHASED ARRAY:       NO
 
 LOBE ATENNUATION (DB) : N/A
@@ -28,8 +28,8 @@ HIGH RESOLUTION:    DISABLED
 
 BEAM MODEL:         ELEVATION
 
-MAIN LOBE WIDTH:    2.944 DEG
-DISTRIBUTION:       SIN X/X
+MAIN LOBE WIDTH:    0.000 DEG
+DISTRIBUTION:       SIN 
 PHASED ARRAY:       NO
 
 LOBE ATENNUATION (DB) : N/A

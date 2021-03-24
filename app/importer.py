@@ -117,7 +117,7 @@ def import_(fp, classtype=datastore, downgrade_peaceful=True):
         logger.debug('A2PATS file provided, importing as A2PATS')
         return import_a2pats(fp)
     elif classtype is ceesim:
-        logger.debug('CEESIM file provided, imporrting as CEESIM')
+        logger.debug('CEESIM file provided, importing as CEESIM')
         return import_ceesim(fp)
     else:
         raise ValueError('This type of datastore isn\'t supported yet!')

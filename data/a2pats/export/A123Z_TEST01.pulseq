@@ -1,0 +1,12 @@
+//************** PULSE SEQUENCE DEFINITION FILE ***************
+//
+// Model:   A123Z_TEST01
+//
+// Created: Wed Mar 24, 2021  11:14 PM
+
+PULSE NOTES:        ""
+
+SCAN MODEL:         ""
+USE LOCAL SCAN:     NO
+
+ATENNUATION (DB):   0.0000
