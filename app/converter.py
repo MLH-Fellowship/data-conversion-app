@@ -448,9 +448,15 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             ceesim_data, ceesim_flattened, opt[TAG_HDR])
         if tags:
             value = tags[0]
+            logger.debug("Found tag {} for {} in {} with value: {}".format(opt[TAG_HDR], 
+                opt["LABEL"], opt[FILE_HDR], value))
         else:
-            logger.debug('Could not find tag, using default tag for {}: {}: {}'.format(
-                opt[FILE_HDR], opt[TAG_HDR], opt[DEFAULT_HDR]))
+            if opt[TAG_HDR]:
+                logger.debug('Could not find tag {}, using default value for {} in {}: {}'.format(opt[TAG_HDR],
+                    opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
+            else:
+                logger.debug('Using default value for tagless {} in {}: {}'.format(
+                    opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
             value = opt[DEFAULT_HDR]
         converted = convert_one_key(opt, value)
         fill_table(model, opt[PRI_HDR], converted)
@@ -466,7 +472,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                     if lleft == left:
                         left = lleft
                         right = lleft + 1
-                    htext = ' '.join(
+                    htext = "//" + ' '.join(
                         ['*' * lleft, header[1], '*' * right])
                     fill_table(model, int(header[3]), htext)
     models = list()
@@ -593,8 +599,8 @@ def convert_to_a2pats(ceesim_data, lookup_table):
     :rtype: a2pats
     '''
     logger.info('Beginning CEESIM to A2PATS conversion')
-    flattened_data = flatten_table(ceesim_data.imported_data)
     emitter_modes = split_emitter_modes(ceesim_data.imported_data)
+    flattened_data = flatten_table(emitter_modes[0])
     store = a2pats(imported_type='A2PATS')
     # TODO: Use emitter modes instead
     generic_models = generate_other_models(
