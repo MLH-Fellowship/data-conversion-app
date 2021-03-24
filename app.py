@@ -5,7 +5,7 @@ from app import a2pats, ceesim
 from app.converter import convert_to_a2pats
 from app.exporter import dump_a2pats
 from app.importer import import_
-from app.scripts import load_lookup_table, dump_lookup_table
+from app.scripts import load_lookup_table, dump_table
 from app.util import config as config_
 from app.util.logger import logger, set_up_logger
 from argparse import ArgumentParser
@@ -26,7 +26,7 @@ def prepare_lookup_table(unparsed=DEFAULT_UNPARSED_TABLE_PATH, parsed=DEFAULT_TA
         return load_lookup_table(parsed)
     else:
         if isfile(unparsed):
-            return dump_lookup_table(unparsed, parsed)
+            return dump_table(unparsed, parsed)
         else:
             return dict()
 
@@ -35,7 +35,7 @@ def print_lookup_table(file):
     # type: (str) -> None
     '''Prints stats about the lookup table
     '''
-    data = dump_lookup_table(file, DEFAULT_TABLE_PATH)
+    data = dump_table(file, DEFAULT_TABLE_PATH)
     logger.info(
         'Table has {} keys and was successfully dumped'.format(len(data)))
 

@@ -6,7 +6,7 @@ from json import dump, load
 from sys import version_info
 
 if version_info > (3, 5):
-    from typing import TextIO, Union
+    from typing import TextIO, Union, Tuple
 
 
 BOOLEANS = {'TRUE': True, 'FALSE': False}
@@ -28,8 +28,8 @@ def load_lookup_table(fp):
     return load(fp)
 
 
-def dump_lookup_table(in_fp, out_fp):
-    # type: (Union[str, TextIO], Union[str, TextIO]) -> dict
+def dump_table(in_fp, out_fp, headers=CSV_HEADERS):
+    # type: (Union[str, TextIO], Union[str, TextIO], Tuple[str]) -> dict
     '''Dumps lookup table to a file
 
     :param in_fp: Input file
@@ -53,7 +53,7 @@ def dump_lookup_table(in_fp, out_fp):
                 row[key] = BOOLEANS[row[key]]
         row[PRI_HDR] = int(row[PRI_HDR])
         frame = lookup_table
-        for header in CSV_HEADERS:
+        for header in headers:
             assert header in row, 'Input file is not a recognized format!'
             if row[header] not in frame:
                 frame[row[header]] = dict()
