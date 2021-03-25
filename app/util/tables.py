@@ -39,7 +39,7 @@ def detect_header_height(headers, default=DEF_HDRRW_CNT):
 
 
 def determine_max_width(table, column, default=0):
-    # type(List[List[str]], int, int) -> int
+    # type: (List[List[str]], int, int) -> int
     '''
     Determines the minimum width necessary to fill the space. If a default value
     is provided, then the default value is returned when the determined width
@@ -47,6 +47,15 @@ def determine_max_width(table, column, default=0):
     '''
     max_value = max([len(v[column]) for v in table])
     return max_value if max_value >= default else default
+
+
+def determine_max_widths(table, default=0):
+    # type: (List[List[str]], int) -> List[int]
+    '''
+    Determines all max widths
+    '''
+    if not len(table): return list()
+    return [determine_max_width(table, i, default) for i in range(len(table[0]))]
 
 
 def assemble_relevant_data(ceesim_data, lookup_table, section, priority):
@@ -83,8 +92,7 @@ def build_table(ceesim_data, lookup_table, section, priority, converter):
     Builds the table and returns all rows
     '''
     data, headers = assemble_relevant_data(ceesim_data, lookup_table, section, priority)
-    table = create_empty_table(data, headers)
-    table = populate_table(table, data, converter)
+    table = populate_table(create_empty_table(data, headers), data, converter)
     # TODO: Insert +/- if necessary
     # TODO: Assemble table into list of strings
     return list()
