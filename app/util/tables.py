@@ -79,16 +79,17 @@ def assemble_lookup_data(table_data, section, priority):
 
 
 def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority):
-    # type: (dict, dict, str, str, int) -> Tuple(OrderedDict, OrderedDict)
+    # type: (dict, dict, str, str, int) -> Tuple(OrderedDict, List[dict])
     '''
     Finds the relevant data, creating multiple rows if necessary
     '''
     data = OrderedDict()
-    headers = OrderedDict()
-    # TODO
-    for azkey in lookup_table[file]:
-        if MULTI_HDR in lookup_table[file][azkey]:
-            pass
+    # TODO: Order the headers properly. This is caused by the fact that we
+    # do not actually keep track of header order anywhere in code or in
+    # the lookup table, so we currently do not have this information. Thus,
+    # the data is assembled in the order it is recived from the function,
+    # of which the behavior is undefined.
+    headers = assemble_lookup_data(lookup_table[file], section, priority)
     return data, headers
 
 
