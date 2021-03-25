@@ -11,7 +11,6 @@ follows the adage of Don't Repeat Yourself.
 Author: Gideon Tong
 '''
 
-from app.converter import convert_one_key
 from app.util.logger import logger
 # NOTE: OrderedDict is not necessary if Python 2 support is dropped, as in
 # later versions of Python, dictionaries now remember insertion order.
@@ -112,7 +111,7 @@ def populate_table(table, relevant_data, headers, converter):
     '''
     # TODO: Split headers into multiple rows if necessary
     table[0] = [hdr[LBL_HDR] for hdr in headers]
-    table[1:] = [[convert_one_key(hdr, relevant_data[row - 1][idx])
+    table[1:] = [[converter(hdr, relevant_data[row - 1][idx])
                   for idx, hdr in enumerate(headers)] for row in range(1, len(table))]
     return table
 
