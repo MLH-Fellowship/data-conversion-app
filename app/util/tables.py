@@ -11,6 +11,7 @@ follows the adage of Don't Repeat Yourself.
 Author: Gideon Tong
 '''
 
+from app.converter import convert_one_key
 from app.util.logger import logger
 # NOTE: OrderedDict is not necessary if Python 2 support is dropped, as in
 # later versions of Python, dictionaries now remember insertion order.
@@ -80,7 +81,7 @@ def assemble_lookup_data(table_data, section, priority):
 
 
 def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, obtainer):
-    # type: (dict, dict, str, str, int, function) -> Tuple(List[dict], List[dict])
+    # type: (dict, dict, str, str, int, function) -> Tuple(List[List[str]], List[dict])
     '''
     Finds the relevant data, creating multiple rows if necessary
     '''
@@ -97,7 +98,7 @@ def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, o
 
 
 def create_empty_table(relevant_data, headers):
-    # type: (List[dict], OrderedDict) -> List[List[str]]
+    # type: (List[List[str]], OrderedDict) -> List[List[str]]
     '''
     Initializes an empty table
     '''
@@ -105,14 +106,18 @@ def create_empty_table(relevant_data, headers):
 
 
 def populate_table(table, relevant_data, headers, converter):
-    # type: (List[List[str]], List[dict], List[dict], function) -> List[List[str]]
+    # type: (List[List[str]], List[List[str]], List[dict], function) -> List[List[str]]
     '''
     Assembles a list of list of strings 
     '''
     # TODO: Split headers into multiple rows if necessary
-    # TODO: Fill in headers
-    # TODO: Convert data
-    # TODO: Fill in data
+    table[0] = [hdr[LBL_HDR] for hdr in headers]
+    for row in range(1, len(table)):
+        for idx, hdr in enumerate(headers):
+            data = convert_one_key(hdr, relevant_data[row - 1])
+            # TODO: Convert data
+            # TODO: Fill in data
+            pass
     return table
 
 
@@ -125,7 +130,7 @@ def build_table(ceesim_data, lookup_table, file, section, priority, converter, o
     obtainer: function -- obtain_relevant_tags
     '''
     data, headers = assemble_relevant_data(
-        ceesim_data, lookup_table, section, priority, obtainer)
+        ceesim_data, lookup_table, file, section, priority, obtainer)
     table = populate_table(create_empty_table(
         data, headers), data, headers, converter)
     widths = determine_max_widths(table)
