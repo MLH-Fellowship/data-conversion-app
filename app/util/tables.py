@@ -112,12 +112,8 @@ def populate_table(table, relevant_data, headers, converter):
     '''
     # TODO: Split headers into multiple rows if necessary
     table[0] = [hdr[LBL_HDR] for hdr in headers]
-    for row in range(1, len(table)):
-        for idx, hdr in enumerate(headers):
-            data = convert_one_key(hdr, relevant_data[row - 1])
-            # TODO: Convert data
-            # TODO: Fill in data
-            pass
+    table[1:] = [[convert_one_key(hdr, relevant_data[row - 1][idx])
+                  for idx, hdr in enumerate(headers)] for row in range(1, len(table))]
     return table
 
 
