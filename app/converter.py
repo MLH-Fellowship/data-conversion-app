@@ -593,14 +593,13 @@ def convert_to_a2pats(ceesim_data, lookup_table):
     # type: (ceesim, dict) -> a2pats
     '''Convert CEESIM data to A²PATS data
 
-    :param data: CEESIM data to import
+    :param data: CEESIM Emitter Mode data to import
     :type data: ceesim
 
     :returns: A²PATS data
     :rtype: a2pats
     '''
     logger.info('Beginning CEESIM to A2PATS conversion')
-    # emitter_modes = split_emitter_modes(ceesim_data.imported_data)
     flattened_data = flatten_table(ceesim_data)
     store = a2pats(imported_type='A2PATS')
     # TODO: Use emitter modes instead

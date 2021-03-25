@@ -874,7 +874,7 @@
             "TABLE": false,
             "TAG": "AzDirection"
         },
-        "AzInitialBeamOfset": {
+        "AzInitialBeamOffset": {
             "DEFAULT": "0.000 DEG",
             "FILE": "SCAN",
             "FUNCTION": "format_degree",
@@ -883,7 +883,7 @@
             "SECTION": "SCAN MODEL",
             "STRING": false,
             "TABLE": false,
-            "TAG": "AzInitialBeamOfset"
+            "TAG": "AzInitialBeamOffset"
         },
         "AzScanKind": {
             "DEFAULT": "CIRCULAR",
