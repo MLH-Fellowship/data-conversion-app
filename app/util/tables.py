@@ -54,15 +54,23 @@ def assemble_relevant_data(ceesim_data, lookup_table, section, priority):
     '''
     Finds the relevant data, creating multiple rows if necessary
     '''
+    # TODO
     data = OrderedDict()
     return data
 
 
-def populate_table(relevant_data, converter):
-    # type: (OrderedDict, function) -> List[List[str]]
+def create_empty_table():
+    # type: () -> List[List[str]]
+    # TODO
+    return [[]]
+
+
+def populate_table(table, relevant_data, converter):
+    # type: (List[List[str]], OrderedDict, function) -> List[List[str]]
     '''
     Assembles a list of list of strings 
     '''
+    # TODO
     pass
 
 
@@ -73,7 +81,7 @@ def build_table(ceesim_data, lookup_table, section, priority, converter):
     '''
     # TODO
     relevant_data = assemble_relevant_data(ceesim_data, lookup_table, section, priority)
-    table = populate_table(relevant_data, converter)
+    table = populate_table(table, relevant_data, converter)
     return list()
 
 
