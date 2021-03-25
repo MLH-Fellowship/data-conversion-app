@@ -79,8 +79,8 @@ def assemble_lookup_data(table_data, section, priority):
     return data
 
 
-def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority):
-    # type: (dict, dict, str, str, int) -> Tuple(List[dict], List[dict])
+def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, obtainer):
+    # type: (dict, dict, str, str, int, function) -> Tuple(List[dict], List[dict])
     '''
     Finds the relevant data, creating multiple rows if necessary
     '''
@@ -112,13 +112,16 @@ def populate_table(table, relevant_data, converter):
     pass
 
 
-def build_table(ceesim_data, lookup_table, file, section, priority, converter):
-    # type: (dict, dict, str, str, int, function) -> List[str]
+def build_table(ceesim_data, lookup_table, file, section, priority, converter, obtainer):
+    # type: (dict, dict, str, str, int, function, function) -> List[str]
     '''
     Builds the table and returns all rows
+
+    converter: function -- convert_one_key
+    obtainer: function -- obtain_relevant_tags
     '''
     data, headers = assemble_relevant_data(
-        ceesim_data, lookup_table, section, priority)
+        ceesim_data, lookup_table, section, priority, obtainer)
     table = populate_table(create_empty_table(data, headers), data, converter)
     widths = determine_max_widths(table)
     # TODO: Insert +/- if necessary

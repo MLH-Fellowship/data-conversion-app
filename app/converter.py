@@ -419,12 +419,12 @@ def convert_one_key(lookup_data, value):
 
 
 def obtain_relevant_tags(ceesim_data, ceesim_flattened, tag, fast=True):
-    # type: (dict, dict, str, bool) -> Tuple[list, None]
+    # type: (dict, dict, str, bool) -> Union[list, None]
     '''Checks the imported data for relevant data
     '''
     if fast:
         if tag in ceesim_flattened:
-            return ceesim_flattened[tag]
+            return [ceesim_flattened[tag]]
     else:
         # TODO: Iterate through entire data
         pass
@@ -445,7 +445,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
 
     def create_converted(model, opt):
         tags = obtain_relevant_tags(
-            ceesim_data, ceesim_flattened, opt[TAG_HDR])
+            ceesim_data, ceesim_flattened, opt[TAG_HDR])[0]
         if tags:
             value = tags # removed taking the zero-indexed item because it isolated the first character of the ElDirection string value
             logger.debug("Found tag {} for {} in {} with value: {}".format(opt[TAG_HDR], 
@@ -476,7 +476,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                         ['*' * lleft, header[1], '*' * right])
                     fill_table(model, int(header[3]), htext)
     models = list()
-    name = obtain_relevant_tags(ceesim_data, ceesim_flattened, "ModeName")
+    name = obtain_relevant_tags(ceesim_data, ceesim_flattened, "ModeName")[0]
     logger.debug('Generic model generator using name: {}'.format(name))
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name)
