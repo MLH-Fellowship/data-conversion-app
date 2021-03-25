@@ -5,6 +5,7 @@ from app import a2pats, ceesim, datastore, model, MODEL_FILES
 from app.scripts import PRI_HDR, TABLE_MULTI_HDR as MULTI_HDR
 from app.util.errors import DatastoreError
 from app.util.logger import logger
+from app.util.tables import build_table, build_table_str
 from sys import version_info
 from csv import reader
 
@@ -502,6 +503,11 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                 if key_data["SECTION"] == "Main":
                     continue
                 create_converted(next_model, key_data)
+        # table_priorities = {"ANTENNA": 13}
+        # table_section = mtype + " MODEL"
+        # if mtype in table_priorities: 
+        #     fill_table(next_model, table_priorities[mtype], build_table(ceesim_data, lookup_table, table_key, 
+        #                                                     table_section, table_priorities[mtype], convert_one_key, obtain_relevant_tags))
         models.append(next_model)
     return models
 
