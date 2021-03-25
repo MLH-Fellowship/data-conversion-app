@@ -13,7 +13,7 @@ Author: Gideon Tong
 
 from app.util.logger import logger
 # NOTE: OrderedDict is not necessary if Python 2 support is dropped, as in
-# later versions of Python, dictionaries now remember insertion order. 
+# later versions of Python, dictionaries now remember insertion order.
 from collections import OrderedDict
 from sys import version_info
 
@@ -54,8 +54,9 @@ def determine_max_widths(table, default=0):
     '''
     Determines all max widths
     '''
-    if not len(table): return list()
-    return [determine_max_width(table, i, default) for i in range(len(table[0]))]
+    if not len(table):
+        return list()
+    return [determine_max_width(table, i, default) + 2 for i in range(len(table[0]))]
 
 
 def assemble_relevant_data(ceesim_data, lookup_table, section, priority):
@@ -91,11 +92,17 @@ def build_table(ceesim_data, lookup_table, section, priority, converter):
     '''
     Builds the table and returns all rows
     '''
-    data, headers = assemble_relevant_data(ceesim_data, lookup_table, section, priority)
+    data, headers = assemble_relevant_data(
+        ceesim_data, lookup_table, section, priority)
     table = populate_table(create_empty_table(data, headers), data, converter)
+    widths = determine_max_widths(table)
     # TODO: Insert +/- if necessary
-    # TODO: Assemble table into list of strings
-    return list()
+    # NOTE: The following list is built with list comprehension. For the sake
+    # of code readability it is advised to expand this eventually and it makes
+    # the most sense to expand this when the above TODO is added.
+    output_table = [''.join([item.center(widths[idx])
+                             for idx, item in enumerate(row)]) for row in table]
+    return output_table
 
 
 def build_table_str(**kwargs):
