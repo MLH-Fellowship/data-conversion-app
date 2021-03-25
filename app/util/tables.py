@@ -18,7 +18,7 @@ from collections import OrderedDict
 from sys import version_info
 
 if version_info > (3, 5):
-    from typing import List, Union
+    from typing import List
 
 # Default number of rows the header will take up if the number
 # of rows cannot be detected.
@@ -38,18 +38,15 @@ def detect_header_height(headers, default=DEF_HDRRW_CNT):
     return default
 
 
-def determine_max_width(table, column, default=None):
-    # type(List[List[str]], int, Union[int, None]) -> int
+def determine_max_width(table, column, default=0):
+    # type(List[List[str]], int, int) -> int
     '''
     Determines the minimum width necessary to fill the space. If a default value
     is provided, then the default value is returned when the determined width
     is smaller than the default value, or it cannot be determined.
     '''
-    # TODO
-    if default:
-        return default
-    else:
-        raise ValueError('Unable to determine max width of imported table and no default value was given!')
+    max_value = max([len(v[column]) for v in table])
+    return max_value if max_value >= default else default
 
 
 def assemble_relevant_data(ceesim_data, lookup_table, section, priority):
