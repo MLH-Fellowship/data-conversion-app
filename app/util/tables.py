@@ -50,19 +50,22 @@ def determine_max_width(table, column, default=0):
 
 
 def assemble_relevant_data(ceesim_data, lookup_table, section, priority):
-    # type: (dict, dict, str, int) -> OrderedDict
+    # type: (dict, dict, str, int) -> Tuple(OrderedDict, OrderedDict)
     '''
     Finds the relevant data, creating multiple rows if necessary
     '''
-    # TODO
     data = OrderedDict()
-    return data
-
-
-def create_empty_table():
-    # type: () -> List[List[str]]
+    headers = OrderedDict()
     # TODO
-    return [[]]
+    return data, headers
+
+
+def create_empty_table(relevant_data, headers):
+    # type: (OrderedDict, OrderedDict) -> List[List[str]]
+    '''
+    Initializes an empty table
+    '''
+    return [[str()] * len(headers)] * len(relevant_data)
 
 
 def populate_table(table, relevant_data, converter):
@@ -75,13 +78,15 @@ def populate_table(table, relevant_data, converter):
 
 
 def build_table(ceesim_data, lookup_table, section, priority, converter):
-    # type: (dict, dict, str, int, function) -> List
+    # type: (dict, dict, str, int, function) -> List[str]
     '''
     Builds the table and returns all rows
     '''
-    # TODO
-    relevant_data = assemble_relevant_data(ceesim_data, lookup_table, section, priority)
-    table = populate_table(table, relevant_data, converter)
+    data, headers = assemble_relevant_data(ceesim_data, lookup_table, section, priority)
+    table = create_empty_table(data, headers)
+    table = populate_table(table, data, converter)
+    # TODO: Insert +/- if necessary
+    # TODO: Assemble table into list of strings
     return list()
 
 
