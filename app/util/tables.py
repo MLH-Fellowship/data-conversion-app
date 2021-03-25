@@ -84,14 +84,15 @@ def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, o
     '''
     Finds the relevant data, creating multiple rows if necessary
     '''
-    # TODO
-    data = list()
     # TODO: Order the headers properly. This is caused by the fact that we
     # do not actually keep track of header order anywhere in code or in
     # the lookup table, so we currently do not have this information. Thus,
     # the data is assembled in the order it is recived from the function,
     # of which the behavior is undefined.
     headers = assemble_lookup_data(lookup_table[file], section, priority)
+    cols = [obtainer(ceesim_data, None, hdr[LBL_HDR], fast=False)
+            for hdr in headers]
+    data = [list(row) for row in zip(*cols)]
     return data, headers
 
 
@@ -103,13 +104,16 @@ def create_empty_table(relevant_data, headers):
     return [[str()] * len(headers)] * len(relevant_data)
 
 
-def populate_table(table, relevant_data, converter):
-    # type: (List[List[str]], List[dict], function) -> List[List[str]]
+def populate_table(table, relevant_data, headers, converter):
+    # type: (List[List[str]], List[dict], List[dict], function) -> List[List[str]]
     '''
     Assembles a list of list of strings 
     '''
-    # TODO
-    pass
+    # TODO: Split headers into multiple rows if necessary
+    # TODO: Fill in headers
+    # TODO: Convert data
+    # TODO: Fill in data
+    return table
 
 
 def build_table(ceesim_data, lookup_table, file, section, priority, converter, obtainer):
@@ -122,7 +126,8 @@ def build_table(ceesim_data, lookup_table, file, section, priority, converter, o
     '''
     data, headers = assemble_relevant_data(
         ceesim_data, lookup_table, section, priority, obtainer)
-    table = populate_table(create_empty_table(data, headers), data, converter)
+    table = populate_table(create_empty_table(
+        data, headers), data, headers, converter)
     widths = determine_max_widths(table)
     # TODO: Insert +/- if necessary
     # NOTE: The following list is built with list comprehension. For the sake
