@@ -29,6 +29,7 @@ DATA_HDR = 'DATA'
 MULTI_HDR = 'MULTI'
 SEC_HDR = 'SECTION'
 PRI_HDR = 'PRIORITY'
+LBL_HDR = 'LABEL'
 
 
 def detect_header_height(headers, default=DEF_HDRRW_CNT):
@@ -79,11 +80,12 @@ def assemble_lookup_data(table_data, section, priority):
 
 
 def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority):
-    # type: (dict, dict, str, str, int) -> Tuple(OrderedDict, List[dict])
+    # type: (dict, dict, str, str, int) -> Tuple(List[dict], List[dict])
     '''
     Finds the relevant data, creating multiple rows if necessary
     '''
-    data = OrderedDict()
+    # TODO
+    data = list()
     # TODO: Order the headers properly. This is caused by the fact that we
     # do not actually keep track of header order anywhere in code or in
     # the lookup table, so we currently do not have this information. Thus,
@@ -94,7 +96,7 @@ def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority):
 
 
 def create_empty_table(relevant_data, headers):
-    # type: (OrderedDict, OrderedDict) -> List[List[str]]
+    # type: (List[dict], OrderedDict) -> List[List[str]]
     '''
     Initializes an empty table
     '''
@@ -102,7 +104,7 @@ def create_empty_table(relevant_data, headers):
 
 
 def populate_table(table, relevant_data, converter):
-    # type: (List[List[str]], OrderedDict, function) -> List[List[str]]
+    # type: (List[List[str]], List[dict], function) -> List[List[str]]
     '''
     Assembles a list of list of strings 
     '''
