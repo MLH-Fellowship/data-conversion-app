@@ -5,7 +5,6 @@ from app import a2pats, ceesim, datastore, model, MODEL_FILES
 from app.scripts import PRI_HDR, TABLE_MULTI_HDR as MULTI_HDR
 from app.util.errors import DatastoreError
 from app.util.logger import logger
-from app.util.tables import build_table, build_table_str
 from sys import version_info
 from csv import reader
 
@@ -420,16 +419,32 @@ def convert_one_key(lookup_data, value):
 
 
 def obtain_relevant_tags(ceesim_data, ceesim_flattened, tag, fast=True):
-    # type: (dict, dict, str, bool) -> Union[list, None]
+    # type: (dict, dict, str, bool) -> list
     '''Checks the imported data for relevant data
     '''
     if fast:
         if tag in ceesim_flattened:
             return [ceesim_flattened[tag]]
     else:
-        # TODO: Iterate through entire data
-        pass
-    return None
+        acc = list()
+        for k, v in ceesim_data.items():
+            if type(v) is dict:
+                assert k != tag, '{} had subelements when elements were looking in array!'.format(
+                    k)
+                acc += obtain_relevant_tags(v, None, tag, fast=False)
+            elif type(v) is list:
+                if k == tag:
+                    logger.warn(
+                        '{} had subelements that were not checked due to multidict encountered! Adding size {} to list').format(
+                            k, len(v))
+                    acc += v
+                else:
+                    for i in v:
+                        acc += obtain_relevant_tags(i, None, tag, fast=False)
+            elif k == tag:
+                acc.append(v)
+        return acc
+    raise BufferError('Reached unreachable code in obtain_relevant_tags!')
 
 
 def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
@@ -448,13 +463,13 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         tags = obtain_relevant_tags(
             ceesim_data, ceesim_flattened, opt[TAG_HDR])[0]
         if tags:
-            value = tags # removed taking the zero-indexed item because it isolated the first character of the ElDirection string value
-            logger.debug("Found tag {} for {} in {} with value: {}".format(opt[TAG_HDR], 
-                opt["LABEL"], opt[FILE_HDR], value))
+            value = tags  # removed taking the zero-indexed item because it isolated the first character of the ElDirection string value
+            logger.debug("Found tag {} for {} in {} with value: {}".format(opt[TAG_HDR],
+                                                                           opt["LABEL"], opt[FILE_HDR], value))
         else:
             if opt[TAG_HDR]:
                 logger.debug('Could not find tag {}, using default value for {} in {}: {}'.format(opt[TAG_HDR],
-                    opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
+                                                                                                  opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
             else:
                 logger.debug('Using default value for tagless {} in {}: {}'.format(
                     opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
@@ -505,8 +520,8 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                 create_converted(next_model, key_data)
         # table_priorities = {"ANTENNA": 13}
         # table_section = mtype + " MODEL"
-        # if mtype in table_priorities: 
-        #     fill_table(next_model, table_priorities[mtype], build_table(ceesim_data, lookup_table, table_key, 
+        # if mtype in table_priorities:
+        #     fill_table(next_model, table_priorities[mtype], build_table(ceesim_data, lookup_table, table_key,
         #                                                     table_section, table_priorities[mtype], convert_one_key, obtain_relevant_tags))
         models.append(next_model)
     return models

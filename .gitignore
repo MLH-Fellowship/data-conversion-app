@@ -5,6 +5,7 @@ build-*.zip
 # Editor
 .idea
 .vscode
+*.ipynb
 
 # Environment
 venv
