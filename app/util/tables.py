@@ -71,8 +71,11 @@ def assemble_lookup_data(table_data, section, priority):
     '''
     data = list()
     for azkey in table_data:
-        if MULTI_HDR in table_data[azkey]:
-            data += assemble_lookup_data(table_data[azkey][DATA_HDR])
+        if type(azkey) == dict:
+            if azkey[SEC_HDR] == section and azkey[PRI_HDR] == priority:
+                data.append(azkey)
+        elif MULTI_HDR in table_data[azkey]:
+            data += assemble_lookup_data(table_data[azkey][DATA_HDR], section, priority)
         else:
             if table_data[azkey][SEC_HDR] == section and table_data[azkey][PRI_HDR] == priority:
                 data.append(table_data[azkey])
@@ -90,7 +93,8 @@ def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, o
     # the data is assembled in the order it is recived from the function,
     # of which the behavior is undefined.
     headers = assemble_lookup_data(lookup_table[file], section, priority)
-    cols = [obtainer(ceesim_data, None, hdr[LBL_HDR], fast=False)
+    cols = [obtainer(ceesim_data, None, hdr["TAG"], fast=False)
+            if hdr["TAG"] else hdr["DEFAULT"]
             for hdr in headers]
     data = [list(row) for row in zip(*cols)]
     return data, headers

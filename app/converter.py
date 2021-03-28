@@ -5,6 +5,7 @@ from app import a2pats, ceesim, datastore, model, MODEL_FILES
 from app.scripts import PRI_HDR, TABLE_MULTI_HDR as MULTI_HDR
 from app.util.errors import DatastoreError
 from app.util.logger import logger
+from app.util.tables import build_table
 from sys import version_info
 from csv import reader
 
@@ -406,6 +407,8 @@ def convert_one_key(lookup_data, value):
     # TODO: Table Handler
     if FUNC_HDR in lookup_data and hasattr(functions, lookup_data[FUNC_HDR]):
         funcp_data = getattr(functions, lookup_data[FUNC_HDR])(value)
+    elif value:
+        funcp_data = value
     else:
         funcp_data = lookup_data["DEFAULT"]
 
@@ -422,9 +425,8 @@ def obtain_relevant_tags(ceesim_data, ceesim_flattened, tag, fast=True):
     # type: (dict, dict, str, bool) -> list
     '''Checks the imported data for relevant data
     '''
-    if fast:
-        if tag in ceesim_flattened:
-            return [ceesim_flattened[tag]]
+    if fast and tag in ceesim_flattened:
+        return [ceesim_flattened[tag]]
     else:
         acc = list()
         for k, v in ceesim_data.items():
@@ -461,9 +463,9 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
 
     def create_converted(model, opt):
         tags = obtain_relevant_tags(
-            ceesim_data, ceesim_flattened, opt[TAG_HDR])[0]
+            ceesim_data, ceesim_flattened, opt[TAG_HDR])
         if tags:
-            value = tags  # removed taking the zero-indexed item because it isolated the first character of the ElDirection string value
+            value = tags[0]  # removed taking the zero-indexed item because it isolated the first character of the ElDirection string value
             logger.debug("Found tag {} for {} in {} with value: {}".format(opt[TAG_HDR],
                                                                            opt["LABEL"], opt[FILE_HDR], value))
         else:
@@ -474,8 +476,14 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                 logger.debug('Using default value for tagless {} in {}: {}'.format(
                     opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
             value = opt[DEFAULT_HDR]
+        
+        # if opt["TABLE"] is False:
         converted = convert_one_key(opt, value)
         fill_table(model, opt[PRI_HDR], converted)
+        # else:
+        #     table_string = build_table(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
+        #                                     opt[PRI_HDR], convert_one_key, obtain_relevant_tags)
+        #     fill_table(model, opt[PRI_HDR], table_string)
 
     def add_headers(mfile, model):
         with open("data/headers.csv") as head:
@@ -527,7 +535,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
     return models
 
 
-def scan_splitter():
+def determine_scan_type(ceesim_flattened):
     pass
 
 

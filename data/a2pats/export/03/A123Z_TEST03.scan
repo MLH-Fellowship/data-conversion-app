@@ -2,27 +2,27 @@
 //
 // Model:   A123Z_TEST03
 //
-// Created: Wed Mar 24, 2021  11:34 PM
+// Created: Sun Mar 28, 2021  10:03 PM
 
 
 //********************** SCAN MODEL **********************
 
 SCAN NOTES:         ""
 
-SCAN MODEL:         None
+SCAN MODEL:         CIRCULAR
 
 AZIMUTH OFFSET:     0.000 DEG
 ELEVATION OFFSET:   0.000 DEG
-SCAN PERIOD:        0.00000 SEC
-ROTATION:           CCW
+SCAN PERIOD:        10.00000 SEC
+ROTATION:           CW
 
 PULSE TRIG ON REV:  NO
 
-OVERLAY MODEL:      OFF
-TYPE:               SAWTOOTH
-DIRECTION:          None
+OVERLAY MODEL:      NODDING
+TYPE:               TRIANGULAR
+DIRECTION:          VERTICAL
 ORIGIN:             TOP
-SPAN:               0.000 DEG
+SPAN:               90.000 DEG
 SCAN RATE:          0.00000 HZ
 
 SCAN PERSPECTIVE:   TARGET
