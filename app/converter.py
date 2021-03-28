@@ -5,7 +5,7 @@ from app import a2pats, ceesim, datastore, model, MODEL_FILES
 from app.scripts import PRI_HDR, TABLE_MULTI_HDR as MULTI_HDR
 from app.util.errors import DatastoreError
 from app.util.logger import logger
-from app.util.tables import build_table
+from app.util.tables import build_table_str
 from sys import version_info
 from csv import reader
 
@@ -477,13 +477,13 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                     opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
             value = opt[DEFAULT_HDR]
         
-        # if opt["TABLE"] is False:
         converted = convert_one_key(opt, value)
         fill_table(model, opt[PRI_HDR], converted)
-        # else:
-        #     table_string = build_table(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
-        #                                     opt[PRI_HDR], convert_one_key, obtain_relevant_tags)
-        #     fill_table(model, opt[PRI_HDR], table_string)
+
+        # if opt["TABLE"] is True:
+        #     table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
+        #                                 opt[PRI_HDR], convert_one_key, obtain_relevant_tags)
+        #     logger.debug(table_string)
 
     def add_headers(mfile, model):
         with open("data/headers.csv") as head:

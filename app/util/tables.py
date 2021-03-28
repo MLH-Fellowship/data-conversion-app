@@ -96,7 +96,18 @@ def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, o
     cols = [obtainer(ceesim_data, None, hdr["TAG"], fast=False)
             if hdr["TAG"] else hdr["DEFAULT"]
             for hdr in headers]
+    mx_lst_lngth = 0
+    for element in cols:
+        if type(element) is list and len(element) > mx_lst_lngth:
+            mx_lst_lngth = len(element)
+    # cols = [[col] for col in cols if type(col) != list]
+    # for i, element in enumerate(cols):
+    #     while type(element) is list and len(element) < mx_lst_lngth:
+    #           cols[i].append(cols[i][0])
+
     data = [list(row) for row in zip(*cols)]
+    # logger.debug(cols)
+    # logger.debug(data)
     return data, headers
 
 
@@ -142,9 +153,9 @@ def build_table(ceesim_data, lookup_table, file, section, priority, converter, o
     return output_table
 
 
-def build_table_str(**kwargs):
+def build_table_str(*args):
     # type: (dict) -> str
     '''
     Builds the table and returns as a string
     '''
-    return '\n'.join(build_table(**kwargs))
+    return '\n'.join(build_table(*args))
