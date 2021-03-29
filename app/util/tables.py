@@ -96,18 +96,11 @@ def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, o
     cols = [obtainer(ceesim_data, None, hdr["TAG"], fast=False)
             if hdr["TAG"] else hdr["DEFAULT"]
             for hdr in headers]
-    mx_lst_lngth = 0
-    for element in cols:
-        if type(element) is list and len(element) > mx_lst_lngth:
-            mx_lst_lngth = len(element)
-    # cols = [[col] for col in cols if type(col) != list]
-    # for i, element in enumerate(cols):
-    #     while type(element) is list and len(element) < mx_lst_lngth:
-    #           cols[i].append(cols[i][0])
-
+    len3 = len(max(cols, key=lambda i: len(i) if type(i) is list else 0))
+    for i, row in enumerate(cols):
+        if type(row) is not list:
+            cols[i] = [row] * len3
     data = [list(row) for row in zip(*cols)]
-    # logger.debug(cols)
-    # logger.debug(data)
     return data, headers
 
 
@@ -126,7 +119,7 @@ def populate_table(table, relevant_data, headers, converter):
     '''
     # TODO: Split headers into multiple rows if necessary
     table[0] = [hdr[LBL_HDR] for hdr in headers]
-    table[1:] = [[converter(hdr, relevant_data[row - 1][idx])
+    table[1:] = [[converter(hdr, relevant_data[row - 1][idx], keep_tag=False)
                   for idx, hdr in enumerate(headers)] for row in range(1, len(table))]
     return table
 

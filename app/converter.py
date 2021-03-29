@@ -400,8 +400,8 @@ def flatten_table(ceesim_data, stack_size=1):
     return data_
 
 
-def convert_one_key(lookup_data, value):
-    # type: (dict, str) -> str
+def convert_one_key(lookup_data, value, keep_tag=True):
+    # type: (dict, str, bool) -> str
     '''Converts one key given the table lookup parameters
     '''
     # TODO: Table Handler
@@ -414,6 +414,9 @@ def convert_one_key(lookup_data, value):
 
     if lookup_data[STRING_HDR]:
         funcp_data = '"{}"'.format(funcp_data)
+    
+    if not keep_tag:
+        return funcp_data
 
     if len(lookup_data["LABEL"]) >= 19:
         return '{} : {}'.format(lookup_data["LABEL"], funcp_data)
