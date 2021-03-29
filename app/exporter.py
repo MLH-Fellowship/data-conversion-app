@@ -42,6 +42,9 @@ def to_timestamp(time, downgrade_peaceful=True):
     :returns: ISO 8601 timestamp
     :rtype: str
     '''
+    if type(time) is str:
+        logger.debug(time)
+        time = datetime.strptime(time, "%Y-%m-%dT%H:%M:%S")
     def to_str(obj): return time.strftime('%a %b %d, %Y  %I:%M %p')
     if downgrade_peaceful:
         try:

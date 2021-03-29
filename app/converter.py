@@ -463,9 +463,9 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
 
     def create_converted(model, opt):
         tags = obtain_relevant_tags(
-            ceesim_data, ceesim_flattened, opt[TAG_HDR])
+            ceesim_data, ceesim_flattened, opt[TAG_HDR]) # removed taking the zero-index as it's done below
         if tags:
-            value = tags[0]  # removed taking the zero-indexed item because it isolated the first character of the ElDirection string value
+            value = tags[0]  
             logger.debug("Found tag {} for {} in {} with value: {}".format(opt[TAG_HDR],
                                                                            opt["LABEL"], opt[FILE_HDR], value))
         else:
@@ -500,10 +500,11 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                         ['*' * lleft, header[1], '*' * right])
                     fill_table(model, int(header[3]), htext)
     models = list()
-    name = obtain_relevant_tags(ceesim_data, ceesim_flattened, "ModeName")[0]
+    name = form_model_name(ceesim_data, ceesim_flattened)
+    timestamp = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LastUpdateDate")[0]
     logger.debug('Generic model generator using name: {}'.format(name))
     for mtype in AUTO_MODELS:
-        next_model = model(mtype, name)
+        next_model = model(mtype, name, timestamp)
         if mtype not in MODEL_FILES:
             logger.warn(
                 'Could not find mtype {} in model files, skipping'.format(mtype))
@@ -534,6 +535,9 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         models.append(next_model)
     return models
 
+
+def form_model_name(ceesim_data, ceesim_flattened): # potentially move this into generate_other_models scope
+    return obtain_relevant_tags(ceesim_data, ceesim_flattened, "ModeName")[0]
 
 def determine_scan_type(ceesim_flattened):
     pass
