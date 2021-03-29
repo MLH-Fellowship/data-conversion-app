@@ -480,10 +480,10 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         converted = convert_one_key(opt, value)
         fill_table(model, opt[PRI_HDR], converted)
 
-        # if opt["TABLE"] is True:
-        #     table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
-        #                                 opt[PRI_HDR], convert_one_key, obtain_relevant_tags)
-        #     logger.debug(table_string)
+        if opt["TABLE"] is True:
+            table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
+                                        opt[PRI_HDR], convert_one_key, obtain_relevant_tags)
+            fill_table(model, opt[PRI_HDR], table_string)
 
     def add_headers(mfile, model):
         with open("data/headers.csv") as head:
