@@ -483,6 +483,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         if opt["TABLE"] is True:
             table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
                                         opt[PRI_HDR], convert_one_key, obtain_relevant_tags)
+            # logger.debug(table_string)
             fill_table(model, opt[PRI_HDR], table_string)
 
     def add_headers(mfile, model):
@@ -503,6 +504,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
     name = form_model_name(ceesim_data, ceesim_flattened)
     timestamp = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LastUpdateDate")[0]
     logger.debug('Generic model generator using name: {}'.format(name))
+    logger.info("Scan Type: {}".format(determine_scan_type(ceesim_data, ceesim_flattened)))
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name, timestamp)
         if mtype not in MODEL_FILES:
@@ -539,8 +541,19 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
 def form_model_name(ceesim_data, ceesim_flattened): # potentially move this into generate_other_models scope
     return obtain_relevant_tags(ceesim_data, ceesim_flattened, "ModeName")[0]
 
-def determine_scan_type(ceesim_flattened):
-    pass
+def determine_scan_type(ceesim_data, ceesim_flattened):
+    quick_tag = lambda x: obtain_relevant_tags(ceesim_data, ceesim_flattened, x)
+    az_scan = quick_tag("AzScanKind")
+    el_scan = quick_tag("ElScanKind")
+    # TODO: Use a few more tags to confirm the identity of each EmitterMode's scantype
+    if len(az_scan) > 1:
+        return "HELICAL (LAYERED CIRCULAR)"
+    elif not az_scan and not el_scan:
+        return "RASTER"
+    elif az_scan[0] == "Steady" and el_scan[0] == "Steady":
+        return "LORO"
+    elif az_scan[0] == "Circular" or el_scan[0] == "Circular":
+        return "CIRCULAR"
 
 
 def generate_intrapulse(ceesim_data, lookup_table):
