@@ -153,6 +153,9 @@ class functions:
         elif word == "Steady":
             return "LORO"
 
+        else:
+            return "RASTER"
+
     @staticmethod
     def format_degree(num):
         # type: (Union[int, float]) -> str
@@ -355,6 +358,21 @@ class functions:
             return "1"
 
     @staticmethod
+    def get_four_decimal(number):
+        # type: (int) -> float
+        return '{:.4f}'.format(number)
+
+    @staticmethod
+    def get_three_decimal(number):
+        # type: (int) -> float
+        return '{:.3f}'.format(number)
+
+    @staticmethod
+    def get_six_decimal(number):
+        # type: (int) -> float
+        return '{:.6f}'.format(number)
+
+    @staticmethod
     # TODO: if possible, we should really accept a second parameter here to
     def ant_model(emitterid): return "_".join([emitterid, "ANT"])
 
@@ -548,7 +566,7 @@ def determine_scan_type(ceesim_data, ceesim_flattened):
     quick_tag = lambda x: obtain_relevant_tags(ceesim_data, ceesim_flattened, x)
     az_scan = quick_tag("AzScanKind")
     el_scan = quick_tag("ElScanKind")
-    
+
     if len(az_scan) > 1 and (az_scan[0] == "Circular" or el_scan[0] == "Circular"):
         return "HELICAL"
     elif not az_scan and not el_scan and quick_tag("RasterFlybackStatus"):
@@ -558,7 +576,7 @@ def determine_scan_type(ceesim_data, ceesim_flattened):
     elif az_scan[0] == "Circular" or el_scan[0] == "Circular":
         return "CIRCULAR"
     else:
-        return "UNKNOWN"
+        return "SECTOR"
 
 
 def generate_intrapulse(ceesim_data, lookup_table):
