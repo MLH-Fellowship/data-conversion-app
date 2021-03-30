@@ -120,7 +120,7 @@ def populate_table(table, relevant_data, headers, converter):
     # TODO: Split headers into multiple rows if necessary
     table[0] = [hdr[LBL_HDR] for hdr in headers]
     table[1:] = [[converter(hdr, relevant_data[row - 1][idx], keep_tag=False)
-                  for idx, hdr in enumerate(headers)] for row in range(1, len(table))]
+                  for idx, hdr in enumerate(headers)] for row in range(len(table))]
     return table
 
 

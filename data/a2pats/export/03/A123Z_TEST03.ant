@@ -26,6 +26,7 @@ PHASED ARRAY:       NO
     2.000 DEG               N/A                   1                   -15          
     2.000 DEG               N/A                   1                   -15          
     2.000 DEG               N/A                   1                   -15          
+    2.000 DEG               N/A                   1                   -15          
 
 DEPTH OF NULLS DEPTH : 127.8250 DB
 
@@ -41,6 +42,7 @@ DISTRIBUTION:       SIN X/X
 PHASED ARRAY:       NO
 
  LOBE WIDTH (DEG)  LOBE SEPARATION (DEG)  LOBE REPEAT COUNT  LOBE ATENNUATION (DB) 
+    2.000 DEG               N/A                   1                   -15          
     2.000 DEG               N/A                   1                   -15          
     2.000 DEG               N/A                   1                   -15          
     2.000 DEG               N/A                   1                   -15          
