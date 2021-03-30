@@ -1,0 +1,23 @@
+//************** PULSE SEQUENCE DEFINITION FILE ***************
+//
+// Model:   A123Z_TEST01
+//
+// Created: Fri Jan 22, 2021  10:40 AM
+
+PULSE NOTES:        ""
+
+SCAN MODEL:         ""
+USE LOCAL SCAN:     NO
+
+  PULSE MODEL   PULSE GROUP  GROUP REPEAT  DWELL TIME (MSEC)  SCAN COMMAND  AZIMUTH (DEG)  ELEVATION (DEG)  CELL NUMBER  TRACK ID  ATENNUATION (DB) 
+ "A123Z_Pulse"       ""           1            0.00000000         NONE          0.000           0.000            0          0           0.0000      
+ "A123Z_Pulse"       ""           1            0.00000000         NONE          0.000           0.000            0          0           0.0000      
+ "A123Z_Pulse"       ""           1            0.00000000         NONE          0.000           0.000            0          0           0.0000      
+ "A123Z_Pulse"       ""           1            0.00000000         NONE          0.000           0.000            0          0           0.0000      
+ "A123Z_Pulse"       ""           1            0.00000000         NONE          0.000           0.000            0          0           0.0000      
+ "A123Z_Pulse"       ""           1            0.00000000         NONE          0.000           0.000            0          0           0.0000      
+ "A123Z_Pulse"       ""           1            0.00000000         NONE          0.000           0.000            0          0           0.0000      
+ "A123Z_Pulse"       ""           1            0.00000000         NONE          0.000           0.000            0          0           0.0000      
+ "A123Z_Pulse"       ""           1            0.00000000         NONE          0.000           0.000            0          0           0.0000      
+ "A123Z_Pulse"       ""           1            0.00000000         NONE          0.000           0.000            0          0           0.0000      
+ "A123Z_Pulse"       ""           1            0.00000000         NONE          0.000           0.000            0          0           0.0000      

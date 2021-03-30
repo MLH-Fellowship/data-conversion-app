@@ -13,7 +13,7 @@ if version_info > (3, 5):
     from typing import Tuple, Union, List
 
 
-AUTO_MODELS = ('SCAN', 'ANTENNA')
+AUTO_MODELS = ('SCAN', 'ANTENNA', "PULSE", "PULSE SEQUENCE")
 DEFAULT_HDR = 'DEFAULT'
 FILE_HDR = 'FILE'
 FUNC_HDR = 'FUNCTION'
