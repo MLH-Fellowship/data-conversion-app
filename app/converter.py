@@ -13,7 +13,7 @@ if version_info > (3, 5):
     from typing import Tuple, Union, List
 
 
-AUTO_MODELS = ('SCAN', 'ANTENNA', "PULSE", "PULSE SEQUENCE")
+AUTO_MODELS = ('SCAN', 'ANTENNA', "SIGNAL", "PULSE", "PULSE SEQUENCE")
 DEFAULT_HDR = 'DEFAULT'
 FILE_HDR = 'FILE'
 FUNC_HDR = 'FUNCTION'
@@ -42,7 +42,7 @@ class functions:
         '''
         if '_' in name:
             values = name.split('_')
-            half = len(values[1]) / 2
+            half = len(values[1]) // 2
             return values[0], values[1][:half], values[1][half:]
         else:
             return name, name, name
@@ -86,6 +86,8 @@ class functions:
         :returns: Mode
         :rtype: str
         '''
+        this_name, version, mode = functions.extract_metadata(name)
+        return mode
 
     @staticmethod
     def to_mhz(frequency):
@@ -358,33 +360,31 @@ class functions:
             return "1"
 
     @staticmethod
+    def timing_mode(cps):
+        if cps == "false":
+            return "TIME"
+
+    @staticmethod
+    def int_name(ModStatus):
+        # TODO: Determine and associate names for intrapulses
+
+        if ModStatus == "false":
+            return "N/A"
+
+    @staticmethod
     def get_four_decimal(number):
         # type: (int) -> float
-        return '{:.4f}'.format(number)
+        return '{:.4f}'.format(float(number))
 
     @staticmethod
     def get_three_decimal(number):
         # type: (int) -> float
-        return '{:.3f}'.format(number)
+        return '{:.3f}'.format(float(number))
 
     @staticmethod
     def get_six_decimal(number):
         # type: (int) -> float
-        return '{:.6f}'.format(number)
-
-    @staticmethod
-    # TODO: if possible, we should really accept a second parameter here to
-    def ant_model(emitterid): return "_".join([emitterid, "ANT"])
-
-    @staticmethod
-    # consolidate these four very similar functions
-    def freq_model(emitterid): return "_".join([emitterid, "Freq"])
-
-    @staticmethod
-    def seq_model(emitterid): return "_".join([emitterid, "Seq"])
-
-    @staticmethod
-    def scan_model(emitterid): return "_".join([emitterid, "Scan"])
+        return '{:.6f}'.format(float(number))
 
 
 # I'm not sure if this is the right method
@@ -545,6 +545,8 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             if MULTI_HDR in key_data and TABLE_DATA in key_data:
                 data_opts = key_data[TABLE_DATA]
                 for opt in data_opts:
+                    if opt["SECTION"] == "Main":
+                        continue
                     create_converted(next_model, opt)
             else:
                 if key_data["SECTION"] == "Main":
