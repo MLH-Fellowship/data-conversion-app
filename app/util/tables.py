@@ -112,6 +112,20 @@ def create_empty_table(relevant_data, headers):
     return [[str()] * len(headers)] * len(relevant_data)
 
 
+def dedupe_rows(table):
+    # type(List[List[str]]) -> List[List[str]]
+    '''
+    Dedupes rows
+    '''
+    rows = set()
+    for row in range(len(table), 1, -1):
+        if table[row] in rows:
+            del table[row]
+        else:
+            rows.add(tuple(table[row]))
+    return table
+
+
 def populate_table(table, relevant_data, headers, converter):
     # type: (List[List[str]], List[List[str]], List[dict], function) -> List[List[str]]
     '''
@@ -121,7 +135,7 @@ def populate_table(table, relevant_data, headers, converter):
     table[0] = [hdr[LBL_HDR] for hdr in headers]
     table[1:] = [[converter(hdr, relevant_data[row - 1][idx], keep_tag=False)
                   for idx, hdr in enumerate(headers)] for row in range(len(table))]
-    return table
+    return dedupe_rows(table)
 
 
 def build_table(ceesim_data, lookup_table, file, section, priority, converter, obtainer):
