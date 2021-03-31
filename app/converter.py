@@ -13,7 +13,7 @@ if version_info > (3, 5):
     from typing import Tuple, Union, List
 
 
-AUTO_MODELS = ('SCAN', 'ANTENNA')
+AUTO_MODELS = ('SCAN', 'ANTENNA', "SIGNAL", "PULSE", "PULSE SEQUENCE")
 DEFAULT_HDR = 'DEFAULT'
 FILE_HDR = 'FILE'
 FUNC_HDR = 'FUNCTION'
@@ -42,7 +42,7 @@ class functions:
         '''
         if '_' in name:
             values = name.split('_')
-            half = len(values[1]) / 2
+            half = len(values[1]) // 2
             return values[0], values[1][:half], values[1][half:]
         else:
             return name, name, name
@@ -86,6 +86,8 @@ class functions:
         :returns: Mode
         :rtype: str
         '''
+        this_name, version, mode = functions.extract_metadata(name)
+        return mode
 
     @staticmethod
     def to_mhz(frequency):
@@ -152,6 +154,9 @@ class functions:
 
         elif word == "Steady":
             return "LORO"
+
+        else:
+            return "RASTER"
 
     @staticmethod
     def format_degree(num):
@@ -355,18 +360,31 @@ class functions:
             return "1"
 
     @staticmethod
-    # TODO: if possible, we should really accept a second parameter here to
-    def ant_model(emitterid): return "_".join([emitterid, "ANT"])
+    def timing_mode(cps):
+        if cps == "false":
+            return "TIME"
 
     @staticmethod
-    # consolidate these four very similar functions
-    def freq_model(emitterid): return "_".join([emitterid, "Freq"])
+    def int_name(ModStatus):
+        # TODO: Determine and associate names for intrapulses
+
+        if ModStatus == "false":
+            return "N/A"
 
     @staticmethod
-    def seq_model(emitterid): return "_".join([emitterid, "Seq"])
+    def get_four_decimal(number):
+        # type: (int) -> float
+        return '{:.4f}'.format(float(number))
 
     @staticmethod
-    def scan_model(emitterid): return "_".join([emitterid, "Scan"])
+    def get_three_decimal(number):
+        # type: (int) -> float
+        return '{:.3f}'.format(float(number))
+
+    @staticmethod
+    def get_six_decimal(number):
+        # type: (int) -> float
+        return '{:.6f}'.format(float(number))
 
 
 # I'm not sure if this is the right method
@@ -527,6 +545,8 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             if MULTI_HDR in key_data and TABLE_DATA in key_data:
                 data_opts = key_data[TABLE_DATA]
                 for opt in data_opts:
+                    if opt["SECTION"] == "Main":
+                        continue
                     create_converted(next_model, opt)
             else:
                 if key_data["SECTION"] == "Main":
@@ -548,7 +568,7 @@ def determine_scan_type(ceesim_data, ceesim_flattened):
     quick_tag = lambda x: obtain_relevant_tags(ceesim_data, ceesim_flattened, x)
     az_scan = quick_tag("AzScanKind")
     el_scan = quick_tag("ElScanKind")
-    
+
     if len(az_scan) > 1 and (az_scan[0] == "Circular" or el_scan[0] == "Circular"):
         return "HELICAL"
     elif not az_scan and not el_scan and quick_tag("RasterFlybackStatus"):
@@ -558,7 +578,7 @@ def determine_scan_type(ceesim_data, ceesim_flattened):
     elif az_scan[0] == "Circular" or el_scan[0] == "Circular":
         return "CIRCULAR"
     else:
-        return "UNKNOWN"
+        return "SECTOR"
 
 
 def generate_intrapulse(ceesim_data, lookup_table):

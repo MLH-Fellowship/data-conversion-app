@@ -135,7 +135,7 @@
                     "TAG": ""
                 },
                 {
-                    "DEFAULT": "2.000 DEG",
+                    "DEFAULT": "2.000",
                     "FILE": "ANT",
                     "FUNCTION": "",
                     "LABEL": "LOBE WIDTH (DEG)",
@@ -168,7 +168,7 @@
                     "TAG": ""
                 },
                 {
-                    "DEFAULT": "2.000 DEG",
+                    "DEFAULT": "2.000",
                     "FILE": "ANT",
                     "FUNCTION": "",
                     "LABEL": "LOBE WIDTH (DEG)",
@@ -198,6 +198,17 @@
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
                     "TABLE": true,
+                    "TAG": ""
+                },
+                {
+                    "DEFAULT": "",
+                    "FILE": "ANT",
+                    "FUNCTION": "",
+                    "LABEL": "ANTENNA NOTES",
+                    "PRIORITY": 3,
+                    "SECTION": "ANTENNA MODEL",
+                    "STRING": true,
+                    "TABLE": false,
                     "TAG": ""
                 }
             ],
@@ -239,7 +250,7 @@
         "AzSidelobeRatio": {
             "DEFAULT": "N/A",
             "FILE": "ANT",
-            "FUNCTION": "",
+            "FUNCTION": "get_four_decimal",
             "LABEL": "LOBE ATENNUATION (DB)",
             "PRIORITY": 13,
             "SECTION": "ANTENNA MODEL",
@@ -272,7 +283,7 @@
         "ElSidelobeRatio": {
             "DEFAULT": "N/A",
             "FILE": "ANT",
-            "FUNCTION": "",
+            "FUNCTION": "get_four_decimal",
             "LABEL": "LOBE ATENNUATION (DB)",
             "PRIORITY": 28,
             "SECTION": "ANTENNA MODEL",
@@ -530,7 +541,7 @@
                 {
                     "DEFAULT": "TIME",
                     "FILE": "PUL",
-                    "FUNCTION": "",
+                    "FUNCTION": "timing_mode",
                     "LABEL": "PRI TIMING MODE",
                     "PRIORITY": 7,
                     "SECTION": "PULSE MODEL",
@@ -541,7 +552,7 @@
                 {
                     "DEFAULT": "N/A",
                     "FILE": "PUL",
-                    "FUNCTION": "",
+                    "FUNCTION": "get_dwell",
                     "LABEL": "DWELL (MSEC)",
                     "PRIORITY": 11,
                     "SECTION": "PULSE MODEL",
@@ -552,7 +563,7 @@
                 {
                     "DEFAULT": "1",
                     "FILE": "PUL",
-                    "FUNCTION": "",
+                    "FUNCTION": "get_repeat",
                     "LABEL": "PULSE REPEAT",
                     "PRIORITY": 11,
                     "SECTION": "PULSE MODEL",
@@ -566,7 +577,7 @@
         "DwellStatus": {
             "DEFAULT": "TIME",
             "FILE": "PUL",
-            "FUNCTION": "",
+            "FUNCTION": "timing_mode",
             "LABEL": "PW TIMING MODE",
             "PRIORITY": 9,
             "SECTION": "PULSE MODEL",
@@ -599,7 +610,7 @@
         "ModStatus": {
             "DEFAULT": "",
             "FILE": "PUL",
-            "FUNCTION": "",
+            "FUNCTION": "int_name",
             "LABEL": "INTRAPULSE NAME",
             "PRIORITY": 11,
             "SECTION": "PULSE MODEL",
@@ -675,17 +686,6 @@
                     "SECTION": "",
                     "STRING": false,
                     "TABLE": false,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "A123Z_Pulse",
-                    "FILE": "PULSEQ",
-                    "FUNCTION": "",
-                    "LABEL": "PULSE MODEL",
-                    "PRIORITY": 5,
-                    "SECTION": "",
-                    "STRING": true,
-                    "TABLE": true,
                     "TAG": ""
                 },
                 {
@@ -802,15 +802,31 @@
             "TAG": "LastUpdateDate"
         },
         "ModeName": {
-            "DEFAULT": "A123Z_EMITTER01",
-            "FILE": "PULSEQ",
-            "FUNCTION": "",
-            "LABEL": "Model",
-            "PRIORITY": 0,
-            "SECTION": "Main",
-            "STRING": false,
-            "TABLE": false,
-            "TAG": "ModeName"
+            "DATA": [
+                {
+                    "DEFAULT": "A123Z_EMITTER01",
+                    "FILE": "PULSEQ",
+                    "FUNCTION": "",
+                    "LABEL": "Model",
+                    "PRIORITY": 0,
+                    "SECTION": "Main",
+                    "STRING": false,
+                    "TABLE": false,
+                    "TAG": "ModeName"
+                },
+                {
+                    "DEFAULT": "A123Z_Pulse",
+                    "FILE": "PULSEQ",
+                    "FUNCTION": "",
+                    "LABEL": "PULSE MODEL",
+                    "PRIORITY": 5,
+                    "SECTION": "",
+                    "STRING": true,
+                    "TABLE": true,
+                    "TAG": "ModeName"
+                }
+            ],
+            "MULTI": true
         }
     },
     "SCAN": {
@@ -1029,13 +1045,13 @@
                 {
                     "DEFAULT": "A123Z ANT",
                     "FILE": "SIG",
-                    "FUNCTION": "ant_model",
+                    "FUNCTION": "",
                     "LABEL": "MODEL NAME",
                     "PRIORITY": 56,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": true,
                     "TABLE": false,
-                    "TAG": ""
+                    "TAG": "ModeName"
                 },
                 {
                     "DEFAULT": "",
@@ -1128,13 +1144,13 @@
                 {
                     "DEFAULT": "A123Z_EMITTER",
                     "FILE": "SIG",
-                    "FUNCTION": "seq_model",
+                    "FUNCTION": "",
                     "LABEL": "MODEL NAME",
                     "PRIORITY": 20,
                     "SECTION": "PULSE MODEL",
                     "STRING": true,
                     "TABLE": false,
-                    "TAG": ""
+                    "TAG": "ModeName"
                 },
                 {
                     "DEFAULT": "YES",
@@ -1183,13 +1199,13 @@
                 {
                     "DEFAULT": "A123Z_SCAN",
                     "FILE": "SIG",
-                    "FUNCTION": "scan_model",
+                    "FUNCTION": "",
                     "LABEL": "MODEL NAME",
                     "PRIORITY": 46,
                     "SECTION": "SCAN MODEL",
                     "STRING": true,
                     "TABLE": false,
-                    "TAG": ""
+                    "TAG": "ModeName"
                 },
                 {
                     "DEFAULT": "TARGET",
