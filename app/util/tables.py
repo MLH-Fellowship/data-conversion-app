@@ -138,8 +138,8 @@ def populate_table(table, relevant_data, headers, converter):
     return dedupe_rows(table)
 
 
-def build_table(ceesim_data, lookup_table, file, section, priority, converter, obtainer):
-    # type: (dict, dict, str, str, int, function, function) -> List[str]
+def build_table(ceesim_data, lookup_table, file, section, priority, converter, obtainer, add_sign):
+    # type: (dict, dict, str, str, int, function, function, bool) -> List[str]
     '''
     Builds the table and returns all rows
 
@@ -151,7 +151,11 @@ def build_table(ceesim_data, lookup_table, file, section, priority, converter, o
     table = populate_table(create_empty_table(
         data, headers), data, headers, converter)
     widths = determine_max_widths(table)
-    # TODO: Insert +/- if necessary
+    if add_sign:
+        widths.insert(0, 3)
+        table[0].insert(0, str())
+        for i in range(1, len(table)):
+            table[i].insert(0, '+/-')
     # NOTE: The following list is built with list comprehension. For the sake
     # of code readability it is advised to expand this eventually and it makes
     # the most sense to expand this when the above TODO is added.
