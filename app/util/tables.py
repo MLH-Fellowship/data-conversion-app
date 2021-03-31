@@ -138,7 +138,7 @@ def populate_table(table, relevant_data, headers, converter):
     return dedupe_rows(table)
 
 
-def build_table(ceesim_data, lookup_table, file, section, priority, converter, obtainer, add_sign):
+def build_table(ceesim_data, lookup_table, file, section, priority, converter, obtainer, add_sign=False):
     # type: (dict, dict, str, str, int, function, function, bool) -> List[str]
     '''
     Builds the table and returns all rows
