@@ -132,9 +132,10 @@ def populate_table(table, relevant_data, headers, converter):
     Assembles a list of list of strings 
     '''
     # TODO: Split headers into multiple rows if necessary
-    table[0] = [hdr[LBL_HDR] for hdr in headers]
-    table[1:] = [[converter(hdr, relevant_data[row - 1][idx], keep_tag=False)
-                  for idx, hdr in enumerate(headers)] for row in range(len(table))]
+    if len(table) > 1:
+        table[0] = [hdr[LBL_HDR] for hdr in headers]
+        table[1:] = [[converter(hdr, relevant_data[row - 1][idx], keep_tag=False)
+                      for idx, hdr in enumerate(headers)] for row in range(len(table))]
     return dedupe_rows(table)
 
 
