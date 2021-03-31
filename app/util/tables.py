@@ -118,9 +118,10 @@ def dedupe_rows(table):
     Dedupes rows
     '''
     rows = set()
-    for row in range(len(table), 1, -1):
-        if table[row] in rows:
-            del table[row]
+    for row in range(len(table) - 1, 1, -1):
+        if tuple(table[row]) in rows:
+            # del table[row]
+            print('hi')
         else:
             rows.add(tuple(table[row]))
     return table
@@ -132,7 +133,7 @@ def populate_table(table, relevant_data, headers, converter):
     Assembles a list of list of strings 
     '''
     # TODO: Split headers into multiple rows if necessary
-    if len(table) > 1:
+    if len(table) > 0:
         table[0] = [hdr[LBL_HDR] for hdr in headers]
         table[1:] = [[converter(hdr, relevant_data[row - 1][idx], keep_tag=False)
                       for idx, hdr in enumerate(headers)] for row in range(len(table))]
