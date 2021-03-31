@@ -18,7 +18,7 @@ from collections import OrderedDict
 from sys import version_info
 
 if version_info > (3, 5):
-    from typing import List, Union
+    from typing import List, Union, Callable as function
 
 # Default number of rows the header will take up if the number
 # of rows cannot be detected.
@@ -30,6 +30,7 @@ MULTI_HDR = 'MULTI'
 SEC_HDR = 'SECTION'
 PRI_HDR = 'PRIORITY'
 LBL_HDR = 'LABEL'
+TBL_HDR = 'TABLE'
 
 
 def detect_header_height(headers, default=DEF_HDRRW_CNT):
@@ -120,8 +121,8 @@ def dedupe_rows(table):
     rows = set()
     for row in range(len(table) - 1, 1, -1):
         if tuple(table[row]) in rows:
-            # del table[row]
-            print('hi')
+            del table[row]
+            # print('hi')
         else:
             rows.add(tuple(table[row]))
     return table
@@ -138,6 +139,18 @@ def populate_table(table, relevant_data, headers, converter):
         table[1:] = [[converter(hdr, relevant_data[row - 1][idx], keep_tag=False)
                       for idx, hdr in enumerate(headers)] for row in range(len(table))]
     return dedupe_rows(table)
+
+
+def sort_table(table, headers):
+    # type: (List[List[str]], List[dict]) -> List[List[str]]
+    '''
+    Sorts table columns
+    '''
+    table_t = [list(row) for row in zip(*table)]
+    row_idx = [hdr[TBL_HDR] for hdr in headers]
+    table_t = [row for _, row in sorted(zip(row_idx, table_t))]
+    table = [list(row) for row in zip(*table_t)]
+    return table
 
 
 def build_table(ceesim_data, lookup_table, file, section, priority, converter, obtainer, add_sign=False):
