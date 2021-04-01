@@ -11,9 +11,9 @@ PULSE NOTES:        ""
 
 PULSE MODEL:        STAGGER
 
-PRI TIMING MODE:    None
+PRI TIMING MODE:    TIME
 
-PW TIMING MODE:     None
+PW TIMING MODE:     true
 
 
 

@@ -21,7 +21,7 @@ PULSE TRIG ON REV:  NO
 OVERLAY MODEL:      OFF
 TYPE:               SAWTOOTH
 DIRECTION:          None
-ORIGIN:             TOP
+ORIGIN:             BOTTOM
 SPAN:               0.000 DEG
 SCAN RATE:          0.00000 HZ
 

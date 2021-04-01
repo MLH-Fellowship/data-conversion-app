@@ -23,7 +23,7 @@ TYPE:               TRIANGULAR
 DIRECTION:          VERTICAL
 ORIGIN:             TOP
 SPAN:               90.000 DEG
-SCAN RATE:          0.00000 HZ
+SCAN RATE:          0.95367 HZ
 
 SCAN PERSPECTIVE:   TARGET
 

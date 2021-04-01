@@ -274,7 +274,7 @@ class functions:
         '''
         def to_str(f): return '{:.5f} HZ'.format(f)
         try:
-            return to_str(float(1/num))
+            return to_str(1/float(num))
         except:
             return to_str(0)
 
@@ -289,8 +289,7 @@ class functions:
         :returns: top/bottom origin
         :rtype: str
         '''
-
-        if eloffset == 0:
+        if eloffset == "0" or eloffset == "BOTTOM":
             return "BOTTOM"
         else:
             return "TOP"
@@ -363,6 +362,8 @@ class functions:
     def timing_mode(cps):
         if cps == "false":
             return "TIME"
+        else:
+            return cps
 
     @staticmethod
     def int_name(ModStatus):
