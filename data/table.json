@@ -10,7 +10,7 @@
                     "PRIORITY": 7,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -21,7 +21,7 @@
                     "PRIORITY": 22,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -32,7 +32,7 @@
                     "PRIORITY": 11,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -43,7 +43,7 @@
                     "PRIORITY": 26,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -54,7 +54,7 @@
                     "PRIORITY": 30,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -65,7 +65,7 @@
                     "PRIORITY": 32,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -76,7 +76,7 @@
                     "PRIORITY": 34,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -87,7 +87,7 @@
                     "PRIORITY": 35,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -98,7 +98,7 @@
                     "PRIORITY": 15,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -109,7 +109,7 @@
                     "PRIORITY": 17,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -120,7 +120,7 @@
                     "PRIORITY": 19,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -131,29 +131,29 @@
                     "PRIORITY": 20,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "2.000",
-                    "FILE": "ANT",
-                    "FUNCTION": "",
-                    "LABEL": "LOBE WIDTH (DEG)",
-                    "PRIORITY": 13,
-                    "SECTION": "ANTENNA MODEL",
-                    "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
                     "DEFAULT": "N/A",
                     "FILE": "ANT",
                     "FUNCTION": "",
+                    "LABEL": "LOBE WIDTH (DEG)",
+                    "PRIORITY": 13,
+                    "SECTION": "ANTENNA MODEL",
+                    "STRING": false,
+                    "TABLE": 1,
+                    "TAG": ""
+                },
+                {
+                    "DEFAULT": "0.000",
+                    "FILE": "ANT",
+                    "FUNCTION": "",
                     "LABEL": "LOBE SEPARATION (DEG)",
                     "PRIORITY": 13,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 2,
                     "TAG": ""
                 },
                 {
@@ -164,29 +164,29 @@
                     "PRIORITY": 13,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": true,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "2.000",
-                    "FILE": "ANT",
-                    "FUNCTION": "",
-                    "LABEL": "LOBE WIDTH (DEG)",
-                    "PRIORITY": 28,
-                    "SECTION": "ANTENNA MODEL",
-                    "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 3,
                     "TAG": ""
                 },
                 {
                     "DEFAULT": "N/A",
                     "FILE": "ANT",
                     "FUNCTION": "",
+                    "LABEL": "LOBE WIDTH (DEG)",
+                    "PRIORITY": 28,
+                    "SECTION": "ANTENNA MODEL",
+                    "STRING": false,
+                    "TABLE": 1,
+                    "TAG": ""
+                },
+                {
+                    "DEFAULT": "0.000",
+                    "FILE": "ANT",
+                    "FUNCTION": "",
                     "LABEL": "LOBE SEPARATION (DEG)",
                     "PRIORITY": 28,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 2,
                     "TAG": ""
                 },
                 {
@@ -197,7 +197,7 @@
                     "PRIORITY": 28,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 3,
                     "TAG": ""
                 },
                 {
@@ -208,7 +208,7 @@
                     "PRIORITY": 3,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 }
             ],
@@ -222,7 +222,7 @@
             "PRIORITY": 5,
             "SECTION": "ANTENNA MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "AntennaModelKind"
         },
         "AzBeamwidth": {
@@ -233,7 +233,7 @@
             "PRIORITY": 9,
             "SECTION": "ANTENNA MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "AzBeamwidth"
         },
         "AzScanShape": {
@@ -244,7 +244,7 @@
             "PRIORITY": 10,
             "SECTION": "ANTENNA MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "AzScanShape"
         },
         "AzSidelobeRatio": {
@@ -255,7 +255,7 @@
             "PRIORITY": 13,
             "SECTION": "ANTENNA MODEL",
             "STRING": false,
-            "TABLE": true,
+            "TABLE": 0,
             "TAG": "AzSidelobeRatio"
         },
         "ElBeamwidth": {
@@ -266,7 +266,7 @@
             "PRIORITY": 24,
             "SECTION": "ANTENNA MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "ElBeamwidth"
         },
         "ElScanShape": {
@@ -277,7 +277,7 @@
             "PRIORITY": 25,
             "SECTION": "ANTENNA MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "ElScanShape"
         },
         "ElSidelobeRatio": {
@@ -288,7 +288,7 @@
             "PRIORITY": 28,
             "SECTION": "ANTENNA MODEL",
             "STRING": false,
-            "TABLE": true,
+            "TABLE": 0,
             "TAG": "ElSidelobeRatio"
         },
         "LastUpdateDate": {
@@ -299,7 +299,7 @@
             "PRIORITY": 2,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "LastUpdateDate"
         },
         "ModeName": {
@@ -310,7 +310,7 @@
             "PRIORITY": 0,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "ModeName"
         }
     },
@@ -325,7 +325,7 @@
                     "PRIORITY": 4,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -336,7 +336,7 @@
                     "PRIORITY": 6,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -347,7 +347,7 @@
                     "PRIORITY": 8,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -358,7 +358,7 @@
                     "PRIORITY": 9,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -369,7 +369,7 @@
                     "PRIORITY": 10,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -380,7 +380,7 @@
                     "PRIORITY": 11,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -391,7 +391,7 @@
                     "PRIORITY": 12,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 }
             ],
@@ -405,7 +405,7 @@
             "PRIORITY": 2,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "LastUpdateDate"
         },
         "ModeName": {
@@ -416,7 +416,7 @@
             "PRIORITY": 0,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "ModeName"
         }
     },
@@ -431,7 +431,7 @@
                     "PRIORITY": 3,
                     "SECTION": "PULSE MODEL",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -442,7 +442,7 @@
                     "PRIORITY": 5,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -453,7 +453,7 @@
                     "PRIORITY": 11,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 5,
                     "TAG": ""
                 },
                 {
@@ -464,7 +464,7 @@
                     "PRIORITY": 13,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -475,7 +475,7 @@
                     "PRIORITY": 15,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -486,7 +486,7 @@
                     "PRIORITY": 17,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -497,7 +497,7 @@
                     "PRIORITY": 19,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -508,7 +508,7 @@
                     "PRIORITY": 21,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -519,7 +519,7 @@
                     "PRIORITY": 23,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -530,7 +530,7 @@
                     "PRIORITY": 25,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 }
             ],
@@ -546,7 +546,7 @@
                     "PRIORITY": 7,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": "ComplexPriState"
                 },
                 {
@@ -557,7 +557,7 @@
                     "PRIORITY": 11,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 4,
                     "TAG": "ComplexPriState"
                 },
                 {
@@ -568,7 +568,7 @@
                     "PRIORITY": 11,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 3,
                     "TAG": "ComplexPriState"
                 }
             ],
@@ -582,7 +582,7 @@
             "PRIORITY": 9,
             "SECTION": "PULSE MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "DwellStatus"
         },
         "Frequency": {
@@ -593,7 +593,7 @@
             "PRIORITY": 11,
             "SECTION": "PULSE MODEL",
             "STRING": false,
-            "TABLE": true,
+            "TABLE": 6,
             "TAG": "Frequency"
         },
         "LastUpdateDate": {
@@ -604,7 +604,7 @@
             "PRIORITY": 2,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "LastUpdateDate"
         },
         "ModStatus": {
@@ -614,8 +614,8 @@
             "LABEL": "INTRAPULSE NAME",
             "PRIORITY": 11,
             "SECTION": "PULSE MODEL",
-            "STRING": true,
-            "TABLE": true,
+            "STRING": false,
+            "TABLE": 2,
             "TAG": "ModStatus"
         },
         "ModeName": {
@@ -626,7 +626,7 @@
             "PRIORITY": 0,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "ModeName"
         },
         "Pri": {
@@ -637,7 +637,7 @@
             "PRIORITY": 11,
             "SECTION": "PULSE MODEL",
             "STRING": false,
-            "TABLE": true,
+            "TABLE": 0,
             "TAG": "Pri"
         },
         "PulseWidth": {
@@ -648,7 +648,7 @@
             "PRIORITY": 11,
             "SECTION": "PULSE MODEL",
             "STRING": false,
-            "TABLE": true,
+            "TABLE": 1,
             "TAG": "PulseWidth"
         }
     },
@@ -663,7 +663,7 @@
                     "PRIORITY": 0,
                     "SECTION": "",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -674,7 +674,7 @@
                     "PRIORITY": 2,
                     "SECTION": "",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -685,7 +685,7 @@
                     "PRIORITY": 3,
                     "SECTION": "",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -696,7 +696,7 @@
                     "PRIORITY": 5,
                     "SECTION": "",
                     "STRING": true,
-                    "TABLE": true,
+                    "TABLE": 1,
                     "TAG": ""
                 },
                 {
@@ -707,7 +707,7 @@
                     "PRIORITY": 5,
                     "SECTION": "",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 2,
                     "TAG": ""
                 },
                 {
@@ -718,7 +718,7 @@
                     "PRIORITY": 5,
                     "SECTION": "",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 3,
                     "TAG": ""
                 },
                 {
@@ -729,7 +729,7 @@
                     "PRIORITY": 5,
                     "SECTION": "",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 4,
                     "TAG": ""
                 },
                 {
@@ -740,7 +740,7 @@
                     "PRIORITY": 5,
                     "SECTION": "",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 5,
                     "TAG": ""
                 },
                 {
@@ -751,7 +751,7 @@
                     "PRIORITY": 5,
                     "SECTION": "",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 6,
                     "TAG": ""
                 },
                 {
@@ -762,7 +762,7 @@
                     "PRIORITY": 5,
                     "SECTION": "",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 7,
                     "TAG": ""
                 },
                 {
@@ -773,7 +773,7 @@
                     "PRIORITY": 5,
                     "SECTION": "",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 8,
                     "TAG": ""
                 },
                 {
@@ -784,7 +784,7 @@
                     "PRIORITY": 5,
                     "SECTION": "",
                     "STRING": false,
-                    "TABLE": true,
+                    "TABLE": 9,
                     "TAG": ""
                 }
             ],
@@ -798,7 +798,7 @@
             "PRIORITY": 2,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "LastUpdateDate"
         },
         "ModeName": {
@@ -811,7 +811,7 @@
                     "PRIORITY": 0,
                     "SECTION": "Main",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": "ModeName"
                 },
                 {
@@ -822,7 +822,7 @@
                     "PRIORITY": 5,
                     "SECTION": "",
                     "STRING": true,
-                    "TABLE": true,
+                    "TABLE": 0,
                     "TAG": "ModeName"
                 }
             ],
@@ -840,7 +840,7 @@
                     "PRIORITY": 3,
                     "SECTION": "SCAN MODEL",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -851,7 +851,7 @@
                     "PRIORITY": 12,
                     "SECTION": "SCAN MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -862,7 +862,7 @@
                     "PRIORITY": 21,
                     "SECTION": "SCAN MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -873,7 +873,7 @@
                     "PRIORITY": 23,
                     "SECTION": "SCAN MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 }
             ],
@@ -887,7 +887,7 @@
             "PRIORITY": 10,
             "SECTION": "SCAN MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "AzDirection"
         },
         "AzInitialBeamOffset": {
@@ -898,7 +898,7 @@
             "PRIORITY": 7,
             "SECTION": "SCAN MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "AzInitialBeamOffset"
         },
         "AzScanKind": {
@@ -909,7 +909,7 @@
             "PRIORITY": 5,
             "SECTION": "SCAN MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "AzScanKind"
         },
         "AzScanPeriod": {
@@ -920,7 +920,7 @@
             "PRIORITY": 9,
             "SECTION": "SCAN MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "AzScanPeriod"
         },
         "ElDirection": {
@@ -933,7 +933,7 @@
                     "PRIORITY": 15,
                     "SECTION": "SCAN MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": "ElDirection"
                 },
                 {
@@ -944,7 +944,7 @@
                     "PRIORITY": 16,
                     "SECTION": "SCAN MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": "ElDirection"
                 }
             ],
@@ -958,7 +958,7 @@
             "PRIORITY": 8,
             "SECTION": "SCAN MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "ElInitialBeamOffset"
         },
         "ElScanMotion": {
@@ -969,7 +969,7 @@
             "PRIORITY": 14,
             "SECTION": "SCAN MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "ElScanMotion"
         },
         "ElScanPeriod": {
@@ -980,7 +980,7 @@
             "PRIORITY": 19,
             "SECTION": "SCAN MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "ElScanPeriod"
         },
         "ElSectorWidth": {
@@ -991,7 +991,7 @@
             "PRIORITY": 18,
             "SECTION": "SCAN MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "ElSectorWidth"
         },
         "ElTrackOffset": {
@@ -1002,7 +1002,7 @@
             "PRIORITY": 17,
             "SECTION": "SCAN MODEL",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "ElTrackOffset"
         },
         "LastUpdateDate": {
@@ -1013,7 +1013,7 @@
             "PRIORITY": 2,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "LastUpdateDate"
         },
         "ModeName": {
@@ -1024,7 +1024,7 @@
             "PRIORITY": 0,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "ModeName"
         }
     },
@@ -1039,19 +1039,8 @@
                     "PRIORITY": 54,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
-                },
-                {
-                    "DEFAULT": "A123Z ANT",
-                    "FILE": "SIG",
-                    "FUNCTION": "",
-                    "LABEL": "MODEL NAME",
-                    "PRIORITY": 56,
-                    "SECTION": "ANTENNA MODEL",
-                    "STRING": true,
-                    "TABLE": false,
-                    "TAG": "ModeName"
                 },
                 {
                     "DEFAULT": "",
@@ -1061,7 +1050,7 @@
                     "PRIORITY": 34,
                     "SECTION": "FREQUENCY MODEL",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1072,7 +1061,7 @@
                     "PRIORITY": 36,
                     "SECTION": "FREQUENCY MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1083,7 +1072,7 @@
                     "PRIORITY": 38,
                     "SECTION": "FREQUENCY MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1094,7 +1083,7 @@
                     "PRIORITY": 40,
                     "SECTION": "FREQUENCY MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1105,7 +1094,7 @@
                     "PRIORITY": 28,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1116,7 +1105,7 @@
                     "PRIORITY": 30,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1127,7 +1116,7 @@
                     "PRIORITY": 60,
                     "SECTION": "MULTIPLE SIMULTANEOUS SIGNALS",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1138,19 +1127,8 @@
                     "PRIORITY": 18,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
-                },
-                {
-                    "DEFAULT": "A123Z_EMITTER",
-                    "FILE": "SIG",
-                    "FUNCTION": "",
-                    "LABEL": "MODEL NAME",
-                    "PRIORITY": 20,
-                    "SECTION": "PULSE MODEL",
-                    "STRING": true,
-                    "TABLE": false,
-                    "TAG": "ModeName"
                 },
                 {
                     "DEFAULT": "YES",
@@ -1160,7 +1138,7 @@
                     "PRIORITY": 21,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1171,7 +1149,7 @@
                     "PRIORITY": 22,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1182,7 +1160,7 @@
                     "PRIORITY": 24,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1193,19 +1171,8 @@
                     "PRIORITY": 44,
                     "SECTION": "SCAN MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
-                },
-                {
-                    "DEFAULT": "A123Z_SCAN",
-                    "FILE": "SIG",
-                    "FUNCTION": "",
-                    "LABEL": "MODEL NAME",
-                    "PRIORITY": 46,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": true,
-                    "TABLE": false,
-                    "TAG": "ModeName"
                 },
                 {
                     "DEFAULT": "TARGET",
@@ -1215,7 +1182,7 @@
                     "PRIORITY": 48,
                     "SECTION": "SCAN MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1226,7 +1193,7 @@
                     "PRIORITY": 50,
                     "SECTION": "SCAN MODEL",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1237,7 +1204,7 @@
                     "PRIORITY": 2,
                     "SECTION": "SIGNAL IDENTIFICATION",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1248,7 +1215,7 @@
                     "PRIORITY": 5,
                     "SECTION": "SIGNAL IDENTIFICATION",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1259,7 +1226,7 @@
                     "PRIORITY": 13,
                     "SECTION": "SPECIAL FEATURES",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 },
                 {
@@ -1270,7 +1237,7 @@
                     "PRIORITY": 14,
                     "SECTION": "SPECIAL FEATURES",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": ""
                 }
             ],
@@ -1284,7 +1251,7 @@
             "PRIORITY": 4,
             "SECTION": "SIGNAL IDENTIFICATION",
             "STRING": true,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "EmitterId"
         },
         "EmitterName": {
@@ -1295,7 +1262,7 @@
             "PRIORITY": 6,
             "SECTION": "SIGNAL IDENTIFICATION",
             "STRING": true,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "EmitterName"
         },
         "LastUpdateDate": {
@@ -1306,11 +1273,22 @@
             "PRIORITY": 2,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": false,
+            "TABLE": 0,
             "TAG": "LastUpdateDate"
         },
         "ModeName": {
             "DATA": [
+                {
+                    "DEFAULT": "A123Z ANT",
+                    "FILE": "SIG",
+                    "FUNCTION": "",
+                    "LABEL": "MODEL NAME",
+                    "PRIORITY": 56,
+                    "SECTION": "ANTENNA MODEL",
+                    "STRING": true,
+                    "TABLE": 0,
+                    "TAG": "ModeName"
+                },
                 {
                     "DEFAULT": "A123Z_EMITTER01",
                     "FILE": "SIG",
@@ -1319,7 +1297,29 @@
                     "PRIORITY": 0,
                     "SECTION": "Main",
                     "STRING": false,
-                    "TABLE": false,
+                    "TABLE": 0,
+                    "TAG": "ModeName"
+                },
+                {
+                    "DEFAULT": "A123Z_EMITTER",
+                    "FILE": "SIG",
+                    "FUNCTION": "",
+                    "LABEL": "MODEL NAME",
+                    "PRIORITY": 20,
+                    "SECTION": "PULSE MODEL",
+                    "STRING": true,
+                    "TABLE": 0,
+                    "TAG": "ModeName"
+                },
+                {
+                    "DEFAULT": "A123Z_SCAN",
+                    "FILE": "SIG",
+                    "FUNCTION": "",
+                    "LABEL": "MODEL NAME",
+                    "PRIORITY": 46,
+                    "SECTION": "SCAN MODEL",
+                    "STRING": true,
+                    "TABLE": 0,
                     "TAG": "ModeName"
                 },
                 {
@@ -1330,7 +1330,7 @@
                     "PRIORITY": 7,
                     "SECTION": "SIGNAL IDENTIFICATION",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": "ModeName"
                 },
                 {
@@ -1341,7 +1341,7 @@
                     "PRIORITY": 8,
                     "SECTION": "SIGNAL IDENTIFICATION",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": "ModeName"
                 },
                 {
@@ -1352,7 +1352,7 @@
                     "PRIORITY": 9,
                     "SECTION": "SIGNAL IDENTIFICATION",
                     "STRING": true,
-                    "TABLE": false,
+                    "TABLE": 0,
                     "TAG": "ModeName"
                 }
             ],

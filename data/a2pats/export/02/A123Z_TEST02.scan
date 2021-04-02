@@ -23,7 +23,7 @@ TYPE:               SAWTOOTH
 DIRECTION:          None
 ORIGIN:             BOTTOM
 SPAN:               0.000 DEG
-SCAN RATE:          0.00000 HZ
+SCAN RATE:          1.00000 HZ
 
 SCAN PERSPECTIVE:   TARGET
 

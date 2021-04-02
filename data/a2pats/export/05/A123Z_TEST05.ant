@@ -17,9 +17,7 @@ MAIN LOBE WIDTH:    1.978 DEG
 DISTRIBUTION:       SIN X/X
 PHASED ARRAY:       NO
 
- LOBE WIDTH (DEG)  LOBE SEPARATION (DEG)  LOBE REPEAT COUNT  LOBE ATENNUATION (DB) 
-      2.000                 N/A                   1                 -27.0000       
-      2.000                 N/A                   1                 -27.0000       
+LOBE ATENNUATION (DB) : -27.0000
 
 DEPTH OF NULLS DEPTH : 127.8250 DB
 
@@ -34,9 +32,7 @@ MAIN LOBE WIDTH:    2.549 DEG
 DISTRIBUTION:       SIN X/X
 PHASED ARRAY:       NO
 
- LOBE WIDTH (DEG)  LOBE SEPARATION (DEG)  LOBE REPEAT COUNT  LOBE ATENNUATION (DB) 
-      2.000                 N/A                   1                 -18.0000       
-      2.000                 N/A                   1                 -18.0000       
+LOBE ATENNUATION (DB) : -18.0000
 
 DEPTH OF NULLS DEPTH : 127.8250 DB
 
