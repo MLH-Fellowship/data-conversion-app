@@ -7,6 +7,8 @@ from sys import version_info
 
 if version_info > (3, 5):
     from typing import TextIO, Union, Tuple
+import csv
+import glob
 
 
 BOOLEANS = {'TRUE': True, 'FALSE': False}
@@ -15,6 +17,23 @@ TABLE_MULTI_HDR = 'MULTI'
 TABLE_DATA_HDR = 'DATA'
 PRI_HDR = 'PRIORITY'
 T_HDR = 'TABLE'
+
+
+def join_lookup_tables():
+    # TODO: Adjust header lookup table as well due to LORO edits to end of sig file
+    scan_tables = glob.glob("data/s_tables/*.csv")
+    for s_table in scan_tables:
+        with open("data/table.csv") as table, open(s_table) as s, \
+             open("data/c_tables/{}base.csv".format(s_table[-8:-4]), "wt", newline='') as c:
+
+            csv1 = csv.reader(table)
+            csv2 = csv.reader(s)
+
+            w = csv.writer(c)
+            w.writerows(csv1)
+            w.writerows(csv2)
+        # with open("data/c_tables/{}base.csv".format(s_table[-8:-4])) as s_pointer:
+        #     dump_table(s_pointer, "data/c_tables/{}base.json".format(s_table[-8:-4]))
 
 
 def load_lookup_table(fp):
