@@ -14,6 +14,7 @@ if version_info > (3, 5):
 
 
 AUTO_MODELS = ('SCAN', 'ANTENNA', "SIGNAL", "PULSE", "PULSE SEQUENCE")
+scan_file_name = {"CIRCULAR": "circ", "RASTER": "rast", "SECTOR": "sect", "LORO": "loro", "DWELL": "elec", "HELICAL": "circ"}
 DEFAULT_HDR = 'DEFAULT'
 FILE_HDR = 'FILE'
 FUNC_HDR = 'FUNCTION'
@@ -449,7 +450,7 @@ def obtain_relevant_tags(ceesim_data, ceesim_flattened, tag, fast=True):
     # type: (dict, dict, str, bool) -> list
     '''Checks the imported data for relevant data
     '''
-    if fast and tag in ceesim_flattened:
+    if ceesim_flattened is not None and fast and tag in ceesim_flattened:
         return [ceesim_flattened[tag]]
     else:
         acc = list()
@@ -529,7 +530,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
     name = form_model_name(ceesim_data, ceesim_flattened)
     timestamp = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LastUpdateDate")[0]
     logger.debug('Generic model generator using name: {}'.format(name))
-    logger.info("Scan Type: {}".format(determine_scan_type(ceesim_data, ceesim_flattened)))
+    # logger.info("Scan Type: {}".format(determine_scan_type(ceesim_data, ceesim_flattened)))
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name, timestamp)
         if mtype not in MODEL_FILES:
@@ -568,8 +569,9 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
 def form_model_name(ceesim_data, ceesim_flattened): # potentially move this into generate_other_models scope
     return obtain_relevant_tags(ceesim_data, ceesim_flattened, "ModeName")[0]
 
-def determine_scan_type(ceesim_data, ceesim_flattened):
-    quick_tag = lambda x: obtain_relevant_tags(ceesim_data, ceesim_flattened, x)
+
+def determine_scan_type(ceesim_data):
+    quick_tag = lambda x: obtain_relevant_tags(ceesim_data, None, x)
     az_scan = quick_tag("AzScanKind")
     el_scan = quick_tag("ElScanKind")
 

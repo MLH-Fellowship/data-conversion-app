@@ -48,20 +48,23 @@ SYNC TO SCAN:       NO
 
 //********************** SCAN MODEL **********************
 
-SCAN MODEL:         REFERENCE
+SCAN NOTES:         ""
 
-MODEL NAME:         "A123Z_TEST04"
+SCAN MODEL:         LORO
+
+AZIMUTH OFFSET:     "0.000 DEG"
+ELEVATION OFFSET:   0.000 DEG
 
 SCAN PERSPECTIVE:   TARGET
-
+//********************* ANTENNA MODEL **********************
 DEFAULT OFFSET:     0.0000 DBM
 
-//********************* ANTENNA MODEL **********************
+
 
 ANTENNA MODEL:      REFERENCE
-
+//******************** MULTIPLE SIMULTANEOUS SIGNALS *********************
 MODEL NAME:         "A123Z_TEST04"
 
-//******************** MULTIPLE SIMULTANEOUS SIGNALS *********************
+
 
 ENABLE MSS:         NO

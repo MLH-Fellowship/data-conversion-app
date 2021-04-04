@@ -13,17 +13,21 @@ SCAN MODEL:         RASTER
 
 AZIMUTH OFFSET:     0.000 DEG
 ELEVATION OFFSET:   0.000 DEG
-SCAN PERIOD:        0.00000 SEC
-ROTATION:           CCW
+MODEL:              LEVEL
+ORIENTATION:        Azimuth
+AZ WIDTH:           45.000 DEG
+EL WIDTH:           30.000 DEG
+LEVELS:             5
 
-PULSE TRIG ON REV:  NO
+
+
+PULSE TRIG ENABLE:  NO
 
 OVERLAY MODEL:      OFF
-TYPE:               SAWTOOTH
-DIRECTION:          None
-ORIGIN:             BOTTOM
-SPAN:               0.000 DEG
-SCAN RATE:          1.00000 HZ
+TYPE:               SQUINT ANGLE
+SQUINT ANGLE:       0.000 DEG
+SCAN RATE:          30.00000 HZ
+ROTATION:           CCW
 
 SCAN PERSPECTIVE:   TARGET
 

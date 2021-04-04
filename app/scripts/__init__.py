@@ -31,9 +31,12 @@ def join_lookup_tables():
 
             w = csv.writer(c)
             w.writerows(csv1)
-            w.writerows(csv2)
-        # with open("data/c_tables/{}base.csv".format(s_table[-8:-4])) as s_pointer:
-        #     dump_table(s_pointer, "data/c_tables/{}base.json".format(s_table[-8:-4]))
+            for i, row in enumerate(csv2):
+                if i == 0:
+                    continue
+                w.writerow(row)
+        with open("data/c_tables/{}base.csv".format(s_table[-8:-4])) as s_pointer:
+            dump_table(s_pointer, "data/c_tables/{}base.json".format(s_table[-8:-4]))
 
 
 def load_lookup_table(fp):
@@ -44,6 +47,7 @@ def load_lookup_table(fp):
     :type fp: string or file pointer
     '''
     if type(fp) is str:
+        print(fp)
         fp = open(fp)
     return load(fp)
 
