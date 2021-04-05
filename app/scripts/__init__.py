@@ -75,9 +75,10 @@ def dump_table(in_fp, out_fp, headers=CSV_HEADERS):
             if row[key] in BOOLEANS:
                 row[key] = BOOLEANS[row[key]]
         row[PRI_HDR] = int(row[PRI_HDR])
-        try:
+
+        if row[T_HDR]:
             row[T_HDR] = int(row[T_HDR])
-        except:
+        else:
             pass
         frame = lookup_table
         for header in headers:

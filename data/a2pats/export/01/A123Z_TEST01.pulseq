@@ -9,4 +9,6 @@ PULSE NOTES:        ""
 SCAN MODEL:         ""
 USE LOCAL SCAN:     NO
 
-PULSE MODEL:        "A123Z_TEST01"
+     PULSE          PULSE        GROUP          DWELL TIME         SCAN         AZIMUTH        ELEVATION         CELL      TRACK      ATENNUATION    
+     MODEL          GROUP        REPEAT           (MSEC)         COMMAND         (DEG)           (DEG)          NUMBER       ID           (DB)       
+ "A123Z_TEST01"       ""           1            0.00000000         NONE          0.000           0.000            0          0           0.0000      

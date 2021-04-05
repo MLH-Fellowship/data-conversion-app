@@ -502,8 +502,12 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                     opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
             value = opt[DEFAULT_HDR]
 
-        if opt["TABLE"]:
-            table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
+        if type(opt["TABLE"]) is int:
+            if opt[FILE_HDR] == "ANT":
+                table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
+                                        opt[PRI_HDR], convert_one_key, obtain_relevant_tags, True)
+            else:
+                table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
                                         opt[PRI_HDR], convert_one_key, obtain_relevant_tags)
             # logger.info(table_string)
             fill_table(model, opt[PRI_HDR], table_string)
