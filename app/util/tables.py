@@ -22,7 +22,7 @@ if version_info > (3, 5):
 
 # Default number of rows the header will take up if the number
 # of rows cannot be detected.
-DEF_HDRRW_CNT = 3
+DEF_HDRRW_CNT = 2
 # Whether or not +/- is to be appended to the table by default
 DEF_PLMN_STAT = False
 DATA_HDR = 'DATA'
@@ -33,15 +33,22 @@ LBL_HDR = 'LABEL'
 TBL_HDR = 'TABLE'
 
 
-def detect_header_height(headers, default=DEF_HDRRW_CNT):
-    # type: (List[str], int) -> int
+def split_header_auto(table, default=DEF_HDRRW_CNT):
+    # type: (List[List[str]], int) -> List[List[str]]
     '''
     Automatically detect header height
     '''
     # TODO
-    logger.debug('Unable to determine header height for colsize {}, using default {}'.format(
-        len(headers), default))
-    return default
+    logger.debug('Unable to determine header height, using default {}'.format(default))
+    if len(table) < 1:
+        logger.warn('Table was empty, nothing to do in app.util.tables.split_header_auto')
+        return table
+    headers = [s.rsplit(' ', 1) for s in table[0]]
+    headers_n = [[h[0] for h in headers], [h[1] if len(h) > 1 else str() for h in headers]]
+    if len(table) < 2:
+        logger.warn('Table data was empty, but headers were rearranged')
+        return headers_n
+    return headers_n + table[1:]
 
 
 def determine_max_width(table, column, default=0):
@@ -165,7 +172,9 @@ def build_table(ceesim_data, lookup_table, file, section, priority, converter, o
         ceesim_data, lookup_table, file, section, priority, obtainer)
     table = populate_table(create_empty_table(
         data, headers), data, headers, converter)
+    table = sort_table(table, headers)
     widths = determine_max_widths(table)
+    table = split_header_auto(table)
     if add_sign:
         widths.insert(0, 3)
         table[0].insert(0, str())
