@@ -1,0 +1,32 @@
+//****************** PULSE DEFINITION FILE ******************
+//
+// Model:   A123Z_TEST03
+//
+// Created: Fri Jan 22, 2021  10:41 AM
+
+
+//********************** PULSE MODEL ***********************
+
+PULSE NOTES:        ""
+
+PULSE MODEL:        STAGGER
+
+PRI TIMING MODE:    TIME
+
+PW TIMING MODE:     TIME
+
+
+
+USE LOCAL FREQ:     YES
+
+PRI FILL:           NONE
+
+PW FILL:            NONE
+
+PULSE REPEAT FILL:  NONE
+
+DWELL TIME FILL:    NONE
+
+ATTENUATION FILL:   NONE
+
+FREQUENCY FILL:     NONE

@@ -66,6 +66,8 @@ def convert(input_file, output_file):
         lookup_table = prepare_lookup_table(path_to_tables + scan_file_name[scan_type] + "base.csv", \
                                                 path_to_tables + scan_file_name[scan_type] + "base.json")
         output_data = convert_to_a2pats(emitter_mode, lookup_table)
+        if scan_type == "HELICAL":
+            mode_num += " (Needs Edit)"
         success = dump_a2pats(output_data, output_file + "/{}".format(mode_num))
     if success:
         return output_data

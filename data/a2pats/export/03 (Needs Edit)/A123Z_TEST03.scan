@@ -1,0 +1,30 @@
+//******************* SCAN DEFINITION FILE ********************
+//
+// Model:   A123Z_TEST03
+//
+// Created: Fri Jan 22, 2021  10:41 AM
+
+
+//********************** SCAN MODEL **********************
+
+SCAN NOTES:         ""
+
+SCAN MODEL:         CIRCULAR
+
+AZIMUTH OFFSET:     0.000 DEG
+ELEVATION OFFSET:   0.000 DEG
+SCAN PERIOD:        10.00000 SEC
+ROTATION:           CW
+
+PULSE TRIG ON REV:  NO
+
+OVERLAY MODEL:      NODDING
+TYPE:               TRIANGULAR
+DIRECTION:          VERTICAL
+ORIGIN:             TOP
+SPAN:               90.000 DEG
+SCAN RATE:          0.95367 HZ
+
+SCAN PERSPECTIVE:   TARGET
+
+DEFAULT OFFSET:     0.0000 DBM

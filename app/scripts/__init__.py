@@ -47,7 +47,6 @@ def load_lookup_table(fp):
     :type fp: string or file pointer
     '''
     if type(fp) is str:
-        print(fp)
         fp = open(fp)
     return load(fp)
 
