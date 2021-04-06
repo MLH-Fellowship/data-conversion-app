@@ -1,6 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+'''
+Imports files for handling
+
+Once again, find the documentation online at
+https://mlh-fellowship.github.io/hermes-docs
+'''
+
 from app import a2pats, ceesim, datastore
 from app.util.logger import logger
 from io import IOBase
@@ -121,3 +128,7 @@ def import_(fp, classtype=datastore, downgrade_peaceful=True):
         return import_ceesim(fp)
     else:
         raise ValueError('This type of datastore isn\'t supported yet!')
+
+
+if __name__ == '__main__':
+    logger.error('You cannot call this file directly!')

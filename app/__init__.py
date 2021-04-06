@@ -143,3 +143,7 @@ class ceesim(datastore):
     '''
     Contains all generated signals in a CEESIM format
     '''
+
+
+if __name__ == '__main__':
+    logger.error('You cannot call this file directly!')

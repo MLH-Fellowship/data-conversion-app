@@ -1,6 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+'''
+This file handles the conversion between the two file formats.
+
+Once again, find the documentation online at
+https://mlh-fellowship.github.io/hermes-docs
+'''
+
 from app import a2pats, ceesim, datastore, model, MODEL_FILES
 from app.scripts import PRI_HDR, TABLE_MULTI_HDR as MULTI_HDR
 from app.util.errors import DatastoreError
@@ -27,19 +34,20 @@ TAG_HDR = 'TAG'
 
 
 class functions:
-    '''A collection of functions for importing
+    '''
+    A collection of functions for importing
     '''
 
     @staticmethod
     def extract_metadata(name):
         # type: (str) -> Tuple[str, str, str]
-        '''Extracts A2PATS meta from CEESIM name
+        '''
+        Extracts A2PATS meta from CEESIM name
 
-        :param name: ModeName of CEESIM
-        :type name: str
+        Parameters:
+         * `name`: (string) ModelName of CEESIM file
 
-        :returns: name, version, mode
-        :rtype: tuple
+        **Returns**: (tuple of 3 strings) Name, version, and node
         '''
         if '_' in name:
             values = name.split('_')
@@ -51,13 +59,13 @@ class functions:
     @staticmethod
     def extract_name(name):
         # type: (str) -> str
-        '''Extracts A2PATS name from CEESIM name
+        '''
+        Extracts A2PATS name from CEESIM name
 
-        :param name: ModelName of CEESIM
-        :type name: str
-
-        :returns: Name
-        :rtype: str
+        Parameters:
+         * `name`: (string) ModelName of CEESIM file
+        
+        **Returns**: (string) A2PATS name
         '''
         this_name, version, mode = functions.extract_metadata(name)
         return this_name
@@ -65,13 +73,13 @@ class functions:
     @staticmethod
     def extract_version(name):
         # type: (str) -> str
-        '''Extracts A2PATS version from CEESIM version
+        '''
+        Extracts A2PATS version from CEESIM version
 
-        :param name: ModelName of CEESIM
-        :type name: str
+        Parameters:
+         * `name`: (string) ModelName of CEESIM file
 
-        :returns: Version
-        :rtype: str
+        **Returns**: (string) CEESIM version
         '''
         this_name, version, mode = functions.extract_metadata(name)
         return version
@@ -79,13 +87,13 @@ class functions:
     @staticmethod
     def extract_mode(name):
         # type: (str) -> str
-        '''Extracts A2PATS mode from CEESIM name
+        '''
+        Extracts A2PATS mode from CEESIM name
 
-        :param name: ModelName of CEESIM
-        :type name: str
-
-        :returns: Mode
-        :rtype: str
+        Parameters:
+         * `name`: (string) ModelName of CEESIM file
+        
+        **Returns**: (string) CEESIM model
         '''
         this_name, version, mode = functions.extract_metadata(name)
         return mode
@@ -93,13 +101,13 @@ class functions:
     @staticmethod
     def to_mhz(frequency):
         # type: (Union[int, float, str]) -> str
-        '''Convert Hz to MHz
+        '''
+        Convert Hz to MHz
 
-        :param frequency: Hz frequency
-        :type frequency: int, float, or str
+        Parameters:
+         * `frequency`: (number or number as string) Frequency in Hz
 
-        :returns: MHz Frequency
-        :rtype: str
+        **Returns**: (string) Frequency as MHz
         '''
         def to_str(f): return '{:.10f}'.format(f)
         try:
@@ -110,13 +118,13 @@ class functions:
     @staticmethod
     def to_usec(time):
         # type: (Union[int, float, str]) -> str
-        '''Convert s to us
+        '''
+        Convert s to us
 
-        :param time: s
-        :type time: int, float, or str
-
-        :returns: us
-        :rtype: str
+        Parameters:
+         * `time`: (number or number as string) Seconds
+        
+        **Returns**: (string) Microseconds
         '''
         def to_str(f): return '{:.5f}'.format(f)
         try:
@@ -127,13 +135,13 @@ class functions:
     @staticmethod
     def intra_status(modstatus):
         # type: (str) -> str
-        '''Convert modstatus to intrapulse model
+        '''
+        Convert modstatus to intrapulse model
 
-        :param modstatus: XML ModeStatus tag
-        :type modstatus: str
+        Parameters:
+         * `modstatus`: (string) XML ModeStatus tag
 
-        :returns: intrapulse model
-        :rtype: str
+        **Returns**: (string) Intrapulse model
         '''
 
         return "OFF" if modstatus == "false" else "REFERENCE"
@@ -141,15 +149,14 @@ class functions:
     @staticmethod
     def to_caps(word):
         # type: (str) -> str
-        '''Convert string to all caps
-
-        :param word: XML tag text
-        :type word: str
-
-        :returns: capslock word
-        :rtype: str
         '''
+        Convert string to all caps
 
+        Parameters:
+         * `word`: (string) XML tag text
+
+        **Returns**: (string) XML tag text in all caps
+        '''
         if word == "Circular":
             return word.upper()
 
@@ -162,13 +169,13 @@ class functions:
     @staticmethod
     def format_degree(num):
         # type: (Union[int, float]) -> str
-        '''Convert degree single/double digit to triple decimal point
+        '''
+        Convert degree single/double digit to triple decimal point
 
-        :param num: number of degrees
-        :type num: int or float
+        Parameters:
+         * `num`: (number) Degrees
 
-        :returns: formatted degrees
-        :rtype: str
+        **Returns**: (string) Degrees (formatted)
         '''
         def to_str(f): return '{:.3f} DEG'.format(f)
         try:
@@ -179,13 +186,13 @@ class functions:
     @staticmethod
     def format_second(num):
         # type: (Union[int, float]) -> str
-        '''Convert degree single/double digit to five decimal points
+        '''
+        Convert degree single/double digit to five decimal points
 
-        :param num: number of seconds
-        :type num: int or float
-
-        :returns: formatted seconds
-        :rtype: str
+        Parameters:
+         * `num`: (number) Seconds
+        
+        **Returns**: (string) Seconds (formatted)
         '''
         def to_str(f): return '{:.5f} SEC'.format(f)
         try:
@@ -196,13 +203,13 @@ class functions:
     @staticmethod
     def dir_abrev(azdirection):
         # type: (str) -> str
-        '''Convert full direction to abbreviation
+        '''
+        Convert full direction to abbreviation
 
-        :param num: direction as a word
-        :type num: str
-
-        :returns: direction as an abbreviation
-        :rtype: str
+        Parameters:
+         * `azdirection`: Direction name
+        
+        **Returns**: (string) Direction shorthand
         '''
 
         if azdirection == "Clockwise":
@@ -213,13 +220,13 @@ class functions:
     @staticmethod
     def motion_overlay(motion):
         # type: (str) -> str
-        '''Convert elevation scan motion to a2pats scan overlay model
+        '''
+        Convert elevation scan motion to a2pats scan overlay model
 
-        :param motion: direction of motion
-        :type motion: str
+        Parameters:
+         * `motion`: (string) Direction of motion
 
-        :returns: scan overlay model
-        :rtype: str
+        **Returns**: (string) Scan overlay model
         '''
 
         if motion == "Unidirectional":
@@ -231,13 +238,13 @@ class functions:
     @staticmethod
     def dir_typ(eldirection):
         # type: (str) -> str
-        '''Convert up/down direction to a2pats scan type
+        '''
+        Convert up/down direction to a2pats scan type
 
-        :param num: direction up/down
-        :type num: str
+        Parameters:
+         * `eldirection`: (string) Direction string
 
-        :returns: a2pats scan type
-        :rtype: str
+        **Returns**: (string) A2PATS scan type
         '''
 
         if eldirection == "Up" or eldirection == "Down":
@@ -248,13 +255,13 @@ class functions:
     @staticmethod
     def dir_dir(eldirection):
         # type: (str) -> str
-        '''Convert up/down direction to vertical/horizontal
+        '''
+        Convert up/down direction to vertical/horizontal
 
-        :param num: direction up/down
-        :type num: str
+        Parameters:
+         * `eldirection`: (string) CEESIM direction
 
-        :returns: a2pats direction
-        :rtype: str
+        **Returns**: (string) A2PATS direction
         '''
 
         if eldirection == "Up":
@@ -265,13 +272,13 @@ class functions:
     @staticmethod
     def period_to_hz(num):
         # type: (Union[int, float]) -> str
-        '''Convert period single/double in seconds to hertz with five decimal points
+        '''
+        Convert period single/double in seconds to hertz with five decimal points
 
-        :param num: period in seconds
-        :type num: int or float
+        Parameters:
+         * `num`: (number) Period
 
-        :returns: formatted hertz
-        :rtype: str
+        **Returns**: (string) Frequency
         '''
         def to_str(f): return '{:.5f} HZ'.format(f)
         try:
@@ -282,13 +289,13 @@ class functions:
     @staticmethod
     def offset_origin(eloffset):
         # type: (int) -> str
-        '''Convert offset to origin
+        '''
+        Convert offset to origin
 
-        :param eloffset: numerical track offset
-        :type eloffset: int
+        Parameters:
+         * `eloffset`: (number) Numerical track offset
 
-        :returns: top/bottom origin
-        :rtype: str
+        **Returns**: (string) Top or bottom origin
         '''
         if eloffset == "0" or eloffset == "BOTTOM":
             return "BOTTOM"
@@ -298,13 +305,13 @@ class functions:
     @staticmethod
     def model_kind(kind):
         # type: (str) -> str
-        '''Convert kind to model
+        '''
+        Convert kind to model
 
-        :param kind: kind of model (usually a shape)
-        :type kind: str
+        Parameters:
+         * `kind`: (string) Model kind (shape)
 
-        :returns: antenna model
-        :rtype: str
+        **Returns**: (string) Model kind
         '''
 
         assert kind == "Elliptical" or kind == "RECTANGULAR", "Unexpected AntennaModelKind - {}".format(
@@ -316,11 +323,10 @@ class functions:
         # type: (str) -> str
         '''Convert func to formatted_func
 
-        :param func: distribution function
-        :type kind: str
+        Parameters:
+         * `func`: (string) Distribution function name
 
-        :returns: formatted distribution function
-        :rtype: str
+        **Returns**: (string) Distrubtio function (formatted)
         '''
 
         function = func.split()[0].upper()
@@ -332,13 +338,13 @@ class functions:
     @staticmethod
     def get_dwell(cps):
         # type: (str) -> str
-        '''Convert ComplexPriState to Dwell in MSEC
+        '''
+        Convert ComplexPriState to Dwell in MSEC
 
-        :param cps: ComplexPriState
-        :type kind: str
-
-        :returns: Dwell in MSEC
-        :rtype: str
+        Parameters:
+         * `cps`: (string) ComplexPriState
+        
+        **Returns**: (string) Dwell time
         '''
 
         if cps == "false":
@@ -347,13 +353,13 @@ class functions:
     @staticmethod
     def get_repeat(cps):
         # type: (str) -> str
-        '''Convert ComplexPriState to pulse repeat
+        '''
+        Convert ComplexPriState to pulse repeat
 
-        :param cps: ComplexPriState
-        :type kind: str
+        Parameters:
+         * `cps`: (string) ComplexPriState
 
-        :returns: pulse repeat
-        :rtype: str
+        **Returns**: (string) Pulse repeat
         '''
 
         if cps == "false":
@@ -361,6 +367,15 @@ class functions:
 
     @staticmethod
     def timing_mode(cps):
+        # type: (str) -> (str)
+        '''
+        Convert ComplexPriState to timing mode
+
+        Parameters:
+         * `cps`: (string) ComplexPriState
+        
+        **Returns**: (string) Timing mode
+        '''
         if cps == "false":
             return "TIME"
         else:
@@ -368,6 +383,14 @@ class functions:
 
     @staticmethod
     def int_name(ModStatus):
+        '''
+        Determine intrapulse name from MS
+
+        Parameters:
+         * `ModStatus`: (string) ModStatus
+        
+        **Returns**: (string) Intrapulse name
+        '''
         # TODO: Determine and associate names for intrapulses, insert ModeName if ModStatus is false
 
         if ModStatus == "false":
@@ -378,29 +401,58 @@ class functions:
     @staticmethod
     def get_four_decimal(number):
         # type: (int) -> float
+        '''
+        Format to 4 decimal places
+
+        Parameters:
+         * `number`: (number) Number
+        
+        **Returns**: (string) Number
+        '''
         return '{:.4f}'.format(float(number))
 
     @staticmethod
     def get_three_decimal(number):
         # type: (int) -> float
+        '''
+        Format to 3 decimal places
+
+        Parameters:
+         * `number`: (number) Number
+        
+        **Returns**: (string) Number
+        '''
         return '{:.3f}'.format(float(number))
 
     @staticmethod
     def get_six_decimal(number):
         # type: (int) -> float
+        '''
+        Format to 6 decimal places
+
+        Parameters:
+         * `number`: (number) Number
+        
+        **Returns**: (string) Number
+        '''
         return '{:.6f}'.format(float(number))
 
 
-# I'm not sure if this is the right method
 def flatten_table(ceesim_data, stack_size=1):
     # type: (dict, int) -> dict
-    '''Flattens a table
+    '''
+    Flattens a table
+
+    Parameters:
+     * `ceesim_data`: (dictionary) Import ceesim_data from JSON
+     * `stack_size`: (int) Number of function calls in recursive mode
+    
+    **Returns**: (dictionary) Flattened 1 level table
     '''
     logger.debug(
         'Flattening input table with call stack size at {}'.format(stack_size))
     data_ = dict()
     for key in ceesim_data:
-        # logger.debug('Now checking for {} in data'.format(key))
         if key not in data_:
             if type(ceesim_data[key]) not in {dict, list}:
                 logger.debug(
@@ -424,9 +476,16 @@ def flatten_table(ceesim_data, stack_size=1):
 
 def convert_one_key(lookup_data, value, keep_tag=True):
     # type: (dict, str, bool) -> str
-    '''Converts one key given the table lookup parameters
     '''
-    # TODO: Table Handler
+    Converts one key given the table lookup parameters
+
+    Parameters:
+     * `lookup_data`: (dictionary) Lookup data inputted in JSON
+     * `value`: (any) Value to convert
+     * `keep_tag`: Whether or not to keep the left hand tag side
+    
+    **Returns**: Converted string
+    '''
     if FUNC_HDR in lookup_data and hasattr(functions, lookup_data[FUNC_HDR]):
         funcp_data = getattr(functions, lookup_data[FUNC_HDR])(value)
     elif value:
@@ -448,7 +507,16 @@ def convert_one_key(lookup_data, value, keep_tag=True):
 
 def obtain_relevant_tags(ceesim_data, ceesim_flattened, tag, fast=True):
     # type: (dict, dict, str, bool) -> list
-    '''Checks the imported data for relevant data
+    '''
+    Checks the imported data for relevant data
+
+    Parameters:
+     * `ceesim_data`: (dictionary) JSON ceesim data
+     * `ceesim_flattened`: (dictionary, optional) Flattened JSON ceesim data
+     * `tag`: (string) Name of tag
+     * `fast`: (boolean) Fast mode, requires ceesim_flattened
+    
+    **Returns**: (list) List of relevant tags
     '''
     if ceesim_flattened is not None and fast and tag in ceesim_flattened:
         return [ceesim_flattened[tag]]
@@ -471,22 +539,50 @@ def obtain_relevant_tags(ceesim_data, ceesim_flattened, tag, fast=True):
             elif k == tag:
                 acc.append(v)
         return acc
-    raise BufferError('Reached unreachable code in obtain_relevant_tags!')
 
 
 def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
     # type: (dict, dict, dict) -> list
-    '''Generate all non INP/PUL models
+    '''
+    Generate all non INP/PUL models
+
+    Parameters:
+     * `ceesim_data`: (dictionary) Imported CEESIM JSON data
+     * `ceesim_flattened`: (dictionary, optional) Flattened CEESIM JSON data
+     * `lookup_table`: (dictionary) Lookup table JSON imported
+    
+    **Returns**: (list) List of models
     '''
     logger.debug('Now generating all non-signal models')
 
     def fill_table(model, pos, value):
+        # type: (model, int, str) -> None
+        '''
+        Fills out table from model with values
+
+        Parameters:
+         * `model`: (model class object) Model object
+         * `pos`: (int) Position index
+         * `value`: (str) Value to fill
+        
+        **Returns**: None, table is filled in-place
+        '''
         if len(model.converted_data) <= pos:
             model.converted_data += [''] * \
                 (pos - len(model.converted_data) + 1)
         model.converted_data[pos] = value
 
     def create_converted(model, opt):
+        # type: (model, list) -> None
+        '''
+        Converts in-place model
+
+        Parameters:
+         * `model`: (model class object) Model object
+         * `opt`: (list) Options from lookup table
+        
+        **Returns**: None, table is filled in place
+        '''
         tags = obtain_relevant_tags(
             ceesim_data, ceesim_flattened, opt[TAG_HDR]) # removed taking the zero-index as it's done below
         if tags:
@@ -509,14 +605,24 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             else:
                 table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
                                         opt[PRI_HDR], convert_one_key, obtain_relevant_tags)
-            # logger.info(table_string)
             fill_table(model, opt[PRI_HDR], table_string)
 
         else:
             converted = convert_one_key(opt, value)
             fill_table(model, opt[PRI_HDR], converted)
 
+
     def add_headers(mfile, model):
+        # type: (str, model) -> None
+        '''
+        Adds headers to converted model
+
+        Parameters:
+         * `mfile`: (string) Name of file
+         * `model`: (model) Model class object
+
+        **Returns**: None, data is converted in place
+        '''
         with open("data/headers.csv") as head:
             headers = reader(head)
             for header in headers:
@@ -530,11 +636,12 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                     htext = "//" + ' '.join(
                         ['*' * lleft, header[1], '*' * right])
                     fill_table(model, int(header[3]), htext)
+    
+
     models = list()
     name = form_model_name(ceesim_data, ceesim_flattened)
     timestamp = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LastUpdateDate")[0]
     logger.debug('Generic model generator using name: {}'.format(name))
-    # logger.info("Scan Type: {}".format(determine_scan_type(ceesim_data, ceesim_flattened)))
     for mtype in AUTO_MODELS:
         next_model = model(mtype, name, timestamp)
         if mtype not in MODEL_FILES:
@@ -570,11 +677,30 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
     return models
 
 
-def form_model_name(ceesim_data, ceesim_flattened): # potentially move this into generate_other_models scope
+def form_model_name(ceesim_data, ceesim_flattened):
+    # type: (dict, dict) -> str
+    '''
+    Returns the first return type from obtain_relevant_tags
+
+    Parameters:
+     * `ceesim_data`: (dictionary, technically optional) CEESIM data imported
+     * `ceesim_flattened`: (dictionary) Flattened CEESIM imports
+    
+    **Returns**: (string) Model name
+    '''
     return obtain_relevant_tags(ceesim_data, ceesim_flattened, "ModeName")[0]
 
 
 def determine_scan_type(ceesim_data):
+    # type: (dict) -> str
+    '''
+    Determines the scan type
+
+    Parameters:
+     * `ceesim_data`: (dictionary) CEESIM data imported JSON
+    
+    **Returns**: (string) Scan type
+    '''
     quick_tag = lambda x: obtain_relevant_tags(ceesim_data, None, x)
     az_scan = quick_tag("AzScanKind")
     el_scan = quick_tag("ElScanKind")
@@ -593,7 +719,14 @@ def determine_scan_type(ceesim_data):
 
 def generate_intrapulse(ceesim_data, lookup_table):
     # type: (dict, dict) -> List[model]
-    '''Converts intrapulse signals in an imported table using a lookup table
+    '''
+    Converts intrapulse signals in an imported table using a lookup table
+
+    Parameters:
+     * `ceesim_data`: (dictionary) Imported CEESIM data
+     * `lookup_table`: (dictionary) Lookup table as JSON
+    
+    **Returns**: (list of models) List of intrapulse models
     '''
     logger.debug("Now generating the intrapulse models")
 
@@ -615,7 +748,14 @@ def generate_intrapulse(ceesim_data, lookup_table):
 
 def generate_pulse(ceesim_data, lookup_table):
     # type: (dict, dict) -> List[model]
-    '''Converts pulse signals in an imported table using a lookup table
+    '''
+    Converts pulse signals in an imported table using a lookup table
+
+    Parameters:
+     * `ceesim_data`: (dictionary) CEESIM imported JSON data
+     * `lookup_table`: (dictionary) Lookup table as JSON
+    
+    **Returns**: (list of models) List of pulse models
     '''
     logger.debug("Now generating the pulse models")
 
@@ -642,10 +782,24 @@ SEARCH_TO_RETURN_KEYS = ('Emitters', 'Emitter', 'EmitterModes', 'EmitterMode')
 
 def split_emitter_modes(ceesim_data):
     # type: (dict) -> List[dict]
-    '''Converts CEESIM data to a list of emitter mode dicts
+    '''
+    Converts CEESIM data to a list of emitter mode dicts
+
+    Parameters:
+     * `ceesim_data`: (dictionary) CEESIM imported data JSON
+    
+    **Returns**: (list of dictionaries) Emitter modes list
     '''
     def split_emitter_modes_helper(data):
         # type: (dict) -> List[dict]
+        '''
+        Helper function that returns inside frame
+
+        Parameters:
+         * `data`: (dictionary) Sub-dict
+        
+        **Returns**: (list of dictionaries) Emitter modes inside the frame
+        '''
         frame = data
         for key in SEARCH_TO_RETURN_KEYS:
             if key in frame:
@@ -672,53 +826,38 @@ def split_emitter_modes(ceesim_data):
 
 def convert_to_a2pats(ceesim_data, lookup_table):
     # type: (ceesim, dict) -> a2pats
-    '''Convert CEESIM data to A²PATS data
+    '''
+    Convert CEESIM data to A²PATS data
 
-    :param data: CEESIM Emitter Mode data to import
-    :type data: ceesim
-
-    :returns: A²PATS data
-    :rtype: a2pats
+    Parameters:
+     * `ceesim_data`: (ceesim class object) CEESIM emitter mode data to import
+     * `lookup_table`: (dictionary) Looktable table JSON
+    
+    **Returns**: (a2pats class object) A2PATS data
     '''
     logger.info('Beginning CEESIM to A2PATS conversion')
     flattened_data = flatten_table(ceesim_data)
     store = a2pats(imported_type='A2PATS')
-    # TODO: Use emitter modes instead
     generic_models = generate_other_models(
         ceesim_data, flattened_data, lookup_table)
     logger.debug('Added {} models from generate_other_models'.format(
         len(generic_models)))
     store.models += generic_models
-    # TODO: Generate models
     return store
-
-
-def convert_to_ceesim(a2pats_data):
-    # type: (a2pats) -> ceesim
-    '''Convert A²PATS data to CEESIM data
-
-    :param data: A²PATS data to import
-    :type data: a2pats
-
-    :returns: CEESIM data
-    :rtype: ceesim
-    '''
-    # TODO
-    pass
 
 
 def convert(data):
     # type: (Union[a2pats, ceesim]) -> Union[a2pats, ceesim]
-    '''Dynamically convert data to its corresponding format
+    '''
+    Dynamically convert data to its corresponding format
 
-    :param data: A²PATS or CEESIM data to import
-    :type data: a2pats or ceesim
+    Parameters:
+     * `data`: (a2pats or ceesim class object) A²PATS or CEESIM data to import
 
-    :returns: A²PATS or CEESIM data
-    :rtype: a2pats or ceesim
+    **Returns**: (a2pats or ceesim class object) A²PATS or CEESIM data
     '''
     if type(data) is a2pats:
-        return convert_to_ceesim(data)
+        return None
     elif type(data) is ceesim:
         return convert_to_a2pats(data)
     elif isinstance(data, datastore):
@@ -727,3 +866,7 @@ def convert(data):
     else:
         raise DatastoreError(
             'Provided type to convert was neither of class a2pats or ceesim.')
+
+
+if __name__ == '__main__':
+    logger.error('You cannot call this file directly!')
