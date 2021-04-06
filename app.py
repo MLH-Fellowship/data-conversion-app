@@ -1,6 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+'''
+Entrypoint of the program. Run `python app.py -h` for help.
+See the web version of this documentation at https://mlh-fellowship.github.io/hermes-docs/
+
+Documentation for the program entrypoint is not available on the website.
+'''
+
 from app import a2pats, ceesim
 from app.converter import convert_to_a2pats, split_emitter_modes, determine_scan_type, scan_file_name
 from app.exporter import dump_a2pats
@@ -20,7 +27,14 @@ DEFAULT_TABLE_PATH = 'data/table.json'
 
 def prepare_lookup_table(unparsed=DEFAULT_UNPARSED_TABLE_PATH, parsed=DEFAULT_TABLE_PATH):
     # type: (str, str) -> dict
-    '''Prepares a lookup table
+    '''
+    Prepares a lookup table
+
+    Parameters:
+     * `unparsed`: (string) Unprased CSV table path
+     * `parsed`: (string) Parsed JSON output path
+    
+    **Returns**: JSON lookup table as dictionary
     '''
     if isfile(parsed):
         return load_lookup_table(parsed)
@@ -33,7 +47,13 @@ def prepare_lookup_table(unparsed=DEFAULT_UNPARSED_TABLE_PATH, parsed=DEFAULT_TA
 
 def print_lookup_table(file):
     # type: (str) -> None
-    '''Prints stats about the lookup table
+    '''
+    Prints stats about the lookup table
+
+    Parameters:
+     * `file`: (string) JSON lookup table path
+
+    **Returns**: None
     '''
     data = dump_table(file, DEFAULT_TABLE_PATH)
     logger.info(
@@ -42,16 +62,15 @@ def print_lookup_table(file):
 
 def convert(input_file, output_file):
     # type: (str, str) -> a2pats
-    '''Load CEESIM file and convert to A²PATS
+    '''
+    Load CEESIM file and convert to A²PATS. Output files that do not
+    exist are created automatically.
 
-    :param input_file: Location of file to import
-    :type input_file: str
+    Parameters:
+     * `input_file`: (string) Location of file to import
+     * `output_file`: (string) Location of file to export (does not have to exist)
 
-    :param output_file: Location of file to export (does not have to exist)
-    :type output_file: str
-
-    :returns: A²PATS object (if successful)
-    :rtype: a2pats
+    **Returns**: (a2pats class object) A²PATS object (if successful)
     '''
     logger.debug(
         'Main app converter called, using provided input and output files')
@@ -78,7 +97,13 @@ def convert(input_file, output_file):
 
 def parse_arguments(epilog):
     # type: (str) -> None
-    '''Parse arguments
+    '''
+    Parse arguments passed from shell
+
+    Parameters:
+     * `epilog`: (string) Epilog to show on help screen
+    
+    **Returns**: None
     '''
     parser = ArgumentParser(add_help=False)
     parser.add_argument('-i', '--input', help='Input file to convert')
