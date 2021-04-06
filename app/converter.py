@@ -529,7 +529,10 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                         right = lleft + 1
                     htext = "//" + ' '.join(
                         ['*' * lleft, header[1], '*' * right])
-                    fill_table(model, int(header[3]), htext)
+                    h_priority = int(header[3])
+                    if determine_scan_type(ceesim_data) == "LORO" and mfile == "SIG" and (header[1] == "ANTENNA MODEL" or header[1] == "MULTIPLE SIMULTANEOUS SIGNALS"):
+                        h_priority += 3
+                    fill_table(model, h_priority, htext)
     models = list()
     name = form_model_name(ceesim_data, ceesim_flattened)
     timestamp = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LastUpdateDate")[0]
@@ -561,11 +564,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                 if key_data["SECTION"] == "Main":
                     continue
                 create_converted(next_model, key_data)
-        # table_priorities = {"ANTENNA": 13}
-        # table_section = mtype + " MODEL"
-        # if mtype in table_priorities:
-        #     fill_table(next_model, table_priorities[mtype], build_table(ceesim_data, lookup_table, table_key,
-        #                                                     table_section, table_priorities[mtype], convert_one_key, obtain_relevant_tags))
+                
         models.append(next_model)
     return models
 
