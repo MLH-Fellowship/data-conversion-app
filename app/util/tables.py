@@ -8,7 +8,8 @@ imports by passing in the converter function convert_one_key to the
 build_table function, which then gets passed to populate_table. This
 follows the adage of Don't Repeat Yourself.
 
-Author: Gideon Tong
+Once again, find the documentation online at
+https://mlh-fellowship.github.io/hermes-docs
 '''
 
 from app.util.logger import logger
@@ -37,6 +38,12 @@ def split_header_auto(table, default=DEF_HDRRW_CNT):
     # type: (List[List[str]], int) -> Tuple[List[List[str]], int]
     '''
     Automatically detect header height
+
+    Parameters:
+     * `table`: (list of list of strings) 2D matrix used to create the table
+     * `default`: (int) default number of header rows
+    
+    **Returns**: (tuple of list of list of strings and integer) Formatted table and number of header rows
     '''
     # TODO
     logger.debug('Unable to determine header height, using default {}'.format(default))
@@ -57,6 +64,13 @@ def determine_max_width(table, column, default=0):
     Determines the minimum width necessary to fill the space. If a default value
     is provided, then the default value is returned when the determined width
     is smaller than the default value, or it cannot be determined.
+
+    Parameters:
+     * `table`: (list of list of strings) 2D matrix used to create the table
+     * `column`: (integer) Column to determine the width
+     * `default`: (integer) Default width length
+    
+    **Returns**: (integer) width length
     '''
     max_value = max([len(v[column]) for v in table])
     return max_value if max_value >= default else default
@@ -66,6 +80,12 @@ def determine_max_widths(table, default=0):
     # type: (List[List[str]], int) -> List[int]
     '''
     Determines all max widths
+
+    Parameters:
+     * `table`: (list of list of strings) 2D matrix of table to fill
+     * `default`: (integer) Default table width
+    
+    **Returns**: (list of ints) All max widths by column
     '''
     if not len(table):
         return list()
@@ -76,6 +96,13 @@ def assemble_lookup_data(table_data, section, priority):
     # type: (Union[dict, List[dict]], str, int) -> List[dict]
     '''
     Assembles some data from the lookup table
+
+    Parameters:
+     * `table_data`: (dictionaries) List of lookups from lookup table
+     * `section`: (string) Section name to check
+     * `priority`: (integer) Section priority to check
+    
+    **Returns**: (list of dictionaries) Lookup table list
     '''
     data = list()
     for azkey in table_data:
@@ -94,12 +121,18 @@ def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, o
     # type: (dict, dict, str, str, int, function) -> Tuple(List[List[str]], List[dict])
     '''
     Finds the relevant data, creating multiple rows if necessary
+
+    Parameters:
+     * `ceesim_data`: (dictionary) CEESIM JSON imported data
+     * `lookup_table`: (dictionary) Lookup table JSON imported
+     * `file`: (string) File type as ANT, SCAN, etc
+     * `section`: (string) Section header as in ModeName, etc
+     * `priority*: (integer) Priority from the lookup table
+     * `obtainer`: (function) Obtainer that obtains values from converter
+    
+    **Returns**: (tuple of list of list of strings and list of dictionaries),
+    the return data is the new table as well as all headers in a list format
     '''
-    # TODO: Order the headers properly. This is caused by the fact that we
-    # do not actually keep track of header order anywhere in code or in
-    # the lookup table, so we currently do not have this information. Thus,
-    # the data is assembled in the order it is recived from the function,
-    # of which the behavior is undefined.
     headers = assemble_lookup_data(lookup_table[file], section, priority)
     cols = [obtainer(ceesim_data, None, hdr["TAG"], fast=False)
             if hdr["TAG"] else hdr["DEFAULT"]
@@ -140,7 +173,6 @@ def populate_table(table, relevant_data, headers, converter):
     '''
     Assembles a list of list of strings 
     '''
-    # TODO: Split headers into multiple rows if necessary
     if len(table) > 0:
         table[0] = [hdr[LBL_HDR] for hdr in headers]
         table[1:] = [[converter(hdr, relevant_data[row - 1][idx], keep_tag=False)
@@ -195,3 +227,7 @@ def build_table_str(*args):
     Builds the table and returns as a string
     '''
     return '\n'.join(build_table(*args))
+
+
+if __name__ == '__main__':
+    logger.error('You cannot call this file directly!')
