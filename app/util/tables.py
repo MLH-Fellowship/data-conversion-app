@@ -18,7 +18,7 @@ from collections import OrderedDict
 from sys import version_info
 
 if version_info > (3, 5):
-    from typing import List, Union, Callable as function
+    from typing import List, Union, Callable as function, Tuple
 
 # Default number of rows the header will take up if the number
 # of rows cannot be detected.
@@ -34,7 +34,7 @@ TBL_HDR = 'TABLE'
 
 
 def split_header_auto(table, default=DEF_HDRRW_CNT):
-    # type: (List[List[str]], int) -> List[List[str]]
+    # type: (List[List[str]], int) -> Tuple[List[List[str]], int]
     '''
     Automatically detect header height
     '''
@@ -42,13 +42,13 @@ def split_header_auto(table, default=DEF_HDRRW_CNT):
     logger.debug('Unable to determine header height, using default {}'.format(default))
     if len(table) < 1:
         logger.warn('Table was empty, nothing to do in app.util.tables.split_header_auto')
-        return table
+        return table, 0
     headers = [s.rsplit(' ', 1) for s in table[0]]
     headers_n = [[h[0] for h in headers], [h[1] if len(h) > 1 else str() for h in headers]]
     if len(table) < 2:
         logger.warn('Table data was empty, but headers were rearranged')
-        return headers_n
-    return headers_n + table[1:]
+        return headers_n, len(headers_n)
+    return headers_n + table[1:], len(headers_n)
 
 
 def determine_max_width(table, column, default=0):
@@ -174,11 +174,12 @@ def build_table(ceesim_data, lookup_table, file, section, priority, converter, o
         data, headers), data, headers, converter)
     table = sort_table(table, headers)
     widths = determine_max_widths(table)
-    table = split_header_auto(table)
+    table, size = split_header_auto(table)
     if add_sign:
         widths.insert(0, 3)
-        table[0].insert(0, str())
-        for i in range(1, len(table)):
+        for i in range(size):
+            table[i].insert(0, str())
+        for i in range(size, len(table)):
             table[i].insert(0, '+/-')
     # NOTE: The following list is built with list comprehension. For the sake
     # of code readability it is advised to expand this eventually and it makes

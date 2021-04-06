@@ -18,7 +18,7 @@ DISTRIBUTION:       SIN X/X
 PHASED ARRAY:       NO
 
        LOBE ATENNUATION       LOBE WIDTH        LOBE SEPARATION        LOBE REPEAT    
-+/-          (DB)               (DEG)                (DEG)                COUNT       
+             (DB)               (DEG)                (DEG)                COUNT       
 +/-        -27.0000              N/A                 0.000                  1         
 +/-        -27.0000              N/A                 0.000                  1         
 
@@ -36,7 +36,7 @@ DISTRIBUTION:       SIN X/X
 PHASED ARRAY:       NO
 
        LOBE ATENNUATION       LOBE WIDTH        LOBE SEPARATION        LOBE REPEAT    
-+/-          (DB)               (DEG)                (DEG)                COUNT       
+             (DB)               (DEG)                (DEG)                COUNT       
 +/-        -18.0000              N/A                 0.000                  1         
 +/-        -18.0000              N/A                 0.000                  1         
 
