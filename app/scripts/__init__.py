@@ -1,14 +1,23 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+'''
+Scripts for import and export, mostly used to prepare the
+app for actual usage
+
+Once again, find the documentation online at
+https://mlh-fellowship.github.io/hermes-docs
+'''
+
+import csv
+import glob
+from app.util.logger import logger
 from csv import DictReader
 from json import dump, load
 from sys import version_info
 
 if version_info > (3, 5):
     from typing import TextIO, Union, Tuple
-import csv
-import glob
 
 
 BOOLEANS = {'TRUE': True, 'FALSE': False}
@@ -20,6 +29,10 @@ T_HDR = 'TABLE'
 
 
 def join_lookup_tables():
+    # type: () -> None
+    '''
+    Joins lookup tables
+    '''
     # TODO: Adjust header lookup table as well due to LORO edits to end of sig file
     scan_tables = glob.glob("data/s_tables/*.csv")
     for s_table in scan_tables:
@@ -101,4 +114,5 @@ def dump_table(in_fp, out_fp, headers=CSV_HEADERS):
 
 
 if __name__ == '__main__':
-    pass
+    logger.error('You cannot call this file directly!')
+

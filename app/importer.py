@@ -1,6 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+'''
+Imports files for handling
+
+Once again, find the documentation online at
+https://mlh-fellowship.github.io/hermes-docs
+'''
+
 from app import a2pats, ceesim, datastore
 from app.util.logger import logger
 from io import IOBase
@@ -13,6 +20,15 @@ if version_info > (3, 5):
 
 def traverse_xml_tree(parent, stack_size=0):
     # type: (ElementTree.Element, int) -> dict
+    '''
+    Traverse the XML tree and return it as a dictionary
+
+    Parameters:
+     * `parent`: Element tree to traverse
+     * `stack_size`: (integer, optional) Stack size
+    
+    **Returns**: (dictionary) XML tree as dictionary
+    '''
     if stack_size == 0:
         logger.debug('Now traversing XML tree beginning at initial stack')
     data = dict()
@@ -32,7 +48,13 @@ def traverse_xml_tree(parent, stack_size=0):
 
 def strip_xml_namespaces(itr):
     # type: (Iterator) -> None
-    '''Strip XML namespaces from an iterator provided by XML parser
+    '''
+    Strip XML namespaces from an iterator provided by XML parser
+
+    Parameters:
+     * `itr`: Iterator from an ElementTree
+    
+    **Returns**: None, strip happens in place
     '''
     logger.debug('Stripping all namespaces from imported CEESIM file')
     for _, element in itr:
@@ -47,10 +69,11 @@ def strip_xml_namespaces(itr):
 
 def import_a2pats(fp):
     # type: (TextIO) -> a2pats
-    '''Import an A²PATS file for conversion
+    '''
+    Import an A²PATS file for conversion
 
-    :param fp: File pointer
-    :type fp: File-like pointer
+    Parameters:
+     * `fp`: File pointer
     '''
     # TODO
     pass
@@ -58,10 +81,13 @@ def import_a2pats(fp):
 
 def import_ceesim(fp):
     # type: (TextIO) -> ceesim
-    '''Import a CEESIM file for conversion
+    '''
+    Import a CEESIM file for conversion
 
-    :param fp: File pointer
-    :type fp: File-like pointer
+    Parameters:
+     * `fp`: File pointer
+
+    **Returns**: Imported CEESIM object
     '''
     logger.debug('CEESIM importer called, begining CEESIM import with XML file')
     itr = ElementTree.iterparse(fp)
@@ -121,3 +147,7 @@ def import_(fp, classtype=datastore, downgrade_peaceful=True):
         return import_ceesim(fp)
     else:
         raise ValueError('This type of datastore isn\'t supported yet!')
+
+
+if __name__ == '__main__':
+    logger.error('You cannot call this file directly!')

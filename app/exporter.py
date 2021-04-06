@@ -1,6 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+'''
+Exports to a file or a folder, does all the handling,
+file writing, etc.
+
+Once again, find the documentation online at
+https://mlh-fellowship.github.io/hermes-docs
+'''
+
 from app import a2pats, ceesim, datastore, model, MODEL_FILES
 from app.util.logger import logger
 from datetime import datetime
@@ -31,19 +39,16 @@ CONSTANTS = {
 
 def to_timestamp(time, downgrade_peaceful=True):
     # type: (datetime, bool) -> str
-    '''Convert a time to an A²PATS-compatible timestamp (ISO 8601)
+    '''
+    Convert a time to an A²PATS-compatible timestamp (ISO 8601)
 
-    :param time: Time or timestamp-like object
-    :type time: datetime
+    Parameters:
+     * `time`: (Arrow, datetime, or datetime-like) Time or timestamp-like object
+     * `downgrade_peaceful`: (boolean) Whether or not to ignore errors
 
-    :param downgrade_peaceful: Whether or not to downgrade peacefully when function is called
-    :type downgrade_peaceful: bool
-
-    :returns: ISO 8601 timestamp
-    :rtype: str
+    **Returns**: (string) ISO 8601 timestamp
     '''
     if type(time) is str:
-        # logger.debug(time)
         time = datetime.strptime(time, "%Y-%m-%dT%H:%M:%S")
     def to_str(obj): return time.strftime('%a %b %d, %Y  %I:%M %p')
     if downgrade_peaceful:
@@ -57,16 +62,14 @@ def to_timestamp(time, downgrade_peaceful=True):
 
 def to_str_section(data, sect='header'):
     # type: (model, str) -> str
-    '''Create a header or model description for a model
+    '''
+    Create a header or model description for a model
 
-    :param data: Data to serialize
-    :type data: model
+    Parameters:
+     * `data`: (model class object) Data to serialize
+     * `sect`: (string) Section type
 
-    :param sect: Section type
-    :type sect: str
-
-    :returns: Serialized object
-    :rtype: str
+    **Returns**: (string) Serialized object
     '''
     assert type(data) is model, 'You can only convert sections of entire models!'
     left = (CONSTANTS[sect]['length'] -
@@ -92,7 +95,14 @@ def to_str_section(data, sect='header'):
 
 def dump_a2pats_file(model_, folder):
     # type: (model, PathLike) -> bool
-    '''Dump single A2PATS object
+    '''
+    Dump single A2PATS object
+
+    Parameters:
+     * `model_`: (model class object) Model object in A2PATS
+     * `folder`: (string or path like string) Location to dump files
+    
+    **Returns**: (boolean) True on success
     '''
     logger.debug('Now exporting A2PATS model {}'.format(model_.name))
     filename = '{}.{}'.format(model_.name, MODEL_FILES[model_.type].lower())
@@ -116,16 +126,14 @@ def dump_a2pats_file(model_, folder):
 
 def dump_a2pats(obj, folder):
     # type: (a2pats, PathLike) -> bool
-    '''Dump A2PATS object
+    '''
+    Dump A2PATS object
 
-    :param obj: A2PATS object
-    :type obj: A2PATS-like object
-
-    :param folder: Folder location
-    :type folder: str
-
-    :returns: True on success
-    :rtype: boolean
+    Parameters:
+     * `obj`: (a2pats class object) A2PATS object
+     * `folder`: (str or Path like object) Folder location to export
+    
+    **Returns**: (boolean) True on success
     '''
     if isfile(folder):
         logger.error('{} is a filepath, a folder cannot be placed here. Aborting'.format(folder))
@@ -139,45 +147,26 @@ def dump_a2pats(obj, folder):
     return True
 
 
-def dump_ceesim(obj, folder):
-    # type: (ceesim, PathLike) -> bool
-    '''Dump CEESIM object
-
-    :param obj: CEESIM object
-    :type obj: CEESIM-like object
-
-    :param folder: Folder location
-    :type folder: str
-
-    :returns: True on success:
-    :rtype: boolean
-    '''
-    # TODO
-    return False
-
-
 def dump(obj, folder, export_type=a2pats):
     # type: (datastore, PathLike, type) -> bool
     '''Dump data dynmically
 
-    :param obj: Datastore object
-    :type obj: datastore-like object
-
-    :param folder: Folder location
-    :type folder: str
-
-    :returns: True on success
-    :rtype: boolean
+    Parameters:
+     * `obj`: (datastore class object) Datastore object
+     * `folder`: (str or path like object) Folder location of export
+     * `export_type`: (class) Export type
+    
+    **Returns**: (boolean) True on success
     '''
     logger.debug('Generic dump function called, auto-detcting type...')
     assert issubclass(
         type(obj), datastore), 'Your data must be a datastore-like object!'
     if type(obj) is a2pats:
         logger.debug('Detected A2PATS, exporting as A2PATS')
-        return dump_a2pats(obj)
+        return dump_a2pats(obj, folder)
     elif type(obj) is ceesim:
         logger.debug('Detected CEESIM, exporting as CEESIM')
-        return dump_ceesim(obj)
+        return None
     assert type(
         obj) is not export_type, 'You cannot auto-dump a datastore object!'
 
