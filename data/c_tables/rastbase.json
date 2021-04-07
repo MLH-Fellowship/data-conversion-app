@@ -872,6 +872,17 @@
                     "TAG": ""
                 },
                 {
+                    "DEFAULT": "10.000",
+                    "FILE": "SCAN",
+                    "FUNCTION": "",
+                    "LABEL": "TRANS TIME (MSEC)",
+                    "PRIORITY": 15,
+                    "SECTION": "SCAN MODEL",
+                    "STRING": false,
+                    "TABLE": 3,
+                    "TAG": ""
+                },
+                {
                     "DEFAULT": "NO",
                     "FILE": "SCAN",
                     "FUNCTION": "",
@@ -961,17 +972,6 @@
             "STRING": false,
             "TABLE": false,
             "TAG": "BarElTrackOffset"
-        },
-        "BarFlybackTime": {
-            "DEFAULT": "10.000",
-            "FILE": "SCAN",
-            "FUNCTION": "",
-            "LABEL": "TRANS TIME (MSEC)",
-            "PRIORITY": 15,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": 3,
-            "TAG": "BarFlybackTime"
         },
         "BarScanMotion": {
             "DEFAULT": "UP-RIGHT",

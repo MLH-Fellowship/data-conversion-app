@@ -19,7 +19,9 @@ AZ WIDTH:           45.000 DEG
 EL WIDTH:           30.000 DEG
 LEVELS:             5
 
-
+     SWEEP TIME        SWEEP       SWEEP         TRANS TIME        TRANS       TRANS        LEVEL           BAR      
+       (MSEC)          BLANK        TRIG           (MSEC)          BLANK        TRIG        NUMBER       DIRECTION   
+         30              NO          NO            10.000           true         NO           5        Bidirectional 
 
 PULSE TRIG ENABLE:  NO
 
