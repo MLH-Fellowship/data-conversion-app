@@ -446,6 +446,28 @@
                     "TAG": ""
                 },
                 {
+                    "DEFAULT": "N/A",
+                    "FILE": "PUL",
+                    "FUNCTION": "get_dwell",
+                    "LABEL": "DWELL (MSEC)",
+                    "PRIORITY": 11,
+                    "SECTION": "PULSE MODEL",
+                    "STRING": false,
+                    "TABLE": 4,
+                    "TAG": ""
+                },
+                {
+                    "DEFAULT": "1",
+                    "FILE": "PUL",
+                    "FUNCTION": "get_repeat",
+                    "LABEL": "PULSE REPEAT",
+                    "PRIORITY": 11,
+                    "SECTION": "PULSE MODEL",
+                    "STRING": false,
+                    "TABLE": 3,
+                    "TAG": ""
+                },
+                {
                     "DEFAULT": "0.0000",
                     "FILE": "PUL",
                     "FUNCTION": "",
@@ -537,42 +559,15 @@
             "MULTI": true
         },
         "ComplexPriState": {
-            "DATA": [
-                {
-                    "DEFAULT": "TIME",
-                    "FILE": "PUL",
-                    "FUNCTION": "timing_mode",
-                    "LABEL": "PRI TIMING MODE",
-                    "PRIORITY": 7,
-                    "SECTION": "PULSE MODEL",
-                    "STRING": false,
-                    "TABLE": false,
-                    "TAG": "ComplexPriState"
-                },
-                {
-                    "DEFAULT": "N/A",
-                    "FILE": "PUL",
-                    "FUNCTION": "get_dwell",
-                    "LABEL": "DWELL (MSEC)",
-                    "PRIORITY": 11,
-                    "SECTION": "PULSE MODEL",
-                    "STRING": false,
-                    "TABLE": 4,
-                    "TAG": "ComplexPriState"
-                },
-                {
-                    "DEFAULT": "1",
-                    "FILE": "PUL",
-                    "FUNCTION": "get_repeat",
-                    "LABEL": "PULSE REPEAT",
-                    "PRIORITY": 11,
-                    "SECTION": "PULSE MODEL",
-                    "STRING": false,
-                    "TABLE": 3,
-                    "TAG": "ComplexPriState"
-                }
-            ],
-            "MULTI": true
+            "DEFAULT": "TIME",
+            "FILE": "PUL",
+            "FUNCTION": "timing_mode",
+            "LABEL": "PRI TIMING MODE",
+            "PRIORITY": 7,
+            "SECTION": "PULSE MODEL",
+            "STRING": false,
+            "TABLE": false,
+            "TAG": "ComplexPriState"
         },
         "DwellStatus": {
             "DEFAULT": "TIME",
@@ -608,7 +603,7 @@
             "TAG": "LastUpdateDate"
         },
         "ModStatus": {
-            "DEFAULT": "",
+            "DEFAULT": "N/A",
             "FILE": "PUL",
             "FUNCTION": "int_name",
             "LABEL": "INTRAPULSE NAME",

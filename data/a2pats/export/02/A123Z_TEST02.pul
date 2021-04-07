@@ -15,7 +15,9 @@ PRI TIMING MODE:    TIME
 
 PW TIMING MODE:     TIME
 
-
+    PRI          PW        INTRAPULSE       PULSE         DWELL        ATTENUATION        FREQUENCY    
+   (USEC)      (USEC)         NAME          REPEAT        (MSEC)           (DB)             (MHZ)      
+ 500.00000    10.00000     "ModeName"         1            N/A            0.0000       8500.0000000000 
 
 USE LOCAL FREQ:     YES
 
