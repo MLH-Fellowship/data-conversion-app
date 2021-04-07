@@ -142,6 +142,9 @@ def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, o
         if type(row) is not list:
             cols[i] = [row] * len3
     data = [list(row) for row in zip(*cols)]
+    # if headers[0]["FILE"] == "PUL":
+    #     logger.warning(headers[1])
+
     return data, headers
 
 

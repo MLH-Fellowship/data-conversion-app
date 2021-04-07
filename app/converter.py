@@ -347,7 +347,11 @@ class functions:
         **Returns**: (string) Dwell time
         '''
 
+        # TODO: Fix this function and the one below to reflect real ComplexPriState behavior. On hold due to lack of examples in our sample data
+
         if cps == "false":
+            return "N/A"
+        else:
             return "N/A"
 
     @staticmethod
@@ -363,6 +367,8 @@ class functions:
         '''
 
         if cps == "false":
+            return "1"
+        else:
             return "1"
 
     @staticmethod
@@ -583,6 +589,17 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         
         **Returns**: None, table is filled in place
         '''
+
+        if type(opt["TABLE"]) is int:
+            if opt[FILE_HDR] == "ANT":
+                table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
+                                        opt[PRI_HDR], convert_one_key, obtain_relevant_tags, True)
+            else:
+                table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
+                                        opt[PRI_HDR], convert_one_key, obtain_relevant_tags)
+            fill_table(model, opt[PRI_HDR], table_string)
+            return None
+
         tags = obtain_relevant_tags(
             ceesim_data, ceesim_flattened, opt[TAG_HDR]) # removed taking the zero-index as it's done below
         if tags:
@@ -598,18 +615,8 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                     opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
             value = opt[DEFAULT_HDR]
 
-        if type(opt["TABLE"]) is int:
-            if opt[FILE_HDR] == "ANT":
-                table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
-                                        opt[PRI_HDR], convert_one_key, obtain_relevant_tags, True)
-            else:
-                table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
-                                        opt[PRI_HDR], convert_one_key, obtain_relevant_tags)
-            fill_table(model, opt[PRI_HDR], table_string)
-
-        else:
-            converted = convert_one_key(opt, value)
-            fill_table(model, opt[PRI_HDR], converted)
+        converted = convert_one_key(opt, value)
+        fill_table(model, opt[PRI_HDR], converted)
 
 
     def add_headers(mfile, model):
