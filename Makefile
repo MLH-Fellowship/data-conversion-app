@@ -13,6 +13,10 @@ build:
 	find app/*.py app/*/*.py -type f -exec cp '{}' "$(STAGING_NAME)/{}" \;
 	mkdir "$(STAGING_NAME)/data"
 	find data/*.* -exec cp '{}' "$(STAGING_NAME)/{}" \;
+	mkdir "$(STAGING_NAME)/data/c_tables"
+	mkdir "$(STAGING_NAME)/data/s_tables"
+	find data/c_tables/*.* -exec cp '{}' "$(STAGING_NAME)/{}" \;
+	find data/s_tables/*.* -exec cp '{}' "$(STAGING_NAME)/{}" \;
 	cp app.py "$(STAGING_NAME)"
 	zip -r -D "build-$(DATE).zip" $(STAGING_NAME)
 
