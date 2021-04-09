@@ -408,14 +408,14 @@ class functions:
     def get_four_decimal(number):
         # type: (int) -> float
         '''
-        Format to 4 decimal places
+        Format to 4 decimal places and absolute value
 
         Parameters:
          * `number`: (number) Number
         
         **Returns**: (string) Number
         '''
-        return '{:.4f}'.format(float(number))
+        return '{:.4f}'.format(abs(float(number)))
 
     @staticmethod
     def get_three_decimal(number):
