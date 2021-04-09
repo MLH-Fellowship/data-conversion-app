@@ -12,7 +12,7 @@ from app import a2pats, ceesim
 from app.converter import convert_to_a2pats, split_emitter_modes, determine_scan_type, scan_file_name
 from app.exporter import dump_a2pats
 from app.importer import import_
-from app.scripts import load_lookup_table, dump_table
+from app.scripts import join_lookup_tables, dump_table
 from app.util import config as config_
 from app.util.logger import logger, set_up_logger
 from argparse import ArgumentParser
@@ -37,7 +37,7 @@ def prepare_lookup_table(unparsed=DEFAULT_UNPARSED_TABLE_PATH, parsed=DEFAULT_TA
     **Returns**: JSON lookup table as dictionary
     '''
     if isfile(parsed):
-        return load_lookup_table(parsed)
+        return join_lookup_tables()
     else:
         if isfile(unparsed):
             return dump_table(unparsed, parsed)
