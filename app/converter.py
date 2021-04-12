@@ -372,6 +372,10 @@ class functions:
             return "1"
 
     @staticmethod
+    def sweep_timer(rate, width):
+        return rate * width
+
+    @staticmethod
     def timing_mode(cps):
         # type: (str) -> (str)
         '''
@@ -679,8 +683,42 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                 if key_data["SECTION"] == "Main":
                     continue
                 create_converted(next_model, key_data)
-                
+
         models.append(next_model)
+    
+    inp_deviations = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LinearFreqDeviation")
+
+    for i, _ in enumerate(inp_deviations):
+        pass
+        # next_model = model("INTRAPULSE", name + i, timestamp)
+        # if mtype not in MODEL_FILES:
+        #     logger.warn(
+        #         'Could not find mtype {} in model files, skipping'.format(mtype))
+        #     continue
+        # table_key = MODEL_FILES[mtype]
+        # add_headers(table_key, next_model)
+        # if table_key not in lookup_table:
+        #     logger.warn(
+        #         'Could not find key {} in lookup table, skipping'.format(table_key))
+        #     continue
+        # logger.debug(
+        #     'Now processing table key {} with mtype {}'.format(table_key, mtype))
+        # for cdict_key in lookup_table[table_key]:
+        #     key_data = lookup_table[table_key][cdict_key]
+        #     if MULTI_HDR in key_data and TABLE_DATA in key_data:
+        #         data_opts = key_data[TABLE_DATA]
+        #         for opt in data_opts:
+        #             if opt["SECTION"] == "Main":
+        #                 continue
+        #             create_converted(next_model, opt)
+        #     else:
+        #         if key_data["SECTION"] == "Main":
+        #             continue
+        #         create_converted(next_model, key_data)
+        
+        # models.append(next_model)
+    
+    
     return models
 
 
