@@ -443,6 +443,13 @@ class functions:
         '''
         return '{:.6f}'.format(float(number))
 
+    @staticmethod
+    def bool_yn(boolean):
+        # type: (bool) -> str
+
+
+        return "YES" if boolean else "NO"
+
 
 def flatten_table(ceesim_data, stack_size=1):
     # type: (dict, int) -> dict

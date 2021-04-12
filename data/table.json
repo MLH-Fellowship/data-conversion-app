@@ -10,7 +10,7 @@
                     "PRIORITY": 7,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -21,7 +21,7 @@
                     "PRIORITY": 22,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -32,7 +32,7 @@
                     "PRIORITY": 11,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -43,7 +43,7 @@
                     "PRIORITY": 26,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -54,7 +54,7 @@
                     "PRIORITY": 30,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -65,7 +65,7 @@
                     "PRIORITY": 32,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -76,7 +76,7 @@
                     "PRIORITY": 34,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -87,7 +87,7 @@
                     "PRIORITY": 35,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -98,7 +98,7 @@
                     "PRIORITY": 15,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -109,7 +109,7 @@
                     "PRIORITY": 17,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -120,7 +120,7 @@
                     "PRIORITY": 19,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -131,7 +131,7 @@
                     "PRIORITY": 20,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -146,7 +146,7 @@
                     "TAG": ""
                 },
                 {
-                    "DEFAULT": "0.000",
+                    "DEFAULT": "2.000",
                     "FILE": "ANT",
                     "FUNCTION": "",
                     "LABEL": "LOBE SEPARATION (DEG)",
@@ -179,7 +179,7 @@
                     "TAG": ""
                 },
                 {
-                    "DEFAULT": "0.000",
+                    "DEFAULT": "2.000",
                     "FILE": "ANT",
                     "FUNCTION": "",
                     "LABEL": "LOBE SEPARATION (DEG)",
@@ -208,7 +208,7 @@
                     "PRIORITY": 3,
                     "SECTION": "ANTENNA MODEL",
                     "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 }
             ],
@@ -222,7 +222,7 @@
             "PRIORITY": 5,
             "SECTION": "ANTENNA MODEL",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "AntennaModelKind"
         },
         "AzBeamwidth": {
@@ -233,7 +233,7 @@
             "PRIORITY": 9,
             "SECTION": "ANTENNA MODEL",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "AzBeamwidth"
         },
         "AzScanShape": {
@@ -244,7 +244,7 @@
             "PRIORITY": 10,
             "SECTION": "ANTENNA MODEL",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "AzScanShape"
         },
         "AzSidelobeRatio": {
@@ -266,7 +266,7 @@
             "PRIORITY": 24,
             "SECTION": "ANTENNA MODEL",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "ElBeamwidth"
         },
         "ElScanShape": {
@@ -277,7 +277,7 @@
             "PRIORITY": 25,
             "SECTION": "ANTENNA MODEL",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "ElScanShape"
         },
         "ElSidelobeRatio": {
@@ -299,7 +299,7 @@
             "PRIORITY": 2,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "LastUpdateDate"
         },
         "ModeName": {
@@ -310,7 +310,7 @@
             "PRIORITY": 0,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "ModeName"
         }
     },
@@ -325,7 +325,7 @@
                     "PRIORITY": 4,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -336,7 +336,7 @@
                     "PRIORITY": 6,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -347,7 +347,7 @@
                     "PRIORITY": 8,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -358,29 +358,7 @@
                     "PRIORITY": 9,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "10.0000000 MHZ",
-                    "FILE": "INP",
-                    "FUNCTION": "",
-                    "LABEL": "DEVIATION",
-                    "PRIORITY": 10,
-                    "SECTION": "INTRAPULSE MODEL",
-                    "STRING": false,
-                    "TABLE": 0,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "1.000000 MHZ/USEC",
-                    "FILE": "INP",
-                    "FUNCTION": "",
-                    "LABEL": "RATE",
-                    "PRIORITY": 11,
-                    "SECTION": "INTRAPULSE MODEL",
-                    "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -391,7 +369,7 @@
                     "PRIORITY": 12,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 }
             ],
@@ -405,8 +383,30 @@
             "PRIORITY": 2,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "LastUpdateDate"
+        },
+        "LinearFreqDeviation": {
+            "DEFAULT": "10.0000000 MHZ",
+            "FILE": "INP",
+            "FUNCTION": "to_mhz",
+            "LABEL": "DEVIATION",
+            "PRIORITY": 10,
+            "SECTION": "INTRAPULSE MODEL",
+            "STRING": false,
+            "TABLE": false,
+            "TAG": "LinearFreqDeviation"
+        },
+        "LinearFreqDuration": {
+            "DEFAULT": "1.000000 MHZ/USEC",
+            "FILE": "INP",
+            "FUNCTION": "to_usec",
+            "LABEL": "RATE",
+            "PRIORITY": 11,
+            "SECTION": "INTRAPULSE MODEL",
+            "STRING": false,
+            "TABLE": false,
+            "TAG": "LinearFreqDuration"
         },
         "ModeName": {
             "DEFAULT": "A123Z_EMITTER01",
@@ -416,7 +416,7 @@
             "PRIORITY": 0,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "ModeName"
         }
     },
@@ -431,7 +431,7 @@
                     "PRIORITY": 3,
                     "SECTION": "PULSE MODEL",
                     "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -442,7 +442,29 @@
                     "PRIORITY": 5,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
+                    "TAG": ""
+                },
+                {
+                    "DEFAULT": "N/A",
+                    "FILE": "PUL",
+                    "FUNCTION": "get_dwell",
+                    "LABEL": "DWELL (MSEC)",
+                    "PRIORITY": 11,
+                    "SECTION": "PULSE MODEL",
+                    "STRING": false,
+                    "TABLE": 4,
+                    "TAG": ""
+                },
+                {
+                    "DEFAULT": "1",
+                    "FILE": "PUL",
+                    "FUNCTION": "get_repeat",
+                    "LABEL": "PULSE REPEAT",
+                    "PRIORITY": 11,
+                    "SECTION": "PULSE MODEL",
+                    "STRING": false,
+                    "TABLE": 3,
                     "TAG": ""
                 },
                 {
@@ -464,7 +486,7 @@
                     "PRIORITY": 13,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -475,7 +497,7 @@
                     "PRIORITY": 15,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -486,7 +508,7 @@
                     "PRIORITY": 17,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -497,7 +519,7 @@
                     "PRIORITY": 19,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -508,7 +530,7 @@
                     "PRIORITY": 21,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -519,7 +541,7 @@
                     "PRIORITY": 23,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -530,49 +552,22 @@
                     "PRIORITY": 25,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 }
             ],
             "MULTI": true
         },
         "ComplexPriState": {
-            "DATA": [
-                {
-                    "DEFAULT": "TIME",
-                    "FILE": "PUL",
-                    "FUNCTION": "timing_mode",
-                    "LABEL": "PRI TIMING MODE",
-                    "PRIORITY": 7,
-                    "SECTION": "PULSE MODEL",
-                    "STRING": false,
-                    "TABLE": 0,
-                    "TAG": "ComplexPriState"
-                },
-                {
-                    "DEFAULT": "N/A",
-                    "FILE": "PUL",
-                    "FUNCTION": "get_dwell",
-                    "LABEL": "DWELL (MSEC)",
-                    "PRIORITY": 11,
-                    "SECTION": "PULSE MODEL",
-                    "STRING": false,
-                    "TABLE": 4,
-                    "TAG": "ComplexPriState"
-                },
-                {
-                    "DEFAULT": "1",
-                    "FILE": "PUL",
-                    "FUNCTION": "get_repeat",
-                    "LABEL": "PULSE REPEAT",
-                    "PRIORITY": 11,
-                    "SECTION": "PULSE MODEL",
-                    "STRING": false,
-                    "TABLE": 3,
-                    "TAG": "ComplexPriState"
-                }
-            ],
-            "MULTI": true
+            "DEFAULT": "TIME",
+            "FILE": "PUL",
+            "FUNCTION": "timing_mode",
+            "LABEL": "PRI TIMING MODE",
+            "PRIORITY": 7,
+            "SECTION": "PULSE MODEL",
+            "STRING": false,
+            "TABLE": false,
+            "TAG": "ComplexPriState"
         },
         "DwellStatus": {
             "DEFAULT": "TIME",
@@ -582,7 +577,7 @@
             "PRIORITY": 9,
             "SECTION": "PULSE MODEL",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "DwellStatus"
         },
         "Frequency": {
@@ -604,11 +599,11 @@
             "PRIORITY": 2,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "LastUpdateDate"
         },
         "ModStatus": {
-            "DEFAULT": "",
+            "DEFAULT": "N/A",
             "FILE": "PUL",
             "FUNCTION": "int_name",
             "LABEL": "INTRAPULSE NAME",
@@ -626,7 +621,7 @@
             "PRIORITY": 0,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "ModeName"
         },
         "Pri": {
@@ -663,7 +658,7 @@
                     "PRIORITY": 0,
                     "SECTION": "",
                     "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -674,7 +669,7 @@
                     "PRIORITY": 2,
                     "SECTION": "",
                     "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -685,7 +680,7 @@
                     "PRIORITY": 3,
                     "SECTION": "",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -798,7 +793,7 @@
             "PRIORITY": 2,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "LastUpdateDate"
         },
         "ModeName": {
@@ -811,7 +806,7 @@
                     "PRIORITY": 0,
                     "SECTION": "Main",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": "ModeName"
                 },
                 {
@@ -829,219 +824,9 @@
             "MULTI": true
         }
     },
-    "SCAN": {
-        "": {
-            "DATA": [
-                {
-                    "DEFAULT": "",
-                    "FILE": "SCAN",
-                    "FUNCTION": "",
-                    "LABEL": "SCAN NOTES",
-                    "PRIORITY": 3,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": true,
-                    "TABLE": 0,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "NO",
-                    "FILE": "SCAN",
-                    "FUNCTION": "",
-                    "LABEL": "PULSE TRIG ON REV",
-                    "PRIORITY": 12,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": false,
-                    "TABLE": 0,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "TARGET",
-                    "FILE": "SCAN",
-                    "FUNCTION": "",
-                    "LABEL": "SCAN PERSPECTIVE",
-                    "PRIORITY": 21,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": false,
-                    "TABLE": 0,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "0.0000 DBM",
-                    "FILE": "SCAN",
-                    "FUNCTION": "",
-                    "LABEL": "DEFAULT OFFSET",
-                    "PRIORITY": 23,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": false,
-                    "TABLE": 0,
-                    "TAG": ""
-                }
-            ],
-            "MULTI": true
-        },
-        "AzDirection": {
-            "DEFAULT": "CW",
-            "FILE": "SCAN",
-            "FUNCTION": "dir_abrev",
-            "LABEL": "ROTATION",
-            "PRIORITY": 10,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": 0,
-            "TAG": "AzDirection"
-        },
-        "AzInitialBeamOffset": {
-            "DEFAULT": "0.000 DEG",
-            "FILE": "SCAN",
-            "FUNCTION": "format_degree",
-            "LABEL": "AZIMUTH OFFSET",
-            "PRIORITY": 7,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": 0,
-            "TAG": "AzInitialBeamOffset"
-        },
-        "AzScanKind": {
-            "DEFAULT": "CIRCULAR",
-            "FILE": "SCAN",
-            "FUNCTION": "to_caps",
-            "LABEL": "SCAN MODEL",
-            "PRIORITY": 5,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": 0,
-            "TAG": "AzScanKind"
-        },
-        "AzScanPeriod": {
-            "DEFAULT": "1.00000 SEC",
-            "FILE": "SCAN",
-            "FUNCTION": "format_second",
-            "LABEL": "SCAN PERIOD",
-            "PRIORITY": 9,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": 0,
-            "TAG": "AzScanPeriod"
-        },
-        "ElDirection": {
-            "DATA": [
-                {
-                    "DEFAULT": "TRIANGULAR",
-                    "FILE": "SCAN",
-                    "FUNCTION": "dir_typ",
-                    "LABEL": "TYPE",
-                    "PRIORITY": 15,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": false,
-                    "TABLE": 0,
-                    "TAG": "ElDirection"
-                },
-                {
-                    "DEFAULT": "VERTICAL",
-                    "FILE": "SCAN",
-                    "FUNCTION": "dir_dir",
-                    "LABEL": "DIRECTION",
-                    "PRIORITY": 16,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": false,
-                    "TABLE": 0,
-                    "TAG": "ElDirection"
-                }
-            ],
-            "MULTI": true
-        },
-        "ElInitialBeamOffset": {
-            "DEFAULT": "45.000 DEG",
-            "FILE": "SCAN",
-            "FUNCTION": "format_degree",
-            "LABEL": "ELEVATION OFFSET",
-            "PRIORITY": 8,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": 0,
-            "TAG": "ElInitialBeamOffset"
-        },
-        "ElScanMotion": {
-            "DEFAULT": "NODDING",
-            "FILE": "SCAN",
-            "FUNCTION": "motion_overlay",
-            "LABEL": "OVERLAY MODEL",
-            "PRIORITY": 14,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": 0,
-            "TAG": "ElScanMotion"
-        },
-        "ElScanPeriod": {
-            "DEFAULT": "30.00000 HZ",
-            "FILE": "SCAN",
-            "FUNCTION": "period_to_hz",
-            "LABEL": "SCAN RATE",
-            "PRIORITY": 19,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": 0,
-            "TAG": "ElScanPeriod"
-        },
-        "ElSectorWidth": {
-            "DEFAULT": "90.000 DEG",
-            "FILE": "SCAN",
-            "FUNCTION": "format_degree",
-            "LABEL": "SPAN",
-            "PRIORITY": 18,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": 0,
-            "TAG": "ElSectorWidth"
-        },
-        "ElTrackOffset": {
-            "DEFAULT": "BOTTOM",
-            "FILE": "SCAN",
-            "FUNCTION": "offset_origin",
-            "LABEL": "ORIGIN",
-            "PRIORITY": 17,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": 0,
-            "TAG": "ElTrackOffset"
-        },
-        "LastUpdateDate": {
-            "DEFAULT": "",
-            "FILE": "SCAN",
-            "FUNCTION": "to_timestamp",
-            "LABEL": "Created",
-            "PRIORITY": 2,
-            "SECTION": "Main",
-            "STRING": false,
-            "TABLE": 0,
-            "TAG": "LastUpdateDate"
-        },
-        "ModeName": {
-            "DEFAULT": "A123Z_EMITTER01",
-            "FILE": "SCAN",
-            "FUNCTION": "",
-            "LABEL": "Model",
-            "PRIORITY": 0,
-            "SECTION": "Main",
-            "STRING": false,
-            "TABLE": 0,
-            "TAG": "ModeName"
-        }
-    },
     "SIG": {
         "": {
             "DATA": [
-                {
-                    "DEFAULT": "REFERENCE",
-                    "FILE": "SIG",
-                    "FUNCTION": "",
-                    "LABEL": "ANTENNA MODEL",
-                    "PRIORITY": 54,
-                    "SECTION": "ANTENNA MODEL",
-                    "STRING": false,
-                    "TABLE": 0,
-                    "TAG": ""
-                },
                 {
                     "DEFAULT": "",
                     "FILE": "SIG",
@@ -1050,7 +835,7 @@
                     "PRIORITY": 34,
                     "SECTION": "FREQUENCY MODEL",
                     "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1061,7 +846,7 @@
                     "PRIORITY": 36,
                     "SECTION": "FREQUENCY MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1072,7 +857,7 @@
                     "PRIORITY": 38,
                     "SECTION": "FREQUENCY MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1083,7 +868,7 @@
                     "PRIORITY": 40,
                     "SECTION": "FREQUENCY MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1094,7 +879,7 @@
                     "PRIORITY": 28,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1105,18 +890,7 @@
                     "PRIORITY": 30,
                     "SECTION": "INTRAPULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "NO",
-                    "FILE": "SIG",
-                    "FUNCTION": "",
-                    "LABEL": "ENABLE MSS",
-                    "PRIORITY": 60,
-                    "SECTION": "MULTIPLE SIMULTANEOUS SIGNALS",
-                    "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1127,7 +901,7 @@
                     "PRIORITY": 18,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1138,7 +912,7 @@
                     "PRIORITY": 21,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1149,7 +923,7 @@
                     "PRIORITY": 22,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1160,40 +934,7 @@
                     "PRIORITY": 24,
                     "SECTION": "PULSE MODEL",
                     "STRING": false,
-                    "TABLE": 0,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "REFERENCE",
-                    "FILE": "SIG",
-                    "FUNCTION": "",
-                    "LABEL": "SCAN MODEL",
-                    "PRIORITY": 44,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": false,
-                    "TABLE": 0,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "TARGET",
-                    "FILE": "SIG",
-                    "FUNCTION": "",
-                    "LABEL": "SCAN PERSPECTIVE",
-                    "PRIORITY": 48,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": false,
-                    "TABLE": 0,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "0.0000 DBM",
-                    "FILE": "SIG",
-                    "FUNCTION": "",
-                    "LABEL": "DEFAULT OFFSET",
-                    "PRIORITY": 50,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1204,7 +945,7 @@
                     "PRIORITY": 2,
                     "SECTION": "SIGNAL IDENTIFICATION",
                     "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1215,7 +956,7 @@
                     "PRIORITY": 5,
                     "SECTION": "SIGNAL IDENTIFICATION",
                     "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1226,7 +967,7 @@
                     "PRIORITY": 13,
                     "SECTION": "SPECIAL FEATURES",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 },
                 {
@@ -1237,7 +978,7 @@
                     "PRIORITY": 14,
                     "SECTION": "SPECIAL FEATURES",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": ""
                 }
             ],
@@ -1251,7 +992,7 @@
             "PRIORITY": 4,
             "SECTION": "SIGNAL IDENTIFICATION",
             "STRING": true,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "EmitterId"
         },
         "EmitterName": {
@@ -1262,7 +1003,7 @@
             "PRIORITY": 6,
             "SECTION": "SIGNAL IDENTIFICATION",
             "STRING": true,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "EmitterName"
         },
         "LastUpdateDate": {
@@ -1273,22 +1014,11 @@
             "PRIORITY": 2,
             "SECTION": "Main",
             "STRING": false,
-            "TABLE": 0,
+            "TABLE": false,
             "TAG": "LastUpdateDate"
         },
         "ModeName": {
             "DATA": [
-                {
-                    "DEFAULT": "A123Z ANT",
-                    "FILE": "SIG",
-                    "FUNCTION": "",
-                    "LABEL": "MODEL NAME",
-                    "PRIORITY": 56,
-                    "SECTION": "ANTENNA MODEL",
-                    "STRING": true,
-                    "TABLE": 0,
-                    "TAG": "ModeName"
-                },
                 {
                     "DEFAULT": "A123Z_EMITTER01",
                     "FILE": "SIG",
@@ -1297,7 +1027,7 @@
                     "PRIORITY": 0,
                     "SECTION": "Main",
                     "STRING": false,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": "ModeName"
                 },
                 {
@@ -1308,18 +1038,7 @@
                     "PRIORITY": 20,
                     "SECTION": "PULSE MODEL",
                     "STRING": true,
-                    "TABLE": 0,
-                    "TAG": "ModeName"
-                },
-                {
-                    "DEFAULT": "A123Z_SCAN",
-                    "FILE": "SIG",
-                    "FUNCTION": "",
-                    "LABEL": "MODEL NAME",
-                    "PRIORITY": 46,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": "ModeName"
                 },
                 {
@@ -1330,7 +1049,7 @@
                     "PRIORITY": 7,
                     "SECTION": "SIGNAL IDENTIFICATION",
                     "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": "ModeName"
                 },
                 {
@@ -1341,7 +1060,7 @@
                     "PRIORITY": 8,
                     "SECTION": "SIGNAL IDENTIFICATION",
                     "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": "ModeName"
                 },
                 {
@@ -1352,7 +1071,7 @@
                     "PRIORITY": 9,
                     "SECTION": "SIGNAL IDENTIFICATION",
                     "STRING": true,
-                    "TABLE": 0,
+                    "TABLE": false,
                     "TAG": "ModeName"
                 }
             ],

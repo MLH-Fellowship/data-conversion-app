@@ -33,7 +33,6 @@ def join_lookup_tables():
     '''
     Joins lookup tables
     '''
-    # TODO: Adjust header lookup table as well due to LORO edits to end of sig file
     scan_tables = glob.glob("data/s_tables/*.csv")
     for s_table in scan_tables:
         with open("data/table.csv") as table, open(s_table) as s, \
