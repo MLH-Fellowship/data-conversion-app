@@ -21,7 +21,7 @@ LEVELS:             5
 
      SWEEP TIME        SWEEP       SWEEP         TRANS TIME        TRANS       TRANS        LEVEL           BAR      
        (MSEC)          BLANK        TRIG           (MSEC)          BLANK        TRIG        NUMBER       DIRECTION   
-         30              NO          NO            10.000           true         NO           5        Bidirectional 
+         30              NO          NO            10.000           YES          NO           5        Bidirectional 
 
 PULSE TRIG ENABLE:  NO
 

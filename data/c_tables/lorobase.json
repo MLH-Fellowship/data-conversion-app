@@ -146,7 +146,7 @@
                     "TAG": ""
                 },
                 {
-                    "DEFAULT": "0.000",
+                    "DEFAULT": "2.000",
                     "FILE": "ANT",
                     "FUNCTION": "",
                     "LABEL": "LOBE SEPARATION (DEG)",
@@ -179,7 +179,7 @@
                     "TAG": ""
                 },
                 {
-                    "DEFAULT": "0.000",
+                    "DEFAULT": "2.000",
                     "FILE": "ANT",
                     "FUNCTION": "",
                     "LABEL": "LOBE SEPARATION (DEG)",
@@ -362,28 +362,6 @@
                     "TAG": ""
                 },
                 {
-                    "DEFAULT": "10.0000000 MHZ",
-                    "FILE": "INP",
-                    "FUNCTION": "",
-                    "LABEL": "DEVIATION",
-                    "PRIORITY": 10,
-                    "SECTION": "INTRAPULSE MODEL",
-                    "STRING": false,
-                    "TABLE": false,
-                    "TAG": ""
-                },
-                {
-                    "DEFAULT": "1.000000 MHZ/USEC",
-                    "FILE": "INP",
-                    "FUNCTION": "",
-                    "LABEL": "RATE",
-                    "PRIORITY": 11,
-                    "SECTION": "INTRAPULSE MODEL",
-                    "STRING": false,
-                    "TABLE": false,
-                    "TAG": ""
-                },
-                {
                     "DEFAULT": "NO",
                     "FILE": "INP",
                     "FUNCTION": "",
@@ -407,6 +385,28 @@
             "STRING": false,
             "TABLE": false,
             "TAG": "LastUpdateDate"
+        },
+        "LinearFreqDeviation": {
+            "DEFAULT": "10.0000000 MHZ",
+            "FILE": "INP",
+            "FUNCTION": "to_mhz",
+            "LABEL": "DEVIATION",
+            "PRIORITY": 10,
+            "SECTION": "INTRAPULSE MODEL",
+            "STRING": false,
+            "TABLE": false,
+            "TAG": "LinearFreqDeviation"
+        },
+        "LinearFreqDuration": {
+            "DEFAULT": "1.000000 MHZ/USEC",
+            "FILE": "INP",
+            "FUNCTION": "to_usec",
+            "LABEL": "RATE",
+            "PRIORITY": 11,
+            "SECTION": "INTRAPULSE MODEL",
+            "STRING": false,
+            "TABLE": false,
+            "TAG": "LinearFreqDuration"
         },
         "ModeName": {
             "DEFAULT": "A123Z_EMITTER01",
@@ -1010,7 +1010,7 @@
                     "LABEL": "AZIMUTH OFFSET",
                     "PRIORITY": 48,
                     "SECTION": "SCAN MODEL",
-                    "STRING": true,
+                    "STRING": false,
                     "TABLE": false,
                     "TAG": ""
                 },
