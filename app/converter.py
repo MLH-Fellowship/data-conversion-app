@@ -528,22 +528,24 @@ def flatten_table(ceesim_data, stack_size=1):
     return data_
 
 
-def convert_one_key(lookup_data, value, keep_tag=True):
-    # type: (dict, str, bool) -> str
+def convert_one_key(lookup_data, values, keep_tag=True):
+    # type: (dict, List[str], bool) -> str
     '''
     Converts one key given the table lookup parameters
 
     Parameters:
      * `lookup_data`: (dictionary) Lookup data inputted in JSON
-     * `value`: (any) Value to convert
+     * `values`: (any) Value to convert
      * `keep_tag`: Whether or not to keep the left hand tag side
     
     **Returns**: Converted string
     '''
     if FUNC_HDR in lookup_data and hasattr(functions, lookup_data[FUNC_HDR]):
-        funcp_data = getattr(functions, lookup_data[FUNC_HDR])(value)
-    elif value:
-        funcp_data = value
+        funcp_data = getattr(functions, lookup_data[FUNC_HDR])(*values)
+    elif values:
+        if len(values) > 1:
+            logger.warn('Cannot find conversion function ({}) for tag with two inputs.'.format(lookup_data[FUNC_HDR]))
+        funcp_data = values[0]
     else:
         funcp_data = lookup_data["DEFAULT"]
 
@@ -644,22 +646,24 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             fill_table(model, opt[PRI_HDR], table_string)
             return None
 
-        tags = obtain_relevant_tags(
-            ceesim_data, ceesim_flattened, opt[TAG_HDR]) # removed taking the zero-index as it's done below
-        if tags:
-            value = tags[0]  
-            logger.debug("Found tag {} for {} in {} with value: {}".format(opt[TAG_HDR],
-                                                                           opt["LABEL"], opt[FILE_HDR], value))
-        else:
-            if opt[TAG_HDR]:
-                logger.debug('Could not find tag {}, using default value for {} in {}: {}'.format(opt[TAG_HDR],
-                                                                                                  opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
+        values = []
+        for tag in opt[TAG_HDR].split('&'):
+            tags = obtain_relevant_tags(ceesim_data, ceesim_flattened, tag) # removed taking the zero-index as it's done below
+            if tags:
+                value = tags[0]  
+                logger.debug("Found tag {} for {} in {} with value: {}".format(opt[TAG_HDR],
+                                                                            opt["LABEL"], opt[FILE_HDR], value))
             else:
-                logger.debug('Using default value for tagless {} in {}: {}'.format(
-                    opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
-            value = opt[DEFAULT_HDR]
+                if opt[TAG_HDR]:
+                    logger.debug('Could not find tag {}, using default value for {} in {}: {}'.format(opt[TAG_HDR],
+                                                                                                    opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
+                else:
+                    logger.debug('Using default value for tagless {} in {}: {}'.format(
+                        opt["LABEL"], opt[FILE_HDR], opt[DEFAULT_HDR]))
+                value = opt[DEFAULT_HDR]
+            values.append(value)
 
-        converted = convert_one_key(opt, value)
+        converted = convert_one_key(opt, values)
         fill_table(model, opt[PRI_HDR], converted)
 
 
@@ -821,7 +825,7 @@ def generate_intrapulse(ceesim_data, lookup_table):
                 if MULTI_HDR in tag_data:
                     for feature_data in tag_data["DATA"]:
                         convert_one_key(
-                            feature_data, ceesim_data[feature_data["TAG"]])
+                            feature_data, [ceesim_data[feature_data["TAG"]]])
                 else:
                     # TODO: What if table is flat
                     pass
@@ -851,7 +855,7 @@ def generate_pulse(ceesim_data, lookup_table):
                 if MULTI_HDR in tag_data:
                     for feature_data in tag_data["DATA"]:
                         convert_one_key(
-                            feature_data, ceesim_data[feature_data["TAG"]])
+                            feature_data, [ceesim_data[feature_data["TAG"]]])
                 else:
                     # TODO: What if table is flat
                     pass
