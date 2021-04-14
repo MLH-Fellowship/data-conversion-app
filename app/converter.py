@@ -373,7 +373,36 @@ class functions:
 
     @staticmethod
     def sweep_timer(rate, width):
-        return rate * width
+        # type: (float, float) -> str
+        '''
+        Finds sweep time using the rate and bar width
+
+        Parameters:
+         * `rate`: (float) BarScanRate
+         * `width`: (float) BarWidth
+        **Returns**: (string) SWEEP TIME '''
+
+        time = rate * width
+        return '{:.3f}'.format(time)
+
+    @staticmethod
+    def inp_rate(dev, dur):
+        # type: (float, float) -> str
+        '''
+        Finds rate using the deviation and duration
+
+        Parameters:
+         * `dev`: (float) LinearFreqDeviation
+         * `dur`: (float) LinearFreqDuration
+
+        **Returns**: (string) RATE '''
+
+        rate = functions.to_mhz(dev) / functions.to_usec(dur)
+        return '{:.6f}'.format(rate)
+
+    @staticmethod
+    def halve_it(num):
+        return str(num / 2)
 
     @staticmethod
     def timing_mode(cps):
@@ -451,8 +480,16 @@ class functions:
     def bool_yn(boolean):
         # type: (bool) -> str
 
-
         return "YES" if boolean else "NO"
+    
+    @staticmethod
+    def ae_to_vh(az_el):
+        # type (str) -> str
+
+        if az_el == "Azimuth":
+            return "HORIZONTAL"
+        else:
+            return "VERTICAL"
 
 
 def flatten_table(ceesim_data, stack_size=1):
