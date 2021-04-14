@@ -735,6 +735,8 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
 
 
     inp_deviations = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LinearFreqDeviation")
+    inp_durations = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LinearFreqDuration")
+    inp_info = zip(inp_deviations, inp_durations)
     print("inp_deviations________: {}".format(len(inp_deviations)))
 
     #for i, _ in enumerate(inp_deviations):
@@ -743,9 +745,9 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
     numModels = len(models)
 
     count = 1
-    for i, deviation in enumerate(inp_deviations):
+    for i, info in enumerate(inp_info):
         newName = "{}-{}".format(name, i + 1)
-        print('INTRAPULSE {}: {}'.format(count, deviation))
+        print('INTRAPULSE {}: {}'.format(count, info[0]))
         next_model = model('INTRAPULSE', newName, timestamp)
         table_key = MODEL_FILES['INTRAPULSE']
         add_headers(table_key, next_model)
@@ -755,10 +757,10 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             continue
         logger.debug(
             'Now processing table key {} with mtype {}'.format(table_key, 'INTRAPULSE'))
-        print("??? deviation: {} name: {}".format(deviation, newName))
+        print("??? deviation: {} name: {}".format(info[0], newName))
         if 'INTRAPULSE' not in MODEL_FILES:
             logger.warn(
-                'Could not find mtype {} in model files, skipping'.format(deviation))
+                'Could not find mtype {} in model files, skipping'.format(info[0]))
         count += 1
 
         for cdict_key in lookup_table[table_key]:
@@ -772,7 +774,13 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             else:
                 if key_data["SECTION"] == "Main":
                     continue
-                create_converted(next_model, key_data)
+                if not key_data["TAG"]:
+                    create_converted(next_model, key_data)
+                else:
+                    if key_data["TAG"] == "LinearFreqDeviation":
+                        fill_table(next_model, key_data[PRI_HDR], convert_one_key(key_data, [info[0]]))
+                    if key_data["TAG"] == "LinearFreqDeviation&LinearFreqDuration":
+                        fill_table(next_model, key_data[PRI_HDR], convert_one_key(key_data, info))
 
         models.append(next_model)
 
