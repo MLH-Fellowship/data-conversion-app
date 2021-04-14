@@ -11,7 +11,6 @@ follows the adage of Don't Repeat Yourself.
 Once again, find the documentation online at
 https://mlh-fellowship.github.io/hermes-docs
 '''
-
 from app.util.logger import logger
 # NOTE: OrderedDict is not necessary if Python 2 support is dropped, as in
 # later versions of Python, dictionaries now remember insertion order.
@@ -135,9 +134,16 @@ def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, o
     the return data is the new table as well as all headers in a list format
     '''
     headers = assemble_lookup_data(lookup_table[file], section, priority)
-    cols = [obtainer(ceesim_data, None, hdr["TAG"], fast=False)
-            if hdr["TAG"] else hdr["DEFAULT"]
-            for hdr in headers]
+    cols = []
+    for hdr in headers:
+        if hdr["TAG"]:
+            values = []
+            for tag in hdr["TAG"].split('&'):
+                tags = obtainer(ceesim_data, None, tag, fast=False)
+                values.append(tags)
+            cols.append(list(zip(*values)))
+        else:
+            cols.append((hdr["DEFAULT"],))
     len3 = len(max(cols, key=lambda i: len(i) if type(i) is list else 0))
     for i, row in enumerate(cols):
         if type(row) is not list:
@@ -179,7 +185,6 @@ def dedupe_rows(table):
     for row in range(len(table) - 1, 1, -1):
         if tuple(table[row]) in rows:
             del table[row]
-            # print('hi')
         else:
             rows.add(tuple(table[row]))
     return table
