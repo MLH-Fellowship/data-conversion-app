@@ -17,6 +17,7 @@ from app.util.logger import logger
 # later versions of Python, dictionaries now remember insertion order.
 from collections import OrderedDict
 from sys import version_info
+from copy import copy
 
 if version_info > (3, 5):
     from typing import List, Union, Callable as function, Tuple
@@ -143,6 +144,21 @@ def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, o
             cols[i] = [row] * len3
     data = [list(row) for row in zip(*cols)]
 
+    if file == "SCAN" and headers[0]["LABEL"] == "SWEEP BLANK":
+        levels = int(data[0][-1])
+        inc_data = data * levels
+        inc_data_list = []
+        for level in range(levels):
+            row = inc_data[level]
+            row[-1] = str(level + 1)
+            if level % 2 == 0:
+                row[-4] = "UP-RIGHT"
+            else:
+                row[-4] = "DOWN-LEFT"
+            inc_data_list.append(copy(inc_data[level]))
+
+        data = inc_data_list
+
     return data, headers
 
 
@@ -174,6 +190,7 @@ def populate_table(table, relevant_data, headers, converter):
     '''
     Assembles a list of list of strings 
     '''
+
     if len(table) > 0:
         table[0] = [hdr[LBL_HDR] for hdr in headers]
         table[1:] = [[converter(hdr, relevant_data[row - 1][idx], keep_tag=False)
