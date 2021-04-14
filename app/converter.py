@@ -728,9 +728,64 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
         models.append(next_model)
     
     inp_deviations = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LinearFreqDeviation")
+    print("inp_deviations________: {}".format(len(inp_deviations)))
 
-    for i, _ in enumerate(inp_deviations):
-        pass
+    #for i, _ in enumerate(inp_deviations):
+    #    print(i)
+    #    pass
+    numModels = len(models)
+
+    count = 1
+    for mInput in inp_deviations:
+        print('INTRAPULSE {}: {}'.format(count, mInput))
+        next_model = model('INTRAPULSE', name, timestamp)
+        table_key = MODEL_FILES['INTRAPULSE']
+        add_headers(table_key, next_model)
+        if table_key not in lookup_table:
+            logger.warn(
+                'Could not find key {} in lookup table, skipping'.format(table_key))
+            continue
+        logger.debug(
+            'Now processing table key {} with mtype {}'.format(table_key, 'INTRAPULSE'))
+        next_model = model("INTRAPULSE", name, timestamp)
+        if mInput not in MODEL_FILES:
+            logger.warn(
+                'Could not find mtype {} in model files, skipping'.format(mInput))
+        count += 1
+        models.append(next_model)
+
+    numInpDeviations = len(models) - numModels
+    print("numInpDeviations: {}".format(numInpDeviations))
+
+    #for mtype in INTRAPULSE_NAME
+    #    next_model = model(mtype, name + i, timestamp)
+    #    if mtype not in INTRAPULSE_NAME:
+    #        logger.warn(
+    #            'Could not find mtype {} in model files, skipping'.format(mInput))
+        # table_key = MODEL_FILES[mtype]
+        # add_headers(table_key, next_model)
+        # if table_key not in lookup_table:
+        #     logger.warn(
+        #         'Could not find key {} in lookup table, skipping'.format(table_key))
+        #     continue
+        # logger.debug(
+        #     'Now processing table key {} with mtype {}'.format(table_key, mtype))
+        # for cdict_key in lookup_table[table_key]:
+        #     key_data = lookup_table[table_key][cdict_key]
+        #     if MULTI_HDR in key_data and TABLE_DATA in key_data:
+        #         data_opts = key_data[TABLE_DATA]
+        #         for opt in data_opts:
+        #             if opt["SECTION"] == "Main":
+        #                 continue
+        #             create_converted(next_model, opt)
+        #     else:
+        #         if key_data["SECTION"] == "Main":
+        #             continue
+        #         create_converted(next_model, key_data)
+    
+
+    #for i, _ in enumerate(inp_deviations):
+    #    pass
         # next_model = model("INTRAPULSE", name + i, timestamp)
         # if mtype not in MODEL_FILES:
         #     logger.warn(
