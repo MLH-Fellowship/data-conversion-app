@@ -194,7 +194,7 @@ def populate_table(table, relevant_data, headers, converter):
     if len(table) > 0:
         table[0] = [hdr[LBL_HDR] for hdr in headers]
         table[1:] = [[converter(hdr, relevant_data[row - 1][idx], keep_tag=False)
-                      for idx, hdr in enumerate(headers)] for row in range(len(table))]
+                      for idx, hdr in enumerate(headers)] for row in range(1, len(table) + 1)]
     return dedupe_rows(table)
 
 

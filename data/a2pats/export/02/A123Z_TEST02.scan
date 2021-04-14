@@ -21,11 +21,11 @@ LEVELS:             5
 
      SWEEP TIME        SWEEP       SWEEP         TRANS TIME        TRANS       TRANS        LEVEL           BAR      
        (MSEC)          BLANK        TRIG           (MSEC)          BLANK        TRIG        NUMBER       DIRECTION   
-         30              NO          NO            10.000           YES          NO           5           UP-RIGHT   
          30              NO          NO            10.000           YES          NO           1           UP-RIGHT   
          30              NO          NO            10.000           YES          NO           2          DOWN-LEFT   
          30              NO          NO            10.000           YES          NO           3           UP-RIGHT   
          30              NO          NO            10.000           YES          NO           4          DOWN-LEFT   
+         30              NO          NO            10.000           YES          NO           5           UP-RIGHT   
 
 PULSE TRIG ENABLE:  NO
 
