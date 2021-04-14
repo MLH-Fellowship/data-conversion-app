@@ -11,7 +11,6 @@ follows the adage of Don't Repeat Yourself.
 Once again, find the documentation online at
 https://mlh-fellowship.github.io/hermes-docs
 '''
-
 from app.util.logger import logger
 # NOTE: OrderedDict is not necessary if Python 2 support is dropped, as in
 # later versions of Python, dictionaries now remember insertion order.
@@ -142,7 +141,7 @@ def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, o
             for tag in hdr["TAG"].split('&'):
                 tags = obtainer(ceesim_data, None, tag, fast=False)
                 values.append(tags)
-            cols.append(list(zip(*values))[0])
+            cols.append(list(zip(*values)))
         else:
             cols.append((hdr["DEFAULT"],))
     len3 = len(max(cols, key=lambda i: len(i) if type(i) is list else 0))
