@@ -397,16 +397,16 @@
             "TABLE": false,
             "TAG": "LinearFreqDeviation"
         },
-        "LinearFreqDuration": {
+        "LinearFreqDeviation&LinearFreqDuration": {
             "DEFAULT": "1.000000 MHZ/USEC",
             "FILE": "INP",
-            "FUNCTION": "to_usec",
+            "FUNCTION": "inp_rate",
             "LABEL": "RATE",
             "PRIORITY": 11,
             "SECTION": "INTRAPULSE MODEL",
             "STRING": false,
             "TABLE": false,
-            "TAG": "LinearFreqDuration"
+            "TAG": "LinearFreqDeviation&LinearFreqDuration"
         },
         "ModeName": {
             "DEFAULT": "A123Z_EMITTER01",

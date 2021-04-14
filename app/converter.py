@@ -378,11 +378,11 @@ class functions:
         Finds sweep time using the rate and bar width
 
         Parameters:
-         * `rate`: (float) BarScanRate
-         * `width`: (float) BarWidth
+         * `rate`: (string) BarScanRate
+         * `width`: (string) BarWidth
         **Returns**: (string) SWEEP TIME '''
 
-        time = rate * width
+        time = float(rate) * float(width)
         return '{:.3f}'.format(time)
 
     @staticmethod

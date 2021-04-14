@@ -397,16 +397,16 @@
             "TABLE": false,
             "TAG": "LinearFreqDeviation"
         },
-        "LinearFreqDuration": {
+        "LinearFreqDeviation&LinearFreqDuration": {
             "DEFAULT": "1.000000 MHZ/USEC",
             "FILE": "INP",
-            "FUNCTION": "to_usec",
+            "FUNCTION": "inp_rate",
             "LABEL": "RATE",
             "PRIORITY": 11,
             "SECTION": "INTRAPULSE MODEL",
             "STRING": false,
             "TABLE": false,
-            "TAG": "LinearFreqDuration"
+            "TAG": "LinearFreqDeviation&LinearFreqDuration"
         },
         "ModeName": {
             "DEFAULT": "A123Z_EMITTER01",
@@ -984,16 +984,16 @@
             "TABLE": 7,
             "TAG": "BarScanMotion"
         },
-        "BarScanRate": {
+        "BarScanRate&BarWidth": {
             "DEFAULT": "1000.000",
             "FILE": "SCAN",
-            "FUNCTION": "",
+            "FUNCTION": "sweep_timer",
             "LABEL": "SWEEP TIME (MSEC)",
             "PRIORITY": 15,
             "SECTION": "SCAN MODEL",
             "STRING": false,
             "TABLE": 0,
-            "TAG": "BarScanRate"
+            "TAG": "BarScanRate&BarWidth"
         },
         "BarWidth": {
             "DEFAULT": "45.000 DEG",
