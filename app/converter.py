@@ -116,6 +116,10 @@ class functions:
             return to_str(0)
 
     @staticmethod
+    def to_mhz_deviation(frequency):
+        return functions.to_mhz(frequency) + ' MHZ'
+
+    @staticmethod
     def to_usec(time):
         # type: (Union[int, float, str]) -> str
         '''
@@ -397,8 +401,8 @@ class functions:
 
         **Returns**: (string) RATE '''
 
-        rate = functions.to_mhz(dev) / functions.to_usec(dur)
-        return '{:.6f}'.format(rate)
+        rate = float(functions.to_mhz(dev)) / float(functions.to_usec(dur))
+        return '{:.6f} MHZ/USEC'.format(rate)
 
     @staticmethod
     def halve_it(num):
@@ -704,6 +708,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             logger.warn(
                 'Could not find mtype {} in model files, skipping'.format(mtype))
             continue
+        print("!!! mtype: {} name: {}".format(mtype, name))
         table_key = MODEL_FILES[mtype]
         add_headers(table_key, next_model)
         if table_key not in lookup_table:
@@ -727,6 +732,8 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
 
         models.append(next_model)
     
+
+
     inp_deviations = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LinearFreqDeviation")
     print("inp_deviations________: {}".format(len(inp_deviations)))
 
@@ -736,9 +743,10 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
     numModels = len(models)
 
     count = 1
-    for mInput in inp_deviations:
-        print('INTRAPULSE {}: {}'.format(count, mInput))
-        next_model = model('INTRAPULSE', name, timestamp)
+    for i, deviation in enumerate(inp_deviations):
+        newName = "{}-{}".format(name, i + 1)
+        print('INTRAPULSE {}: {}'.format(count, deviation))
+        next_model = model('INTRAPULSE', newName, timestamp)
         table_key = MODEL_FILES['INTRAPULSE']
         add_headers(table_key, next_model)
         if table_key not in lookup_table:
@@ -747,11 +755,25 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             continue
         logger.debug(
             'Now processing table key {} with mtype {}'.format(table_key, 'INTRAPULSE'))
-        next_model = model("INTRAPULSE", name, timestamp)
-        if mInput not in MODEL_FILES:
+        print("??? deviation: {} name: {}".format(deviation, newName))
+        if 'INTRAPULSE' not in MODEL_FILES:
             logger.warn(
-                'Could not find mtype {} in model files, skipping'.format(mInput))
+                'Could not find mtype {} in model files, skipping'.format(deviation))
         count += 1
+
+        for cdict_key in lookup_table[table_key]:
+            key_data = lookup_table[table_key][cdict_key]
+            if MULTI_HDR in key_data and TABLE_DATA in key_data:
+                data_opts = key_data[TABLE_DATA]
+                for opt in data_opts:
+                    if opt["SECTION"] == "Main":
+                        continue
+                    create_converted(next_model, opt)
+            else:
+                if key_data["SECTION"] == "Main":
+                    continue
+                create_converted(next_model, key_data)
+
         models.append(next_model)
 
     numInpDeviations = len(models) - numModels
