@@ -24,16 +24,6 @@ CONSTANTS = {
         'length': 60,
         'title': 'DEFINITION FILE'
     },
-
-    'model_desc': {
-        'length': 58,
-        'title': 'MODEL'
-    },
-
-    'mss': {
-        'length': 73,
-        'title': 'MULTIPLE SIMULTANEOUS SIGNALS'
-    }
 }
 
 
@@ -63,7 +53,7 @@ def to_timestamp(time, downgrade_peaceful=True):
 def to_str_section(data, sect='header'):
     # type: (model, str) -> str
     '''
-    Create a header or model description for a model
+    Create a header or model description for a model found under DEFINITION FILE
 
     Parameters:
      * `data`: (model class object) Data to serialize

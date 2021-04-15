@@ -21,7 +21,8 @@ if version_info > (3, 5):
 
 
 AUTO_MODELS = ('SCAN', 'ANTENNA', "SIGNAL", "PULSE", "PULSE SEQUENCE")
-scan_file_name = {"CIRCULAR": "circ", "RASTER": "rast", "SECTOR": "sect", "LORO": "loro", "DWELL": "elec", "HELICAL": "circ"}
+scan_file_name = {"CIRCULAR": "circ", "RASTER": "rast", "SECTOR": "sect", \
+                    "LORO": "loro", "DWELL": "elec", "HELICAL": "circ"}
 DEFAULT_HDR = 'DEFAULT'
 FILE_HDR = 'FILE'
 FUNC_HDR = 'FUNCTION'
@@ -360,7 +361,8 @@ class functions:
         **Returns**: (string) Dwell time
         '''
 
-        # TODO: Fix this function and the one below to reflect real ComplexPriState behavior. On hold due to lack of examples in our sample data
+        # TODO: Fix this function and the one below to reflect real ComplexPriState behavior. 
+        # On hold due to lack of examples in sample data
 
         if cps == "false":
             return "N/A"
@@ -386,7 +388,7 @@ class functions:
 
     @staticmethod
     def sweep_timer(rate, width):
-        # type: (float, float) -> str
+        # type: (str, str) -> str
         '''
         Finds sweep time using the rate and bar width
 
@@ -633,7 +635,7 @@ def obtain_relevant_tags(ceesim_data, ceesim_flattened, tag, fast=True):
         return acc
 
 
-def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
+def generate_models(ceesim_data, ceesim_flattened, lookup_table):
     # type: (dict, dict, dict) -> list
     '''
     Generate all non INP/PUL models
@@ -680,7 +682,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             table_string = build_table_str(ceesim_data, lookup_table, opt[FILE_HDR], opt["SECTION"], 
                                         opt[PRI_HDR], convert_one_key, obtain_relevant_tags, opt[FILE_HDR] == "ANT")
             fill_table(model, opt[PRI_HDR], table_string)
-            return None
+            return None # No other conversion should occur after building table
 
         values = []
         for tag in opt[TAG_HDR].split('&'):
@@ -700,7 +702,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             values.append(value)
 
         converted = convert_one_key(opt, values)
-        fill_table(model, opt[PRI_HDR], converted)
+        fill_table(model, opt[PRI_HDR], converted) # adds to model.converted_data
 
 
     def add_headers(mfile, model):
@@ -728,6 +730,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                         ['*' * lleft, header[1], '*' * right])
                     h_priority = int(header[3])
                     if determine_scan_type(ceesim_data) == "LORO" and mfile == "SIG" and (header[1] == "ANTENNA MODEL" or header[1] == "MULTIPLE SIMULTANEOUS SIGNALS"):
+                        # Resolves a downstream feature displacement that occurs from the inclusion of all scan data within the .sig file's SCAN MODEL
                         h_priority += 3
                     fill_table(model, h_priority, htext)
     models = list()
@@ -844,65 +847,6 @@ def determine_scan_type(ceesim_data):
         return "SECTOR"
 
 
-def generate_intrapulse(ceesim_data, lookup_table):
-    # type: (dict, dict) -> List[model]
-    '''
-    Converts intrapulse signals in an imported table using a lookup table
-
-    Parameters:
-     * `ceesim_data`: (dictionary) Imported CEESIM data
-     * `lookup_table`: (dictionary) Lookup table as JSON
-    
-    **Returns**: (list of models) List of intrapulse models
-    '''
-    logger.debug("Now generating the intrapulse models")
-
-    for filetype in lookup_table:
-        if filetype is INTRAPULSE_NAME:
-            for tag in filetype:
-
-                tag_data = lookup_table[INTRAPULSE_NAME][tag]
-
-                if MULTI_HDR in tag_data:
-                    for feature_data in tag_data["DATA"]:
-                        convert_one_key(
-                            feature_data, [ceesim_data[feature_data["TAG"]]])
-                else:
-                    # TODO: What if table is flat
-                    pass
-    # TODO: Return data
-
-
-def generate_pulse(ceesim_data, lookup_table):
-    # type: (dict, dict) -> List[model]
-    '''
-    Converts pulse signals in an imported table using a lookup table
-
-    Parameters:
-     * `ceesim_data`: (dictionary) CEESIM imported JSON data
-     * `lookup_table`: (dictionary) Lookup table as JSON
-    
-    **Returns**: (list of models) List of pulse models
-    '''
-    logger.debug("Now generating the pulse models")
-
-    for filetype in lookup_table:
-        if filetype is PULSE_NAME:
-            for tag in filetype:
-
-                if tag:
-                    tag_data = lookup_table[PULSE_NAME][tag]
-
-                if MULTI_HDR in tag_data:
-                    for feature_data in tag_data["DATA"]:
-                        convert_one_key(
-                            feature_data, [ceesim_data[feature_data["TAG"]]])
-                else:
-                    # TODO: What if table is flat
-                    pass
-    # TODO: Return data
-
-
 ITERATOR_KEYS = ('Scenario', 'Platforms', 'Platform')
 SEARCH_TO_RETURN_KEYS = ('Emitters', 'Emitter', 'EmitterModes', 'EmitterMode')
 
@@ -910,7 +854,7 @@ SEARCH_TO_RETURN_KEYS = ('Emitters', 'Emitter', 'EmitterModes', 'EmitterMode')
 def split_emitter_modes(ceesim_data):
     # type: (dict) -> List[dict]
     '''
-    Converts CEESIM data to a list of emitter mode dicts
+    Converts CEESIM data to a list of emitter mode dicts to iterate over during conversion
 
     Parameters:
      * `ceesim_data`: (dictionary) CEESIM imported data JSON
@@ -965,9 +909,9 @@ def convert_to_a2pats(ceesim_data, lookup_table):
     logger.info('Beginning CEESIM to A2PATS conversion')
     flattened_data = flatten_table(ceesim_data)
     store = a2pats(imported_type='A2PATS')
-    generic_models = generate_other_models(
+    generic_models = generate_models(
         ceesim_data, flattened_data, lookup_table)
-    logger.debug('Added {} models from generate_other_models'.format(
+    logger.debug('Added {} models from generate_models'.format(
         len(generic_models)))
     store.models += generic_models
     return store
