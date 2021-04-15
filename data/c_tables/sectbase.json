@@ -918,17 +918,6 @@
             "TABLE": false,
             "TAG": "AzPointAngle"
         },
-        "AzScanKind": {
-            "DEFAULT": "NO",
-            "FILE": "SCAN",
-            "FUNCTION": "",
-            "LABEL": "PULSE TRIG ON TRANSITION",
-            "PRIORITY": 24,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": false,
-            "TAG": "AzScanKind"
-        },
         "AzSectorWidth": {
             "DEFAULT": "0.000 DEG",
             "FILE": "SCAN",
@@ -962,6 +951,82 @@
             "TABLE": false,
             "TAG": "ElDirection"
         },
+        "ElDirection&AzScanKind&ElScanKind": {
+            "DEFAULT": "NO",
+            "FILE": "SCAN",
+            "FUNCTION": "orientation_flipper",
+            "LABEL": "PULSE TRIG ON TRANSITION",
+            "PRIORITY": 24,
+            "SECTION": "SCAN MODEL",
+            "STRING": false,
+            "TABLE": false,
+            "TAG": "ElDirection&AzScanKind&ElScanKind"
+        },
+        "ElDirection&ElScanMotion&AzScanMotion": {
+            "DEFAULT": "BI",
+            "FILE": "SCAN",
+            "FUNCTION": "orientation_flipper",
+            "LABEL": "DIRECTION",
+            "PRIORITY": 15,
+            "SECTION": "SCAN MODEL",
+            "STRING": false,
+            "TABLE": false,
+            "TAG": "ElDirection&ElScanMotion&AzScanMotion"
+        },
+        "ElDirection&ElScanPeriod&AzScanPeriod": {
+            "DATA": [
+                {
+                    "DEFAULT": "1000.00 MSEC",
+                    "FILE": "SCAN",
+                    "FUNCTION": "orientation_flipper_half",
+                    "LABEL": "1ST BAR TIME",
+                    "PRIORITY": 16,
+                    "SECTION": "SCAN MODEL",
+                    "STRING": false,
+                    "TABLE": false,
+                    "TAG": "ElDirection&ElScanPeriod&AzScanPeriod"
+                },
+                {
+                    "DEFAULT": "1000.00 MSEC",
+                    "FILE": "SCAN",
+                    "FUNCTION": "orientation_flipper_half",
+                    "LABEL": "2ND BAR TIME",
+                    "PRIORITY": 17,
+                    "SECTION": "SCAN MODEL",
+                    "STRING": false,
+                    "TABLE": false,
+                    "TAG": "ElDirection&ElScanPeriod&AzScanPeriod"
+                }
+            ],
+            "MULTI": true
+        },
+        "ElDirection&ElScanReset&AzScanReset": {
+            "DATA": [
+                {
+                    "DEFAULT": "0.00 MSEC",
+                    "FILE": "SCAN",
+                    "FUNCTION": "orientation_flipper",
+                    "LABEL": "TRANSITION TIME",
+                    "PRIORITY": 18,
+                    "SECTION": "SCAN MODEL",
+                    "STRING": false,
+                    "TABLE": false,
+                    "TAG": "ElDirection&ElScanReset&AzScanReset"
+                },
+                {
+                    "DEFAULT": "NO",
+                    "FILE": "SCAN",
+                    "FUNCTION": "orientation_flipper",
+                    "LABEL": "TRANSITION BLANK",
+                    "PRIORITY": 19,
+                    "SECTION": "SCAN MODEL",
+                    "STRING": false,
+                    "TABLE": false,
+                    "TAG": "ElDirection&ElScanReset&AzScanReset"
+                }
+            ],
+            "MULTI": true
+        },
         "ElPointAngle": {
             "DEFAULT": "NEGATIVE",
             "FILE": "SCAN",
@@ -983,71 +1048,6 @@
             "STRING": false,
             "TABLE": false,
             "TAG": "ElScanKind"
-        },
-        "ElScanMotion": {
-            "DEFAULT": "BI",
-            "FILE": "SCAN",
-            "FUNCTION": "",
-            "LABEL": "DIRECTION",
-            "PRIORITY": 15,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": false,
-            "TAG": "ElScanMotion"
-        },
-        "ElScanPeriod": {
-            "DATA": [
-                {
-                    "DEFAULT": "1000.00 MSEC",
-                    "FILE": "SCAN",
-                    "FUNCTION": "",
-                    "LABEL": "1ST BAR TIME",
-                    "PRIORITY": 16,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": false,
-                    "TABLE": false,
-                    "TAG": "ElScanPeriod"
-                },
-                {
-                    "DEFAULT": "1000.00 MSEC",
-                    "FILE": "SCAN",
-                    "FUNCTION": "",
-                    "LABEL": "2ND BAR TIME",
-                    "PRIORITY": 17,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": false,
-                    "TABLE": false,
-                    "TAG": "ElScanPeriod"
-                }
-            ],
-            "MULTI": true
-        },
-        "ElScanReset": {
-            "DATA": [
-                {
-                    "DEFAULT": "0.00 MSEC",
-                    "FILE": "SCAN",
-                    "FUNCTION": "",
-                    "LABEL": "TRANSITION TIME",
-                    "PRIORITY": 18,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": false,
-                    "TABLE": false,
-                    "TAG": "ElScanReset"
-                },
-                {
-                    "DEFAULT": "NO",
-                    "FILE": "SCAN",
-                    "FUNCTION": "",
-                    "LABEL": "TRANSITION BLANK",
-                    "PRIORITY": 19,
-                    "SECTION": "SCAN MODEL",
-                    "STRING": false,
-                    "TABLE": false,
-                    "TAG": "ElScanReset"
-                }
-            ],
-            "MULTI": true
         },
         "ElSectorWidth": {
             "DEFAULT": "0.000 DEG",

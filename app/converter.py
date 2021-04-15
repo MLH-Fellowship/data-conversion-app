@@ -512,6 +512,22 @@ class functions:
         else:
             return functions.format_degree(second)
 
+    @staticmethod
+    def orientation_flipper_half(orientation, first, second):
+        # type: (str, str, str) -> str
+        if orientation:
+            return functions.halve_it(first)
+        else:
+            return functions.halve_it(second)
+
+    @staticmethod
+    def orientation_flipper(orientation, first, second):
+        # type: (str, str, str) -> str
+        if orientation:
+            return first
+        else:
+            return second
+
 def flatten_table(ceesim_data, stack_size=1):
     # type: (dict, int) -> dict
     '''
