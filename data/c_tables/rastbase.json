@@ -995,28 +995,6 @@
             "TABLE": 0,
             "TAG": "BarScanRate&BarWidth"
         },
-        "BarWidth": {
-            "DEFAULT": "45.000 DEG",
-            "FILE": "SCAN",
-            "FUNCTION": "format_degree",
-            "LABEL": "AZ WIDTH",
-            "PRIORITY": 11,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": false,
-            "TAG": "BarWidth"
-        },
-        "CoverageAngle": {
-            "DEFAULT": "0.000 DEG",
-            "FILE": "SCAN",
-            "FUNCTION": "format_degree",
-            "LABEL": "EL WIDTH",
-            "PRIORITY": 12,
-            "SECTION": "SCAN MODEL",
-            "STRING": false,
-            "TABLE": false,
-            "TAG": "CoverageAngle"
-        },
         "InterbarBlankingStatus": {
             "DEFAULT": "NO",
             "FILE": "SCAN",
@@ -1120,6 +1098,28 @@
             "STRING": false,
             "TABLE": false,
             "TAG": "RasterOrientation"
+        },
+        "RasterOrientation&BarWidth&CoverageAngle": {
+            "DEFAULT": "45.000 DEG",
+            "FILE": "SCAN",
+            "FUNCTION": "orientation_flipper_degrees",
+            "LABEL": "AZ WIDTH",
+            "PRIORITY": 11,
+            "SECTION": "SCAN MODEL",
+            "STRING": false,
+            "TABLE": false,
+            "TAG": "RasterOrientation&BarWidth&CoverageAngle"
+        },
+        "RasterOrientation&CoverageAngle&BarWidth": {
+            "DEFAULT": "0.000 DEG",
+            "FILE": "SCAN",
+            "FUNCTION": "orientation_flipper_degrees",
+            "LABEL": "EL WIDTH",
+            "PRIORITY": 12,
+            "SECTION": "SCAN MODEL",
+            "STRING": false,
+            "TABLE": false,
+            "TAG": "RasterOrientation&CoverageAngle&BarWidth"
         },
         "ctScanSegmentNonInterleavedRaster": {
             "DEFAULT": "RASTER",

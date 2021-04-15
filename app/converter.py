@@ -491,6 +491,13 @@ class functions:
         else:
             return "VERTICAL"
 
+    @staticmethod
+    def orientation_flipper_degrees(orientation, first, second):
+        # type: (str, str, str) -> str
+        if orientation == "Azimuth":
+            return functions.format_degree(first)
+        else:
+            return functions.format_degree(second)
 
 def flatten_table(ceesim_data, stack_size=1):
     # type: (dict, int) -> dict
