@@ -1,0 +1,19 @@
+//**************** INTRAPULSE DEFINITION FILE *****************
+//
+// Model:   A123Z_TEST03-4
+//
+// Created: Fri Jan 22, 2021  10:41 AM
+
+
+//******************* INTRAPULSE MODEL *******************
+
+
+INTRAPULSE NOTES:   ""
+
+INTRAPULSE MODEL:   FM LINEAR
+
+TYPE:               RAMP AND HOLD
+MODE:               START ON CARRIER
+DEVIATION:          10.0000000000 MHZ
+RATE:               1.041667 MHZ/USEC
+INVERT:             NO

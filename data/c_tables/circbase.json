@@ -389,7 +389,7 @@
         "LinearFreqDeviation": {
             "DEFAULT": "10.0000000 MHZ",
             "FILE": "INP",
-            "FUNCTION": "to_mhz",
+            "FUNCTION": "to_mhz_deviation",
             "LABEL": "DEVIATION",
             "PRIORITY": 10,
             "SECTION": "INTRAPULSE MODEL",

@@ -724,7 +724,6 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             logger.warn(
                 'Could not find mtype {} in model files, skipping'.format(mtype))
             continue
-        print("!!! mtype: {} name: {}".format(mtype, name))
         table_key = MODEL_FILES[mtype]
         add_headers(table_key, next_model)
         if table_key not in lookup_table:
