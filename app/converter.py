@@ -116,6 +116,19 @@ class functions:
             return to_str(0)
 
     @staticmethod
+    def to_mhz_deviation(frequency):
+        # type: (Union[int, float, str]) -> str
+        '''
+        Convert Hz to MHz and adds MHZ suffix
+
+        Parameters:
+         * `frequency`: (number or number as string) Frequency in Hz
+
+        **Returns**: (string) Frequency as string with MHZ suffix
+        '''
+        return functions.to_mhz(frequency) + ' MHZ'
+
+    @staticmethod
     def to_usec(time):
         # type: (Union[int, float, str]) -> str
         '''
@@ -397,8 +410,8 @@ class functions:
 
         **Returns**: (string) RATE '''
 
-        rate = functions.to_mhz(dev) / functions.to_usec(dur)
-        return '{:.6f}'.format(rate)
+        rate = float(functions.to_mhz(dev)) / float(functions.to_usec(dur))
+        return '{:.6f} MHZ/USEC'.format(rate)
 
     @staticmethod
     def halve_it(num):
@@ -711,6 +724,7 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
             logger.warn(
                 'Could not find mtype {} in model files, skipping'.format(mtype))
             continue
+        print("!!! mtype: {} name: {}".format(mtype, name))
         table_key = MODEL_FILES[mtype]
         add_headers(table_key, next_model)
         if table_key not in lookup_table:
@@ -733,40 +747,45 @@ def generate_other_models(ceesim_data, ceesim_flattened, lookup_table):
                 create_converted(next_model, key_data)
 
         models.append(next_model)
-    
-    inp_deviations = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LinearFreqDeviation")
 
-    for i, _ in enumerate(inp_deviations):
-        pass
-        # next_model = model("INTRAPULSE", name + i, timestamp)
-        # if mtype not in MODEL_FILES:
-        #     logger.warn(
-        #         'Could not find mtype {} in model files, skipping'.format(mtype))
-        #     continue
-        # table_key = MODEL_FILES[mtype]
-        # add_headers(table_key, next_model)
-        # if table_key not in lookup_table:
-        #     logger.warn(
-        #         'Could not find key {} in lookup table, skipping'.format(table_key))
-        #     continue
-        # logger.debug(
-        #     'Now processing table key {} with mtype {}'.format(table_key, mtype))
-        # for cdict_key in lookup_table[table_key]:
-        #     key_data = lookup_table[table_key][cdict_key]
-        #     if MULTI_HDR in key_data and TABLE_DATA in key_data:
-        #         data_opts = key_data[TABLE_DATA]
-        #         for opt in data_opts:
-        #             if opt["SECTION"] == "Main":
-        #                 continue
-        #             create_converted(next_model, opt)
-        #     else:
-        #         if key_data["SECTION"] == "Main":
-        #             continue
-        #         create_converted(next_model, key_data)
-        
-        # models.append(next_model)
-    
-    
+    # Handles Intrapule here
+    inp_deviations = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LinearFreqDeviation")
+    inp_durations = obtain_relevant_tags(ceesim_data, ceesim_flattened, "LinearFreqDuration")
+    inp_info = zip(inp_deviations, inp_durations)
+
+    for i, info in enumerate(inp_info):
+        newName = "{}-{}".format(name, i + 1)
+        next_model = model('INTRAPULSE', newName, timestamp)
+        table_key = MODEL_FILES['INTRAPULSE']
+        add_headers(table_key, next_model)
+        if table_key not in lookup_table:
+            logger.warn(
+                'Could not find key {} in lookup table, skipping'.format(table_key))
+            continue
+        logger.debug(
+            'Now processing table key {} with mtype {}'.format(table_key, 'INTRAPULSE'))
+
+        for cdict_key in lookup_table[table_key]:
+            key_data = lookup_table[table_key][cdict_key]
+            if MULTI_HDR in key_data and TABLE_DATA in key_data:
+                data_opts = key_data[TABLE_DATA]
+                for opt in data_opts:
+                    if opt["SECTION"] == "Main":
+                        continue
+                    create_converted(next_model, opt)
+            else:
+                if key_data["SECTION"] == "Main":
+                    continue
+                if not key_data["TAG"]:
+                    create_converted(next_model, key_data)
+                else:
+                    if key_data["TAG"] == "LinearFreqDeviation":
+                        fill_table(next_model, key_data[PRI_HDR], convert_one_key(key_data, [info[0]]))
+                    if key_data["TAG"] == "LinearFreqDeviation&LinearFreqDuration":
+                        fill_table(next_model, key_data[PRI_HDR], convert_one_key(key_data, info))
+
+        models.append(next_model)
+
     return models
 
 
