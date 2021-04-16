@@ -141,7 +141,12 @@ def assemble_relevant_data(ceesim_data, lookup_table, file, section, priority, o
             for tag in hdr["TAG"].split('&'):
                 tags = obtainer(ceesim_data, None, tag, fast=False)
                 values.append(tags)
-            cols.append(list(zip(*values)))
+                if '0.0005' in tags:
+                    pass
+            ir = list(zip(*values))
+            if len(ir) == 1:
+                ir = ir[0]
+            cols.append(ir)
         else:
             cols.append((hdr["DEFAULT"],))
     len3 = len(max(cols, key=lambda i: len(i) if type(i) is list else 0))

@@ -463,6 +463,8 @@ class functions:
         
         **Returns**: (string) Number
         '''
+        if type(number) is tuple:
+            number = number[0]
         return '{:.4f}'.format(abs(float(number)))
 
     @staticmethod

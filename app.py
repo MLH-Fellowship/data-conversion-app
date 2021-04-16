@@ -89,11 +89,13 @@ def convert(input_file, output_file):
         if scan_type == "HELICAL": # stacked circular scans
             mode_num += " (Needs Edit)"
         success = dump_a2pats(output_data, output_file + "/{}".format(mode_num))
+    '''
     if success:
         return output_data
     else:
         logger.error('File failed to export!')
         return None
+    '''
 
 
 def parse_arguments(epilog):
